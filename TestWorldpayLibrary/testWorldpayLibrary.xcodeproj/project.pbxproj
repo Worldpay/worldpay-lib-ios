@@ -1,0 +1,775 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5927CEA719B5CB95004BA44F /* app_icon@2x.png */; };
+		593F14AA19B0BA7F00A009FB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A619B0BA7F00A009FB /* amex.png */; };
+		593F14AB19B0BA7F00A009FB /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A719B0BA7F00A009FB /* maestro.png */; };
+		593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A819B0BA7F00A009FB /* mastercard.png */; };
+		593F14AD19B0BA7F00A009FB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A919B0BA7F00A009FB /* visa.png */; };
+		597077CE1993CC1F002651A7 /* WorldpayResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 597077CC1993CC1F002651A7 /* WorldpayResources.bundle */; };
+		597077CF1993CC1F002651A7 /* libWorldpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 597077CD1993CC1F002651A7 /* libWorldpay.a */; };
+		5A6788F01A680E590084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EF1A680E590084394C /* default_card@2x.png */; };
+		7E00CE88198B7B5500C34D6A /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7C198B7B5500C34D6A /* check@2x.png */; };
+		7E00CE89198B7B5500C34D6A /* choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7D198B7B5500C34D6A /* choose@2x.png */; };
+		7E00CE8A198B7B5500C34D6A /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7E198B7B5500C34D6A /* clock@2x.png */; };
+		7E00CE8B198B7B5500C34D6A /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7F198B7B5500C34D6A /* delete@2x.png */; };
+		7E00CE8C198B7B5500C34D6A /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE80198B7B5500C34D6A /* empty@2x.png */; };
+		7E00CE8D198B7B5500C34D6A /* greece@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE81198B7B5500C34D6A /* greece@2x.png */; };
+		7E00CE90198B7B5500C34D6A /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE84198B7B5500C34D6A /* logo@2x.png */; };
+		7E00CE91198B7B5500C34D6A /* loxodrome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE85198B7B5500C34D6A /* loxodrome@2x.png */; };
+		7E00CE92198B7B5500C34D6A /* spain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE86198B7B5500C34D6A /* spain@2x.png */; };
+		7E00CE93198B7B5500C34D6A /* uk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE87198B7B5500C34D6A /* uk@2x.png */; };
+		7E00CEB2198B921B00C34D6A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEA9198B921B00C34D6A /* FMDatabase.m */; };
+		7E00CEB3198B921B00C34D6A /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEAB198B921B00C34D6A /* FMDatabaseAdditions.m */; };
+		7E00CEB4198B921B00C34D6A /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEAD198B921B00C34D6A /* FMDatabasePool.m */; };
+		7E00CEB5198B921B00C34D6A /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEAF198B921B00C34D6A /* FMDatabaseQueue.m */; };
+		7E00CEB6198B921B00C34D6A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEB1198B921B00C34D6A /* FMResultSet.m */; };
+		7E00CEB9198B922600C34D6A /* ALToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEB8198B922600C34D6A /* ALToastView.m */; };
+		7E224920198230A20016BE5E /* SuccessPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E22491E198230A20016BE5E /* SuccessPageViewController.m */; };
+		7E224921198230A20016BE5E /* SuccessPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E22491F198230A20016BE5E /* SuccessPageViewController.xib */; };
+		7E2C5B971980F64600701108 /* DBhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C5B961980F64600701108 /* DBhandler.m */; };
+		7E2C5B991980F84000701108 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2C5B981980F84000701108 /* libsqlite3.0.dylib */; };
+		7E2C5BA9198126D900701108 /* CustomGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C5BA8198126D900701108 /* CustomGestureRecognizer.m */; };
+		7E2C5BAE1981436F00701108 /* worldpay.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C5BAD1981436F00701108 /* worldpay.sqlite */; };
+		7E5166B2197FE63700CCB1EC /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5166B0197FE63700CCB1EC /* SplashScreenViewController.m */; };
+		7E5166B3197FE63700CCB1EC /* SplashScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5166B1197FE63700CCB1EC /* SplashScreenViewController.xib */; };
+		7E5166B7197FE6FF00CCB1EC /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5166B5197FE6FF00CCB1EC /* MainPageViewController.m */; };
+		7E5166B8197FE6FF00CCB1EC /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5166B6197FE6FF00CCB1EC /* MainPageViewController.xib */; };
+		7EB746C9198BCED400D33001 /* moussaka@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB746C6198BCED400D33001 /* moussaka@2x.jpg */; };
+		7EB746CA198BCED400D33001 /* paella@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB746C7198BCED400D33001 /* paella@2x.jpg */; };
+		7EB746CB198BCED400D33001 /* roastbeef@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB746C8198BCED400D33001 /* roastbeef@2x.jpg */; };
+		7EF711091976C3C000F7DC51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF711081976C3C000F7DC51 /* Foundation.framework */; };
+		7EF7110B1976C3C000F7DC51 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF7110A1976C3C000F7DC51 /* CoreGraphics.framework */; };
+		7EF7110D1976C3C000F7DC51 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF7110C1976C3C000F7DC51 /* UIKit.framework */; };
+		7EF711131976C3C100F7DC51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EF711111976C3C100F7DC51 /* InfoPlist.strings */; };
+		7EF711151976C3C100F7DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711141976C3C100F7DC51 /* main.m */; };
+		7EF711191976C3C100F7DC51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711181976C3C100F7DC51 /* AppDelegate.m */; };
+		7EF7111B1976C3C100F7DC51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EF7111A1976C3C100F7DC51 /* Images.xcassets */; };
+		7EF711221976C3C100F7DC51 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF711211976C3C100F7DC51 /* XCTest.framework */; };
+		7EF711231976C3C100F7DC51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF711081976C3C000F7DC51 /* Foundation.framework */; };
+		7EF711241976C3C100F7DC51 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF7110C1976C3C000F7DC51 /* UIKit.framework */; };
+		7EF7112C1976C3C100F7DC51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EF7112A1976C3C100F7DC51 /* InfoPlist.strings */; };
+		7EF7112E1976C3C100F7DC51 /* testWorldpayLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7112D1976C3C100F7DC51 /* testWorldpayLibraryTests.m */; };
+		7EF711431976C72600F7DC51 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711411976C72600F7DC51 /* SampleViewController.m */; };
+		7EF711441976C72600F7DC51 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711411976C72600F7DC51 /* SampleViewController.m */; };
+		7EF711451976C72600F7DC51 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EF711421976C72600F7DC51 /* SampleViewController.xib */; };
+		7EF711461976C72600F7DC51 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EF711421976C72600F7DC51 /* SampleViewController.xib */; };
+		7EF7114A1976C74100F7DC51 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711481976C74100F7DC51 /* NavigationViewController.m */; };
+		7EF7114B1976C74100F7DC51 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711481976C74100F7DC51 /* NavigationViewController.m */; };
+		7EF7114C1976C74100F7DC51 /* NavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EF711491976C74100F7DC51 /* NavigationViewController.xib */; };
+		7EF7114D1976C74100F7DC51 /* NavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EF711491976C74100F7DC51 /* NavigationViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7EF711251976C3C100F7DC51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EF710FD1976C3C000F7DC51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EF711041976C3C000F7DC51;
+			remoteInfo = testWorldpayLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5927CEA719B5CB95004BA44F /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "Resources/app_icon@2x.png"; sourceTree = "<group>"; };
+		593F14A619B0BA7F00A009FB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amex.png; path = Resources/amex.png; sourceTree = "<group>"; };
+		593F14A719B0BA7F00A009FB /* maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maestro.png; path = Resources/maestro.png; sourceTree = "<group>"; };
+		593F14A819B0BA7F00A009FB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = Resources/mastercard.png; sourceTree = "<group>"; };
+		593F14A919B0BA7F00A009FB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = Resources/visa.png; sourceTree = "<group>"; };
+		597077CA1993CC1F002651A7 /* Worldpay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worldpay.h; sourceTree = "<group>"; };
+		597077CB1993CC1F002651A7 /* WorldpayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayCardViewController.h; sourceTree = "<group>"; };
+		597077CC1993CC1F002651A7 /* WorldpayResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WorldpayResources.bundle; sourceTree = "<group>"; };
+		597077CD1993CC1F002651A7 /* libWorldpay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWorldpay.a; sourceTree = "<group>"; };
+		5A6788EF1A680E590084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
+		7E00CE7C198B7B5500C34D6A /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check@2x.png"; path = "Resources/check@2x.png"; sourceTree = "<group>"; };
+		7E00CE7D198B7B5500C34D6A /* choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "choose@2x.png"; path = "Resources/choose@2x.png"; sourceTree = "<group>"; };
+		7E00CE7E198B7B5500C34D6A /* clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clock@2x.png"; path = "Resources/clock@2x.png"; sourceTree = "<group>"; };
+		7E00CE7F198B7B5500C34D6A /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "delete@2x.png"; path = "Resources/delete@2x.png"; sourceTree = "<group>"; };
+		7E00CE80198B7B5500C34D6A /* empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "empty@2x.png"; path = "Resources/empty@2x.png"; sourceTree = "<group>"; };
+		7E00CE81198B7B5500C34D6A /* greece@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greece@2x.png"; path = "Resources/greece@2x.png"; sourceTree = "<group>"; };
+		7E00CE84198B7B5500C34D6A /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo@2x.png"; path = "Resources/logo@2x.png"; sourceTree = "<group>"; };
+		7E00CE85198B7B5500C34D6A /* loxodrome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loxodrome@2x.png"; path = "Resources/loxodrome@2x.png"; sourceTree = "<group>"; };
+		7E00CE86198B7B5500C34D6A /* spain@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "spain@2x.png"; path = "Resources/spain@2x.png"; sourceTree = "<group>"; };
+		7E00CE87198B7B5500C34D6A /* uk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uk@2x.png"; path = "Resources/uk@2x.png"; sourceTree = "<group>"; };
+		7E00CEA8198B921B00C34D6A /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = ThirdParty/FMDatabase/FMDatabase.h; sourceTree = "<group>"; };
+		7E00CEA9198B921B00C34D6A /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = ThirdParty/FMDatabase/FMDatabase.m; sourceTree = "<group>"; };
+		7E00CEAA198B921B00C34D6A /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = ThirdParty/FMDatabase/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		7E00CEAB198B921B00C34D6A /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = ThirdParty/FMDatabase/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		7E00CEAC198B921B00C34D6A /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = ThirdParty/FMDatabase/FMDatabasePool.h; sourceTree = "<group>"; };
+		7E00CEAD198B921B00C34D6A /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = ThirdParty/FMDatabase/FMDatabasePool.m; sourceTree = "<group>"; };
+		7E00CEAE198B921B00C34D6A /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = ThirdParty/FMDatabase/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		7E00CEAF198B921B00C34D6A /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = ThirdParty/FMDatabase/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		7E00CEB0198B921B00C34D6A /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = ThirdParty/FMDatabase/FMResultSet.h; sourceTree = "<group>"; };
+		7E00CEB1198B921B00C34D6A /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = ThirdParty/FMDatabase/FMResultSet.m; sourceTree = "<group>"; };
+		7E00CEB7198B922600C34D6A /* ALToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALToastView.h; path = ThirdParty/ALToastView/ALToastView.h; sourceTree = "<group>"; };
+		7E00CEB8198B922600C34D6A /* ALToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALToastView.m; path = ThirdParty/ALToastView/ALToastView.m; sourceTree = "<group>"; };
+		7E00CECE198BB41300C34D6A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		7E22491D198230A20016BE5E /* SuccessPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessPageViewController.h; sourceTree = "<group>"; };
+		7E22491E198230A20016BE5E /* SuccessPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessPageViewController.m; sourceTree = "<group>"; };
+		7E22491F198230A20016BE5E /* SuccessPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessPageViewController.xib; sourceTree = "<group>"; };
+		7E2C5B951980F64600701108 /* DBhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBhandler.h; sourceTree = "<group>"; };
+		7E2C5B961980F64600701108 /* DBhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBhandler.m; sourceTree = "<group>"; };
+		7E2C5B981980F84000701108 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		7E2C5BA7198126D900701108 /* CustomGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGestureRecognizer.h; sourceTree = "<group>"; };
+		7E2C5BA8198126D900701108 /* CustomGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGestureRecognizer.m; sourceTree = "<group>"; };
+		7E2C5BAD1981436F00701108 /* worldpay.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = worldpay.sqlite; sourceTree = "<group>"; };
+		7E5166AF197FE63700CCB1EC /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreenViewController.h; sourceTree = "<group>"; };
+		7E5166B0197FE63700CCB1EC /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreenViewController.m; sourceTree = "<group>"; };
+		7E5166B1197FE63700CCB1EC /* SplashScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashScreenViewController.xib; sourceTree = "<group>"; };
+		7E5166B4197FE6FF00CCB1EC /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		7E5166B5197FE6FF00CCB1EC /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
+		7E5166B6197FE6FF00CCB1EC /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
+		7EB746C6198BCED400D33001 /* moussaka@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "moussaka@2x.jpg"; path = "Resources/moussaka@2x.jpg"; sourceTree = "<group>"; };
+		7EB746C7198BCED400D33001 /* paella@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "paella@2x.jpg"; path = "Resources/paella@2x.jpg"; sourceTree = "<group>"; };
+		7EB746C8198BCED400D33001 /* roastbeef@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "roastbeef@2x.jpg"; path = "Resources/roastbeef@2x.jpg"; sourceTree = "<group>"; };
+		7EF711051976C3C000F7DC51 /* Worldfood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Worldfood.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EF711081976C3C000F7DC51 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7EF7110A1976C3C000F7DC51 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7EF7110C1976C3C000F7DC51 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7EF711101976C3C100F7DC51 /* testWorldpayLibrary-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "testWorldpayLibrary-Info.plist"; sourceTree = "<group>"; };
+		7EF711121976C3C100F7DC51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EF711141976C3C100F7DC51 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7EF711161976C3C100F7DC51 /* testWorldpayLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "testWorldpayLibrary-Prefix.pch"; sourceTree = "<group>"; };
+		7EF711171976C3C100F7DC51 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7EF711181976C3C100F7DC51 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7EF7111A1976C3C100F7DC51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7EF711201976C3C100F7DC51 /* testWorldpayLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testWorldpayLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EF711211976C3C100F7DC51 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7EF711291976C3C100F7DC51 /* testWorldpayLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "testWorldpayLibraryTests-Info.plist"; sourceTree = "<group>"; };
+		7EF7112B1976C3C100F7DC51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EF7112D1976C3C100F7DC51 /* testWorldpayLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testWorldpayLibraryTests.m; sourceTree = "<group>"; };
+		7EF711401976C72600F7DC51 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		7EF711411976C72600F7DC51 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
+		7EF711421976C72600F7DC51 /* SampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
+		7EF711471976C74100F7DC51 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		7EF711481976C74100F7DC51 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		7EF711491976C74100F7DC51 /* NavigationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7EF711021976C3C000F7DC51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2C5B991980F84000701108 /* libsqlite3.0.dylib in Frameworks */,
+				7EF7110B1976C3C000F7DC51 /* CoreGraphics.framework in Frameworks */,
+				7EF7110D1976C3C000F7DC51 /* UIKit.framework in Frameworks */,
+				597077CF1993CC1F002651A7 /* libWorldpay.a in Frameworks */,
+				7EF711091976C3C000F7DC51 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EF7111D1976C3C100F7DC51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF711221976C3C100F7DC51 /* XCTest.framework in Frameworks */,
+				7EF711241976C3C100F7DC51 /* UIKit.framework in Frameworks */,
+				7EF711231976C3C100F7DC51 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		597077C81993CC1F002651A7 /* Worldpay */ = {
+			isa = PBXGroup;
+			children = (
+				597077C91993CC1F002651A7 /* Include */,
+				597077CD1993CC1F002651A7 /* libWorldpay.a */,
+			);
+			name = Worldpay;
+			path = ../Worldpay/output/Worldpay;
+			sourceTree = "<group>";
+		};
+		597077C91993CC1F002651A7 /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				597077CA1993CC1F002651A7 /* Worldpay.h */,
+				597077CB1993CC1F002651A7 /* WorldpayCardViewController.h */,
+				597077CC1993CC1F002651A7 /* WorldpayResources.bundle */,
+			);
+			path = Include;
+			sourceTree = "<group>";
+		};
+		7E00CE4E198B669000C34D6A /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				7E00CE4F198B66C000C34D6A /* ALToastView */,
+				7E2C5B851980F60D00701108 /* FMDatabase */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		7E00CE4F198B66C000C34D6A /* ALToastView */ = {
+			isa = PBXGroup;
+			children = (
+				7E00CEB7198B922600C34D6A /* ALToastView.h */,
+				7E00CEB8198B922600C34D6A /* ALToastView.m */,
+			);
+			name = ALToastView;
+			sourceTree = "<group>";
+		};
+		7E00CE50198B66D200C34D6A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E2C5BA0198105FB00701108 /* images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7E2C5B851980F60D00701108 /* FMDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				7E00CEA8198B921B00C34D6A /* FMDatabase.h */,
+				7E00CEA9198B921B00C34D6A /* FMDatabase.m */,
+				7E00CEAA198B921B00C34D6A /* FMDatabaseAdditions.h */,
+				7E00CEAB198B921B00C34D6A /* FMDatabaseAdditions.m */,
+				7E00CEAC198B921B00C34D6A /* FMDatabasePool.h */,
+				7E00CEAD198B921B00C34D6A /* FMDatabasePool.m */,
+				7E00CEAE198B921B00C34D6A /* FMDatabaseQueue.h */,
+				7E00CEAF198B921B00C34D6A /* FMDatabaseQueue.m */,
+				7E00CEB0198B921B00C34D6A /* FMResultSet.h */,
+				7E00CEB1198B921B00C34D6A /* FMResultSet.m */,
+			);
+			name = FMDatabase;
+			sourceTree = "<group>";
+		};
+		7E2C5BA0198105FB00701108 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				5A6788EF1A680E590084394C /* default_card@2x.png */,
+				5927CEA719B5CB95004BA44F /* app_icon@2x.png */,
+				7EB746C6198BCED400D33001 /* moussaka@2x.jpg */,
+				7EB746C7198BCED400D33001 /* paella@2x.jpg */,
+				7EB746C8198BCED400D33001 /* roastbeef@2x.jpg */,
+				7E00CE7C198B7B5500C34D6A /* check@2x.png */,
+				7E00CE7E198B7B5500C34D6A /* clock@2x.png */,
+				7E00CE7D198B7B5500C34D6A /* choose@2x.png */,
+				7E00CE80198B7B5500C34D6A /* empty@2x.png */,
+				7E00CE7F198B7B5500C34D6A /* delete@2x.png */,
+				7E00CE84198B7B5500C34D6A /* logo@2x.png */,
+				7E00CE86198B7B5500C34D6A /* spain@2x.png */,
+				7E00CE87198B7B5500C34D6A /* uk@2x.png */,
+				7E00CE81198B7B5500C34D6A /* greece@2x.png */,
+				7E00CE85198B7B5500C34D6A /* loxodrome@2x.png */,
+				593F14A619B0BA7F00A009FB /* amex.png */,
+				593F14A719B0BA7F00A009FB /* maestro.png */,
+				593F14A819B0BA7F00A009FB /* mastercard.png */,
+				593F14A919B0BA7F00A009FB /* visa.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		7EF710FC1976C3C000F7DC51 = {
+			isa = PBXGroup;
+			children = (
+				597077C81993CC1F002651A7 /* Worldpay */,
+				7EF711071976C3C000F7DC51 /* Frameworks */,
+				7E00CE50198B66D200C34D6A /* Resources */,
+				7E00CE4E198B669000C34D6A /* ThirdParty */,
+				7EF7110E1976C3C100F7DC51 /* testWorldpayLibrary */,
+				7EF711271976C3C100F7DC51 /* testWorldpayLibraryTests */,
+				7EF711061976C3C000F7DC51 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7EF711061976C3C000F7DC51 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7EF711051976C3C000F7DC51 /* Worldfood.app */,
+				7EF711201976C3C100F7DC51 /* testWorldpayLibraryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7EF711071976C3C000F7DC51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E00CECE198BB41300C34D6A /* CoreFoundation.framework */,
+				7E2C5B981980F84000701108 /* libsqlite3.0.dylib */,
+				7EF711081976C3C000F7DC51 /* Foundation.framework */,
+				7EF7110A1976C3C000F7DC51 /* CoreGraphics.framework */,
+				7EF7110C1976C3C000F7DC51 /* UIKit.framework */,
+				7EF711211976C3C100F7DC51 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7EF7110E1976C3C100F7DC51 /* testWorldpayLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				7E2C5BAD1981436F00701108 /* worldpay.sqlite */,
+				7EF711171976C3C100F7DC51 /* AppDelegate.h */,
+				7EF711181976C3C100F7DC51 /* AppDelegate.m */,
+				7EF7111A1976C3C100F7DC51 /* Images.xcassets */,
+				7EF7110F1976C3C100F7DC51 /* Supporting Files */,
+				7EF711401976C72600F7DC51 /* SampleViewController.h */,
+				7EF711411976C72600F7DC51 /* SampleViewController.m */,
+				7EF711421976C72600F7DC51 /* SampleViewController.xib */,
+				7E5166B4197FE6FF00CCB1EC /* MainPageViewController.h */,
+				7E5166B5197FE6FF00CCB1EC /* MainPageViewController.m */,
+				7E5166B6197FE6FF00CCB1EC /* MainPageViewController.xib */,
+				7E5166AF197FE63700CCB1EC /* SplashScreenViewController.h */,
+				7E5166B0197FE63700CCB1EC /* SplashScreenViewController.m */,
+				7E5166B1197FE63700CCB1EC /* SplashScreenViewController.xib */,
+				7EF711471976C74100F7DC51 /* NavigationViewController.h */,
+				7EF711481976C74100F7DC51 /* NavigationViewController.m */,
+				7EF711491976C74100F7DC51 /* NavigationViewController.xib */,
+				7E22491D198230A20016BE5E /* SuccessPageViewController.h */,
+				7E22491E198230A20016BE5E /* SuccessPageViewController.m */,
+				7E22491F198230A20016BE5E /* SuccessPageViewController.xib */,
+				7E2C5B951980F64600701108 /* DBhandler.h */,
+				7E2C5B961980F64600701108 /* DBhandler.m */,
+				7E2C5BA7198126D900701108 /* CustomGestureRecognizer.h */,
+				7E2C5BA8198126D900701108 /* CustomGestureRecognizer.m */,
+			);
+			path = testWorldpayLibrary;
+			sourceTree = "<group>";
+		};
+		7EF7110F1976C3C100F7DC51 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EF711101976C3C100F7DC51 /* testWorldpayLibrary-Info.plist */,
+				7EF711111976C3C100F7DC51 /* InfoPlist.strings */,
+				7EF711141976C3C100F7DC51 /* main.m */,
+				7EF711161976C3C100F7DC51 /* testWorldpayLibrary-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EF711271976C3C100F7DC51 /* testWorldpayLibraryTests */ = {
+			isa = PBXGroup;
+			children = (
+				7EF7112D1976C3C100F7DC51 /* testWorldpayLibraryTests.m */,
+				7EF711281976C3C100F7DC51 /* Supporting Files */,
+			);
+			path = testWorldpayLibraryTests;
+			sourceTree = "<group>";
+		};
+		7EF711281976C3C100F7DC51 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EF711291976C3C100F7DC51 /* testWorldpayLibraryTests-Info.plist */,
+				7EF7112A1976C3C100F7DC51 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7EF711041976C3C000F7DC51 /* testWorldpayLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EF711311976C3C100F7DC51 /* Build configuration list for PBXNativeTarget "testWorldpayLibrary" */;
+			buildPhases = (
+				7EF711011976C3C000F7DC51 /* Sources */,
+				7EF711021976C3C000F7DC51 /* Frameworks */,
+				7EF711031976C3C000F7DC51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = testWorldpayLibrary;
+			productName = testWorldpayLibrary;
+			productReference = 7EF711051976C3C000F7DC51 /* Worldfood.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7EF7111F1976C3C100F7DC51 /* testWorldpayLibraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EF711341976C3C100F7DC51 /* Build configuration list for PBXNativeTarget "testWorldpayLibraryTests" */;
+			buildPhases = (
+				7EF7111C1976C3C100F7DC51 /* Sources */,
+				7EF7111D1976C3C100F7DC51 /* Frameworks */,
+				7EF7111E1976C3C100F7DC51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7EF711261976C3C100F7DC51 /* PBXTargetDependency */,
+			);
+			name = testWorldpayLibraryTests;
+			productName = testWorldpayLibraryTests;
+			productReference = 7EF711201976C3C100F7DC51 /* testWorldpayLibraryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7EF710FD1976C3C000F7DC51 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = arx;
+				TargetAttributes = {
+					7EF711041976C3C000F7DC51 = {
+						DevelopmentTeam = NXRQM34DT8;
+					};
+					7EF7111F1976C3C100F7DC51 = {
+						DevelopmentTeam = NXRQM34DT8;
+						TestTargetID = 7EF711041976C3C000F7DC51;
+					};
+				};
+			};
+			buildConfigurationList = 7EF711001976C3C000F7DC51 /* Build configuration list for PBXProject "testWorldpayLibrary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7EF710FC1976C3C000F7DC51;
+			productRefGroup = 7EF711061976C3C000F7DC51 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7EF711041976C3C000F7DC51 /* testWorldpayLibrary */,
+				7EF7111F1976C3C100F7DC51 /* testWorldpayLibraryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7EF711031976C3C000F7DC51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E00CE8B198B7B5500C34D6A /* delete@2x.png in Resources */,
+				7E00CE91198B7B5500C34D6A /* loxodrome@2x.png in Resources */,
+				593F14AD19B0BA7F00A009FB /* visa.png in Resources */,
+				7EF7114C1976C74100F7DC51 /* NavigationViewController.xib in Resources */,
+				7E00CE88198B7B5500C34D6A /* check@2x.png in Resources */,
+				7E00CE8C198B7B5500C34D6A /* empty@2x.png in Resources */,
+				7E2C5BAE1981436F00701108 /* worldpay.sqlite in Resources */,
+				7EF711131976C3C100F7DC51 /* InfoPlist.strings in Resources */,
+				7EB746C9198BCED400D33001 /* moussaka@2x.jpg in Resources */,
+				7EF711451976C72600F7DC51 /* SampleViewController.xib in Resources */,
+				5A6788F01A680E590084394C /* default_card@2x.png in Resources */,
+				7E5166B3197FE63700CCB1EC /* SplashScreenViewController.xib in Resources */,
+				7EB746CB198BCED400D33001 /* roastbeef@2x.jpg in Resources */,
+				593F14AA19B0BA7F00A009FB /* amex.png in Resources */,
+				7E00CE8A198B7B5500C34D6A /* clock@2x.png in Resources */,
+				7E5166B8197FE6FF00CCB1EC /* MainPageViewController.xib in Resources */,
+				7E00CE90198B7B5500C34D6A /* logo@2x.png in Resources */,
+				7E00CE93198B7B5500C34D6A /* uk@2x.png in Resources */,
+				7EB746CA198BCED400D33001 /* paella@2x.jpg in Resources */,
+				593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */,
+				5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */,
+				593F14AB19B0BA7F00A009FB /* maestro.png in Resources */,
+				7E00CE89198B7B5500C34D6A /* choose@2x.png in Resources */,
+				7EF7111B1976C3C100F7DC51 /* Images.xcassets in Resources */,
+				7E00CE8D198B7B5500C34D6A /* greece@2x.png in Resources */,
+				7E224921198230A20016BE5E /* SuccessPageViewController.xib in Resources */,
+				7E00CE92198B7B5500C34D6A /* spain@2x.png in Resources */,
+				597077CE1993CC1F002651A7 /* WorldpayResources.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EF7111E1976C3C100F7DC51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF711461976C72600F7DC51 /* SampleViewController.xib in Resources */,
+				7EF7114D1976C74100F7DC51 /* NavigationViewController.xib in Resources */,
+				7EF7112C1976C3C100F7DC51 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7EF711011976C3C000F7DC51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF7114A1976C74100F7DC51 /* NavigationViewController.m in Sources */,
+				7E00CEB9198B922600C34D6A /* ALToastView.m in Sources */,
+				7E224920198230A20016BE5E /* SuccessPageViewController.m in Sources */,
+				7E00CEB4198B921B00C34D6A /* FMDatabasePool.m in Sources */,
+				7E00CEB5198B921B00C34D6A /* FMDatabaseQueue.m in Sources */,
+				7EF711191976C3C100F7DC51 /* AppDelegate.m in Sources */,
+				7E2C5BA9198126D900701108 /* CustomGestureRecognizer.m in Sources */,
+				7E2C5B971980F64600701108 /* DBhandler.m in Sources */,
+				7E5166B7197FE6FF00CCB1EC /* MainPageViewController.m in Sources */,
+				7E00CEB6198B921B00C34D6A /* FMResultSet.m in Sources */,
+				7E5166B2197FE63700CCB1EC /* SplashScreenViewController.m in Sources */,
+				7EF711151976C3C100F7DC51 /* main.m in Sources */,
+				7E00CEB2198B921B00C34D6A /* FMDatabase.m in Sources */,
+				7EF711431976C72600F7DC51 /* SampleViewController.m in Sources */,
+				7E00CEB3198B921B00C34D6A /* FMDatabaseAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EF7111C1976C3C100F7DC51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EF711441976C72600F7DC51 /* SampleViewController.m in Sources */,
+				7EF7112E1976C3C100F7DC51 /* testWorldpayLibraryTests.m in Sources */,
+				7EF7114B1976C74100F7DC51 /* NavigationViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7EF711261976C3C100F7DC51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EF711041976C3C000F7DC51 /* testWorldpayLibrary */;
+			targetProxy = 7EF711251976C3C100F7DC51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7EF711111976C3C100F7DC51 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EF711121976C3C100F7DC51 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7EF7112A1976C3C100F7DC51 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EF7112B1976C3C100F7DC51 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7EF7112F1976C3C100F7DC51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ARX.NET S.A.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ARX.NET S.A.";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = $SOURCE_ROOT/include;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Worldfood;
+				PROVISIONING_PROFILE = "A3EBCC93-DBA7-4678-AF28-51F9159050B7";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Debug;
+		};
+		7EF711301976C3C100F7DC51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ARX.NET S.A.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ARX.NET S.A.";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = $SOURCE_ROOT/include;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = Worldfood;
+				PROVISIONING_PROFILE = "A3EBCC93-DBA7-4678-AF28-51F9159050B7";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Release;
+		};
+		7EF711321976C3C100F7DC51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$SOURCE_ROOT/../Worldpay/output/Worldpay/**";
+				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
+				LIBRARY_SEARCH_PATHS = $SOURCE_ROOT/../Worldpay/output/Worldpay;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = Worldfood;
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7EF711331976C3C100F7DC51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$SOURCE_ROOT/../Worldpay/output/Worldpay/**";
+				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
+				LIBRARY_SEARCH_PATHS = $SOURCE_ROOT/../Worldpay/output/Worldpay;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = Worldfood;
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7EF711351976C3C100F7DC51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "testWorldpayLibraryTests/testWorldpayLibraryTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Worldpay-budbzhqblacwlcczmrysjaznqbqi/Build/Products/Debug-universal",
+					"$(PROJECT_DIR)/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Worldfood.app/Worldfood";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7EF711361976C3C100F7DC51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
+				INFOPLIST_FILE = "testWorldpayLibraryTests/testWorldpayLibraryTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Worldpay-budbzhqblacwlcczmrysjaznqbqi/Build/Products/Debug-universal",
+					"$(PROJECT_DIR)/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Worldfood.app/Worldfood";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7EF711001976C3C000F7DC51 /* Build configuration list for PBXProject "testWorldpayLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EF7112F1976C3C100F7DC51 /* Debug */,
+				7EF711301976C3C100F7DC51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EF711311976C3C100F7DC51 /* Build configuration list for PBXNativeTarget "testWorldpayLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EF711321976C3C100F7DC51 /* Debug */,
+				7EF711331976C3C100F7DC51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EF711341976C3C100F7DC51 /* Build configuration list for PBXNativeTarget "testWorldpayLibraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EF711351976C3C100F7DC51 /* Debug */,
+				7EF711361976C3C100F7DC51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7EF710FD1976C3C000F7DC51 /* Project object */;
+}
