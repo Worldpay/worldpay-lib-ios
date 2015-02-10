@@ -62,8 +62,8 @@
   //  NSLog(@"name:%@",name);
   //  NSLog(@"maskedCardNumber:%@",maskedCardNumber);
     
-    NSString *string = [NSString stringWithFormat:@"insert into storedcards (token,cardType,name,maskedCardNumber) values('%@','%@','%@','%@')",token,cardType,name,maskedCardNumber];
-    
+    NSString *string = [NSString stringWithFormat:@"insert into storedcards (token,cardType,name,maskedCardNumber) values('%@','%@','%@','%@')",token,cardType,[name stringByReplacingOccurrencesOfString:@"'" withString:@"''"],maskedCardNumber];
+
     BOOL y = [database executeUpdate:string];
     if (!y)
     {

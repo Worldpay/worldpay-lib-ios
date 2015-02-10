@@ -2,8 +2,7 @@
 //  testWorldpayLibraryTests.m
 //  testWorldpayLibraryTests
 //
-//  Created by arx on 7/16/14.
-//  Copyright (c) 2014 arx. All rights reserved.
+//  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

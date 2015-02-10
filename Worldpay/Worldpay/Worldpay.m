@@ -27,9 +27,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         getInstance = [[self alloc] init];
-        [getInstance setValidationType:WorldpayValidationTypeAdvanced];
-        
-        [WorldpayUtils loadFont:@"ArialMT"];
+        [getInstance setValidationType:WorldpayValidationTypeAdvanced];        
     });
     return getInstance;
 }
@@ -334,7 +332,7 @@
     }
     
     holderName = [holderName stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSCharacterSet *permittedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    NSCharacterSet *permittedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'-"];
     permittedCharacterSet = [permittedCharacterSet invertedSet];
     NSRange r = [holderName rangeOfCharacterFromSet:permittedCharacterSet];
     
