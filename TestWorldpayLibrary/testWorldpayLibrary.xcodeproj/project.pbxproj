@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59032FFC1A8BC99600CB2ADE /* WorldpayResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 59032FFB1A8BC99600CB2ADE /* WorldpayResources.bundle */; };
 		5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5927CEA719B5CB95004BA44F /* app_icon@2x.png */; };
 		593F14AA19B0BA7F00A009FB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A619B0BA7F00A009FB /* amex.png */; };
 		593F14AB19B0BA7F00A009FB /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A719B0BA7F00A009FB /* maestro.png */; };
 		593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A819B0BA7F00A009FB /* mastercard.png */; };
 		593F14AD19B0BA7F00A009FB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A919B0BA7F00A009FB /* visa.png */; };
-		597077CE1993CC1F002651A7 /* WorldpayResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 597077CC1993CC1F002651A7 /* WorldpayResources.bundle */; };
+		59581CAA1B7B544E00D616C0 /* Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59581CA91B7B544E00D616C0 /* Close@2x.png */; };
+		59616AF71A9F4EB4009A820E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59616AF61A9F4EB4009A820E /* AddressBook.framework */; };
+		596E539A1AA4DF3300170E90 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596E53991AA4DF3300170E90 /* libPods.a */; };
 		597077CF1993CC1F002651A7 /* libWorldpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 597077CD1993CC1F002651A7 /* libWorldpay.a */; };
+		59AB33B61B8CC658008342BF /* ThreeDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AB33B41B8CC658008342BF /* ThreeDSController.m */; };
+		59AB33B71B8CC658008342BF /* ThreeDSController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59AB33B51B8CC658008342BF /* ThreeDSController.xib */; };
+		59B389A51AC1A99C00CA5269 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B389A31AC1A99C00CA5269 /* SettingsTableViewController.m */; };
+		59B389A61AC1A99C00CA5269 /* SettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B389A41AC1A99C00CA5269 /* SettingsTableViewController.xib */; };
+		59B389AB1AC1A9E600CA5269 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B389A91AC1A9E600CA5269 /* SettingsCell.m */; };
+		59B389AC1AC1A9E600CA5269 /* SettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B389AA1AC1A9E600CA5269 /* SettingsCell.xib */; };
+		59C005401B78D89400862E1A /* Basket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59C0053F1B78D89400862E1A /* Basket@2x.png */; };
+		59CEF27C1B72015500FB0A7D /* BasketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CEF27B1B72015500FB0A7D /* BasketManager.m */; };
+		59D4B5441A7153BC00E92557 /* apple_pay_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */; };
+		59D4B5461A71594300E92557 /* apple_pay_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */; };
 		5A6788F01A680E590084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EF1A680E590084394C /* default_card@2x.png */; };
 		7E00CE88198B7B5500C34D6A /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7C198B7B5500C34D6A /* check@2x.png */; };
 		7E00CE89198B7B5500C34D6A /* choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7D198B7B5500C34D6A /* choose@2x.png */; };
@@ -77,15 +90,36 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		59032FFB1A8BC99600CB2ADE /* WorldpayResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WorldpayResources.bundle; sourceTree = "<group>"; };
 		5927CEA719B5CB95004BA44F /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "Resources/app_icon@2x.png"; sourceTree = "<group>"; };
+		5929C51F1A717BA900BAB6D8 /* Worldpay+ApplePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Worldpay+ApplePay.h"; sourceTree = "<group>"; };
 		593F14A619B0BA7F00A009FB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amex.png; path = Resources/amex.png; sourceTree = "<group>"; };
 		593F14A719B0BA7F00A009FB /* maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maestro.png; path = Resources/maestro.png; sourceTree = "<group>"; };
 		593F14A819B0BA7F00A009FB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = Resources/mastercard.png; sourceTree = "<group>"; };
 		593F14A919B0BA7F00A009FB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = Resources/visa.png; sourceTree = "<group>"; };
+		59581CA91B7B544E00D616C0 /* Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Close@2x.png"; path = "Resources/Close@2x.png"; sourceTree = "<group>"; };
+		59616AF61A9F4EB4009A820E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		596E53951AA4DF2300170E90 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		596E53971AA4DF2900170E90 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
+		596E53991AA4DF3300170E90 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		597077CA1993CC1F002651A7 /* Worldpay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worldpay.h; sourceTree = "<group>"; };
 		597077CB1993CC1F002651A7 /* WorldpayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayCardViewController.h; sourceTree = "<group>"; };
-		597077CC1993CC1F002651A7 /* WorldpayResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WorldpayResources.bundle; sourceTree = "<group>"; };
 		597077CD1993CC1F002651A7 /* libWorldpay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWorldpay.a; sourceTree = "<group>"; };
+		59A6308E1A8BC0C2002A1CCC /* Worldfood.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Worldfood.entitlements; sourceTree = "<group>"; };
+		59AB33B31B8CC658008342BF /* ThreeDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeDSController.h; sourceTree = "<group>"; };
+		59AB33B41B8CC658008342BF /* ThreeDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeDSController.m; sourceTree = "<group>"; };
+		59AB33B51B8CC658008342BF /* ThreeDSController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeDSController.xib; sourceTree = "<group>"; };
+		59B389A21AC1A99C00CA5269 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = Settings/SettingsTableViewController.h; sourceTree = "<group>"; };
+		59B389A31AC1A99C00CA5269 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = Settings/SettingsTableViewController.m; sourceTree = "<group>"; };
+		59B389A41AC1A99C00CA5269 /* SettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsTableViewController.xib; path = Settings/SettingsTableViewController.xib; sourceTree = "<group>"; };
+		59B389A81AC1A9E600CA5269 /* SettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsCell.h; path = Settings/SettingsCell.h; sourceTree = "<group>"; };
+		59B389A91AC1A9E600CA5269 /* SettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsCell.m; path = Settings/SettingsCell.m; sourceTree = "<group>"; };
+		59B389AA1AC1A9E600CA5269 /* SettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsCell.xib; path = Settings/SettingsCell.xib; sourceTree = "<group>"; };
+		59C0053F1B78D89400862E1A /* Basket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Basket@2x.png"; path = "Resources/Basket@2x.png"; sourceTree = "<group>"; };
+		59CEF27A1B72015500FB0A7D /* BasketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasketManager.h; sourceTree = "<group>"; };
+		59CEF27B1B72015500FB0A7D /* BasketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketManager.m; sourceTree = "<group>"; };
+		59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apple_pay_btn@2x.png"; path = "Resources/apple_pay_btn@2x.png"; sourceTree = "<group>"; };
+		59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apple_pay_btn@3x.png"; path = "Resources/apple_pay_btn@3x.png"; sourceTree = "<group>"; };
 		5A6788EF1A680E590084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
 		7E00CE7C198B7B5500C34D6A /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check@2x.png"; path = "Resources/check@2x.png"; sourceTree = "<group>"; };
 		7E00CE7D198B7B5500C34D6A /* choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "choose@2x.png"; path = "Resources/choose@2x.png"; sourceTree = "<group>"; };
@@ -150,6 +184,9 @@
 		7EF711471976C74100F7DC51 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		7EF711481976C74100F7DC51 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7EF711491976C74100F7DC51 /* NavigationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationViewController.xib; sourceTree = "<group>"; };
+		A6F7F264FAFEEE875548B407 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2F3D62D086671F86421DC0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		B540D97CB3C2CD5E66ACEA52 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +194,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				596E539A1AA4DF3300170E90 /* libPods.a in Frameworks */,
+				59616AF71A9F4EB4009A820E /* AddressBook.framework in Frameworks */,
 				7E2C5B991980F84000701108 /* libsqlite3.0.dylib in Frameworks */,
 				7EF7110B1976C3C000F7DC51 /* CoreGraphics.framework in Frameworks */,
 				7EF7110D1976C3C000F7DC51 /* UIKit.framework in Frameworks */,
@@ -178,6 +217,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		218FE71566F425E91581770E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA2F3D62D086671F86421DC0 /* Pods.debug.xcconfig */,
+				B540D97CB3C2CD5E66ACEA52 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		597077C81993CC1F002651A7 /* Worldpay */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,10 +240,34 @@
 			isa = PBXGroup;
 			children = (
 				597077CA1993CC1F002651A7 /* Worldpay.h */,
+				5929C51F1A717BA900BAB6D8 /* Worldpay+ApplePay.h */,
 				597077CB1993CC1F002651A7 /* WorldpayCardViewController.h */,
-				597077CC1993CC1F002651A7 /* WorldpayResources.bundle */,
+				59032FFB1A8BC99600CB2ADE /* WorldpayResources.bundle */,
 			);
 			path = Include;
+			sourceTree = "<group>";
+		};
+		59AB33B21B8CC63B008342BF /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				59AB33B31B8CC658008342BF /* ThreeDSController.h */,
+				59AB33B41B8CC658008342BF /* ThreeDSController.m */,
+				59AB33B51B8CC658008342BF /* ThreeDSController.xib */,
+			);
+			name = 3DS;
+			sourceTree = "<group>";
+		};
+		59B389A71AC1A9BE00CA5269 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				59B389A21AC1A99C00CA5269 /* SettingsTableViewController.h */,
+				59B389A31AC1A99C00CA5269 /* SettingsTableViewController.m */,
+				59B389A41AC1A99C00CA5269 /* SettingsTableViewController.xib */,
+				59B389A81AC1A9E600CA5269 /* SettingsCell.h */,
+				59B389A91AC1A9E600CA5269 /* SettingsCell.m */,
+				59B389AA1AC1A9E600CA5269 /* SettingsCell.xib */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		7E00CE4E198B669000C34D6A /* ThirdParty */ = {
@@ -244,6 +316,10 @@
 		7E2C5BA0198105FB00701108 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				59581CA91B7B544E00D616C0 /* Close@2x.png */,
+				59C0053F1B78D89400862E1A /* Basket@2x.png */,
+				59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */,
+				59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */,
 				5A6788EF1A680E590084394C /* default_card@2x.png */,
 				5927CEA719B5CB95004BA44F /* app_icon@2x.png */,
 				7EB746C6198BCED400D33001 /* moussaka@2x.jpg */,
@@ -277,6 +353,7 @@
 				7EF7110E1976C3C100F7DC51 /* testWorldpayLibrary */,
 				7EF711271976C3C100F7DC51 /* testWorldpayLibraryTests */,
 				7EF711061976C3C000F7DC51 /* Products */,
+				218FE71566F425E91581770E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -292,12 +369,17 @@
 		7EF711071976C3C000F7DC51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				596E53991AA4DF3300170E90 /* libPods.a */,
+				596E53971AA4DF2900170E90 /* libPods-AFNetworking.a */,
+				596E53951AA4DF2300170E90 /* libPods.a */,
+				59616AF61A9F4EB4009A820E /* AddressBook.framework */,
 				7E00CECE198BB41300C34D6A /* CoreFoundation.framework */,
 				7E2C5B981980F84000701108 /* libsqlite3.0.dylib */,
 				7EF711081976C3C000F7DC51 /* Foundation.framework */,
 				7EF7110A1976C3C000F7DC51 /* CoreGraphics.framework */,
 				7EF7110C1976C3C000F7DC51 /* UIKit.framework */,
 				7EF711211976C3C100F7DC51 /* XCTest.framework */,
+				A6F7F264FAFEEE875548B407 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -305,11 +387,12 @@
 		7EF7110E1976C3C100F7DC51 /* testWorldpayLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				59AB33B21B8CC63B008342BF /* 3DS */,
+				59B389A71AC1A9BE00CA5269 /* Settings */,
+				59A6308E1A8BC0C2002A1CCC /* Worldfood.entitlements */,
 				7E2C5BAD1981436F00701108 /* worldpay.sqlite */,
 				7EF711171976C3C100F7DC51 /* AppDelegate.h */,
 				7EF711181976C3C100F7DC51 /* AppDelegate.m */,
-				7EF7111A1976C3C100F7DC51 /* Images.xcassets */,
-				7EF7110F1976C3C100F7DC51 /* Supporting Files */,
 				7EF711401976C72600F7DC51 /* SampleViewController.h */,
 				7EF711411976C72600F7DC51 /* SampleViewController.m */,
 				7EF711421976C72600F7DC51 /* SampleViewController.xib */,
@@ -319,6 +402,8 @@
 				7E5166AF197FE63700CCB1EC /* SplashScreenViewController.h */,
 				7E5166B0197FE63700CCB1EC /* SplashScreenViewController.m */,
 				7E5166B1197FE63700CCB1EC /* SplashScreenViewController.xib */,
+				59CEF27A1B72015500FB0A7D /* BasketManager.h */,
+				59CEF27B1B72015500FB0A7D /* BasketManager.m */,
 				7EF711471976C74100F7DC51 /* NavigationViewController.h */,
 				7EF711481976C74100F7DC51 /* NavigationViewController.m */,
 				7EF711491976C74100F7DC51 /* NavigationViewController.xib */,
@@ -329,6 +414,8 @@
 				7E2C5B961980F64600701108 /* DBhandler.m */,
 				7E2C5BA7198126D900701108 /* CustomGestureRecognizer.h */,
 				7E2C5BA8198126D900701108 /* CustomGestureRecognizer.m */,
+				7EF7111A1976C3C100F7DC51 /* Images.xcassets */,
+				7EF7110F1976C3C100F7DC51 /* Supporting Files */,
 			);
 			path = testWorldpayLibrary;
 			sourceTree = "<group>";
@@ -369,9 +456,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EF711311976C3C100F7DC51 /* Build configuration list for PBXNativeTarget "testWorldpayLibrary" */;
 			buildPhases = (
+				91A36732E2F98CD61F0DBD43 /* Check Pods Manifest.lock */,
 				7EF711011976C3C000F7DC51 /* Sources */,
 				7EF711021976C3C000F7DC51 /* Frameworks */,
 				7EF711031976C3C000F7DC51 /* Resources */,
+				EF457F0D73DDC3B79917CEE7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -406,11 +495,16 @@
 		7EF710FD1976C3C000F7DC51 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = arx;
 				TargetAttributes = {
 					7EF711041976C3C000F7DC51 = {
-						DevelopmentTeam = NXRQM34DT8;
+						DevelopmentTeam = MZ9M879U38;
+						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 1;
+							};
+						};
 					};
 					7EF7111F1976C3C100F7DC51 = {
 						DevelopmentTeam = NXRQM34DT8;
@@ -444,7 +538,10 @@
 				7E00CE8B198B7B5500C34D6A /* delete@2x.png in Resources */,
 				7E00CE91198B7B5500C34D6A /* loxodrome@2x.png in Resources */,
 				593F14AD19B0BA7F00A009FB /* visa.png in Resources */,
+				59581CAA1B7B544E00D616C0 /* Close@2x.png in Resources */,
+				59D4B5441A7153BC00E92557 /* apple_pay_btn@2x.png in Resources */,
 				7EF7114C1976C74100F7DC51 /* NavigationViewController.xib in Resources */,
+				59AB33B71B8CC658008342BF /* ThreeDSController.xib in Resources */,
 				7E00CE88198B7B5500C34D6A /* check@2x.png in Resources */,
 				7E00CE8C198B7B5500C34D6A /* empty@2x.png in Resources */,
 				7E2C5BAE1981436F00701108 /* worldpay.sqlite in Resources */,
@@ -452,14 +549,19 @@
 				7EB746C9198BCED400D33001 /* moussaka@2x.jpg in Resources */,
 				7EF711451976C72600F7DC51 /* SampleViewController.xib in Resources */,
 				5A6788F01A680E590084394C /* default_card@2x.png in Resources */,
+				59C005401B78D89400862E1A /* Basket@2x.png in Resources */,
 				7E5166B3197FE63700CCB1EC /* SplashScreenViewController.xib in Resources */,
 				7EB746CB198BCED400D33001 /* roastbeef@2x.jpg in Resources */,
+				59B389A61AC1A99C00CA5269 /* SettingsTableViewController.xib in Resources */,
 				593F14AA19B0BA7F00A009FB /* amex.png in Resources */,
 				7E00CE8A198B7B5500C34D6A /* clock@2x.png in Resources */,
 				7E5166B8197FE6FF00CCB1EC /* MainPageViewController.xib in Resources */,
+				59B389AC1AC1A9E600CA5269 /* SettingsCell.xib in Resources */,
 				7E00CE90198B7B5500C34D6A /* logo@2x.png in Resources */,
 				7E00CE93198B7B5500C34D6A /* uk@2x.png in Resources */,
 				7EB746CA198BCED400D33001 /* paella@2x.jpg in Resources */,
+				59D4B5461A71594300E92557 /* apple_pay_btn@3x.png in Resources */,
+				59032FFC1A8BC99600CB2ADE /* WorldpayResources.bundle in Resources */,
 				593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */,
 				5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */,
 				593F14AB19B0BA7F00A009FB /* maestro.png in Resources */,
@@ -468,7 +570,6 @@
 				7E00CE8D198B7B5500C34D6A /* greece@2x.png in Resources */,
 				7E224921198230A20016BE5E /* SuccessPageViewController.xib in Resources */,
 				7E00CE92198B7B5500C34D6A /* spain@2x.png in Resources */,
-				597077CE1993CC1F002651A7 /* WorldpayResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,11 +585,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		91A36732E2F98CD61F0DBD43 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EF457F0D73DDC3B79917CEE7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7EF711011976C3C000F7DC51 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59B389A51AC1A99C00CA5269 /* SettingsTableViewController.m in Sources */,
+				59CEF27C1B72015500FB0A7D /* BasketManager.m in Sources */,
 				7EF7114A1976C74100F7DC51 /* NavigationViewController.m in Sources */,
 				7E00CEB9198B922600C34D6A /* ALToastView.m in Sources */,
 				7E224920198230A20016BE5E /* SuccessPageViewController.m in Sources */,
@@ -497,9 +633,11 @@
 				7EF711191976C3C100F7DC51 /* AppDelegate.m in Sources */,
 				7E2C5BA9198126D900701108 /* CustomGestureRecognizer.m in Sources */,
 				7E2C5B971980F64600701108 /* DBhandler.m in Sources */,
+				59B389AB1AC1A9E600CA5269 /* SettingsCell.m in Sources */,
 				7E5166B7197FE6FF00CCB1EC /* MainPageViewController.m in Sources */,
 				7E00CEB6198B921B00C34D6A /* FMResultSet.m in Sources */,
 				7E5166B2197FE63700CCB1EC /* SplashScreenViewController.m in Sources */,
+				59AB33B61B8CC658008342BF /* ThreeDSController.m in Sources */,
 				7EF711151976C3C100F7DC51 /* main.m in Sources */,
 				7E00CEB2198B921B00C34D6A /* FMDatabase.m in Sources */,
 				7EF711431976C72600F7DC51 /* SampleViewController.m in Sources */,
@@ -563,8 +701,9 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Capilla Martínez (5ZR5HUR772)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: David Capilla Martínez (5ZR5HUR772)";
+				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Arx.Net SA Mobile (MZ9M879U38)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Arx.Net SA Mobile (MZ9M879U38)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -588,7 +727,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "3bb5957f-8f2d-4a6e-af74-956dbd006913";
+				PROVISIONING_PROFILE = "36d46bf8-ba3b-4d82-bc81-38cea1c1f267";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -610,8 +749,9 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: David Capilla Martínez (5ZR5HUR772)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: David Capilla Martínez (5ZR5HUR772)";
+				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Arx.Net SA Mobile (MZ9M879U38)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Arx.Net SA Mobile (MZ9M879U38)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -628,7 +768,7 @@
 				HEADER_SEARCH_PATHS = $SOURCE_ROOT/include;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "3bb5957f-8f2d-4a6e-af74-956dbd006913";
+				PROVISIONING_PROFILE = "36d46bf8-ba3b-4d82-bc81-38cea1c1f267";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -637,23 +777,33 @@
 		};
 		7EF711321976C3C100F7DC51 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA2F3D62D086671F86421DC0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Capilla Martínez (5ZR5HUR772)";
+				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Thanos Chatziathanassiou (TUJR2S557U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Thanos Chatziathanassiou (TUJR2S557U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$SOURCE_ROOT/../Worldpay/output/Worldpay/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$SOURCE_ROOT/../Worldpay/output/Worldpay/**",
+				);
 				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
 				LIBRARY_SEARCH_PATHS = $SOURCE_ROOT/../Worldpay/output/Worldpay;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-all_load",
+				);
+				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "3bb5957f-8f2d-4a6e-af74-956dbd006913";
+				PROVISIONING_PROFILE = "36d46bf8-ba3b-4d82-bc81-38cea1c1f267";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -661,23 +811,36 @@
 		};
 		7EF711331976C3C100F7DC51 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B540D97CB3C2CD5E66ACEA52 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: David Capilla Martínez (5ZR5HUR772)";
+				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Arx.Net SA Mobile (MZ9M879U38)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Arx.Net SA Mobile (MZ9M879U38)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$SOURCE_ROOT/../Worldpay/output/Worldpay/**";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$SOURCE_ROOT/../Worldpay/output/Worldpay/**",
+				);
 				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
-				LIBRARY_SEARCH_PATHS = $SOURCE_ROOT/../Worldpay/output/Worldpay;
+				LIBRARY_SEARCH_PATHS = (
+					$SOURCE_ROOT/../Worldpay/output/Worldpay,
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-all_load",
+				);
+				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "3bb5957f-8f2d-4a6e-af74-956dbd006913";
+				PROVISIONING_PROFILE = "36d46bf8-ba3b-4d82-bc81-38cea1c1f267";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -687,8 +850,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -707,7 +870,7 @@
 					"$(PROJECT_DIR)/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bb5957f-8f2d-4a6e-af74-956dbd006913";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Worldfood.app/Worldfood";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -717,8 +880,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -733,7 +896,7 @@
 					"$(PROJECT_DIR)/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bb5957f-8f2d-4a6e-af74-956dbd006913";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Worldfood.app/Worldfood";
 				WRAPPER_EXTENSION = xctest;
 			};

@@ -85,6 +85,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
     
+    [WorldpayUtils loadFont:@"ArialMT"];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

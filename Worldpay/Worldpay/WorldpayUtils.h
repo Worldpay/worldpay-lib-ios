@@ -9,8 +9,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WorldpayUtils : NSObject
 
+@interface WorldpayUtils : NSObject
+/*!
+ * This is a helper method that loads a font file with the given name
+ * from library's bundle
+ */
 + (void)loadFont:(NSString *)fontName;
++ (void)sendDebug: (NSString *)string;
 
 @end

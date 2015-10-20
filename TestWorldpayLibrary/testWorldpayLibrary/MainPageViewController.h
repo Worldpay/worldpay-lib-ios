@@ -42,4 +42,5 @@
  */
 -(void)createCellView:(long)indexPathRow cellView:(UIView *)cv;
 
+- (IBAction)settingsAction:(id)sender;
 @end

@@ -62,8 +62,8 @@
   //  NSLog(@"name:%@",name);
   //  NSLog(@"maskedCardNumber:%@",maskedCardNumber);
     
-    NSString *string = [NSString stringWithFormat:@"insert into storedcards (token,cardType,name,maskedCardNumber) values('%@','%@','%@','%@')",token,cardType,[name stringByReplacingOccurrencesOfString:@"'" withString:@"''"],maskedCardNumber];
-
+    NSString *string = [NSString stringWithFormat:@"insert into storedcards (token,cardType,name,maskedCardNumber) values('%@','%@','%@','%@')",token,cardType,name,maskedCardNumber];
+    
     BOOL y = [database executeUpdate:string];
     if (!y)
     {
@@ -83,7 +83,17 @@
     }else{
         NSLog(@"delete succeeded!!");
     }
-    
+}
+
++ (void)deleteAllCards:(FMDatabase *)database {
+    NSString *string = @"delete from storedcards";
+    BOOL y = [database executeUpdate:string];
+    if (!y)
+    {
+      NSLog(@"delete failed!!");
+    }else{
+      NSLog(@"delete succeeded!!");
+    }
 }
 
 + (void)closeDatabase: (FMDatabase *)database {

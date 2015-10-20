@@ -2,12 +2,16 @@
 //  AppDelegate.m
 //  testWorldpayLibrary
 //
-//  Copyright (c) 2015 Worldpay. All rights reserved.
+//  Created by arx on 7/16/14.
+//  Copyright (c) 2014 arx. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "NavigationViewController.h"
 #import "SplashScreenViewController.h"
+#import "AFNetworkActivityLogger.h"
+#import "AFNetworking.h"
+#import "Worldpay.h"
 
 @implementation AppDelegate
 
@@ -23,8 +27,14 @@
     
     //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
+    _debugMode = YES;
+    [self setKeys];
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -51,6 +61,61 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark -
+- (void)sendDebug: (NSString *)string {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    
+    NSString *logEntry = [NSString stringWithFormat:@"%@ [Sample App] (%@): %@\n", dateString, [[UIDevice currentDevice] name], string];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"https://public.arx.net/~billp/ios_reports/report.asp" parameters:@{@"log": logEntry} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+
+- (void)setKeys {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *developmentClientKey = [userDefaults valueForKey:@"developmentClientKey"];
+    NSString *developmentServiceKey = [userDefaults valueForKey:@"developmentServiceKey"];
+    if (!developmentClientKey) {
+        developmentClientKey = @"L_C_58d93fc9-e325-45fa-8b4d-ef0c632f7c13";
+        [userDefaults setValue:developmentClientKey forKey:@"developmentClientKey"];
+    }
+    if (!developmentServiceKey) {
+        developmentServiceKey = @"L_S_60d7f849-3ff0-43fa-944e-dfd860c757ab";
+        [userDefaults setValue:developmentServiceKey forKey:@"developmentServiceKey"];
+    }
+    
+    NSString *productionClientKey = [userDefaults valueForKey:@"productionClientKey"];
+    NSString *productionServiceKey = [userDefaults valueForKey:@"productionServiceKey"];
+    if (!productionClientKey) {
+        productionClientKey = @"L_C_57f32dce-628d-49c7-9faf-392323fe02d9";
+        [userDefaults setValue:productionClientKey forKey:@"productionClientKey"];
+    }
+    if (!productionServiceKey) {
+        productionServiceKey = @"L_S_0285ce18-8624-44d9-97aa-ffcd5fca31da";
+        [userDefaults setValue:productionServiceKey forKey:@"productionServiceKey"];
+    }
+    
+    [userDefaults synchronize];
+    
+    if ([[Worldpay sharedInstance] WPEnvironment] == WPEnvironmentDevelopment) {
+        [[Worldpay sharedInstance] setClientKey:developmentClientKey];
+        [[Worldpay sharedInstance] setServiceKey:developmentServiceKey];
+    }
+    else if ([[Worldpay sharedInstance] WPEnvironment] == WPEnvironmentProduction) {
+        [[Worldpay sharedInstance] setClientKey:productionClientKey];
+        [[Worldpay sharedInstance] setServiceKey:productionServiceKey];
+    }
+    
 }
 
 @end

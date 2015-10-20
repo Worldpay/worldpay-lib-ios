@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>UniversalLib.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Worldpay.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>WorldpayResources.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>597077AA1993999A002651A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7EF710741976B8B800F7DC51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7EF710841976B8B800F7DC51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7EF710AD1976BA4600F7DC51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

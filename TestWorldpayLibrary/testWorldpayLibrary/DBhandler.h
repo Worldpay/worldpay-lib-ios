@@ -52,4 +52,11 @@
  */
 + (void)deleteCard:(FMDatabase *)database token:(NSString *)token;
 
+/**
+ *  Function that deletes all stored cards.
+ *
+ *  @param sender
+ */
++ (void)deleteAllCards:(FMDatabase *)database;
+
 @end
