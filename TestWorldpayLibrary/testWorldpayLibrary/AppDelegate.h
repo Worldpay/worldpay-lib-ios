@@ -12,5 +12,9 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic) CGRect screenRect;
+@property (nonatomic, retain) NSString *debugText, *apmName;
+@property (nonatomic) BOOL threeDSEnabled, apmEnabled, debugMode;
 
+- (void)sendDebug: (NSString *)string;
+- (void)setKeys;
 @end

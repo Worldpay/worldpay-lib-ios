@@ -7,10 +7,12 @@
 
 #import "Worldpay.h"
 #import "WorldpayUtils.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface Worldpay()<UITextFieldDelegate>
     @property (nonatomic, copy) requestUpdateTokenSuccess CVCModalSuccess;
     @property (nonatomic, copy) requestTokenFailure CVCModalFailure;
+    @property (nonatomic, copy) void (^CVCModalBeforeRequest)(void);
     @property (nonatomic, retain) NSString *CVCModalToken;
     @property (nonatomic, retain) UIView *CVCModalBackgroundView;
     @property (nonatomic, retain) NSString *CVCModalTfCVC;
@@ -22,34 +24,30 @@
 
 #pragma mark - Sigleton Method
 
-+ (id)sharedInstance{
++ (id)sharedInstance {
     static Worldpay *getInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         getInstance = [[self alloc] init];
-        [getInstance setValidationType:WorldpayValidationTypeAdvanced];        
+        [getInstance setValidationType:WorldpayValidationTypeAdvanced];
+        
+        [WorldpayUtils loadFont:@"ArialMT"];
     });
     return getInstance;
 }
 
 - (id)init{
     if (self = [super init]) {
-        WorldpayClientKey = @"";
-        WorldpayReusable = NO;
-        WorldpayTimeout = 10;
+        WorldpayTimeout = 65;
     }
     return self;
 }
 
+- (NSString *)APIStringURL {
+    return api_url;
+}
+
 #pragma mark - Setters
-
-- (void)setClientKey:(NSString *)clientKey{
-    WorldpayClientKey = clientKey;
-}
-
-- (void)setReusable:(BOOL)reusable{
-    WorldpayReusable = reusable;
-}
 
 - (void)setValidationType:(WorldpayValidationType)validationType {    
     if (![self validationTypeIsValid:validationType]) {
@@ -85,8 +83,8 @@
     
     NSMutableDictionary *cardDetailsDictionary = [[NSMutableDictionary alloc] init];
     
-    [cardDetailsDictionary setValue:[NSNumber numberWithBool:WorldpayReusable] forKey:@"reusable"];
-    [cardDetailsDictionary setValue:WorldpayClientKey forKey:@"clientKey"];
+    [cardDetailsDictionary setValue:[NSNumber numberWithBool:self.reusable] forKey:@"reusable"];
+    [cardDetailsDictionary setValue:_clientKey forKey:@"clientKey"];
     
     NSMutableDictionary *paymentMethodDictionary = [[NSMutableDictionary alloc]init];
     
@@ -103,10 +101,52 @@
     
     [cardDetailsDictionary setValue:paymentMethodDictionary forKey:@"paymentMethod"];
     
-    [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens",api_path] requestDictionary:cardDetailsDictionary method:@"POST" success:success failure:failure];
+    [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens", [self APIStringURL]]
+           requestDictionary:cardDetailsDictionary
+                      method:@"POST"
+                     success:success
+                     failure:failure
+           additionalHeaders:nil];
 }
 
 
+- (void)createAPMTokenWithAPMName:(NSString *)apmName
+                      countryCode:(NSString *)countryCode
+                        apmFields:(NSDictionary *)apmFields
+              shopperLanguageCode:(NSString *)shopperLanguageCode
+                          success:(requestUpdateTokenSuccess)success
+                          failure:(requestTokenFailure)failure {
+    
+    
+    NSArray *errors = [self validateAPMDetailsWithAPMName:apmName countryCode:countryCode];
+    if (errors.count > 0) {
+        failure(nil, errors);
+        return;
+    }
+    
+    NSMutableDictionary *apmDetailsDictionary = [[NSMutableDictionary alloc] init];
+    
+    [apmDetailsDictionary setValue:[NSNumber numberWithBool:self.reusable] forKey:@"reusable"];
+    [apmDetailsDictionary setValue:_clientKey forKey:@"clientKey"];
+    [apmDetailsDictionary setValue:shopperLanguageCode forKey:@"shopperLanguageCode"];
+
+    NSMutableDictionary *paymentMethodDictionary = [[NSMutableDictionary alloc]init];
+    
+    [paymentMethodDictionary setValue:@"APM" forKey:@"type"];
+    [paymentMethodDictionary setValue:apmName forKey:@"apmName"];
+    [paymentMethodDictionary setValue:countryCode forKey:@"shopperCountryCode"];
+    [paymentMethodDictionary setValue:apmFields forKey:@"apmFields"];
+    
+    [apmDetailsDictionary setValue:paymentMethodDictionary forKey:@"paymentMethod"];
+    
+    [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens", [self APIStringURL]]
+           requestDictionary:apmDetailsDictionary
+                      method:@"POST"
+                     success:success
+                     failure:failure
+           additionalHeaders:nil];
+    
+}
 
 -(void)reuseToken:(NSString *)token
           withCVC:(NSString *)CVC
@@ -123,10 +163,16 @@
     NSMutableDictionary *cardDetailsDictionary = [[NSMutableDictionary alloc] init];
     
     [cardDetailsDictionary setValue:CVC forKey:@"cvc"];
-    [cardDetailsDictionary setValue:WorldpayClientKey forKey:@"clientKey"];
+    [cardDetailsDictionary setValue:_clientKey forKey:@"clientKey"];
     
-    [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens/%@", api_path, token] requestDictionary:cardDetailsDictionary method:@"PUT" success:success failure:failure];
+    [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens/%@", [self APIStringURL], token]
+           requestDictionary:cardDetailsDictionary
+                      method:@"PUT"
+                     success:success
+                     failure:failure
+           additionalHeaders:nil];
 }
+
 
 #pragma mark - CVC Modal View Methods
 
@@ -140,6 +186,18 @@
                             token:(NSString *)token
                           success:(requestUpdateTokenSuccess)success
                             error:(updateTokenFailure)failure {
+    [self showCVCModalWithParentView:parentView
+                               token:token
+                             success:success
+                       beforeRequest:nil
+                               error:failure];
+}
+
+-(void)showCVCModalWithParentView:(UIView *)parentView
+                            token:(NSString *)token
+                          success:(requestUpdateTokenSuccess)success
+                    beforeRequest:(void (^)(void))beforeRequest
+                            error:(updateTokenFailure)failure {
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CVC" message:NSLocalizedString(@"Please enter your CVC", nil) delegate:self cancelButtonTitle:@"Confirm" otherButtonTitles:nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
@@ -148,6 +206,7 @@
     self.CVCModalSuccess = success;
     self.CVCModalFailure = failure;
     self.CVCModalToken = token;
+    self.CVCModalBeforeRequest = beforeRequest;
     [alert show];
 }
 
@@ -155,13 +214,21 @@
 - (IBAction)confirmCVCAction:(id)sender {
     self.CVCModalBtnConfirm.enabled = NO;
     [self.CVCModalActivityIndicatorView startAnimating];
+    if (self.CVCModalBeforeRequest) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.CVCModalBeforeRequest();
+        });
+    }
     [self reuseToken:self.CVCModalToken
              withCVC:self.CVCModalTfCVC
              success:^(int code, NSDictionary *responseDictionary) {
+                 
                  self.CVCModalToken = nil;
                  self.CVCModalBtnConfirm.enabled = YES;
                  [self.CVCModalActivityIndicatorView stopAnimating];
-                 self.CVCModalSuccess(code, responseDictionary);
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                    self.CVCModalSuccess(code, responseDictionary);
+                 });
              } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
                  self.CVCModalBtnConfirm.enabled = YES;
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
@@ -171,8 +238,9 @@
                  [alert show];
                  [self.CVCModalActivityIndicatorView stopAnimating];
                  
-                 self.CVCModalFailure(responseDictionary, errors);
-                 
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     self.CVCModalFailure(responseDictionary, errors);
+                 });
              }];
 }
 
@@ -188,6 +256,21 @@
 }
 
 #pragma mark - Validation Methods
+
+-(NSArray *)validateAPMDetailsWithAPMName:(NSString *)apmName
+                                   countryCode:(NSString *)countryCode {
+    
+    NSMutableArray *errors = [[NSMutableArray alloc] init];
+    
+    if (![self validateAPMNameWithName:apmName]) {
+        [errors addObject:[self errorWithTitle:NSLocalizedString(@"APM Name is not valid", nil) code:1]];
+    }
+    
+    if (![self validateCountryCodeWithCode:countryCode]) {
+        [errors addObject:[self errorWithTitle:NSLocalizedString(@"Country Code is not valid", nil) code:2]];
+    }
+    return errors;
+}
 
 -(NSArray *)validateCardDetailsWithHolderName:(NSString *)holderName
                                    cardNumber:(NSString *)cardNumber
@@ -332,7 +415,7 @@
     }
     
     holderName = [holderName stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSCharacterSet *permittedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'-"];
+    NSCharacterSet *permittedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-'"];
     permittedCharacterSet = [permittedCharacterSet invertedSet];
     NSRange r = [holderName rangeOfCharacterFromSet:permittedCharacterSet];
     
@@ -342,60 +425,57 @@
 #pragma mark -
 #pragma mark Helper Methods
 
+
 -(void)makeRequestWithURL:(NSString *)url
         requestDictionary:(NSDictionary *)requestDictionary
                    method:(NSString *)method
                   success:(requestUpdateTokenSuccess)success
-                  failure:(requestTokenFailure)failure {
-    
+                  failure:(requestTokenFailure)failure
+        additionalHeaders:(NSDictionary *)additionalHeaders {
+
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestDictionary options:kNilOptions error:nil];
+  
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setTimeoutInterval:WorldpayTimeout];
     [request setHTTPMethod:method];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
     [request setValue:[self customHeader] forHTTPHeaderField:@"X-wp-client-user-agent"];
-    
+  
+    for (NSString *key in additionalHeaders.allKeys) {
+      [request setValue:[additionalHeaders objectForKey:key] forHTTPHeaderField:key];
+    }
+  
     [request setHTTPBody:jsonData];
+  
     
-    dispatch_queue_t dispatchQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(dispatchQueue, ^(void) {
-        
-        //Async code
-        NSHTTPURLResponse *httpResponse;
-        NSError *error = nil;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&httpResponse error:&error];
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            if (error) {
-                failure(nil, @[error]);
-            } else {
-                NSError *jsonError = nil;
-                NSDictionary *json = nil;
-                if (responseData.length > 0) {
-                    
-                    jsonError = nil;
-                    json = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&jsonError];
-                    
-                    if (jsonError) {
-                        NSError *error = [self errorWithTitle:@"Cannot parse JSON" code:-1];
-                        failure(json, @[error]);
-                        return;
-                    }
-                }
-                
-                if (httpResponse.statusCode == 200 && ![json objectForKey:@"error"]){
-                    success(200, json);
-                } else {
-                    NSError *error = [self errorWithTitle:[json objectForKey:@"message"] code:httpResponse.statusCode];
-                    failure(json, @[error]);
-                }
-            }
-        });
-    });
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success((int)operation.response.statusCode, responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation.responseObject, @[error]);
+    }];
+    [[NSOperationQueue mainQueue] addOperation:op];
+    
 }
 
 - (BOOL)validationTypeIsValid:(WorldpayValidationType)validationType {
     return validationType < validation_types;
+}
+
+-(BOOL)validateAPMNameWithName:(NSString *)apmName {
+    if(apmName == nil || [apmName isEqualToString:@""]){
+        return NO;
+    }
+    return YES;
+}
+
+-(BOOL)validateCountryCodeWithCode:(NSString *)countryCode {
+    if(countryCode == nil || [countryCode isEqualToString:@""]){
+        return NO;
+    }
+    return YES;
 }
 
 - (NSString *)convertYearIfNeededWithYear:(NSString *)year {

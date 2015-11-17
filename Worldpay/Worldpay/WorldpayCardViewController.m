@@ -85,6 +85,8 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
     
+    [WorldpayUtils loadFont:@"ArialMT"];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -389,19 +391,20 @@
         NSArray *dateParts = [_expiry.text componentsSeparatedByString:@"/"];
         
         [[Worldpay sharedInstance] createTokenWithNameOnCard:[NSString stringWithFormat:@"%@ %@",_firstName.text, _lastName.text]
-                                                  cardNumber:_cardNumber.text
-                                             expirationMonth:[dateParts objectAtIndex:0]
-                                              expirationYear:[dateParts objectAtIndex:1]
-                                                         CVC:_CVC.text
-                                                     success:^(int code, NSDictionary *responseDictionary) {
-                                                         [weakSelf closeController];
-                                                         _saveSuccessBlock(responseDictionary);
-                                                     }
-                                                     failure:^(id responseData, NSArray *errors) {
-                                                         [weakSelf closeController];
-                                                         _saveFailureBlock(responseData, errors);
-                                                     }];
+                                                      cardNumber:_cardNumber.text
+                                                 expirationMonth:[dateParts objectAtIndex:0]
+                                                  expirationYear:[dateParts objectAtIndex:1]
+                                                             CVC:_CVC.text
+                                                         success:^(int code, NSDictionary *responseDictionary) {
+                                                             [weakSelf closeController];
+                                                             _saveSuccessBlock(responseDictionary);
+                                                         }
+                                                         failure:^(id responseData, NSArray *errors) {
+                                                             [weakSelf closeController];
+                                                             _saveFailureBlock(responseData, errors);
+                                                         }];
 
+        
     }
 }
 

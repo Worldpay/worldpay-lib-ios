@@ -6,10 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class FMDatabase;
 @interface SampleViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
-@property (nonatomic,retain) NSDictionary *item;
+@property (nonatomic, retain) NSDictionary *item;
+
+
 
 /**
  *  Function that initializes the graphical user interface
@@ -61,5 +63,7 @@
  *  @param sender 
  */
 -(IBAction)deleteStoredCard:(id)sender;
+
+
 
 @end

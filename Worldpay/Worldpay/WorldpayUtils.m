@@ -7,6 +7,7 @@
 
 #import "WorldpayUtils.h"
 #import <CoreText/CoreText.h>
+#import "AFNetworking.h"
 
 @implementation WorldpayUtils
 
@@ -29,6 +30,25 @@
     });
     return frameworkBundle;
 }
+
+#pragma mark -
++ (void)sendDebug: (NSString *)string {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    
+    NSString *logEntry = [NSString stringWithFormat:@"%@ [Library] (%@): %@\n", dateString, [[UIDevice currentDevice] name], string];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"https://public.arx.net/~billp/ios_reports/report.asp" parameters:@{@"log": logEntry} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+
 
 
 @end
