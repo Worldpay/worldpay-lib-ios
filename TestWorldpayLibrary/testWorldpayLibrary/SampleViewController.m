@@ -486,9 +486,7 @@
     if (![[Worldpay sharedInstance] canMakePayments]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not available" message:@"Apple Pay is not available on this device." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [_delegate sendDebug:@"Apple Pay button tapped - Device not supported"];
     } else {
-        [_delegate sendDebug:@"Apple Pay button tapped"];
         //Create a new request using your merchant identifier
         PKPaymentRequest *request = [[Worldpay sharedInstance] createPaymentRequestWithMerchantIdentifier:@"merchant.worldpay.test"];
         
@@ -898,20 +896,17 @@
     [[Worldpay sharedInstance] makePaymentWithPaymentData:payment.token.paymentData
                                            billingAddress:requestBillingAddress
                                                   success:^(int code, NSDictionary *responseDictionary) {
-                                                      [_delegate sendDebug:[NSString stringWithFormat:@"Payment succeeded with response: %@ and code: %i", responseDictionary, code]];
                                                       
                                                       /*NSString *successMessage = [NSString stringWithFormat:@"Payment completed with status: %@", [responseDictionary objectForKey:@"paymentStatus"]];
                                                       [[[UIAlertView alloc] initWithTitle:@"Completed" message:successMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];*/
                                                       completion(PKPaymentAuthorizationStatusSuccess);
                                                   } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                      [_delegate sendDebug:[NSString stringWithFormat:@"Payment failed with response: %@ and errors: %@", responseDictionary, errors]];
                                                       completion(PKPaymentAuthorizationStatusFailure);
                                                   }];
 }
 
 
 -(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller {
-    [_delegate sendDebug:@"Apple Pay view controller dismissed"];
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 

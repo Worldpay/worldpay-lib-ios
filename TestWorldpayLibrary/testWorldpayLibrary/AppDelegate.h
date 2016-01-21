@@ -15,6 +15,5 @@
 @property (nonatomic, retain) NSString *debugText, *apmName;
 @property (nonatomic) BOOL threeDSEnabled, apmEnabled, debugMode;
 
-- (void)sendDebug: (NSString *)string;
 - (void)setKeys;
 @end

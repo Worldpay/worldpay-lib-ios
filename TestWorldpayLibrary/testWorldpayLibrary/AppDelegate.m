@@ -63,21 +63,7 @@
 }
 
 #pragma mark -
-- (void)sendDebug: (NSString *)string {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    
-    NSString *dateString = [formatter stringFromDate:[NSDate date]];
-    
-    NSString *logEntry = [NSString stringWithFormat:@"%@ [Sample App] (%@): %@\n", dateString, [[UIDevice currentDevice] name], string];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"https://public.arx.net/~billp/ios_reports/report.asp" parameters:@{@"log": logEntry} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
-}
+
 
 
 - (void)setKeys {
@@ -85,11 +71,11 @@
     NSString *clientKey = [userDefaults valueForKey:@"clientKey"];
     NSString *serviceKey = [userDefaults valueForKey:@"serviceKey"];
     if (!clientKey) {
-        clientKey = @"T_C_e51c8f3f-b038-453a-9b0c-904f489e5c3a";
+        clientKey = @"T_C_fba10c60-5581-414c-aee7-358f150e6104";
         [userDefaults setValue:clientKey forKey:@"clientKey"];
     }
     if (!serviceKey) {
-        serviceKey = @"T_S_9eafef79-bc9a-42d6-a0a8-53f9035ff1dc";
+        serviceKey = @"T_S_e19c5313-e249-4beb-a6de-1f788882476c";
         [userDefaults setValue:serviceKey forKey:@"serviceKey"];
     }
     
