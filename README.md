@@ -30,6 +30,18 @@ Integration
       pod "AFNetworking", "~> 2.0"
       ```
 
+6. **If your app is using Swift**, please make sure that you create a [Bridging Header file](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html) on your app after having completed the previous steps. In order to do so,
+      just create a file named yourprojectname-Bridging-Header.h with the content:
+
+      ```
+      #import "Worldpay.h"
+      #import "APMController.h"
+      #import "WorldpayAPMViewController.h"
+      #import "ThreeDSController.h"
+      #import "WorldpayCardViewController.h"
+      #import "Worldpay+ApplePay.h"
+      ```
+      Once you have done this, please amend "Objective-C Bridging Header" on your Target Build Settings to point to the path of the file you just created.
 
 How To Use the Library
 -------------
@@ -38,8 +50,12 @@ How To Use the Library
       ```
       import "Worldpay.h"
       ```
+
+      You don't need to do this import if you are using **Swift**, since the Bridging Header file you created would take care of this.
+
 2. Set the variables to use the library (you can do this on your controller's viewDidLoad function)
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] setClientKey:YOUR_CLIENT_KEY];
 
       //decide whether you want to charge this card multiple times or only once
@@ -49,18 +65,32 @@ How To Use the Library
       //Basic validation just checks that is a numeric value and not empty.
       //Advanced checks that is a valid card number.
       [[Worldpay sharedInstance] setValidationType:WorldpayValidationTypeAdvanced];
+
+      /** SWIFT **/
+      let wp: Worldpay = Worldpay.sharedInstance();
+      wp.clientKey = YOUR_CLIENT_KEY;
+      wp.reusable = true;
+      wp.validationType = WorldpayValidationTypeAdvanced;
+
       ```
+
 3. Call the following method to validate Card Details before calling the request to get token. (See Validation Error Codes below) (**This step is optional, create token and update token methods take care of handling the validation**). The result is an array of NSError elements (if no errors the array will be empty).
       ```
+      /** OBJECTIVE-C **/
       NSArray *errors = [[Worldpay sharedInstance] validateCardDetailsWithHolderName:@"CARDHOLDER_NAME"
                                                                              cardNumber:@"CARD_NUMBER"
                                                                         expirationMonth:@"MM"
                                                                          expirationYear:@"YYYY"
                                                                                     CVC:@"CARD_CVC"];
+
+      /** SWIFT **/
+      let errors = wp.validateCardDetailsWithHolderName("CARDHOLDER_NAME", cardNumber: "CARD_NUMBER", expirationMonth: "MM", expirationYear: "YYYY", CVC: "CARD_CVC");
+
       ```
 
 4. To get the Token call
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] createTokenWithNameOnCard:@"CARDHOLDER_NAME"
                                                 cardNumber:@"CARD_NUMBER"
                                            expirationMonth:@"MM"
@@ -87,9 +117,17 @@ How To Use the Library
                                                           //The array will contain NSError objects on it.
                                                   }
       ];
+
+      /** SWIFT **/
+      wp.createTokenWithNameOnCard("CARDHOLDER_NAME", cardNumber: "CARD_NUMBER", expirationMonth: "MM", expirationYear: "YYYY", CVC: "CARD_CVC", success:{(code, response) in
+            // save the token in the way you want.
+        }, failure: {(response) in
+            // handle errors here
+      });
       ```
     To update the Token call
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] reuseToken:@"YOUR_REUSABLE_TOKEN"
                                     withCVC:@"CARD_CVC"
                                     success:^(int code, NSDictionary *responseDictionary){
@@ -99,12 +137,20 @@ How To Use the Library
                                           //handle error
                                     }
       ];
+
+      /** SWIFT **/
+      wp.reuseToken("YOUR_REUSABLE_TOKEN", withCVC: "CARD_CVC", success:{(response) in
+          // updated successfully
+      }, failure: {(response, errors) in
+          // handle errors here
+      });
       ```
 
-    In order to ask for the CVC to the user when reusing a card, we also provide a method that displays a UIAlertView and then performs the call to reuseToken for you with the card token and the CVC
+      In order to ask the user for the CVC when reusing a card, we also provide a method that displays a UIAlertView and then performs the call to reuseToken for you with the card token and the CVC
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
-                                                      token:token
+                                                      token:@"YOUR_REUSABLE_TOKEN"
                                                     success:^(int code, NSDictionary *responseDictionary){
                                                           //updated successfully
                                                     }
@@ -115,6 +161,16 @@ How To Use the Library
                                                           //handle error
                                                     }
       ];
+
+      /** SWIFT **/
+      wp.showCVCModalWithParentView(self.view, token: "YOUR_REUSABLE_TOKEN",
+      success:{(code, response) in
+          // updated successfully
+      }, beforeRequest: {() in
+          //your code before the request is triggered
+      },error: {(response) in
+          // handle errors here
+      });
       ```
 
 The WorldpayCardViewController
@@ -128,6 +184,8 @@ The WorldpayCardViewController is a simple UIViewController that displays a card
       import "Worldpay.h"
       import "WorldpayCardViewController.h"
       ```
+      Again, you don't need to do these imports if you are using **Swift**, since the Bridging Header file you created would take care of this.
+
 2. Set the variables to use the library
       ```
       [[Worldpay sharedInstance] setClientKey:YOUR_CLIENT_KEY];
@@ -139,32 +197,56 @@ The WorldpayCardViewController is a simple UIViewController that displays a card
       //Basic validation just checks that is a numeric value and not empty.
       //Advanced checks that is a valid card number.
       [[Worldpay sharedInstance] setValidationType:WorldpayValidationTypeAdvanced];
+
+      /** SWIFT **/
+      let wp: Worldpay = Worldpay.sharedInstance();
+      wp.clientKey = YOUR_CLIENT_KEY;
+      wp.reusable = true;
+      wp.validationType = WorldpayValidationTypeAdvanced;
       ```
 3. To initialize **WorldpayCardViewController** use the following constructors
       ```
+      /** OBJECTIVE-C **/
       //Default theme (iOS blue theme)
       WorldpayCardViewController *worldpayCardViewController = [[WorldpayCardViewController alloc] init];
       //or
       //Custom Theme
       WorldpayCardViewController *worldpayCardViewController = [[WorldpayCardViewController alloc] initWithColor:[UIColor greenColor] loadingTheme:CardDetailsLoadingThemeWhite];
+
+      /** SWIFT **/
+      let worldpayCardViewController: WorldpayCardViewController = WorldpayCardViewController();
+      //or
+      let worldpayCardViewController: WorldpayCardViewController = WorldpayCardViewController(color: UIColor.greenColor(), loadingTheme: CardDetailsLoadingThemeWhite);
       ```
 
 4. Set the "save card" button block with
       ```
+      /** OBJECTIVE-C **/
       [worldpayCardViewController setSaveButtonTapBlockWithSuccess:^(NSDictionary *responseDictionary) {
           // save the token,name,cardType and maskedCardNumber the way you like.
           // here responseDictionary will have the same structure as the one on createTokenWithNameOnCard
       } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
           //handle the error
       }];
+
+      /** SWIFT **/
+      worldpayCardViewController.setSaveButtonTapBlockWithSuccess({(response) in
+          // save the token,name,cardType and maskedCardNumber the way you like.
+          }, failure: {(response) in
+          //handle the error
+      });
       ```
 5. Push or present the worldpayCardViewController
       ```
+      /** OBJECTIVE-C **/
       //if you are inside a navigator controller
       [self.navigationController pushViewController:worldpayCardViewController animated:YES];
 
       //or if you are not inside a navigator controller
       [self presentViewController:worldpayCardViewController animated:YES completion:nil];
+
+      /** SWIFT **/
+      self.presentViewController(worldpayCardViewController, animated: true, completion: nil);
       ```
 
 
@@ -184,14 +266,24 @@ The **WorldpayAPMViewController** can be used to display a very simple form with
       import "Worldpay.h"
       import "WorldpayAPMViewController.h"
       ```
+      You don't need to do these imports if you are using **Swift**, since the Bridging Header file you created would take care of this.
+
 2. Set the variables to use the library
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] setClientKey:YOUR_CLIENT_KEY];
       [[Worldpay sharedInstance] setServiceKey:YOUR_SERVICE_KEY];
 
       //decide whether you want to charge this card multiple times or only once
       [[Worldpay sharedInstance] setReusable:YES];
+
+      /** SWIFT **/
+      let wp: Worldpay = Worldpay.sharedInstance();
+      wp.clientKey = YOUR_CLIENT_KEY;
+      wp.serviceKey = YOUR_SERVICE_KEY;
+      wp.reusable = true;
       ```
+
 3. In order to use this controller, you will need to allow arbitrary loads on your application info.plist
       ```
           <key>NSAppTransportSecurity</key>
@@ -203,27 +295,34 @@ The **WorldpayAPMViewController** can be used to display a very simple form with
 
 4. To initialize **WorldpayAPMViewController** use the following constructors
       ```
+      /** OBJECTIVE-C **/
       //Default theme (iOS blue theme)
       WorldpayAPMViewController *worldpayAPMViewController = [[WorldpayAPMViewController alloc] initWithAPMName:apmName];
       //or
       //Custom Theme
       WorldpayAPMViewController *worldpayAPMViewController = [[WorldpayAPMViewController alloc] initWithColor:[UIColor redColor] loadingTheme:APMDetailsLoadingThemeWhite apmName:apmName];
+
+      /** SWIFT **/
+      let worldpayAPMViewController: WorldpayAPMViewController = WorldpayAPMViewController.init(APMName: apmName);
+      //OR
+      let worldpayAPMViewController: WorldpayAPMViewController = WorldpayAPMViewController.init(color: UIColor.greenColor(), loadingTheme: APMDetailsLoadingThemeWhite, apmName: apmName);
       ```
 
-5. After this, you can also initialise these elements (optional) before presenting the controller (for those properties that are not set, the form will display them as normal inputs. For those properties that have been preset, the form will display them as read-only inputs):
+5. After this, you can also initialise these elements before presenting the controller (for those properties that are not set, the form will display them as normal inputs. For those properties that have been preset, the form will display them as read-only inputs):
     ```
     //UI elements
     @property (nonatomic) UIView *customToolbar;
     @property (nonatomic) UIButton *confirmPurchaseButton;
 
     //Form inputs (properties)
-    @property (nonatomic) NSString *apmName;
+    @property (nonatomic) NSString *apmName; //Mandatory field
     @property (nonatomic) NSString *address;
     @property (nonatomic) NSString *city;
     @property (nonatomic) NSString *postcode;
     @property (nonatomic) NSString *name;
     @property (nonatomic) NSString *countryCode;
     @property (nonatomic) NSString *currency; //For apmName ‘Giropay’, currency should be always EUR
+    @property (nonatomic) NSString *settlementCurrency;
     @property (nonatomic) NSString *successUrl; //This url has to be over https, otherwise the redirect won't work
     @property (nonatomic) NSString *cancelUrl; //This url has to be over https, otherwise the redirect won't work
     @property (nonatomic) NSString *failureUrl; //This url has to be over https, otherwise the redirect won't work
@@ -238,22 +337,36 @@ The **WorldpayAPMViewController** can be used to display a very simple form with
 6. Tell the controller how to handle success/failure in case the APM order is created successfully or fails. In order to do that we use the **setCreateAPMOrderBlockWithSucess**:
 
     ```
+    /** OBJECTIVE-C **/
     //this code blocks will be executed if the APM order is created an authorised successfully / or there is an error
     [worldpayAPMViewController setCreateAPMOrderBlockWithSuccess:^(NSDictionary *responseDictionary) {
         //APM Order is successful, here you can handle what to do after it (eg. clearing the basket, displaying another controller etc)
     } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
         //Create Token or Create APM Order failed, here you can display an error message.
     }];
+
+    /** SWIFT **/
+    worldpayAPMViewController.setCreateAPMOrderBlockWithSuccess({(response) in
+        //APM Order is successful, here you can handle what to do after it (eg. clearing the basket, displaying another controller etc)
+    }, failure: {(response,errors) in
+        //Create Token or Create APM Order failed, here you can display an error message.
+    });
+
     ```
 
 7. Last but not least, we must present the controller:
 
     ```
+    /** OBJECTIVE-C **/
     //if you are inside a navigator controller
     [self.navigationController pushViewController:worldpayAPMViewController animated:YES];
 
     //if you are not inside a navigator controller
     [self presentViewController:worldpayAPMViewController animated:YES completion:nil];
+
+    /** SWIFT **/
+    self.presentViewController(worldpayAPMViewController, animated: true, completion: nil);
+
     ```
 
 The **WorldpayAPMViewController** generates the token, but it uses internally **APMController** in order to create the Order and redirect to the APM Authorisation Page. However, the developer can discard using **WorldpayAPMViewController** in order to display a custom form and use only the **APMController** to create the order. We will explain this on the next subsection.
@@ -271,14 +384,22 @@ Follow these steps to use **APMController**:
       import "Worldpay.h"
       import "APMController.h"
       ```
+      Again, you don't need to do these imports if you are using **Swift**, since the Bridging Header file you created would take care of this.
 
 2. Set the variables to use the library
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] setClientKey:YOUR_CLIENT_KEY];
       [[Worldpay sharedInstance] setServiceKey:YOUR_SERVICE_KEY];
 
       //decide whether you want to charge this card multiple times or only once
       [[Worldpay sharedInstance] setReusable:YES];
+
+      /** SWIFT **/
+      wp.clientKey = YOUR_CLIENT_KEY;
+      wp.serviceKey = YOUR_SERVICE_KEY;
+      wp.reusable = true;
+
       ```
 
 3. In order to use this controller, you will need to allow arbitrary loads on your application info.plist
@@ -292,6 +413,7 @@ Follow these steps to use **APMController**:
 
 4. As we don't use **WorldpayAPMViewController**, we'll need to generate an APM token ourselves. This is done by calling the createAPMTokenWithAPMName... function provided by **Worldpay.h**:
       ```
+      /** OBJECTIVE-C **/
       NSDictionary *apmFields = [[NSDictionary alloc] init];
       NSString *_shopperLangCode = nil;
 
@@ -315,6 +437,7 @@ Follow these steps to use **APMController**:
                       apmController.countryCode = @"GB";
                       apmController.city = @"London";
                       apmController.currencyCode =  @"GBP"; //For apmName ‘Giropay’, currency should be always EUR
+                      apmController.settlementCurrency = @"GBP";
                       apmController.postalCode = @"EC2P 2BX";
                       apmController.name = @"Name";
                       apmController.price = 50;
@@ -348,6 +471,46 @@ Follow these steps to use **APMController**:
                       //Error creating the APM Token, we'll handle it here properly
                    }
       ];
+
+      /** SWIFT **/
+
+       wp.createAPMTokenWithAPMName("paypal", countryCode: "GB", apmFields: [String: String](), shopperLanguageCode: "EN", success: {(code, response) in
+
+            let apmController: APMController = APMController();
+
+            apmController.token = response["token"]! as? String;
+            apmController.address = "address";
+            apmController.countryCode = "GB";
+            apmController.city = "London";
+            apmController.currencyCode = "GBP";
+            apmController.settlementCurrency = "GBP";
+            apmController.postalCode = "EC2P 2BX";
+            apmController.name = "Name";
+            apmController.price = 50;
+
+            apmController.successUrl = "https://www.test.com/success";
+            apmController.failureUrl = "https://www.test.com/failure";
+            apmController.cancelUrl = "https://www.test.com/cancel";
+            apmController.pendingUrl = "https://www.test.com/pending";
+
+            apmController.customerOrderCode = "ABC12345";
+            apmController.customerIdentifiers = [String: String]();
+            apmController.orderDescription = "description";
+
+            apmController.setAuthorizeAPMOrderBlockWithSuccess({(response) in
+                  //Order Created and authorized
+                  //You can include here your custom actions
+                }, failure: {(response, errors) in
+                  //Error creating or authorizing the order
+            })
+
+            //Don't forget to present or push the APMController
+            self.presentViewController(apmController, animated: true, completion: nil);
+
+            }, failure: {(response, errors) in
+                //Error creating the APM Token, we'll handle it here properly
+        });
+
       ```
 5. Once the token is generated successfully the callback for createAPMTokenWithAPMName will be triggered with a valid token: this is a good moment to setup your APMController to create a APM Order and display the APM Authorisation Page. It will also handle the create order result, as shown on the example above.
 
@@ -360,8 +523,12 @@ The **ThreeDSController** is another UIWebViewDelegate controller that lets you 
       import "Worldpay.h"
       import "ThreeDSController.h"
       ```
+
+      You don't need to do these imports if you are using **Swift**, since the Bridging Header file you created would take care of this.
+
 2. Set the variables to use the library
       ```
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] setClientKey:YOUR_CLIENT_KEY];
       [[Worldpay sharedInstance] setServiceKey:YOUR_SERVICE_KEY];
 
@@ -372,6 +539,12 @@ The **ThreeDSController** is another UIWebViewDelegate controller that lets you 
 
       //decide whether you want to charge this card multiple times or only once
       [[Worldpay sharedInstance] setReusable:YES];
+
+      /** SWIFT **/
+      wp.clientKey = YOUR_CLIENT_KEY;
+      wp.serviceKey = YOUR_SERVICE_KEY;
+      wp.reusable = true;
+      wp.validationType = WorldpayValidationTypeAdvanced;
       ```
 
 3. In order to use this controller, you will need to allow arbitrary loads on your application info.plist
@@ -384,6 +557,8 @@ The **ThreeDSController** is another UIWebViewDelegate controller that lets you 
       ```
 4. Generate an token if you don't have one stored already.
       ```
+
+      /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] createTokenWithNameOnCard:@"CARDHOLDER_NAME"
                                                 cardNumber:@"CARD_NUMBER"
                                            expirationMonth:@"MM"
@@ -416,12 +591,37 @@ The **ThreeDSController** is another UIWebViewDelegate controller that lets you 
                                        failure:^(NSDictionary *responseDictionary, NSArray *errors) {
                                               //handle errors here. The array will contain NSError objects on it.
       }];
+
+      /** SWIFT **/
+      wp.createTokenWithNameOnCard("CARDHOLDER_NAME", cardNumber: "CARD_NUMBER", expirationMonth: "MM", expirationYear: "YYYY", CVC: "CARD_CVC", success: {(code, response) in
+
+          let threeDSController: ThreeDSController = ThreeDSController();
+
+          threeDSController.address = "Adress";
+          threeDSController.city = "City";
+          threeDSController.postalCode = "PostCode";
+          threeDSController.token = response["token"] as? String;
+          threeDSController.name = "3D";
+          threeDSController.price = 39;
+
+          threeDSController.setAuthorizeThreeDSOrderBlockWithSuccess({(response) in
+              //3DS order created and authorized
+              }, failure: {(response, errors) in
+              //3DS Order failed
+          });
+
+          self.presentViewController(threeDSController, animated: true, completion: nil);
+
+      }, failure: {(response, errors) in
+          //handle errors here.
+      });
       ```
 
 3. Once the token is generated successfully, the callback for createTokenWithNameOnCard will be triggered. This is a good place to setup your ThreeDsController that will create the order and display the 3DS Authorisation Page (see the example above), and will also handle the create & authorize order result. If you already had a token stored, you don't need to call the createTokenWithNameOnCard function. However, if the token you created is reusable and you are trying to create a 3DS order, you need to make sure that you force to update token before pushing
 the ThreeDSController, otherwise create order will fail:
 
       ```
+      /** OBJECTIVE-C **/
       //if token is reusable and we are on 3DS, we need to force update token before calling create order
       BOOL reusable = [[Worldpay sharedInstance] reusable];
       if (reusable) {
@@ -438,6 +638,23 @@ the ThreeDSController, otherwise create order will fail:
       }
       else {
           [self.navigationController pushViewController:threeDSController animated:YES];
+      }
+
+      /** SWIFT **/
+      //if token is reusable and we are on 3DS, we need to force update token before calling create order
+      if (wp.reusable) {
+          wp.showCVCModalWithParentView(self.view, token: "YOUR_REUSABLE_TOKEN",
+              success:{(code, response) in
+                  // updated successfully
+                  self.presentViewController(threeDSController, animated: true, completion: nil);
+              }, beforeRequest: {() in
+                  //your code before the request is triggered
+              },error: {(response) in
+                  //handle CVC error here
+          });
+      }
+      else {
+          self.presentViewController(threeDSController, animated: true, completion: nil);
       }
       ```
 

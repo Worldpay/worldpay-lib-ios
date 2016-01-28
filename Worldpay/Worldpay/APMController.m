@@ -66,6 +66,11 @@
 }
 
 - (IBAction)close:(id)sender {
+    
+    NSMutableArray *errors = [[NSMutableArray alloc] init];
+    [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"User cancelled APM authorization", nil) code:0]];
+    _authorizeFailureBlock(@{}, errors);
+    
     if (!self.navigationController) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -84,13 +89,14 @@
     [request setURL:[NSURL URLWithString:stringURL]];
     [request setHTTPMethod:@"POST"];
     [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
-    [request addValue:[[Worldpay sharedInstance] serviceKey] forHTTPHeaderField:@"Authorization"];
-
+    [request addValue:[[Worldpay sharedInstance] serviceKey] forHTTPHeaderField:@"Authorization"];    
+    
     NSDictionary *params = @{
                              @"token": _token,
                              @"orderDescription": _orderDescription,
-                             @"amount": @((NSInteger)(_price * 100)),
+                             @"amount": @((float)(ceil(_price * 100))),
                              @"currencyCode": _currencyCode,
+                             @"settlementCurrency": _settlementCurrency,
                              @"name": _name,
                              @"billingAddress": @{
                                      @"address1": _address,
@@ -98,7 +104,7 @@
                                      @"city": _city,
                                      @"countryCode": _countryCode
                                      },
-                             @"customerIdentifiers": _customerIdentifiers,
+                             @"customerIdentifiers": (_customerIdentifiers && [_customerIdentifiers count] > 0) ? _customerIdentifiers : @{},
                              @"customerOrderCode": _customerOrderCode,
                              @"is3DSOrder": @(NO),
                              @"successUrl": _successUrl,

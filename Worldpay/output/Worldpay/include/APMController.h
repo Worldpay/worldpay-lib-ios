@@ -29,6 +29,7 @@ typedef void (^authorizeAPMOrderFailure)(NSDictionary *responseDictionary, NSArr
 @property (nonatomic, retain) NSString *token;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *currencyCode;
+@property (nonatomic, retain) NSString *settlementCurrency;
 @property (nonatomic, retain) NSString *countryCode;
 
 

@@ -68,6 +68,10 @@
 }
 
 - (IBAction)close:(id)sender {
+    NSMutableArray *errors = [[NSMutableArray alloc] init];
+    [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"User cancelled 3DS authorization", nil) code:0]];
+    _authorizeFailureBlock(@{}, errors);
+    
     if (self.navigationController){
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -92,8 +96,9 @@
                              @"token": _token,
                              @"orderType": @"ECOM",
                              @"orderDescription": @"Goods and Services",
-                             @"amount": @((NSInteger)(_price * 100)),
+                             @"amount": @((float)(ceil(_price * 100))),
                              @"currencyCode": @"GBP",
+                             @"settlementCurrency": @"GBP",
                              @"name": @"3D",
                              @"billingAddress": @{
                                      @"address1": _address,
@@ -101,9 +106,7 @@
                                      @"city": _city,
                                      @"countryCode": @"GB"
                                      },
-                             @"customerIdentifiers": @{
-                                     @"email": @"john.smith@gmail.com"
-                                     },
+                             @"customerIdentifiers": (_customerIdentifiers && [_customerIdentifiers count] > 0) ? _customerIdentifiers : @{},
                              @"is3DSOrder": @(YES),
                              @"shopperAcceptHeader": @"application/json",
                              @"shopperUserAgent": [self userAgent],

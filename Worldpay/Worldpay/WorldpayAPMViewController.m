@@ -31,6 +31,7 @@
 @property (nonatomic) UITextField *postcodeInput;
 @property (nonatomic) UITextField *nameInput;
 @property (nonatomic) UITextField *countryCodeInput;
+@property (nonatomic) UITextField *settlementCurrencyInput;
 @property (nonatomic) UITextField *currencyInput;
 @property (nonatomic) UITextField *successUrlInput;
 @property (nonatomic) UITextField *cancelUrlInput;
@@ -208,6 +209,9 @@
 }
 
 - (IBAction)backAction:(id)sender {
+    NSMutableArray *errors = [[NSMutableArray alloc] init];
+    [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"User cancelled APM order", nil) code:0]];
+    _saveFailureBlock(@{}, errors);
     [self closeController];
 }
 
@@ -254,10 +258,10 @@
         NSString *_shopperLangCode = nil;
         NSString *countryCode = (_countryCode) ? _countryCode : _countryCodeInput.text;
 
-        if ([_apmName isEqualToString:@"Paypal"]) {
+        if ([[_apmName lowercaseString] isEqualToString:@"paypal"]) {
             _shopperLangCode = (_shopperLanguageCode) ? _shopperLanguageCode : _shopperLanguageCodeInput.text;
         }
-        else if ([_apmName isEqualToString:@"Giropay"]) {
+        else if ([[_apmName lowercaseString] isEqualToString:@"giropay"]) {
             apmFields = @{@"swiftCode" : (_swiftCode) ? _swiftCode : _swiftCodeInput.text };
         }
 
@@ -271,6 +275,7 @@
                                                         apmController.countryCode = (_countryCode) ? _countryCode : _countryCodeInput.text;
                                                         apmController.city = (_city) ? _city : _cityInput.text;
                                                         apmController.currencyCode = (_currency) ? _currency : _currencyInput.text;
+                                                        apmController.settlementCurrency = (_settlementCurrency) ? _settlementCurrency : _settlementCurrencyInput.text;
                                                         apmController.postalCode = (_postcode) ? _postcode : _postcodeInput.text;
                                                         apmController.token = [responseDictionary objectForKey:@"token"];
                                                         apmController.name = (_name) ? _name : _nameInput.text;
@@ -282,8 +287,8 @@
                                                         
                                                         apmController.customerOrderCode = (_customerOrderCode) ?  _customerOrderCode : _customerOrderCodeInput.text;
                                                         
-                                                        apmController.customerIdentifiers = _customerIdentifiers;
-                                                        
+                                                        apmController.customerIdentifiers = (_customerIdentifiers && [_customerIdentifiers count] > 0) ? _customerIdentifiers : @{};
+//
                                                         apmController.orderDescription = (_orderDescription) ? _orderDescription : _descriptionInput.text;
                                                         
                                                         ///Once the authorize order is completed, we call these code blocks
@@ -359,12 +364,12 @@
 
 - (void)initGUI{
     
-    int numberOfFields = 12;
+    int numberOfFields = 13;
     int fieldHeight = 40;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, screenRect.size.width, 78 * numberOfFields)];
     
-    UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, 10, screenRect.size.width, 51 * numberOfFields)];
+    UIView *bg = [[UIView alloc]initWithFrame:CGRectMake(0, 10, screenRect.size.width, 49.5 * numberOfFields)];
     bg.backgroundColor = (_loadingTheme == APMDetailsLoadingThemeBlack) ? [UIColor blackColor] : [UIColor whiteColor];
     [scrollView addSubview:bg];
     
@@ -381,7 +386,7 @@
 
     if (_price) {
         _priceInput.enabled = NO;
-        _priceInput.text = [NSLocalizedString(@"Total Price: ",nil) stringByAppendingString:[[NSNumber numberWithFloat:_price] stringValue]];
+        _priceInput.text = [NSLocalizedString(@"Total Price: ",nil) stringByAppendingString:[NSString stringWithFormat:@"%.2f", _price]];
     }
     [scrollView addSubview:_priceInput];
 
@@ -440,7 +445,8 @@
     
     [self addHorizontalLineOnView:scrollView afterElement:_countryCodeInput];
     
-    if ([_apmName isEqualToString:@"Paypal"]) {
+    
+    if ([[_apmName lowercaseString] isEqualToString:@"paypal"]) {
         _shopperLanguageCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _countryCodeInput.frame.size.height+_countryCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
         _shopperLanguageCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Language Code (Eg. 'EN')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
         if (_shopperLanguageCode) {
@@ -458,7 +464,7 @@
         }
         [scrollView addSubview:_currencyInput];
     }
-    if ([_apmName isEqualToString:@"Giropay"]) {
+    if ([[_apmName lowercaseString] isEqualToString:@"giropay"]) {
         
         _swiftCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _countryCodeInput.frame.size.height+_countryCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
         _swiftCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Swift Code", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
@@ -481,7 +487,17 @@
     
     [self addHorizontalLineOnView:scrollView afterElement:_currencyInput];
     
-    _nameInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _currencyInput.frame.size.height+_currencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    _settlementCurrencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _currencyInput.frame.size.height+_currencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    _settlementCurrencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Settlement Currency", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_settlementCurrency) {
+        _settlementCurrencyInput.enabled = NO;
+        _settlementCurrencyInput.text = [NSLocalizedString(@"Settlement Currency: ",nil) stringByAppendingString:_settlementCurrency];
+    }
+    
+    [scrollView addSubview:_settlementCurrencyInput];
+    [self addHorizontalLineOnView:scrollView afterElement:_settlementCurrencyInput];
+    
+    _nameInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _settlementCurrencyInput.frame.size.height+_settlementCurrencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
     _nameInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     if (_name) {
         _nameInput.enabled = NO;
@@ -539,7 +555,7 @@
     [scrollView addSubview:_pendingUrlInput];
 
 
-    UIButton *confirmPurchase = [[UIButton alloc]initWithFrame:CGRectMake(screenRect.size.width/2-85, scrollView.frame.size.height-280, 160, 35)];
+    UIButton *confirmPurchase = [[UIButton alloc]initWithFrame:CGRectMake(screenRect.size.width/2-85, scrollView.frame.size.height-320, 160, 35)];
 
     if (!_confirmPurchaseButton) {
         confirmPurchase.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -574,6 +590,9 @@
     _currencyInput.layer.name = @"currency";
     _shopperLanguageCodeInput.layer.name = @"shopperLanguageCode";
     _swiftCodeInput.layer.name = @"swiftCode";
+    _descriptionInput.layer.name = @"description";
+    _settlementCurrencyInput.layer.name = @"settlementCurrency";
+    _customerOrderCodeInput.layer.name = @"customerOrderCode";
     
     _apmNameInput.delegate = self;
     _priceInput.delegate = self;
@@ -589,6 +608,9 @@
     _currencyInput.delegate = self;
     _shopperLanguageCodeInput.delegate = self;
     _swiftCodeInput.delegate = self;
+    _descriptionInput.delegate = self;
+    _settlementCurrencyInput.delegate = self;
+    _customerOrderCodeInput.delegate = self;
     
     if (_loadingTheme == APMDetailsLoadingThemeBlack) {
         _apmNameInput.textColor = [UIColor whiteColor];
@@ -605,6 +627,10 @@
         _currencyInput.textColor = [UIColor whiteColor];
         _shopperLanguageCodeInput.textColor = [UIColor whiteColor];
         _swiftCodeInput.textColor = [UIColor whiteColor];
+        _descriptionInput.textColor = [UIColor whiteColor];
+        _settlementCurrencyInput.textColor = [UIColor whiteColor];
+        _customerOrderCodeInput.textColor = [UIColor whiteColor];
+
     }
 
 

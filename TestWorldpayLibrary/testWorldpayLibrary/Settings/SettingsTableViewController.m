@@ -13,7 +13,7 @@
 #import "DBhandler.h"
 
 @interface SettingsTableViewController ()<UIAlertViewDelegate>
-@property (nonatomic, retain) NSArray *settingsItems, *keys;
+@property (nonatomic, retain) NSArray *settingsItems, *keys, *versions;
 @property (nonatomic, retain) NSArray *sections;
 @property (nonatomic, retain) AppDelegate *delegate;
 @property (nonatomic, retain) UIAlertView *keyAlertView;
@@ -29,6 +29,10 @@
     self.title = @"Settings";
     
     _settingsItems = @[
+                       @{
+                           @"label": @"One time Token",
+                           @"value": [NSNumber numberWithBool:![[Worldpay sharedInstance] reusable]]
+                        },
                         @{
                             @"label": @"Authorisation only",
                             @"value": [NSNumber numberWithBool:[[Worldpay sharedInstance] authorizeOnly]]
@@ -40,13 +44,14 @@
     
     
     [self setKeys];
-    
+    [self setVersions];
+
     UINib *cellNib = [UINib nibWithNibName:@"SettingsCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"settingsCell"];
     
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     
-    _sections = @[@"Settings", @"API Keys"];
+    _sections = @[@"Settings", @"API Keys", @"Version"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +62,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -100,7 +105,7 @@
         
         cell = settingsCell;
     }
-    else if (indexPath.section <= 2) {
+    else if (indexPath.section <= 1) {
         UITableViewCell *keyCell = [tableView dequeueReusableCellWithIdentifier:@"keyCell"];
         
         if (keyCell == nil) {
@@ -116,7 +121,21 @@
         
         cell = keyCell;
     }
+    else if (indexPath.section == 2) {
+        UITableViewCell *versionCell = [tableView dequeueReusableCellWithIdentifier:@"versionCell"];
+        
+        if (versionCell == nil) {
+            versionCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"versionCell"];
+        }
+        
+        NSArray *versions = _versions;
 
+        NSDictionary *item = [versions objectAtIndex:indexPath.row];
+        
+        versionCell.textLabel.text = [item objectForKey:@"label"];
+        versionCell.detailTextLabel.text = [item objectForKey:@"value"];
+        cell = versionCell;
+    }
     
     return cell;
 }
@@ -153,17 +172,23 @@
 - (IBAction)switchChangedAction:(id)sender {
     UISwitch *switchSetting = sender;
     NSIndexPath *indexPath = [switchSetting.layer valueForKey:@"indexPath"];
-    
+    FMDatabase *database = [DBhandler openDB];
     switch (indexPath.row) {
         case 0:
-            [[Worldpay sharedInstance] setAuthorizeOnly:switchSetting.on];
+            [DBhandler deleteAllCards:database];
+            [[Worldpay sharedInstance] setReusable:!switchSetting.on];
             break;
         case 1:
+            [[Worldpay sharedInstance] setAuthorizeOnly:switchSetting.on];
+            break;
+        case 2:
             _delegate.threeDSEnabled = switchSetting.on;
             break;
         default:
             break;
     }
+    
+    [DBhandler closeDatabase:database];
 }
 
 - (void)setKeys {
@@ -186,6 +211,20 @@
     
     
 
+}
+
+- (void)setVersions {
+    
+    _versions = @[
+                  @{
+                      @"label": @"App Version",
+                      @"value": [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+                      },
+                  @{
+                      @"label": @"Build Number",
+                      @"value": [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]
+                      }
+                  ];
 }
 
 #pragma mark - UIAlertView delegate

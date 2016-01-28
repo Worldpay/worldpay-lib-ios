@@ -27,6 +27,7 @@
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *countryCode;
 @property (nonatomic) NSString *currency;
+@property (nonatomic) NSString *settlementCurrency;
 @property (nonatomic) NSString *successUrl;
 @property (nonatomic) NSString *cancelUrl;
 @property (nonatomic) NSString *failureUrl;
@@ -37,7 +38,7 @@
 @property (nonatomic) NSString *orderDescription;
 @property (nonatomic) NSDictionary *customerIdentifiers;
 
-@property float price;
+@property (nonatomic) float price;
 
 typedef void (^createAPMOrderSuccess)(NSDictionary *responseDictionary);
 typedef void (^createAPMOrderFailure)(NSDictionary *responseDictionary, NSArray *errors);

@@ -89,8 +89,7 @@
     
     token = @"";
     isSelectedCard = NO;
-    [[Worldpay sharedInstance] setReusable:YES];
-
+    
     [scrollView removeFromSuperview];
     [self initGUI];
     [self createStoredCardView];
@@ -338,6 +337,8 @@
 
 -(IBAction)editAPMSettingsAction:(NSString *)apmName {
     
+    [self saveDeliveryAddressDefaults];
+    
     NSString *billingAddressErrorMessage = @"";
     if([addressTextField.text isEqualToString:@""]){
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in address\n"];
@@ -355,9 +356,6 @@
         return;
     }
     
-    //for apms we set the token to not reusable
-    [[Worldpay sharedInstance] setReusable:NO];
-    
     worldpayapmviewcontroller = [[WorldpayAPMViewController alloc] initWithColor:[UIColor redColor] loadingTheme:APMDetailsLoadingThemeWhite apmName:apmName];
 
     worldpayapmviewcontroller.address = addressTextField.text;
@@ -367,15 +365,19 @@
     worldpayapmviewcontroller.customerIdentifiers = @{ @"email": @"customer.email.test123@gmail.com"};
     worldpayapmviewcontroller.orderDescription = @"Worldfood purchase";
     worldpayapmviewcontroller.countryCode = @"GB";
-    
+    worldpayapmviewcontroller.settlementCurrency = @"GBP";
+
+    BOOL _reusable = [[Worldpay sharedInstance] reusable];
+
     if ([apmName isEqualToString:@"Giropay"]) {
         worldpayapmviewcontroller.currency = @"EUR";
         worldpayapmviewcontroller.swiftCode = @"ABC123";
+        //for Giropay we set the token to not reusable (otherwise it won't work)
+        [[Worldpay sharedInstance] setReusable:NO];
     }
     else {
         worldpayapmviewcontroller.currency = @"GBP";
         worldpayapmviewcontroller.shopperLanguageCode = @"EN";
-
     }
     
     __weak SampleViewController *weakSelf = self;
@@ -385,10 +387,26 @@
     [worldpayapmviewcontroller setCreateAPMOrderBlockWithSuccess:^(NSDictionary *responseDictionary) {
         //APM Order is successful, here you can handle what to do after it (eg. clearing the basket, displaying another controller etc)
         [[BasketManager sharedInstance] clearBasket];
+
+        //once the order has been completed, revert _reusable to whatever it was (remember we forced reusable=NO for Giropay)
+        if ([apmName isEqualToString:@"Giropay"]) {
+            [[Worldpay sharedInstance] setReusable:_reusable];
+        }
+        
     } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
+
         NSError *error = [errors objectAtIndex:0];
-        [weakSelf.navigationController popToViewController:[[weakSelf.navigationController viewControllers] objectAtIndex:1] animated:YES];
-        [ALToastView toastInView:weakDelegate.window withText:[error localizedDescription]];
+        
+        //user manually cancelled APM order by pressing back button on the controller
+        if (error.code == 0) {
+            if ([apmName isEqualToString:@"Giropay"]) {
+                [[Worldpay sharedInstance] setReusable:_reusable];
+            }
+        }
+        else {
+            [weakSelf.navigationController popToViewController:[[weakSelf.navigationController viewControllers] objectAtIndex:1] animated:YES];
+            [ALToastView toastInView:weakDelegate.window withText:[error localizedDescription]];
+        }
         
     }];
     
@@ -396,20 +414,17 @@
     
 }
 
--(IBAction)buyWithPaypalAction:(id)sender{
-    [self makeAPMPayment:@"paypal"];
+-(void)saveDeliveryAddressDefaults {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:addressTextField.text forKey:@"address"];
+    [prefs setObject:cityTextField.text forKey:@"city"];
+    [prefs setObject:postcodeTextField.text forKey:@"postcode"];
 }
 
--(IBAction)buyWithGiropayAction:(id)sender{
-    [self makeAPMPayment:@"giropay"];
-}
-
-- (void)makeAPMPayment:(NSString *)apmName {
-
-
-
-}
 -(IBAction)addCardAction:(id)sender{
+    
+    [self saveDeliveryAddressDefaults];
+    
     [addressTextField resignFirstResponder];
     [cityTextField resignFirstResponder];
     [postcodeTextField resignFirstResponder];
@@ -417,7 +432,6 @@
     worldpaycardviewcontroller = [[WorldpayCardViewController alloc] initWithColor:[UIColor redColor] loadingTheme:CardDetailsLoadingThemeWhite];
     
     [self.navigationController pushViewController:worldpaycardviewcontroller animated:YES];
-    
     
     __weak SampleViewController *weakSelf = self;
     
@@ -448,12 +462,6 @@
 
 -(IBAction)confirmPurchaseAction:(id)sender{
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    [prefs setObject:addressTextField.text forKey:@"address"];
-    [prefs setObject:cityTextField.text forKey:@"city"];
-    [prefs setObject:postcodeTextField.text forKey:@"postcode"];
-    
     if(!isSelectedCard){
         [ALToastView toastInView:self.view withText:@"Please select a card to charge"];
         [confirmPurchase setUserInteractionEnabled:YES];
@@ -477,7 +485,7 @@
         return;
     }
 
-    
+    [self saveDeliveryAddressDefaults];
     [self makePayment];
 }
 
@@ -543,12 +551,20 @@
             [[BasketManager sharedInstance] clearBasket];
             SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
-
+            
+            //if the token is not reusable, we remove it
+            if (![[Worldpay sharedInstance] reusable]) {
+                [self deleteStoredToken:_selectedToken];
+            }
+            
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-            [self.navigationController popViewControllerAnimated:YES];
-
             NSError *error = [errors objectAtIndex:0];
-            [ALToastView toastInView:weakDelegate.window withText:[error localizedDescription]];
+            //error.code == 0 means: user manually cancelled 3DS authorization by pressing close button on the controller
+            if (error.code != 0) {
+                [self.navigationController popViewControllerAnimated:YES];
+                [ALToastView toastInView:weakDelegate.window withText:[error localizedDescription]];
+            }
+            
         }];
         
         //if token is reusable and we are on 3DS, we need to update token before calling create order
@@ -608,8 +624,11 @@
                                                                                                           SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
                                                                                                           [self.navigationController pushViewController:vc animated:YES];
                                                                                                           [[BasketManager sharedInstance] clearBasket];
-                                                                                                          _selectedToken = @"";
-                                                                                                          isSelectedCard = NO;
+
+                                                                                                          //if the token is not reusable, we remove it
+                                                                                                          if (![[Worldpay sharedInstance] reusable]) {
+                                                                                                              [self deleteStoredToken:_selectedToken];
+                                                                                                          }
                                                                                                       }
                                                                                                       else {
                                                                                                           [ALToastView toastInView:self.view withText:@"Error! Check console"];
@@ -775,6 +794,17 @@
     [temp.containerView addSubview:selectedCard];
 }
 
+-(void)deleteStoredToken:(NSString *)_token {
+    if (!_token) {
+        return;
+    }
+    FMDatabase *database = [DBhandler openDB];
+    [DBhandler deleteCard:database token:_token];
+    isSelectedCard = NO;
+    _selectedToken = @"";
+    [DBhandler closeDatabase:database];
+}
+
 -(IBAction)deleteStoredCard:(id)sender{
     UIButton *temp = sender;
     _selectedRowToDelete = [temp.layer.name intValue];
@@ -893,12 +923,9 @@
                                             };
     
     
-    [[Worldpay sharedInstance] makePaymentWithPaymentData:payment.token.paymentData
+    [self makePaymentWithPaymentData:payment.token.paymentData
                                            billingAddress:requestBillingAddress
                                                   success:^(int code, NSDictionary *responseDictionary) {
-                                                      
-                                                      /*NSString *successMessage = [NSString stringWithFormat:@"Payment completed with status: %@", [responseDictionary objectForKey:@"paymentStatus"]];
-                                                      [[[UIAlertView alloc] initWithTitle:@"Completed" message:successMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];*/
                                                       completion(PKPaymentAuthorizationStatusSuccess);
                                                   } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
                                                       completion(PKPaymentAuthorizationStatusFailure);
@@ -927,6 +954,7 @@
   [requestParams setValue:orderDescription forKey:@"orderDescription"];
   [requestParams setValue:amount forKey:@"amount"];
   [requestParams setValue:currencyCode forKey:@"currencyCode"];
+  [requestParams setValue:currencyCode forKey:@"settlementCurrency"];
   [requestParams setValue:billingAddress forKey:@"billingAddress"];
   
   if ([[Worldpay sharedInstance] authorizeOnly]) {

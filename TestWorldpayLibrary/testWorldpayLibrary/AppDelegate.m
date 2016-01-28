@@ -30,6 +30,9 @@
     [[AFNetworkActivityLogger sharedLogger] startLogging];
     
     _debugMode = YES;
+    
+    [[Worldpay sharedInstance] setReusable:YES];
+    
     [self setKeys];
     return YES;
 }
@@ -64,18 +67,16 @@
 
 #pragma mark -
 
-
-
 - (void)setKeys {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *clientKey = [userDefaults valueForKey:@"clientKey"];
     NSString *serviceKey = [userDefaults valueForKey:@"serviceKey"];
     if (!clientKey) {
-        clientKey = @"T_C_fba10c60-5581-414c-aee7-358f150e6104";
+        clientKey = @"T_C_e51c8f3f-b038-453a-9b0c-904f489e5c3a";
         [userDefaults setValue:clientKey forKey:@"clientKey"];
     }
     if (!serviceKey) {
-        serviceKey = @"T_S_e19c5313-e249-4beb-a6de-1f788882476c";
+        serviceKey = @"T_S_9eafef79-bc9a-42d6-a0a8-53f9035ff1dc";
         [userDefaults setValue:serviceKey forKey:@"serviceKey"];
     }
     

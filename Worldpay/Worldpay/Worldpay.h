@@ -70,7 +70,7 @@ typedef enum {
  *
  *  @returns a new Worldpay object if it hasn't been created or returns the Worldpay object if it exists
  */
-+ (id) sharedInstance;
++ (Worldpay *) sharedInstance;
 
 /*!
  *  Worldpay allows you to store card details so you can charge a card multiple times. You can use this to offer your customers card-on-file payment or a recurring payment

@@ -24,7 +24,7 @@
 
 #pragma mark - Sigleton Method
 
-+ (id)sharedInstance {
++ (Worldpay *)sharedInstance {
     static Worldpay *getInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
