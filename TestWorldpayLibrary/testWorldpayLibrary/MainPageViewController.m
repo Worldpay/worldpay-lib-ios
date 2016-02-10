@@ -84,9 +84,9 @@
     foodDescriptionArray = @[@"Rare roast topside with Marmite & sweet onion gravy.",
                              @"Chicken, seafood, vegetables, rice.",
                              @"Classic baked dish of layered ground beef. Served with house salad."];
-    foodPriceArray = @[@"9.90",
-                       @"11.20",
-                       @"8.50"];
+    foodPriceArray = @[@"1.99",
+                       @"2.99",
+                       @"3.99"];
     
     foodFlagsArray = @[@"uk.png",
                        @"spain.png",

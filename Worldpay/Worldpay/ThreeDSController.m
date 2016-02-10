@@ -106,6 +106,7 @@
                                      @"city": _city,
                                      @"countryCode": @"GB"
                                      },
+                             @"authorizeOnly" : @([[Worldpay sharedInstance] authorizeOnly]),
                              @"customerIdentifiers": (_customerIdentifiers && [_customerIdentifiers count] > 0) ? _customerIdentifiers : @{},
                              @"is3DSOrder": @(YES),
                              @"shopperAcceptHeader": @"application/json",
@@ -141,9 +142,6 @@
                                 ];
             [self redirectToThreeDSPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]
                                                 params:params];
-        }
-        else if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"SUCCESS"]) {
-            _authorizeSuccessBlock(responseObject);
         }
         else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];
@@ -208,7 +206,7 @@
     op.responseSerializer = [AFJSONResponseSerializer serializer];
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *status = [operation.responseObject objectForKey:@"paymentStatus"];
-        if ([status isEqualToString:@"SUCCESS"]) {
+        if ([status isEqualToString:@"SUCCESS"] || [status isEqualToString:@"AUTHORIZED"]) {
             _authorizeSuccessBlock(responseObject);
         } else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];

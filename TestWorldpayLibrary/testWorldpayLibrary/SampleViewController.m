@@ -285,8 +285,7 @@
     confirmPurchase.layer.cornerRadius = 5.0f;
     [confirmPurchase addTarget:self action:@selector(confirmPurchaseAction:) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:confirmPurchase];
-    NSLog(@"%f", self.view.frame.size.height);
-    
+
     applePayButton = [[UIButton alloc]initWithFrame:CGRectMake(_addCardButton.frame.size.width + _addCardButton.frame.origin.x + 13, _addCardButton.frame.origin.y, 140, 32)];
     [applePayButton setImage:[UIImage imageNamed:@"apple_pay_btn.png"] forState:UIControlStateNormal];
     [applePayButton addTarget:self action:@selector(applePayTap) forControlEvents:UIControlEventTouchUpInside];
@@ -896,42 +895,52 @@
                       didAuthorizePayment:(PKPayment *)payment
                                completion:(void (^)(PKPaymentAuthorizationStatus))completion {
     
-
-    /*[[Worldpay sharedInstance] createTokenWithPayment:payment
-                                              success:^(int code, NSDictionary *responseDictionary) {
-                                                  //Handle the WorldPay token here
-                                                  completion(PKPaymentAuthorizationStatusSuccess);
-                                                  
-                                            } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                  completion(PKPaymentAuthorizationStatusFailure);
-                                            }];*/
+    
+    #if TARGET_OS_SIMULATOR
+    NSDictionary *testPaymentData = @{ @"data" : @"4444333322221111",
+                                       @"signature" : @"test",
+                                       @"header" : @{
+                                               @"transactionId" : @"test",
+                                               @"ephemeralPublicKey" : @"test",
+                                               @"publicKeyHash" : @"test"
+                                               }
+                                       };
+    
+    NSError *error;
+    NSData *paymentData = [NSJSONSerialization dataWithJSONObject:testPaymentData options:NSJSONWritingPrettyPrinted error: &error];
+    
+    #else
+    NSData *paymentData = payment.token.paymentData;
+    #endif
     
     
-    /*[[Worldpay sharedInstance] makePaymentWithPayment:payment success:^(int code, NSDictionary *responseDictionary) {
-        completion(PKPaymentAuthorizationStatusSuccess);
-    } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-        completion(PKPaymentAuthorizationStatusFailure);
-    }];*/
+    ABMultiValueRef addressMultiValue = ABRecordCopyValue(payment.billingAddress, kABPersonAddressProperty);
+    NSDictionary *addressDictionary = (__bridge_transfer NSDictionary *) ABMultiValueCopyValueAtIndex(addressMultiValue, 0);
     
-
     
     NSDictionary *requestBillingAddress = @{
-                                            (NSString *)kABPersonAddressStreetKey: @"test",
-                                            (NSString *)kABPersonAddressZIPKey: @"1234",
-                                            (NSString *)kABPersonAddressCityKey: @"Athens",
-                                            (NSString *)kABPersonAddressStateKey: @"Athens"
+                                            (NSString *)kABPersonAddressStreetKey: [addressDictionary objectForKey:@"Street"],
+                                            (NSString *)kABPersonAddressCountryKey: [addressDictionary objectForKey:@"Country"],
+                                            (NSString *)kABPersonAddressZIPKey: [addressDictionary objectForKey:@"ZIP"],
+                                            (NSString *)kABPersonAddressCityKey: [addressDictionary objectForKey:@"City"]
                                             };
     
+    BOOL _reusable = [[Worldpay sharedInstance] reusable];
+    [[Worldpay sharedInstance] setReusable:NO];
     
-    [self makePaymentWithPaymentData:payment.token.paymentData
-                                           billingAddress:requestBillingAddress
-                                                  success:^(int code, NSDictionary *responseDictionary) {
-                                                      completion(PKPaymentAuthorizationStatusSuccess);
-                                                  } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                      completion(PKPaymentAuthorizationStatusFailure);
-                                                  }];
+    [self makePaymentWithPaymentData:paymentData
+                      billingAddress:requestBillingAddress
+                             success:^(int code, NSDictionary *responseDictionary) {
+                                 [[BasketManager sharedInstance] clearBasket];
+                                 completion(PKPaymentAuthorizationStatusSuccess);
+                                 SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
+                                 [self.navigationController pushViewController:vc animated:YES];
+                                 [[Worldpay sharedInstance] setReusable:_reusable];
+                             } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
+                                 completion(PKPaymentAuthorizationStatusFailure);
+                                 [[Worldpay sharedInstance] setReusable:_reusable];
+    }];
 }
-
 
 -(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller {
     [controller dismissViewControllerAnimated:YES completion:nil];
@@ -987,32 +996,28 @@
                     billingAddress:(NSDictionary *)billingAddress
                            success:(requestUpdateTokenSuccess)success
                            failure:(requestTokenFailure)failure {
-  
-  [[Worldpay sharedInstance] createTokenWithPaymentData:paymentData
-                                                success:^(int code, NSDictionary *responseDictionary) {
-                             
-                             NSString *paymentToken = [responseDictionary objectForKey:@"token"];
-                             
-                             NSDictionary *requestBillingAddress = @{
-                                                                     @"address1": [billingAddress objectForKey:(NSString *)kABPersonAddressStreetKey],
-                                                                     @"address2": @"ApplePay",
-                                                                     @"address3": @"ApplePay",
-                                                                     @"postalCode": [billingAddress objectForKey:(NSString *)kABPersonAddressZIPKey],
-                                                                     @"city": [billingAddress objectForKey:(NSString *)kABPersonAddressCityKey],
-                                                                     @"state": [billingAddress objectForKey:(NSString *)kABPersonAddressStateKey],
-                                                                     @"countryCode": @"GB",
-                                                                     };
-                             
-                             
-                             [self makePaymentWithToken:paymentToken
-                                       orderDescription:@"ApplePay payment"
-                                            orderAmount:@1
-                                      orderCurrencyCode:@"GBP"
-                                    orderBillingAddress:requestBillingAddress
-                                                success:success
-                                                failure:failure];
-                           } failure:failure];
+    
+    [[Worldpay sharedInstance] createTokenWithPaymentData:paymentData
+                                                  success:^(int code, NSDictionary *responseDictionary) {
+                                                      
+                                                      NSString *paymentToken = [responseDictionary objectForKey:@"token"];
+                                                      
+                                                      NSDictionary *requestBillingAddress = @{
+                                                                                              @"address1": [billingAddress objectForKey:(NSString *)kABPersonAddressStreetKey],
+                                                                                              @"postalCode": [billingAddress objectForKey:(NSString *)kABPersonAddressZIPKey],
+                                                                                              @"city": [billingAddress objectForKey:(NSString *)kABPersonAddressCityKey],
+                                                                                              @"state": [billingAddress objectForKey:(NSString *)kABPersonAddressCityKey],
+                                                                                              };
+                                                      
+                
+                                                      [self makePaymentWithToken:paymentToken
+                                                                orderDescription:@"ApplePay payment"
+                                                                     orderAmount:@(round([[BasketManager sharedInstance] totalPrice] * 100))
+                                                               orderCurrencyCode:@"GBP"
+                                                             orderBillingAddress:requestBillingAddress
+                                                                         success:success
+                                                                         failure:failure];
+                                                  } failure:failure];
 }
-
 
 @end
