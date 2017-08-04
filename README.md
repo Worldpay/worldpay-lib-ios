@@ -4,6 +4,9 @@ Worldpay iOS Library
 The Worldpay iOS Library makes it easy to process credit card & apm payments direct from your app. The library allows you to create your own payment form  while at the same time making it easy to meet the security guidelines of Visa, MasterCard and Amex (called ["PCI compliance rules"](https://online.worldpay.com/support/articles/do-i-need-to-be-pci-compliant)).
 We also offer the possibility to save the token that has been created in order to prevent the user from re-entering the card details.
 
+#### Issues
+Please see our [support contact information]( https://developer.worldpay.com/jsonapi/faq/articles/how-can-i-contact-you-for-support) to raise an issue.
+
 Integration
 -------------
 1. Download the iOS Worldpay library
