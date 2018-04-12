@@ -16,30 +16,49 @@
 
 @interface ThreeDSController ()<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) NSString *currentOrderCode;
+@property (nonatomic, strong) NSString *currentOrderCode;
 @property (nonatomic,copy) threeDSOrderSuccess authorizeSuccessBlock;
 @property (nonatomic,copy) threeDSOrderFailure authorizeFailureBlock;
-@property (nonatomic, retain) NSString *sessionID;
+@property (nonatomic, strong) NSString *sessionID;
+
+@property (nonatomic, strong) AFURLSessionManager *networkManager;
+
 @end
 
 @implementation ThreeDSController
 
--(void)createNavigationBar{
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        AFURLSessionManager *networkManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
+        responseSerializer.readingOptions = NSJSONReadingMutableContainers;
+        networkManager.responseSerializer = responseSerializer;
+        _networkManager = networkManager;
+    }
+    
+    return self;
+}
+
+- (void)createNavigationBar {
     if (_customToolbar) {
         [self.view addSubview:_customToolbar];
         return;
     }
     
-    UIView *navigationBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, 50)];
-
+    UIView *navigationBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
+    
     navigationBarView.backgroundColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
     _customToolbar = navigationBarView;
-
+    
     [self.view addSubview:navigationBarView];
     
     UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, 80, 30)];
     [closeBtn setTitleColor:self.view.tintColor forState:UIControlStateNormal];
-
+    
     [closeBtn setTitle:@"Close" forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:closeBtn];
@@ -51,7 +70,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self createNavigationBar];
-
+    
     _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0,50.0,self.view.frame.size.width,self.view.frame.size.height-self.customToolbar.frame.size.height)];
     _webView.delegate = self;
     
@@ -59,6 +78,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self initializeThreeDS];
 }
 
@@ -86,12 +107,6 @@
 - (void)initializeThreeDS {
     NSString *stringURL = [[[Worldpay sharedInstance] APIStringURL] stringByAppendingPathComponent:@"orders"];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:stringURL]];
-    [request setHTTPMethod:@"POST"];
-    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
-    [request addValue:[[Worldpay sharedInstance] serviceKey] forHTTPHeaderField:@"Authorization"];
-
     NSDictionary *params = @{
                              @"token": _token,
                              @"orderType": @"ECOM",
@@ -106,8 +121,8 @@
                                      @"city": _city,
                                      @"countryCode": @"GB"
                                      },
-                             @"authorizeOnly" : @([[Worldpay sharedInstance] authorizeOnly]),
-                             @"customerIdentifiers": (_customerIdentifiers && [_customerIdentifiers count] > 0) ? _customerIdentifiers : @{},
+                             @"authorizeOnly" : @([Worldpay sharedInstance].authorizeOnly),
+                             @"customerIdentifiers": (_customerIdentifiers && _customerIdentifiers.count > 0) ? _customerIdentifiers : @{},
                              @"is3DSOrder": @(YES),
                              @"shopperAcceptHeader": @"application/json",
                              @"shopperUserAgent": [self userAgent],
@@ -115,25 +130,22 @@
                              @"shopperIpAddress": [self getIPAddress]
                              };
     
+    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+    NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
+                                                       URLString:stringURL
+                                                      parameters:params
+                                                           error:nil];
     
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params
-                                                       options:0
-                                                         error:&error];
+    [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
     
-    [request setHTTPBody:jsonData];
-    
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFJSONResponseSerializer serializer];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
-            _currentOrderCode = [responseObject objectForKey:@"orderCode"];
+            self->_currentOrderCode = [responseObject objectForKey:@"orderCode"];
             
             NSArray *params = @[
                                 @{
                                     @"key": @"PaReq",
-                                    @"value": [operation.responseObject objectForKey:@"oneTime3DsToken"]
+                                    @"value": [responseObject objectForKey:@"oneTime3DsToken"]
                                     },
                                 @{
                                     @"key": @"TermUrl",
@@ -146,83 +158,63 @@
         else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];
             [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the 3DS Order.", nil) code:1]];
-            _authorizeFailureBlock(responseObject, errors);
+            self->_authorizeFailureBlock(responseObject, errors);
         }
-      
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSMutableArray *errors = [[NSMutableArray alloc] init];
-        [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the 3DS Order.", nil) code:1]];
-        _authorizeFailureBlock(operation.responseObject, errors);
     }];
-    [[NSOperationQueue mainQueue] addOperation:op];
-
+    
+    [dataTask resume];
 }
 
 - (void)redirectToThreeDSPageWithRedirectURL:(NSString *)redirectURL
                                       params:(NSArray *)params {
-
-    
     NSURL *url = [NSURL URLWithString:redirectURL];
     
     NSMutableArray *keyValueParams = [NSMutableArray array];
     for (NSDictionary *item in params) {
-        [keyValueParams addObject:[NSString stringWithFormat:@"%@=%@", [item objectForKey:@"key"], [[item objectForKey:@"value"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]]];
+        [keyValueParams addObject:[NSString stringWithFormat:@"%@=%@", item[@"key"], [item[@"value"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]]]];
     }
     
     NSString *body = [keyValueParams componentsJoinedByString:@"&"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
-    [request setHTTPMethod: @"POST"];
-    [request setHTTPBody: [body dataUsingEncoding: NSUTF8StringEncoding]];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [body dataUsingEncoding: NSUTF8StringEncoding];
     [_webView loadRequest: request];
 }
 
 - (void)authorize3DSOrder:(NSString *)orderCode
-                                 paRes:(NSString *)paRes {
+                    paRes:(NSString *)paRes {
     
     NSString *stringURL = [[[[Worldpay sharedInstance] APIStringURL] stringByAppendingPathComponent:@"orders"] stringByAppendingPathComponent:orderCode];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:stringURL]];
-    [request setHTTPMethod:@"PUT"];
-    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
-    [request addValue:[[Worldpay sharedInstance] serviceKey] forHTTPHeaderField:@"Authorization"];
-    
     NSDictionary *params = @{
-                                 @"threeDSResponseCode": paRes,
-                                 @"shopperAcceptHeader": @"application/json",
-                                 @"shopperUserAgent": [self userAgent],
-                                 @"shopperSessionId": _sessionID,
-                                 @"shopperIpAddress": [self getIPAddress]
+                             @"threeDSResponseCode": paRes,
+                             @"shopperAcceptHeader": @"application/json",
+                             @"shopperUserAgent": [self userAgent],
+                             @"shopperSessionId": _sessionID,
+                             @"shopperIpAddress": [self getIPAddress]
                              };
     
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params
-                                                       options:0
-                                                         error:&error];
+    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+    NSMutableURLRequest *request = [serializer requestWithMethod:@"PUT"
+                                                       URLString:stringURL
+                                                      parameters:params
+                                                           error:nil];
     
-    [request setHTTPBody:jsonData];
+    [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
     
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFJSONResponseSerializer serializer];
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *status = [operation.responseObject objectForKey:@"paymentStatus"];
+    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NSString *status = [responseObject objectForKey:@"paymentStatus"];
         if ([status isEqualToString:@"SUCCESS"] || [status isEqualToString:@"AUTHORIZED"]) {
-            _authorizeSuccessBlock(responseObject);
+            self->_authorizeSuccessBlock(responseObject);
         } else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];
             [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"Error authorizing 3DS Order", nil) code:1]];
-            _authorizeFailureBlock(responseObject, errors);
+            self->_authorizeFailureBlock(responseObject, errors);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSMutableArray *errors = [[NSMutableArray alloc] init];
-        [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"Error authorizing 3DS Order", nil) code:1]];
-        _authorizeFailureBlock(operation.responseObject, errors);
     }];
     
-    [[NSOperationQueue mainQueue] addOperation:op];
+    [dataTask resume];
 }
-
-
 
 #pragma mark - UIWebView delegate methods
 
@@ -231,12 +223,13 @@
         NSString *paRes = [self paramFromURL:request.URL.absoluteString key:@"PaRes"];
         [self authorize3DSOrder:_currentOrderCode paRes:paRes];
     }
+    
     return YES;
 }
 
 
 - (void)setAuthorizeThreeDSOrderBlockWithSuccess:(threeDSOrderSuccess)success
-                                     failure:(threeDSOrderFailure)failure {
+                                         failure:(threeDSOrderFailure)failure {
     _authorizeSuccessBlock = success;
     _authorizeFailureBlock = failure;
 }
@@ -244,7 +237,7 @@
 #pragma mark - Helper Methods
 
 - (NSArray *)paramsFromURLToDictionary:(NSString *)stringURL {
-    NSString *getParams = [[stringURL componentsSeparatedByString:@"?"] objectAtIndex:1];
+    NSString *getParams = [stringURL componentsSeparatedByString:@"?"][1];
     NSArray *paramComponents = [getParams componentsSeparatedByString:@"&"];
     NSMutableArray *params = [NSMutableArray array];
     
@@ -252,11 +245,11 @@
         NSArray *parts = [param componentsSeparatedByString:@"="];
         
         [params addObject:@{
-                            @"key": [parts objectAtIndex:0],
-                            @"value": [parts objectAtIndex:1]
+                            @"key": parts[0],
+                            @"value": parts[1]
                             }];
     }
-
+    
     return params;
 }
 
@@ -267,7 +260,7 @@
     NSArray *foundArray = [params filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"key = %@", key]];
     
     if (foundArray.count > 0) {
-        return [[foundArray objectAtIndex:0] objectForKey:@"value"];
+        return foundArray[0][@"value"];
     }
     
     return nil;
@@ -276,60 +269,59 @@
 
 // Get IP Address
 - (NSString *)getIPAddress {
-  NSString *address = @"error";
-  struct ifaddrs *interfaces = NULL;
-  struct ifaddrs *temp_addr = NULL;
-  int success = 0;
-  // retrieve the current interfaces - returns 0 on success
-  success = getifaddrs(&interfaces);
-  if (success == 0) {
-    // Loop through linked list of interfaces
-    temp_addr = interfaces;
-    while(temp_addr != NULL) {
-      if(temp_addr->ifa_addr->sa_family == AF_INET) {
-        // Check if interface is en0 which is the wifi connection on the iPhone
-        if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
-          // Get NSString from C String
-          address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            if (temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if ([@(temp_addr->ifa_name) isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = @(inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr));
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
         }
-      }
-      temp_addr = temp_addr->ifa_next;
     }
-  }
-  // Free memory
-  freeifaddrs(interfaces);
-  return address;
-  
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
 }
 
 - (NSString *)userAgent {
-  UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-  return [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    return [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
 }
 
 - (NSString *)MD5String:(NSString *)text {
-  const char *cstr = [text UTF8String];
-  unsigned char result[16];
-  CC_MD5(cstr, (unsigned int)strlen(cstr), result);
-  
-  return [NSString stringWithFormat:
-          @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-          result[0], result[1], result[2], result[3],
-          result[4], result[5], result[6], result[7],
-          result[8], result[9], result[10], result[11],
-          result[12], result[13], result[14], result[15]
-          ];
+    const char *cstr = text.UTF8String;
+    unsigned char result[16];
+    CC_MD5(cstr, (unsigned int)strlen(cstr), result);
+    
+    return [NSString stringWithFormat:
+            @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];
 }
 
 - (NSString *)uniqueSessionID {
-  NSDateFormatter *formatter;
-  NSString        *dateString;
-  
-  formatter = [[NSDateFormatter alloc] init];
-  [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-  
-  dateString = [formatter stringFromDate:[NSDate date]];
-  return [self MD5String:dateString];
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd-MM-yyyy HH:mm";
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    return [self MD5String:dateString];
 }
 
 

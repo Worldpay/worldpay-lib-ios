@@ -16,4 +16,5 @@
 @property (nonatomic) BOOL threeDSEnabled, apmEnabled, debugMode;
 
 - (void)setKeys;
+
 @end

@@ -14,55 +14,66 @@
 @property (nonatomic,copy) authorizeAPMOrderSuccess authorizeSuccessBlock;
 @property (nonatomic,copy) authorizeAPMOrderFailure authorizeFailureBlock;
 
-@property (nonatomic, retain) NSString *currentOrderCode;
+@property (nonatomic, strong) NSString *currentOrderCode;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
+
+@property (nonatomic, strong) AFURLSessionManager *networkManager;
 
 @end
 
 @implementation APMController
 
--(void)createNavigationBar{
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        AFURLSessionManager *networkManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
+        responseSerializer.readingOptions = NSJSONReadingMutableContainers;
+        networkManager.responseSerializer = responseSerializer;
+        _networkManager = networkManager;
+    }
+    
+    return self;
+}
+
+- (void)createNavigationBar {
     
     if (_customToolbar) {
         [self.view addSubview:_customToolbar];
         return;
     }
     
-    UIView *navigationBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, 50)];
+    UIView *navigationBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
     navigationBarView.backgroundColor = [UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1.0];
     _customToolbar = navigationBarView;
     [self.view addSubview:navigationBarView];
-      
+    
     UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, 80, 30)];
     [closeBtn setTitleColor:self.view.tintColor forState:UIControlStateNormal];
-
+    
     [closeBtn setTitle:@"Close" forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:closeBtn];
-
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createNavigationBar];
-
+    
     _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0,50,self.view.frame.size.width,self.view.frame.size.height-_customToolbar.frame.size.height)];
     _webView.delegate = self;
-
-    [self.view addSubview:_webView];
     
-//    any additional setup after loading the view from its nib.
+    [self.view addSubview:_webView];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self initializeAPM];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)close:(id)sender {
@@ -85,12 +96,6 @@
 - (void)initializeAPM {
     NSString *stringURL = [[[Worldpay sharedInstance] APIStringURL] stringByAppendingPathComponent:@"orders"];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:stringURL]];
-    [request setHTTPMethod:@"POST"];
-    [request addValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
-    [request addValue:[[Worldpay sharedInstance] serviceKey] forHTTPHeaderField:@"Authorization"];    
-    
     NSDictionary *params = @{
                              @"token": _token,
                              @"orderDescription": _orderDescription,
@@ -104,7 +109,7 @@
                                      @"city": _city,
                                      @"countryCode": _countryCode
                                      },
-                             @"customerIdentifiers": (_customerIdentifiers && [_customerIdentifiers count] > 0) ? _customerIdentifiers : @{},
+                             @"customerIdentifiers": (_customerIdentifiers && _customerIdentifiers.count > 0) ? _customerIdentifiers : @{},
                              @"customerOrderCode": _customerOrderCode,
                              @"is3DSOrder": @(NO),
                              @"successUrl": _successUrl,
@@ -112,61 +117,49 @@
                              @"failureUrl": _failureUrl,
                              @"cancelUrl": _cancelUrl
                              };
-
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params
-                                                       options:0
-                                                         error:&error];
     
-    [request setHTTPBody:jsonData];
+    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+    NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
+                                                       URLString:stringURL
+                                                      parameters:params
+                                                           error:nil];
     
-    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
     
-    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-    
-      if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
-          _currentOrderCode = [responseObject objectForKey:@"orderCode"];
-          
-          //Refresh URLS in case the user doesn't input any urls on create order
-          _successUrl = [responseObject objectForKey:@"successUrl"];
-          _failureUrl = [responseObject objectForKey:@"failureUrl"];
-          _cancelUrl = [responseObject objectForKey:@"cancelUrl"];
-          _pendingUrl = [responseObject objectForKey:@"pendingUrl"];
-          
-          [self redirectToAPMPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]];
-
-      } else {
-          NSMutableArray *errors = [[NSMutableArray alloc] init];
-          [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the APM Order.", nil) code:1]];
-          
-          
-          _authorizeFailureBlock(operation.responseObject, errors);
-      }
-      
-      
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSMutableArray *errors = [[NSMutableArray alloc] init];
-
-        [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the APM Order.", nil) code:1]];
-        _authorizeFailureBlock(operation.responseObject, errors);
-        
+    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
+            self->_currentOrderCode = [responseObject objectForKey:@"orderCode"];
+            
+            //Refresh URLS in case the user doesn't input any urls on create order
+            self->_successUrl = [responseObject objectForKey:@"successUrl"];
+            self->_failureUrl = [responseObject objectForKey:@"failureUrl"];
+            self->_cancelUrl = [responseObject objectForKey:@"cancelUrl"];
+            self->_pendingUrl = [responseObject objectForKey:@"pendingUrl"];
+            
+            [self redirectToAPMPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]];
+            
+        } else {
+            NSMutableArray *errors = [[NSMutableArray alloc] init];
+            [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the APM Order.", nil) code:1]];
+            
+            
+            self->_authorizeFailureBlock(responseObject, errors);
+        }
     }];
     
-    [[NSOperationQueue mainQueue] addOperation:op];
-
+    [dataTask resume];
 }
 
 - (void)redirectToAPMPageWithRedirectURL:(NSString *)redirectURL {
     NSURL *url = [NSURL URLWithString:redirectURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL: url];
-    [request setHTTPMethod: @"GET"];
+    request.HTTPMethod = @"GET";
     
     [_webView loadRequest: request];
 }
 
 - (void)setAuthorizeAPMOrderBlockWithSuccess:(authorizeAPMOrderSuccess)success
-                                  failure:(authorizeAPMOrderFailure)failure {
+                                     failure:(authorizeAPMOrderFailure)failure {
     _authorizeSuccessBlock = success;
     _authorizeFailureBlock = failure;
 }
@@ -174,11 +167,11 @@
 #pragma mark - UIWebView delegate methods
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-
+    
     NSDictionary *responseDictionary = @{
                                          @"token": _token,
                                          @"orderCode": _currentOrderCode
-                                };
+                                         };
     NSMutableArray *errors = [[NSMutableArray alloc] init];
     
     //we need to tell the parent controller that the purchase was success
@@ -200,6 +193,5 @@
     
     return YES;
 }
-
 
 @end

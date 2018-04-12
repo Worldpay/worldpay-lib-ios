@@ -43,18 +43,18 @@
 typedef void (^createAPMOrderSuccess)(NSDictionary *responseDictionary);
 typedef void (^createAPMOrderFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
-typedef enum {
+typedef NS_ENUM(unsigned int, APMDetailsTheme) {
     APMDetailsThemeBlue,
     APMDetailsThemeRed,
     APMDetailsThemeYellow
-} APMDetailsTheme;
+};
 
 @property (nonatomic) APMDetailsTheme theme;
 
-typedef enum {
+typedef NS_ENUM(unsigned int, APMDetailsLoadingTheme) {
     APMDetailsLoadingThemeWhite,
     APMDetailsLoadingThemeBlack
-} APMDetailsLoadingTheme;
+};
 
 @property (nonatomic) APMDetailsLoadingTheme loadingTheme;
 
@@ -63,7 +63,7 @@ typedef enum {
  *
  *  @return self
  */
--(id)init;
+- (instancetype)init;
 
 
 /*!
@@ -73,37 +73,37 @@ typedef enum {
  
  *  @return self ( the view controller)
  */
--(id)initWithAPMName:(NSString *)apmName;
+- (instancetype)initWithAPMName:(NSString *)apmName;
 
-    
+
 /*!
  *  Function to initialize APM Details of the "Edit APM" functionality view controller.
  *
  *  @param color          Choose any color
  *  @param loadingTheme   Choose the loading theme between white and black for the loading request to retrieve token
  *  @param apmName        Choose the APM Name (this will automatically show/hide some fields)
-
+ 
  *  @return self ( the view controller)
  */
--(id)initWithColor:(UIColor *)color loadingTheme:(APMDetailsLoadingTheme)loadingTheme apmName:(NSString *)apmName;
+- (instancetype)initWithColor:(UIColor *)color loadingTheme:(APMDetailsLoadingTheme)loadingTheme apmName:(NSString *)apmName;
 
 /*!
  *  Function that adds a blackish transparent background with a loading indicator.
  */
--(void)addLoadingBackground;
+- (void)addLoadingBackground;
 
 /*!
  *  Function that remove the blackish transparent background.
  */
--(void)removeLoadingBackground;
+- (void)removeLoadingBackground;
 
 /*!
  *  Function that sets the Send Request Tap Block
  *
- *  @param success
- *  @param failure 
+ *  @param success Success block
+ *  @param failure Failure block
  */
--(void)setCreateAPMOrderBlockWithSuccess:(createAPMOrderSuccess)success
-                                failure:(createAPMOrderFailure)failure;
+- (void)setCreateAPMOrderBlockWithSuccess:(createAPMOrderSuccess)success
+                                  failure:(createAPMOrderFailure)failure;
 
 @end

@@ -8,8 +8,6 @@
 #import "AppDelegate.h"
 #import "NavigationViewController.h"
 #import "SplashScreenViewController.h"
-#import "AFNetworkActivityLogger.h"
-#import "AFNetworking.h"
 #import "Worldpay.h"
 
 @implementation AppDelegate
@@ -26,8 +24,6 @@
     
     //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
     
     _debugMode = YES;
     
@@ -68,19 +64,9 @@
 #pragma mark -
 
 - (void)setKeys {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *clientKey = [userDefaults valueForKey:@"clientKey"];
-    NSString *serviceKey = [userDefaults valueForKey:@"serviceKey"];
-    if (!clientKey) {
-        clientKey = @"T_C_e51c8f3f-b038-453a-9b0c-904f489e5c3a";
-        [userDefaults setValue:clientKey forKey:@"clientKey"];
-    }
-    if (!serviceKey) {
-        serviceKey = @"T_S_9eafef79-bc9a-42d6-a0a8-53f9035ff1dc";
-        [userDefaults setValue:serviceKey forKey:@"serviceKey"];
-    }
-    
-    [userDefaults synchronize];
+#warning change
+    NSString *clientKey = @"";
+    NSString *serviceKey = @"";
     
     [[Worldpay sharedInstance] setClientKey:clientKey];
     [[Worldpay sharedInstance] setServiceKey:serviceKey];

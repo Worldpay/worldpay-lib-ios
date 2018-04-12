@@ -148,13 +148,13 @@
     [ALToastView toastInView:self.view withText:[NSString stringWithFormat:@"Added to basket! (Total: %lu items)", (unsigned long)[[BasketManager sharedInstance] countItems]]];
     
     [UIView animateWithDuration:0.1 animations:^{
-        _basketButton.transform = CGAffineTransformMakeRotation(M_PI_4/2);
+        self->_basketButton.transform = CGAffineTransformMakeRotation(M_PI_4/2);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.1 animations:^{
-            _basketButton.transform = CGAffineTransformMakeRotation(-M_PI_4/2);
+            self->_basketButton.transform = CGAffineTransformMakeRotation(-M_PI_4/2);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.1 animations:^{
-                _basketButton.transform = CGAffineTransformMakeRotation(0);
+                self->_basketButton.transform = CGAffineTransformMakeRotation(0);
             }];
         }];
     }];    

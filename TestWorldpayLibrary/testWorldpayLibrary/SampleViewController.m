@@ -571,7 +571,7 @@
         if (reusable) {
             [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
                                                             token:token
-                                                          success:^(int code, NSDictionary *responseDictionary) {
+                                                          success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                               [self.navigationController pushViewController:threeDSController animated:YES];
                                                           }
                                                           beforeRequest:^{
@@ -587,7 +587,7 @@
         
         [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
                                                         token:token
-                                                      success:^(int code, NSDictionary *responseDictionary) {
+                                                      success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                           
                                                           
                                                           NSDictionary *requestBillingAddress = @{
@@ -602,7 +602,7 @@
                                                                                               orderAmount:@(round([[BasketManager sharedInstance] totalPrice] * 100))
                                                                                         orderCurrencyCode:@"GBP"
                                                                                       orderBillingAddress:requestBillingAddress
-                                                                                                  success:^(int code, NSDictionary *responseDictionary) {
+                                                                                                  success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                                                                       /**
                                                                                                        *  At this point you should connect to your own server and complete the purchase from there.
                                                                                                        */
@@ -930,7 +930,7 @@
     
     [self makePaymentWithPaymentData:paymentData
                       billingAddress:requestBillingAddress
-                             success:^(int code, NSDictionary *responseDictionary) {
+                             success:^(NSInteger code, NSDictionary *responseDictionary) {
                                  [[BasketManager sharedInstance] clearBasket];
                                  completion(PKPaymentAuthorizationStatusSuccess);
                                  SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
@@ -998,7 +998,7 @@
                            failure:(requestTokenFailure)failure {
     
     [[Worldpay sharedInstance] createTokenWithPaymentData:paymentData
-                                                  success:^(int code, NSDictionary *responseDictionary) {
+                                                  success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                       
                                                       NSString *paymentToken = [responseDictionary objectForKey:@"token"];
                                                       

@@ -21,5 +21,5 @@ typedef void (^threeDSOrderFailure)(NSDictionary *responseDictionary, NSArray *e
 
 - (void)setAuthorizeThreeDSOrderBlockWithSuccess:(threeDSOrderSuccess)success
                                          failure:(threeDSOrderFailure)failure;
-    
+
 @end

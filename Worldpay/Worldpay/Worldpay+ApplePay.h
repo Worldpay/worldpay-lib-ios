@@ -16,7 +16,7 @@
  *
  *  @return bool if ApplePay is supported.
  */
-- (BOOL)canMakePayments;
+@property (nonatomic, readonly) BOOL canMakePayments;
 
 /*!
  *  Creates a new PKPaymentRequest object for the given Marchant Identifier.
@@ -31,11 +31,10 @@
 /*!
  *  Creates a new Worldpay token using an ApplePay token
  *
- *  @param paymentData the paymentData of PKPaymentToken object which contains an encrypted payment credential
+ *  @param payment the paymentData of PKPaymentToken object which contains an encrypted payment credential
  *  @param success success block returning (int code, NSDictionary *responseDictionary)
  *  @param failure failure block returning (NSDictionary *responseDictionary, NSArray *errors)
  *
- *  @return a new PKPaymentRequest
  */
 
 - (void)createTokenWithPayment:(PKPayment *)payment
@@ -49,7 +48,6 @@
  *  @param success success block returning (int code, NSDictionary *responseDictionary)
  *  @param failure failure block returning (NSDictionary *responseDictionary, NSArray *errors)
  *
- *  @return a new PKPaymentRequest
  */
 - (void)createTokenWithPaymentData:(NSData *)paymentData
                            success:(requestUpdateTokenSuccess)success

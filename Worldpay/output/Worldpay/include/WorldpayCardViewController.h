@@ -18,28 +18,28 @@
 typedef void (^requestTokenSuccess)(NSDictionary *responseDictionary);
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
-typedef enum {
+typedef NS_ENUM(unsigned int, CardDetailsTheme) {
     CardDetailsThemeBlue,
     CardDetailsThemeRed,
     CardDetailsThemeYellow
-} CardDetailsTheme;
+};
 
 @property (nonatomic) CardDetailsTheme theme;
 
-typedef enum {
+typedef NS_ENUM(unsigned int, CardDetailsLoadingTheme) {
     CardDetailsLoadingThemeWhite,
     CardDetailsLoadingThemeBlack
-} CardDetailsLoadingTheme;
+};
 
 @property (nonatomic) CardDetailsLoadingTheme loadingTheme;
 
-typedef enum {
+typedef NS_ENUM(unsigned int, CardDetailsTextField) {
     CardDetailsTextFieldFirstName,
     CardDetailsTextFieldLastName,
     CardDetailsTextFieldCardNumber,
     CardDetailsTextFieldExpiry,
     CardDetailsTextFieldCVC
-} CardDetailsTextField;
+};
 
 @property (nonatomic) CardDetailsTextField textField;
 
@@ -48,7 +48,7 @@ typedef enum {
  *
  *  @return self
  */
--(id)init;
+- (instancetype)init;
 
 /*!
  *  Function to initialize Card Details of the "add card" functionallity view controller.
@@ -58,38 +58,38 @@ typedef enum {
  *
  *  @return self ( the view controller)
  */
--(id)initWithColor:(UIColor *)color loadingTheme:(CardDetailsLoadingTheme)loadingTheme;
+- (instancetype)initWithColor:(UIColor *)color loadingTheme:(CardDetailsLoadingTheme)loadingTheme;
 
 /*!
  *  Function to choose which textField to shake to indicate the error field.
  *
  *  @param textField the one that is going to be shaked and colored red.
  */
--(void)shakeTextField:(CardDetailsTextField)textField;
+- (void)shakeTextField:(CardDetailsTextField)textField;
 
 /*!
  *  Function that calls the warning view regarding the SSL encryption after we validate the card details and before we make the request
  */
--(void)showWarningView;
+- (void)showWarningView;
 
 
 /*!
  *  Function that adds a blackish transparent background with a loading indicator.
  */
--(void)addLoadingBackground;
+- (void)addLoadingBackground;
 
 /*!
  *  Function that remove the blackish transparent background.
  */
--(void)removeLoadingBackground;
+- (void)removeLoadingBackground;
 
 /*!
  *  Function that sets the Send Request Tap Block
  *
  *  @param success
- *  @param failure 
+ *  @param failure
  */
--(void)setSaveButtonTapBlockWithSuccess:(requestTokenSuccess)success
-                                failure:(requestTokenFailure)failure;
+- (void)setSaveButtonTapBlockWithSuccess:(requestTokenSuccess)success
+                                 failure:(requestTokenFailure)failure;
 
 @end

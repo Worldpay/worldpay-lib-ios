@@ -19,19 +19,18 @@
 @interface Worldpay : NSObject {
     
     NSString *WorldpayClientKey;
-    int WorldpayTimeout;
-    
+    NSUInteger WorldpayTimeout;
 }
 
-typedef void (^requestUpdateTokenSuccess)(int code, NSDictionary *responseDictionary);
+typedef void (^requestUpdateTokenSuccess)(NSInteger code, NSDictionary *responseDictionary);
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 typedef void (^updateTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
-typedef enum {
+typedef NS_ENUM(unsigned int, WorldpayValidationType) {
     WorldpayValidationTypeBasic,
     WorldpayValidationTypeAdvanced,
     validation_types
-} WorldpayValidationType;
+};
 
 
 /*!
@@ -70,7 +69,7 @@ typedef enum {
  *
  *  @returns a new Worldpay object if it hasn't been created or returns the Worldpay object if it exists
  */
-+ (Worldpay *) sharedInstance;
++ (Worldpay *)sharedInstance;
 
 /*!
  *  Worldpay allows you to store card details so you can charge a card multiple times. You can use this to offer your customers card-on-file payment or a recurring payment
@@ -84,7 +83,7 @@ typedef enum {
  *  Returns the API URL based on environment property
  *
  */
-- (NSString *)APIStringURL;
+@property (nonatomic, readonly, copy) NSString *APIStringURL;
 
 /*!
  *  Function that validates the card credentials and then makes the request to create token
@@ -143,10 +142,10 @@ typedef enum {
  *  @param failure         On failure returning status : NSDictionary and NSArray of errors
  */
 
--(void)showCVCModalWithParentView:(UIView *)parentView
-                            token:(NSString *)token
-                          success:(requestUpdateTokenSuccess)success
-                            error:(updateTokenFailure)failure __deprecated;
+- (void)showCVCModalWithParentView:(UIView *)parentView
+                             token:(NSString *)token
+                           success:(requestUpdateTokenSuccess)success
+                             error:(updateTokenFailure)failure __deprecated;
 
 /*!
  *  Function that shows a dialog and asks for the CVC, then it calls reuseToken:withCVC:success:failure:. It also provides a beforeRequest callback (useful if you want to show a custom loader to your app)
@@ -155,11 +154,11 @@ typedef enum {
  *  @param failure         On failure returning status : NSDictionary and NSArray of errors
  */
 
--(void)showCVCModalWithParentView:(UIView *)parentView
-                            token:(NSString *)token
-                          success:(requestUpdateTokenSuccess)success
-                    beforeRequest:(void (^)(void))beforeRequest
-                            error:(updateTokenFailure)failure;
+- (void)showCVCModalWithParentView:(UIView *)parentView
+                             token:(NSString *)token
+                           success:(requestUpdateTokenSuccess)success
+                     beforeRequest:(void (^)(void))beforeRequest
+                             error:(updateTokenFailure)failure;
 
 /*!
  *  Function to strip card number by removing the " " (white spaces) and removing the "-" dashes
@@ -238,11 +237,11 @@ typedef enum {
  *
  *  @return an array of errors: 1 -> Problem with Card Expiration Date, 2 -> Problem with Card Number, 3 -> Problem with Name on Card ( holder name ), 4 -> Problem with CVC ( Card Verification Code )
  */
--(NSArray *)validateCardDetailsWithHolderName:(NSString *)holderName
-                                   cardNumber:(NSString *)cardNumber
-                              expirationMonth:(NSString *)expirationMonth
-                               expirationYear:(NSString *)expirationYear
-                                          CVC:(NSString *)CVC;
+- (NSArray *)validateCardDetailsWithHolderName:(NSString *)holderName
+                                    cardNumber:(NSString *)cardNumber
+                               expirationMonth:(NSString *)expirationMonth
+                                expirationYear:(NSString *)expirationYear
+                                           CVC:(NSString *)CVC;
 
 
 /*!
@@ -253,8 +252,8 @@ typedef enum {
  *
  *  @return an array of errors: 1 -> Problem with APM Name, 2 -> Problem with Country Code
  */
--(NSArray *)validateAPMDetailsWithAPMName:(NSString *)apmName
-                              countryCode:(NSString *)countryCode;
+- (NSArray *)validateAPMDetailsWithAPMName:(NSString *)apmName
+                               countryCode:(NSString *)countryCode;
 
 /*!
  *  Function to validate the APM Name
@@ -263,7 +262,7 @@ typedef enum {
  *
  *  @return YES or NO
  */
--(BOOL)validateAPMNameWithName:(NSString *)apmName;
+- (BOOL)validateAPMNameWithName:(NSString *)apmName;
 
 /*!
  *  Function to validate the Country Code
@@ -272,8 +271,7 @@ typedef enum {
  *
  *  @return YES or NO
  */
--(BOOL)validateCountryCodeWithCode:(NSString *)countryCode;
-
+- (BOOL)validateCountryCodeWithCode:(NSString *)countryCode;
 
 /*!
  *  Returns the type of the card
@@ -289,6 +287,7 @@ typedef enum {
  */
 - (NSError *)errorWithTitle:(NSString *)title
                        code:(NSInteger)code;
+
 /*!
  *  Helper method for making requests
  *
@@ -300,12 +299,11 @@ typedef enum {
  *  @param additionalHeaders additional headers as NSDictionary
  */
 
--(void)makeRequestWithURL:(NSString *)url
-        requestDictionary:(NSDictionary *)requestDictionary
-                   method:(NSString *)method
-                  success:(requestUpdateTokenSuccess)success
-                  failure:(requestTokenFailure)failure
-        additionalHeaders:(NSDictionary *)additionalHeaders;
-
+- (void)makeRequestWithURL:(NSString *)url
+         requestDictionary:(NSDictionary *)requestDictionary
+                    method:(NSString *)method
+                   success:(requestUpdateTokenSuccess)success
+                   failure:(requestTokenFailure)failure
+         additionalHeaders:(NSDictionary *)additionalHeaders;
 
 @end

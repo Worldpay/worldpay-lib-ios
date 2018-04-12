@@ -16,7 +16,7 @@
  *
  *  @return bool if ApplePay is supported.
  */
-- (BOOL)canMakePayments;
+@property (nonatomic, readonly) BOOL canMakePayments;
 
 /*!
  *  Creates a new PKPaymentRequest object for the given Marchant Identifier.

@@ -54,7 +54,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Failure
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"^&*AghA GHAJdas" cardNumber:@"1cczz zvs safd  asd" expirationMonth:@"-1" expirationYear:@"21" CVC:@"---" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"^&*AghA GHAJdas" cardNumber:@"1cczz zvs safd  asd" expirationMonth:@"-1" expirationYear:@"21" CVC:@"---" success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             XCTFail(@"should not call success block");
             
@@ -74,7 +74,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Success
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"John Doe" cardNumber:@"6759649826438453" expirationMonth:@"05" expirationYear:@"21" CVC:@"067" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"John Doe" cardNumber:@"6759649826438453" expirationMonth:@"05" expirationYear:@"21" CVC:@"067" success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -92,7 +92,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     
 
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"" countryCode:@"" apmFields:nil shopperLanguageCode:nil success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"" countryCode:@"" apmFields:nil shopperLanguageCode:nil success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             XCTFail(@"should not call success block");
             *done = YES;
@@ -110,7 +110,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Success (paypal)
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"paypal" countryCode:@"GB" apmFields:nil shopperLanguageCode:nil success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"paypal" countryCode:@"GB" apmFields:nil shopperLanguageCode:nil success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -126,7 +126,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     hxRunInMainLoop(^(BOOL *done) {
         [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"giropay" countryCode:@"GB" apmFields:@{
                                                                                                       @"swiftCode": @"ABC12345"
-                                                                                                      } shopperLanguageCode:@"EN" success:^(int code, NSDictionary *responseDictionary) {
+                                                                                                      } shopperLanguageCode:@"EN" success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                                                                           
                                                                                                           //        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"paypal" countryCode:@"GB" apmFields:nil shopperLanguageCode:nil success:^(int code, NSDictionary *responseDictionary) {
                                                                                                           
@@ -152,7 +152,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
                                              expirationMonth:@"05"
                                               expirationYear:@"21"
                                                          CVC:@"067"
-                                                     success:^(int code, NSDictionary *responseDictionary) {
+                                                     success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             token = [responseDictionary objectForKey:@"token"];
             
@@ -168,7 +168,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Failure
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] reuseToken:token withCVC:@"-14" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] reuseToken:token withCVC:@"-14" success:^(NSInteger code, NSDictionary *responseDictionary) {
             XCTFail(@"should not call success block");
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -181,7 +181,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Success
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] reuseToken:token withCVC:@"067" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] reuseToken:token withCVC:@"067" success:^(NSInteger code, NSDictionary *responseDictionary) {
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
             XCTFail(@"should not call failure block");

@@ -34,6 +34,6 @@ typedef void (^authorizeAPMOrderFailure)(NSDictionary *responseDictionary, NSArr
 
 
 - (void)setAuthorizeAPMOrderBlockWithSuccess:(authorizeAPMOrderSuccess)success
-                                  failure:(authorizeAPMOrderFailure)failure;
+                                     failure:(authorizeAPMOrderFailure)failure;
 
 @end

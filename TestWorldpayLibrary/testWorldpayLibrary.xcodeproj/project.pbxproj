@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59032FFC1A8BC99600CB2ADE /* WorldpayResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 59032FFB1A8BC99600CB2ADE /* WorldpayResources.bundle */; };
 		5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5927CEA719B5CB95004BA44F /* app_icon@2x.png */; };
 		593F14AA19B0BA7F00A009FB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A619B0BA7F00A009FB /* amex.png */; };
 		593F14AB19B0BA7F00A009FB /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A719B0BA7F00A009FB /* maestro.png */; };
@@ -15,8 +14,6 @@
 		593F14AD19B0BA7F00A009FB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A919B0BA7F00A009FB /* visa.png */; };
 		59581CAA1B7B544E00D616C0 /* Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59581CA91B7B544E00D616C0 /* Close@2x.png */; };
 		59616AF71A9F4EB4009A820E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59616AF61A9F4EB4009A820E /* AddressBook.framework */; };
-		596E539A1AA4DF3300170E90 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596E53991AA4DF3300170E90 /* libPods.a */; };
-		597077CF1993CC1F002651A7 /* libWorldpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 597077CD1993CC1F002651A7 /* libWorldpay.a */; };
 		59B389A51AC1A99C00CA5269 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B389A31AC1A99C00CA5269 /* SettingsTableViewController.m */; };
 		59B389A61AC1A99C00CA5269 /* SettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59B389A41AC1A99C00CA5269 /* SettingsTableViewController.xib */; };
 		59B389AB1AC1A9E600CA5269 /* SettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B389A91AC1A9E600CA5269 /* SettingsCell.m */; };
@@ -29,6 +26,7 @@
 		5AC8C6911BDEAC57006F1F78 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AC8C68E1BDEAC57006F1F78 /* Default-568h@2x.png */; };
 		5AC8C6921BDEAC57006F1F78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AC8C68F1BDEAC57006F1F78 /* Default.png */; };
 		5AC8C6931BDEAC57006F1F78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AC8C6901BDEAC57006F1F78 /* Default@2x.png */; };
+		5BF680AD2F8233C3146E5A18 /* Pods_testWorldpayLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396CB97E046112B2665DFFC6 /* Pods_testWorldpayLibrary.framework */; };
 		7E00CE88198B7B5500C34D6A /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7C198B7B5500C34D6A /* check@2x.png */; };
 		7E00CE89198B7B5500C34D6A /* choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7D198B7B5500C34D6A /* choose@2x.png */; };
 		7E00CE8A198B7B5500C34D6A /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE7E198B7B5500C34D6A /* clock@2x.png */; };
@@ -39,16 +37,9 @@
 		7E00CE91198B7B5500C34D6A /* loxodrome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE85198B7B5500C34D6A /* loxodrome@2x.png */; };
 		7E00CE92198B7B5500C34D6A /* spain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE86198B7B5500C34D6A /* spain@2x.png */; };
 		7E00CE93198B7B5500C34D6A /* uk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE87198B7B5500C34D6A /* uk@2x.png */; };
-		7E00CEB2198B921B00C34D6A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEA9198B921B00C34D6A /* FMDatabase.m */; };
-		7E00CEB3198B921B00C34D6A /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEAB198B921B00C34D6A /* FMDatabaseAdditions.m */; };
-		7E00CEB4198B921B00C34D6A /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEAD198B921B00C34D6A /* FMDatabasePool.m */; };
-		7E00CEB5198B921B00C34D6A /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEAF198B921B00C34D6A /* FMDatabaseQueue.m */; };
-		7E00CEB6198B921B00C34D6A /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEB1198B921B00C34D6A /* FMResultSet.m */; };
-		7E00CEB9198B922600C34D6A /* ALToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00CEB8198B922600C34D6A /* ALToastView.m */; };
 		7E224920198230A20016BE5E /* SuccessPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E22491E198230A20016BE5E /* SuccessPageViewController.m */; };
 		7E224921198230A20016BE5E /* SuccessPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E22491F198230A20016BE5E /* SuccessPageViewController.xib */; };
 		7E2C5B971980F64600701108 /* DBhandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C5B961980F64600701108 /* DBhandler.m */; };
-		7E2C5B991980F84000701108 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2C5B981980F84000701108 /* libsqlite3.0.dylib */; };
 		7E2C5BA9198126D900701108 /* CustomGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C5BA8198126D900701108 /* CustomGestureRecognizer.m */; };
 		7E2C5BAE1981436F00701108 /* worldpay.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C5BAD1981436F00701108 /* worldpay.sqlite */; };
 		7E5166B2197FE63700CCB1EC /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5166B0197FE63700CCB1EC /* SplashScreenViewController.m */; };
@@ -65,7 +56,6 @@
 		7EF711151976C3C100F7DC51 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711141976C3C100F7DC51 /* main.m */; };
 		7EF711191976C3C100F7DC51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF711181976C3C100F7DC51 /* AppDelegate.m */; };
 		7EF7111B1976C3C100F7DC51 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EF7111A1976C3C100F7DC51 /* Images.xcassets */; };
-		7EF711221976C3C100F7DC51 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF711211976C3C100F7DC51 /* XCTest.framework */; };
 		7EF711231976C3C100F7DC51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF711081976C3C000F7DC51 /* Foundation.framework */; };
 		7EF711241976C3C100F7DC51 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF7110C1976C3C000F7DC51 /* UIKit.framework */; };
 		7EF7112C1976C3C100F7DC51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EF7112A1976C3C100F7DC51 /* InfoPlist.strings */; };
@@ -91,21 +81,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		59032FFB1A8BC99600CB2ADE /* WorldpayResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WorldpayResources.bundle; sourceTree = "<group>"; };
+		0EAE37F6BC6C51224E880E0D /* Pods-testWorldpayLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testWorldpayLibrary.release.xcconfig"; path = "Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary.release.xcconfig"; sourceTree = "<group>"; };
+		396CB97E046112B2665DFFC6 /* Pods_testWorldpayLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testWorldpayLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50B8FB47399606D0168C472D /* Pods-testWorldpayLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testWorldpayLibrary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 		5927CEA719B5CB95004BA44F /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "Resources/app_icon@2x.png"; sourceTree = "<group>"; };
-		5929C51F1A717BA900BAB6D8 /* Worldpay+ApplePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Worldpay+ApplePay.h"; sourceTree = "<group>"; };
 		593F14A619B0BA7F00A009FB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amex.png; path = Resources/amex.png; sourceTree = "<group>"; };
 		593F14A719B0BA7F00A009FB /* maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maestro.png; path = Resources/maestro.png; sourceTree = "<group>"; };
 		593F14A819B0BA7F00A009FB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = Resources/mastercard.png; sourceTree = "<group>"; };
 		593F14A919B0BA7F00A009FB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = Resources/visa.png; sourceTree = "<group>"; };
 		59581CA91B7B544E00D616C0 /* Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Close@2x.png"; path = "Resources/Close@2x.png"; sourceTree = "<group>"; };
 		59616AF61A9F4EB4009A820E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		596E53951AA4DF2300170E90 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		596E53971AA4DF2900170E90 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
-		596E53991AA4DF3300170E90 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		597077CA1993CC1F002651A7 /* Worldpay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worldpay.h; sourceTree = "<group>"; };
-		597077CB1993CC1F002651A7 /* WorldpayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayCardViewController.h; sourceTree = "<group>"; };
-		597077CD1993CC1F002651A7 /* libWorldpay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWorldpay.a; sourceTree = "<group>"; };
 		59A6308E1A8BC0C2002A1CCC /* Worldfood.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Worldfood.entitlements; sourceTree = "<group>"; };
 		59B389A21AC1A99C00CA5269 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = Settings/SettingsTableViewController.h; sourceTree = "<group>"; };
 		59B389A31AC1A99C00CA5269 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = Settings/SettingsTableViewController.m; sourceTree = "<group>"; };
@@ -119,9 +104,6 @@
 		59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apple_pay_btn@2x.png"; path = "Resources/apple_pay_btn@2x.png"; sourceTree = "<group>"; };
 		59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apple_pay_btn@3x.png"; path = "Resources/apple_pay_btn@3x.png"; sourceTree = "<group>"; };
 		5A6788EF1A680E590084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
-		5AC8C6881BDE5DB5006F1F78 /* WorldpayAPMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldpayAPMViewController.h; sourceTree = "<group>"; };
-		5AC8C6891BDE5DC6006F1F78 /* ThreeDSController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeDSController.h; sourceTree = "<group>"; };
-		5AC8C68B1BDE5EA4006F1F78 /* APMController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APMController.h; sourceTree = "<group>"; };
 		5AC8C68E1BDEAC57006F1F78 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5AC8C68F1BDEAC57006F1F78 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5AC8C6901BDEAC57006F1F78 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -135,25 +117,12 @@
 		7E00CE85198B7B5500C34D6A /* loxodrome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loxodrome@2x.png"; path = "Resources/loxodrome@2x.png"; sourceTree = "<group>"; };
 		7E00CE86198B7B5500C34D6A /* spain@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "spain@2x.png"; path = "Resources/spain@2x.png"; sourceTree = "<group>"; };
 		7E00CE87198B7B5500C34D6A /* uk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "uk@2x.png"; path = "Resources/uk@2x.png"; sourceTree = "<group>"; };
-		7E00CEA8198B921B00C34D6A /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = ThirdParty/FMDatabase/FMDatabase.h; sourceTree = "<group>"; };
-		7E00CEA9198B921B00C34D6A /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = ThirdParty/FMDatabase/FMDatabase.m; sourceTree = "<group>"; };
-		7E00CEAA198B921B00C34D6A /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = ThirdParty/FMDatabase/FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		7E00CEAB198B921B00C34D6A /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = ThirdParty/FMDatabase/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		7E00CEAC198B921B00C34D6A /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = ThirdParty/FMDatabase/FMDatabasePool.h; sourceTree = "<group>"; };
-		7E00CEAD198B921B00C34D6A /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = ThirdParty/FMDatabase/FMDatabasePool.m; sourceTree = "<group>"; };
-		7E00CEAE198B921B00C34D6A /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = ThirdParty/FMDatabase/FMDatabaseQueue.h; sourceTree = "<group>"; };
-		7E00CEAF198B921B00C34D6A /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = ThirdParty/FMDatabase/FMDatabaseQueue.m; sourceTree = "<group>"; };
-		7E00CEB0198B921B00C34D6A /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = ThirdParty/FMDatabase/FMResultSet.h; sourceTree = "<group>"; };
-		7E00CEB1198B921B00C34D6A /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = ThirdParty/FMDatabase/FMResultSet.m; sourceTree = "<group>"; };
-		7E00CEB7198B922600C34D6A /* ALToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALToastView.h; path = ThirdParty/ALToastView/ALToastView.h; sourceTree = "<group>"; };
-		7E00CEB8198B922600C34D6A /* ALToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALToastView.m; path = ThirdParty/ALToastView/ALToastView.m; sourceTree = "<group>"; };
 		7E00CECE198BB41300C34D6A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		7E22491D198230A20016BE5E /* SuccessPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessPageViewController.h; sourceTree = "<group>"; };
 		7E22491E198230A20016BE5E /* SuccessPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessPageViewController.m; sourceTree = "<group>"; };
 		7E22491F198230A20016BE5E /* SuccessPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessPageViewController.xib; sourceTree = "<group>"; };
 		7E2C5B951980F64600701108 /* DBhandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBhandler.h; sourceTree = "<group>"; };
 		7E2C5B961980F64600701108 /* DBhandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBhandler.m; sourceTree = "<group>"; };
-		7E2C5B981980F84000701108 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		7E2C5BA7198126D900701108 /* CustomGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGestureRecognizer.h; sourceTree = "<group>"; };
 		7E2C5BA8198126D900701108 /* CustomGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGestureRecognizer.m; sourceTree = "<group>"; };
 		7E2C5BAD1981436F00701108 /* worldpay.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = worldpay.sqlite; sourceTree = "<group>"; };
@@ -178,7 +147,6 @@
 		7EF711181976C3C100F7DC51 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7EF7111A1976C3C100F7DC51 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7EF711201976C3C100F7DC51 /* testWorldpayLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testWorldpayLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EF711211976C3C100F7DC51 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7EF711291976C3C100F7DC51 /* testWorldpayLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "testWorldpayLibraryTests-Info.plist"; sourceTree = "<group>"; };
 		7EF7112B1976C3C100F7DC51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EF7112D1976C3C100F7DC51 /* testWorldpayLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testWorldpayLibraryTests.m; sourceTree = "<group>"; };
@@ -188,7 +156,6 @@
 		7EF711471976C74100F7DC51 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		7EF711481976C74100F7DC51 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7EF711491976C74100F7DC51 /* NavigationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavigationViewController.xib; sourceTree = "<group>"; };
-		A6F7F264FAFEEE875548B407 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2F3D62D086671F86421DC0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B540D97CB3C2CD5E66ACEA52 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,13 +165,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				596E539A1AA4DF3300170E90 /* libPods.a in Frameworks */,
 				59616AF71A9F4EB4009A820E /* AddressBook.framework in Frameworks */,
-				7E2C5B991980F84000701108 /* libsqlite3.0.dylib in Frameworks */,
 				7EF7110B1976C3C000F7DC51 /* CoreGraphics.framework in Frameworks */,
 				7EF7110D1976C3C000F7DC51 /* UIKit.framework in Frameworks */,
-				597077CF1993CC1F002651A7 /* libWorldpay.a in Frameworks */,
 				7EF711091976C3C000F7DC51 /* Foundation.framework in Frameworks */,
+				5BF680AD2F8233C3146E5A18 /* Pods_testWorldpayLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +177,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EF711221976C3C100F7DC51 /* XCTest.framework in Frameworks */,
 				7EF711241976C3C100F7DC51 /* UIKit.framework in Frameworks */,
 				7EF711231976C3C100F7DC51 /* Foundation.framework in Frameworks */,
 			);
@@ -226,32 +190,10 @@
 			children = (
 				AA2F3D62D086671F86421DC0 /* Pods.debug.xcconfig */,
 				B540D97CB3C2CD5E66ACEA52 /* Pods.release.xcconfig */,
+				50B8FB47399606D0168C472D /* Pods-testWorldpayLibrary.debug.xcconfig */,
+				0EAE37F6BC6C51224E880E0D /* Pods-testWorldpayLibrary.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		597077C81993CC1F002651A7 /* Worldpay */ = {
-			isa = PBXGroup;
-			children = (
-				597077C91993CC1F002651A7 /* Include */,
-				597077CD1993CC1F002651A7 /* libWorldpay.a */,
-			);
-			name = Worldpay;
-			path = ../Worldpay/output/Worldpay;
-			sourceTree = "<group>";
-		};
-		597077C91993CC1F002651A7 /* Include */ = {
-			isa = PBXGroup;
-			children = (
-				5AC8C68B1BDE5EA4006F1F78 /* APMController.h */,
-				5AC8C6881BDE5DB5006F1F78 /* WorldpayAPMViewController.h */,
-				597077CA1993CC1F002651A7 /* Worldpay.h */,
-				5AC8C6891BDE5DC6006F1F78 /* ThreeDSController.h */,
-				5929C51F1A717BA900BAB6D8 /* Worldpay+ApplePay.h */,
-				597077CB1993CC1F002651A7 /* WorldpayCardViewController.h */,
-				59032FFB1A8BC99600CB2ADE /* WorldpayResources.bundle */,
-			);
-			path = Include;
 			sourceTree = "<group>";
 		};
 		59B389A71AC1A9BE00CA5269 /* Settings */ = {
@@ -267,47 +209,12 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		7E00CE4E198B669000C34D6A /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				7E00CE4F198B66C000C34D6A /* ALToastView */,
-				7E2C5B851980F60D00701108 /* FMDatabase */,
-			);
-			name = ThirdParty;
-			sourceTree = "<group>";
-		};
-		7E00CE4F198B66C000C34D6A /* ALToastView */ = {
-			isa = PBXGroup;
-			children = (
-				7E00CEB7198B922600C34D6A /* ALToastView.h */,
-				7E00CEB8198B922600C34D6A /* ALToastView.m */,
-			);
-			name = ALToastView;
-			sourceTree = "<group>";
-		};
 		7E00CE50198B66D200C34D6A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				7E2C5BA0198105FB00701108 /* images */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		7E2C5B851980F60D00701108 /* FMDatabase */ = {
-			isa = PBXGroup;
-			children = (
-				7E00CEA8198B921B00C34D6A /* FMDatabase.h */,
-				7E00CEA9198B921B00C34D6A /* FMDatabase.m */,
-				7E00CEAA198B921B00C34D6A /* FMDatabaseAdditions.h */,
-				7E00CEAB198B921B00C34D6A /* FMDatabaseAdditions.m */,
-				7E00CEAC198B921B00C34D6A /* FMDatabasePool.h */,
-				7E00CEAD198B921B00C34D6A /* FMDatabasePool.m */,
-				7E00CEAE198B921B00C34D6A /* FMDatabaseQueue.h */,
-				7E00CEAF198B921B00C34D6A /* FMDatabaseQueue.m */,
-				7E00CEB0198B921B00C34D6A /* FMResultSet.h */,
-				7E00CEB1198B921B00C34D6A /* FMResultSet.m */,
-			);
-			name = FMDatabase;
 			sourceTree = "<group>";
 		};
 		7E2C5BA0198105FB00701108 /* images */ = {
@@ -343,10 +250,8 @@
 		7EF710FC1976C3C000F7DC51 = {
 			isa = PBXGroup;
 			children = (
-				597077C81993CC1F002651A7 /* Worldpay */,
 				7EF711071976C3C000F7DC51 /* Frameworks */,
 				7E00CE50198B66D200C34D6A /* Resources */,
-				7E00CE4E198B669000C34D6A /* ThirdParty */,
 				7EF7110E1976C3C100F7DC51 /* testWorldpayLibrary */,
 				7EF711271976C3C100F7DC51 /* testWorldpayLibraryTests */,
 				7EF711061976C3C000F7DC51 /* Products */,
@@ -366,17 +271,12 @@
 		7EF711071976C3C000F7DC51 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				596E53991AA4DF3300170E90 /* libPods.a */,
-				596E53971AA4DF2900170E90 /* libPods-AFNetworking.a */,
-				596E53951AA4DF2300170E90 /* libPods.a */,
 				59616AF61A9F4EB4009A820E /* AddressBook.framework */,
 				7E00CECE198BB41300C34D6A /* CoreFoundation.framework */,
-				7E2C5B981980F84000701108 /* libsqlite3.0.dylib */,
 				7EF711081976C3C000F7DC51 /* Foundation.framework */,
 				7EF7110A1976C3C000F7DC51 /* CoreGraphics.framework */,
 				7EF7110C1976C3C000F7DC51 /* UIKit.framework */,
-				7EF711211976C3C100F7DC51 /* XCTest.framework */,
-				A6F7F264FAFEEE875548B407 /* libPods.a */,
+				396CB97E046112B2665DFFC6 /* Pods_testWorldpayLibrary.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -455,12 +355,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EF711311976C3C100F7DC51 /* Build configuration list for PBXNativeTarget "testWorldpayLibrary" */;
 			buildPhases = (
-				91A36732E2F98CD61F0DBD43 /* Check Pods Manifest.lock */,
+				14DE4DCF27FC210F7470B2C2 /* [CP] Check Pods Manifest.lock */,
 				7EF711011976C3C000F7DC51 /* Sources */,
 				7EF711021976C3C000F7DC51 /* Frameworks */,
 				7EF711031976C3C000F7DC51 /* Resources */,
-				EF457F0D73DDC3B79917CEE7 /* Copy Pods Resources */,
-				23EFE9D09F3DD94D013D4D56 /* Embed Pods Frameworks */,
+				4DB80D959E42143A91BF7E3B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -495,11 +394,10 @@
 		7EF710FD1976C3C000F7DC51 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = arx;
 				TargetAttributes = {
 					7EF711041976C3C000F7DC51 = {
-						DevelopmentTeam = NXRQM34DT8;
 						SystemCapabilities = {
 							com.apple.OMC = {
 								enabled = 1;
@@ -562,7 +460,6 @@
 				7E00CE93198B7B5500C34D6A /* uk@2x.png in Resources */,
 				7EB746CA198BCED400D33001 /* paella@2x.jpg in Resources */,
 				59D4B5461A71594300E92557 /* apple_pay_btn@3x.png in Resources */,
-				59032FFC1A8BC99600CB2ADE /* WorldpayResources.bundle in Resources */,
 				593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */,
 				5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */,
 				593F14AB19B0BA7F00A009FB /* maestro.png in Resources */,
@@ -588,49 +485,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23EFE9D09F3DD94D013D4D56 /* Embed Pods Frameworks */ = {
+		14DE4DCF27FC210F7470B2C2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-testWorldpayLibrary-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		91A36732E2F98CD61F0DBD43 /* Check Pods Manifest.lock */ = {
+		4DB80D959E42143A91BF7E3B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/ALToastView/ALToastView.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Worldpay/Worldpay.framework",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALToastView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Worldpay.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		EF457F0D73DDC3B79917CEE7 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -643,21 +537,15 @@
 				59B389A51AC1A99C00CA5269 /* SettingsTableViewController.m in Sources */,
 				59CEF27C1B72015500FB0A7D /* BasketManager.m in Sources */,
 				7EF7114A1976C74100F7DC51 /* NavigationViewController.m in Sources */,
-				7E00CEB9198B922600C34D6A /* ALToastView.m in Sources */,
 				7E224920198230A20016BE5E /* SuccessPageViewController.m in Sources */,
-				7E00CEB4198B921B00C34D6A /* FMDatabasePool.m in Sources */,
-				7E00CEB5198B921B00C34D6A /* FMDatabaseQueue.m in Sources */,
 				7EF711191976C3C100F7DC51 /* AppDelegate.m in Sources */,
 				7E2C5BA9198126D900701108 /* CustomGestureRecognizer.m in Sources */,
 				7E2C5B971980F64600701108 /* DBhandler.m in Sources */,
 				59B389AB1AC1A9E600CA5269 /* SettingsCell.m in Sources */,
 				7E5166B7197FE6FF00CCB1EC /* MainPageViewController.m in Sources */,
-				7E00CEB6198B921B00C34D6A /* FMResultSet.m in Sources */,
 				7E5166B2197FE63700CCB1EC /* SplashScreenViewController.m in Sources */,
 				7EF711151976C3C100F7DC51 /* main.m in Sources */,
-				7E00CEB2198B921B00C34D6A /* FMDatabase.m in Sources */,
 				7EF711431976C72600F7DC51 /* SampleViewController.m in Sources */,
-				7E00CEB3198B921B00C34D6A /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,29 +593,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -740,13 +635,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = $SOURCE_ROOT/include;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "d7b66151-f91e-4381-a091-709666529aec";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -754,111 +646,76 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = $SOURCE_ROOT/include;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "d7b66151-f91e-4381-a091-709666529aec";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
 		7EF711321976C3C100F7DC51 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA2F3D62D086671F86421DC0 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 50B8FB47399606D0168C472D /* Pods-testWorldpayLibrary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$SOURCE_ROOT/../Worldpay/output/Worldpay/**",
-				);
 				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
-				LIBRARY_SEARCH_PATHS = $SOURCE_ROOT/../Worldpay/output/Worldpay;
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-all_load",
-				);
-				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.worldpay.worldfoodapp;
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		7EF711331976C3C100F7DC51 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B540D97CB3C2CD5E66ACEA52 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 0EAE37F6BC6C51224E880E0D /* Pods-testWorldpayLibrary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$SOURCE_ROOT/../Worldpay/output/Worldpay/**",
-				);
 				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					$SOURCE_ROOT/../Worldpay/output/Worldpay,
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-all_load",
-				);
-				OTHER_LIBTOOLFLAGS = "$(inherited) $(OTHER_LDFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.worldpay.worldfoodapp;
 				PRODUCT_NAME = Worldfood;
-				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
