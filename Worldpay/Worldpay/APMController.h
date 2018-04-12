@@ -32,7 +32,6 @@ typedef void (^authorizeAPMOrderFailure)(NSDictionary *responseDictionary, NSArr
 @property (nonatomic, strong) NSString *settlementCurrency;
 @property (nonatomic, strong) NSString *countryCode;
 
-
 - (void)setAuthorizeAPMOrderBlockWithSuccess:(authorizeAPMOrderSuccess)success
                                      failure:(authorizeAPMOrderFailure)failure;
 

@@ -15,7 +15,6 @@
  * This is a helper method that loads a font file with the given name
  * from library's bundle
  */
-+ (void)loadFont:(NSString *)fontName;
-+ (void)sendDebug: (NSString *)string;
++ (void)sendDebug:(NSString *)string;
 
 @end

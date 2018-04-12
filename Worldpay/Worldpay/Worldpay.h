@@ -8,10 +8,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <mach/machine.h>
-
 #define api_version @"v1"
 
 #define api_url @"https://api.worldpay.com/v1/"
@@ -26,7 +22,7 @@ typedef void (^requestUpdateTokenSuccess)(NSInteger code, NSDictionary *response
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 typedef void (^updateTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
-typedef NS_ENUM(unsigned int, WorldpayValidationType) {
+typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
     WorldpayValidationTypeBasic,
     WorldpayValidationTypeAdvanced,
     validation_types
@@ -190,13 +186,13 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
 /*!
  *  Function to validate Card Expiration Date. Year can be in YY or YYYY format
  *
- *  @param month is the month the card expires : int
- *  @param year  is the year the card expires : int
+ *  @param month is the month the card expires : NSUInteger
+ *  @param year  is the year the card expires : NSUInteger
  *
  *  @return YES or NO
  */
-- (BOOL)validateCardExpiryWithMonth:(int)month
-                               year:(int)year;
+- (BOOL)validateCardExpiryWithMonth:(NSInteger)month
+                               year:(NSInteger)year;
 
 /*!
  *  Function to validate the CVC (Card Verification Code)

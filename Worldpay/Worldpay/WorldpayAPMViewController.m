@@ -6,11 +6,10 @@
 //
 
 #import "WorldpayAPMViewController.h"
-#import "WorldpayUtils.h"
 #import "APMController.h"
 #import <AFNetworking/AFNetworking.h>
 
-@interface WorldpayAPMViewController ()
+@interface WorldpayAPMViewController () <UITextFieldDelegate>
 
 @property (nonatomic,copy) createAPMOrderSuccess saveSuccessBlock;
 @property (nonatomic,copy) createAPMOrderFailure saveFailureBlock;
@@ -105,10 +104,7 @@
     [self createNavigationBar];
     [self initGUI];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
-    
-    [WorldpayUtils loadFont:@"ArialMT"];
-    
+    self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -369,8 +365,8 @@
 
 - (void)initGUI {
     
-    int numberOfFields = 13;
-    int fieldHeight = 40;
+    NSUInteger numberOfFields = 13;
+    NSUInteger fieldHeight = 40;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, screenRect.size.width, 78 * numberOfFields)];
     
@@ -575,7 +571,7 @@
     [confirmPurchase addTarget:self action:@selector(submitAPMDetails:) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:confirmPurchase];
     
-    scrollView.contentSize = CGSizeMake(screenRect.size.width, 115*numberOfFields);
+    scrollView.contentSize = CGSizeMake(screenRect.size.width, 115 * numberOfFields);
     
     [self.view addSubview:scrollView];
     

@@ -5,17 +5,18 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import "APMController.h"
-#import "Worldpay.h"
 #import <AFNetworking/AFNetworking.h>
 
-@interface APMController ()<UIWebViewDelegate>
+#import "APMController.h"
+#import "Worldpay.h"
+
+@interface APMController () <UIWebViewDelegate>
 
 @property (nonatomic,copy) authorizeAPMOrderSuccess authorizeSuccessBlock;
 @property (nonatomic,copy) authorizeAPMOrderFailure authorizeFailureBlock;
 
 @property (nonatomic, strong) NSString *currentOrderCode;
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) UIWebView *webView;
 
 @property (nonatomic, strong) AFURLSessionManager *networkManager;
 

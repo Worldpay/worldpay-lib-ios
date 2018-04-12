@@ -8,7 +8,7 @@
 #import "WorldpayCardViewController.h"
 #import "WorldpayUtils.h"
 
-@interface WorldpayCardViewController ()
+@interface WorldpayCardViewController () <UITextFieldDelegate>
 
 @property (nonatomic,copy) requestTokenSuccess saveSuccessBlock;
 @property (nonatomic,copy) requestTokenFailure saveFailureBlock;
@@ -89,9 +89,6 @@
     [self initGUI];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
-    
-    [WorldpayUtils loadFont:@"ArialMT"];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -206,7 +203,8 @@
         btnConfirm.titleLabel.textColor = [UIColor whiteColor];
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0xFFFFFF, 1.0);
         padlockImage.image = [UIImage imageNamed:@"WorldpayResources.bundle/lockB.png"];
-    } else {
+    }
+    else {
         btnConfirm.backgroundColor = [UIColor whiteColor];
         [btnConfirm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -561,30 +559,28 @@
     }
 }
 
-- (void)shake:(UITextField *)theOneYouWannaShake shakes:(int)shakes direction:(int)direction {
-    __block int shakesNumber = shakes;
-    __block int directionNumber = shakes;
+- (void)shake:(UITextField *)theOneYouWannaShake shakes:(NSInteger)shakes direction:(NSInteger)direction {
+    __block NSInteger shakesNumber = shakes;
+    __block NSInteger directionNumber = shakes;
     
-    [UIView animateWithDuration:0.05 animations:^
-     {
-         theOneYouWannaShake.transform = CGAffineTransformMakeTranslation(5*direction, 0);
-     }
-                     completion:^(BOOL finished)
-     {
-         if(shakes >= 10)
-         {
-             theOneYouWannaShake.textColor = [UIColor redColor];
-             theOneYouWannaShake.transform = CGAffineTransformIdentity;
-             return;
-         }
-         shakesNumber++;
-         directionNumber = direction * -1;
-         [self shake:theOneYouWannaShake shakes:shakesNumber direction:directionNumber];
-     }];
+    [UIView animateWithDuration:0.05 animations:^{
+        theOneYouWannaShake.transform = CGAffineTransformMakeTranslation(5*direction, 0);
+    }
+                     completion:^(BOOL finished) {
+                         if (shakes >= 10) {
+                             theOneYouWannaShake.textColor = [UIColor redColor];
+                             theOneYouWannaShake.transform = CGAffineTransformIdentity;
+                             
+                             return;
+                         }
+                         shakesNumber++;
+                         directionNumber = direction * -1;
+                         [self shake:theOneYouWannaShake shakes:shakesNumber direction:directionNumber];
+                     }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if([textField.layer.name isEqualToString:@"expiry"]){
+    if ([textField.layer.name isEqualToString:@"expiry"]){
         [textField selectAll:self];
     }
 }
@@ -643,23 +639,26 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if([textField.layer.name isEqualToString:@"firstName"]){
+    if ([textField.layer.name isEqualToString:@"firstName"]){
         [_lastName becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"lastName"]){
+    }
+    else if([textField.layer.name isEqualToString:@"lastName"]){
         [_cardNumber becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"cardNumber"]){
+    }
+    else if([textField.layer.name isEqualToString:@"cardNumber"]){
         [_expiry becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"expiry"]){
+    }
+    else if([textField.layer.name isEqualToString:@"expiry"]){
         [_CVC becomeFirstResponder];
-    }else{
+    }
+    else{
         [_CVC resignFirstResponder];
     }
     
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if ([string isEqualToString:@""]) {
         _shouldDeleteCharacter = YES;
@@ -673,7 +672,7 @@
         return NO;
     }
     
-    if(textField == _expiry && string.length != 0 && ![string isEqualToString:@"/"] && (_expiry.text).length == 2 && [_expiry.text rangeOfString:@"/"].location == NSNotFound) {
+    if (textField == _expiry && string.length != 0 && ![string isEqualToString:@"/"] && (_expiry.text).length == 2 && [_expiry.text rangeOfString:@"/"].location == NSNotFound) {
         _expiry.text = [NSString stringWithFormat:@"%@/", _expiry.text];
     }
     
@@ -683,7 +682,8 @@
     
     if (textField.text.length >= 7 && range.length == 0 && [textField.layer.name isEqualToString:@"expiry"]){
         return NO;
-    } else if(textField.text.length >= 4 && range.length == 0 && [textField.layer.name isEqualToString:@"CVC"]){
+    }
+    else if(textField.text.length >= 4 && range.length == 0 && [textField.layer.name isEqualToString:@"CVC"]){
         return NO;
     }
     
@@ -730,7 +730,8 @@
 - (void)closeController {
     if (_isModal) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
+    }
+    else {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

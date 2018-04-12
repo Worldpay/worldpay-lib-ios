@@ -9,7 +9,6 @@
 
 @interface ThreeDSController : UIViewController
 
-
 typedef void (^threeDSOrderSuccess)(NSDictionary *responseDictionary);
 typedef void (^threeDSOrderFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
@@ -17,7 +16,6 @@ typedef void (^threeDSOrderFailure)(NSDictionary *responseDictionary, NSArray *e
 @property (nonatomic) float price;
 @property (nonatomic, strong) NSString *address, *city, *postalCode, *token, *name;
 @property (nonatomic) NSDictionary *customerIdentifiers;
-
 
 - (void)setAuthorizeThreeDSOrderBlockWithSuccess:(threeDSOrderSuccess)success
                                          failure:(threeDSOrderFailure)failure;

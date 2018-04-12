@@ -7,8 +7,6 @@
 
 #import "Worldpay+ApplePay.h"
 #import <AddressBook/AddressBook.h>
-#import "WorldpayUtils.h"
-
 
 #define WorldpaySupportedNetworks @[PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]
 

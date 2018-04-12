@@ -8,7 +8,9 @@
 #import <AFNetworking/AFNetworking.h>
 
 #import "Worldpay.h"
-#import "WorldpayUtils.h"
+
+#include <sys/sysctl.h>
+#include <mach/machine.h>
 
 @interface Worldpay() <UITextFieldDelegate>
 @property (nonatomic, copy) requestUpdateTokenSuccess CVCModalSuccess;
@@ -34,8 +36,6 @@
     dispatch_once(&onceToken, ^{
         getInstance = [[self alloc] init];
         getInstance.validationType = WorldpayValidationTypeAdvanced;
-        
-        [WorldpayUtils loadFont:@"ArialMT"];
     });
     
     return getInstance;
@@ -93,6 +93,7 @@
     
     if (errors.count > 0) {
         failure(nil, errors);
+        
         return;
     }
     
@@ -110,7 +111,7 @@
     [paymentMethodDictionary setValue:expirationMonth forKey:@"expiryMonth"];
     [paymentMethodDictionary setValue:@(intExpirationYear+2000) forKey:@"expiryYear"];
     [paymentMethodDictionary setValue:cardNumber forKey:@"cardNumber"];
-    if(CVC !=nil){
+    if (CVC.length){
         [paymentMethodDictionary setValue:CVC forKey:@"cvc"];
     }
     
@@ -123,7 +124,6 @@
                      failure:failure
            additionalHeaders:nil];
 }
-
 
 - (void)createAPMTokenWithAPMName:(NSString *)apmName
                       countryCode:(NSString *)countryCode
@@ -239,9 +239,11 @@
 - (IBAction)confirmCVCAction:(id)sender {
     self.CVCModalBtnConfirm.enabled = NO;
     [self.CVCModalActivityIndicatorView startAnimating];
+    
+    __weak typeof(self) weak = self;
     if (self.CVCModalBeforeRequest) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.CVCModalBeforeRequest();
+            weak.CVCModalBeforeRequest();
         });
     }
     
@@ -253,10 +255,10 @@
                  self.CVCModalBtnConfirm.enabled = YES;
                  [self.CVCModalActivityIndicatorView stopAnimating];
                  dispatch_async(dispatch_get_main_queue(), ^{
-                     self.CVCModalSuccess(code, responseDictionary);
+                     weak.CVCModalSuccess(code, responseDictionary);
                  });
              } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                 self.CVCModalBtnConfirm.enabled = YES;
+                 weak.CVCModalBtnConfirm.enabled = YES;
                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
                                                                                           message:[errors[0] localizedDescription]
                                                                                    preferredStyle:UIAlertControllerStyleAlert];
@@ -270,9 +272,9 @@
                  }];
                  [alertController addAction:confirmAction];
                  
-                 [self.topViewController presentViewController:alertController animated:YES completion:nil];
+                 [weak.topViewController presentViewController:alertController animated:YES completion:nil];
                  
-                 [self.CVCModalActivityIndicatorView stopAnimating];
+                 [weak.CVCModalActivityIndicatorView stopAnimating];
              }];
 }
 
@@ -288,7 +290,7 @@
 
 #pragma mark - Validation Methods
 
--(NSArray *)validateAPMDetailsWithAPMName:(NSString *)apmName
+- (NSArray *)validateAPMDetailsWithAPMName:(NSString *)apmName
                               countryCode:(NSString *)countryCode {
     
     NSMutableArray *errors = [[NSMutableArray alloc] init];
@@ -316,14 +318,17 @@
     if (![self validateCardExpiryWithMonth:expirationMonth.intValue year:expirationYear.intValue]) {
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Card Expiry is not valid", nil) code:1]];
     }
+    
     if ( (_validationType == WorldpayValidationTypeBasic && ![self validateCardNumberBasicWithCardNumber:cardNumber]) ||
         (_validationType == WorldpayValidationTypeAdvanced && ![self validateCardNumberAdvancedWithCardNumber:cardNumber]) ) {
         
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Card Number is not valid", nil) code:2]];
     }
+    
     if (![self validateCardHolderNameWithName:holderName]) {
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Name on card is not valid", nil) code:3]];
     }
+    
     if (![self validateCardCVCWithNumber:CVC]) {
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Card Verification Code is not valid", nil) code:4]];
     }
@@ -336,14 +341,14 @@
     
     NSMutableArray *errors = [[NSMutableArray alloc] init];
     
-    if (CVC != nil) {
+    if (CVC.length) {
         if ([self validateCardCVCWithNumber:CVC] == NO) {
             NSError *error = [self errorWithTitle:NSLocalizedString(@"Card Verification Code is not valid", nil) code:4];
             [errors addObject:error];
         }
     }
     
-    if ([token isEqualToString:@""] || token == nil) {
+    if (!token.length) {
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Token can not be blank", nil) code:400]];
     }
     
@@ -352,11 +357,11 @@
 
 - (BOOL)validateCardNumberBasicWithCardNumber:(NSString *)cardNumber {
     cardNumber = [cardNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-    return [self stringIsNumeric:cardNumber] && cardNumber && ![cardNumber isEqualToString:@""];
+    return cardNumber.length && [self stringIsNumeric:cardNumber];
 }
 
 - (BOOL)validateCardNumberAdvancedWithCardNumber:(NSString *)cardNumber {
-    if (cardNumber == nil || [cardNumber isEqualToString:@""]) {
+    if (!cardNumber.length) {
         return NO;
     }
     
@@ -394,16 +399,16 @@
     }
 }
 
-- (BOOL)validateCardExpiryWithMonth:(int)intMonth year:(int)intYear {
+- (BOOL)validateCardExpiryWithMonth:(NSInteger)intMonth year:(NSInteger)intYear {
     
-    NSString *strYear = [NSString stringWithFormat:@"%i", intYear];
-    NSString *strMonth = [NSString stringWithFormat:@"%i", intMonth];
+    NSString *strYear = [NSString stringWithFormat:@"%@", @(intYear)];
+    NSString *strMonth = [NSString stringWithFormat:@"%@", @(intMonth)];
     
-    if (!strMonth || [strMonth isEqualToString:@""] || ![self stringIsNumeric:strMonth] || !strYear || [strYear isEqualToString:@""] || ![self stringIsNumeric:strYear]) {
+    if (!strMonth.length || ![self stringIsNumeric:strMonth] || !strYear.length || ![self stringIsNumeric:strYear]) {
         return NO;
     }
     
-    intYear = [self convertYearIfNeededWithYear:strYear].intValue;
+    intYear = [self convertYearIfNeededWithYear:strYear].integerValue;
     
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -433,7 +438,7 @@
 }
 
 - (BOOL)validateCardCVCWithNumber:(NSString *)cvc{
-    if (cvc == nil || [cvc isEqualToString:@""]) {
+    if (!cvc.length) {
         return YES;
     }
     
@@ -446,7 +451,7 @@
 }
 
 - (BOOL)validateCardHolderNameWithName:(NSString *)holderName {
-    if (!holderName || [holderName isEqualToString:@""]) {
+    if (!holderName.length) {
         return NO;
     }
     
@@ -497,7 +502,7 @@
 }
 
 - (BOOL)validateAPMNameWithName:(NSString *)apmName {
-    if (apmName == nil || [apmName isEqualToString:@""]) {
+    if (!apmName.length) {
         return NO;
     }
     
@@ -505,7 +510,7 @@
 }
 
 - (BOOL)validateCountryCodeWithCode:(NSString *)countryCode {
-    if (countryCode == nil || [countryCode isEqualToString:@""]) {
+    if (!countryCode.length) {
         return NO;
     }
     

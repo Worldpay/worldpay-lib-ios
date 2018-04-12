@@ -43,8 +43,6 @@
 		5A8BC2BB1BD8DBDF00FFBED0 /* WorldpayAPMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */; };
 		5A8BC2BC1BD8EB4400FFBED0 /* WorldpayAPMViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */; };
 		5A8BC2BE1BDA2A3200FFBED0 /* APMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */; };
-		5A8BC2C11BDA46B900FFBED0 /* WorldpayAPMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8BC2BA1BD8DBDF00FFBED0 /* WorldpayAPMViewController.xib */; };
-		5A8BC2C61BDA4F8100FFBED0 /* APMController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8BC2C51BDA4F8100FFBED0 /* APMController.xib */; };
 		5A8BC2CA1BDA9DD600FFBED0 /* ThreeDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */; };
 		5A8BC2CB1BDA9F7700FFBED0 /* ThreeDSController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */; };
 		5AC8C68A1BDE5E8C006F1F78 /* APMController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */; };
@@ -54,7 +52,6 @@
 		7E00CE9A198B86F200C34D6A /* lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE98198B86F200C34D6A /* lockB@2x.png */; };
 		7E00CE9B198B86F200C34D6A /* lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE99198B86F200C34D6A /* lockW@2x.png */; };
 		7EEBCC24197E59BB00DBEA7C /* WorldpayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */; };
-		7EEBCC26197E59BB00DBEA7C /* WorldpayCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EEBCC23197E59BB00DBEA7C /* WorldpayCardViewController.xib */; };
 		7EF710791976B8B800F7DC51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF710781976B8B800F7DC51 /* Foundation.framework */; };
 		7EF7107E1976B8B800F7DC51 /* Worldpay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7EF7107D1976B8B800F7DC51 /* Worldpay.h */; };
 		7EF710801976B8B800F7DC51 /* Worldpay.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7107F1976B8B800F7DC51 /* Worldpay.m */; };
@@ -115,13 +112,10 @@
 		5A6788EC1A680E120084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
 		5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayAPMViewController.h; sourceTree = "<group>"; };
 		5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayAPMViewController.m; sourceTree = "<group>"; };
-		5A8BC2BA1BD8DBDF00FFBED0 /* WorldpayAPMViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorldpayAPMViewController.xib; sourceTree = "<group>"; };
 		5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMController.m; sourceTree = "<group>"; };
 		5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMController.h; sourceTree = "<group>"; };
-		5A8BC2C51BDA4F8100FFBED0 /* APMController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APMController.xib; sourceTree = "<group>"; };
 		5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeDSController.h; sourceTree = "<group>"; };
 		5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeDSController.m; sourceTree = "<group>"; };
-		5A8BC2C91BDA9DD600FFBED0 /* ThreeDSController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeDSController.xib; sourceTree = "<group>"; };
 		6D1C2B8E83D580151CB88A7E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7E00CE72198B77E400C34D6A /* x_b@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x_b@2x.png"; path = "Resources/x_b@2x.png"; sourceTree = "<group>"; };
 		7E00CE73198B77E400C34D6A /* x_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x_w@2x.png"; path = "Resources/x_w@2x.png"; sourceTree = "<group>"; };
@@ -129,7 +123,6 @@
 		7E00CE99198B86F200C34D6A /* lockW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lockW@2x.png"; path = "Resources/lockW@2x.png"; sourceTree = "<group>"; };
 		7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayCardViewController.h; sourceTree = "<group>"; };
 		7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayCardViewController.m; sourceTree = "<group>"; };
-		7EEBCC23197E59BB00DBEA7C /* WorldpayCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorldpayCardViewController.xib; sourceTree = "<group>"; };
 		7EF710751976B8B800F7DC51 /* libWorldpay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWorldpay.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF710781976B8B800F7DC51 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EF7107C1976B8B800F7DC51 /* Worldpay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Worldpay-Prefix.pch"; sourceTree = "<group>"; };
@@ -206,12 +199,10 @@
 		5AC8C6841BDE2827006F1F78 /* APM */ = {
 			isa = PBXGroup;
 			children = (
-				5A8BC2C51BDA4F8100FFBED0 /* APMController.xib */,
 				5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */,
 				5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */,
 				5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */,
 				5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */,
-				5A8BC2BA1BD8DBDF00FFBED0 /* WorldpayAPMViewController.xib */,
 			);
 			name = APM;
 			sourceTree = "<group>";
@@ -221,7 +212,6 @@
 			children = (
 				5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */,
 				5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */,
-				5A8BC2C91BDA9DD600FFBED0 /* ThreeDSController.xib */,
 			);
 			name = 3DS;
 			sourceTree = "<group>";
@@ -231,7 +221,6 @@
 			children = (
 				7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */,
 				7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */,
-				7EEBCC23197E59BB00DBEA7C /* WorldpayCardViewController.xib */,
 			);
 			name = Card;
 			sourceTree = "<group>";
@@ -473,10 +462,7 @@
 				7E00CE79198B77E400C34D6A /* x_b@2x.png in Resources */,
 				7E00CE9B198B86F200C34D6A /* lockW@2x.png in Resources */,
 				5A6788ED1A680E120084394C /* default_card@2x.png in Resources */,
-				7EEBCC26197E59BB00DBEA7C /* WorldpayCardViewController.xib in Resources */,
-				5A8BC2C11BDA46B900FFBED0 /* WorldpayAPMViewController.xib in Resources */,
 				7EF710931976B8B800F7DC51 /* InfoPlist.strings in Resources */,
-				5A8BC2C61BDA4F8100FFBED0 /* APMController.xib in Resources */,
 				7E00CE9A198B86F200C34D6A /* lockB@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

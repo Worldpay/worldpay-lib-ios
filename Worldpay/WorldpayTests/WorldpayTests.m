@@ -18,8 +18,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     __block BOOL done = NO;
     block(&done);
     while (!done) {
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
+        [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     }
 }
 
