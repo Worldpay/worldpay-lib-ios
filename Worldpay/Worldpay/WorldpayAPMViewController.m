@@ -81,7 +81,7 @@
     return self;
 }
 
--(instancetype)initWithColor:(UIColor *)color loadingTheme:(APMDetailsLoadingTheme)loadingTheme apmName:(NSString *)apmName {
+- (instancetype)initWithColor:(UIColor *)color loadingTheme:(APMDetailsLoadingTheme)loadingTheme apmName:(NSString *)apmName {
     if (self = [super init]) {
         _apmName = apmName;
         _colorTheme = color;
@@ -118,7 +118,7 @@
     }
 }
 
--(void)createNavigationBar{
+- (void)createNavigationBar{
     
     if (_customToolbar) {
         [self.view addSubview:_customToolbar];
@@ -349,7 +349,8 @@
              [UIView animateWithDuration:0.5 delay:2.5 options:UIViewAnimationOptionCurveLinear
                               animations:^{
                                   errorMessage.alpha = 0;
-                              }completion:^(BOOL finished){
+                              }
+                              completion:^(BOOL finished) {
                                   self->_isDisplayingError = NO;
                               }];
          }

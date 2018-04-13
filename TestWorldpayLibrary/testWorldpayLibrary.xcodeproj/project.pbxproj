@@ -250,10 +250,10 @@
 		7EF710FC1976C3C000F7DC51 = {
 			isa = PBXGroup;
 			children = (
-				7EF711071976C3C000F7DC51 /* Frameworks */,
-				7E00CE50198B66D200C34D6A /* Resources */,
 				7EF7110E1976C3C100F7DC51 /* testWorldpayLibrary */,
+				7E00CE50198B66D200C34D6A /* Resources */,
 				7EF711271976C3C100F7DC51 /* testWorldpayLibraryTests */,
+				7EF711071976C3C000F7DC51 /* Frameworks */,
 				7EF711061976C3C000F7DC51 /* Products */,
 				218FE71566F425E91581770E /* Pods */,
 			);

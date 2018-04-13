@@ -64,9 +64,20 @@
 #pragma mark -
 
 - (void)setKeys {
-#warning change
-    NSString *clientKey = @"";
-    NSString *serviceKey = @"";
+#warning need set keys
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *clientKey = [userDefaults valueForKey:@"clientKey"];
+    NSString *serviceKey = [userDefaults valueForKey:@"serviceKey"];
+    if (!clientKey.length) {
+        clientKey = @"";
+        [userDefaults setValue:clientKey forKey:@"clientKey"];
+    }
+    if (!serviceKey.length) {
+        serviceKey = @"";
+        [userDefaults setValue:serviceKey forKey:@"serviceKey"];
+    }
+    
+    [userDefaults synchronize];
     
     [[Worldpay sharedInstance] setClientKey:clientKey];
     [[Worldpay sharedInstance] setServiceKey:serviceKey];

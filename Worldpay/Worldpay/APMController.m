@@ -179,15 +179,15 @@
     if ([request.URL.absoluteString containsString:_successUrl]) {
         _authorizeSuccessBlock(responseDictionary);
     }
-    else if ([request.URL.absoluteString containsString:_failureUrl]){
+    else if ([request.URL.absoluteString containsString:_failureUrl]) {
         [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error authorizing the APM Order. Order failed.", nil) code:1]];
         _authorizeFailureBlock(responseDictionary, errors);
     }
-    else if ([request.URL.absoluteString containsString:_cancelUrl]){
+    else if ([request.URL.absoluteString containsString:_cancelUrl]) {
         [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error authorizing the APM Order. Order cancelled.", nil) code:2]];
         _authorizeFailureBlock(responseDictionary, errors);
     }
-    else if ([request.URL.absoluteString containsString:_pendingUrl]){
+    else if ([request.URL.absoluteString containsString:_pendingUrl]) {
         [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error authorizing the APM Order. Order pending.", nil) code:3]];
         _authorizeFailureBlock(responseDictionary, errors);
     }

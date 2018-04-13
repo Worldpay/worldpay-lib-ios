@@ -20,7 +20,7 @@
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     
     __unused NSString *logEntry = [NSString stringWithFormat:@"%@ [Library] (%@): %@\n", dateString, [UIDevice currentDevice].name, string];
-
+    
     AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
     NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
                                                        URLString:@"https://public.arx.net/~billp/ios_reports/report.asp"

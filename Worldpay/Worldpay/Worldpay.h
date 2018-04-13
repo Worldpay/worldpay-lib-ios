@@ -8,24 +8,18 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define api_version @"v1"
-
-#define api_url @"https://api.worldpay.com/v1/"
-
-@interface Worldpay : NSObject {
-    
-    NSString *WorldpayClientKey;
-    NSUInteger WorldpayTimeout;
-}
+@interface Worldpay : NSObject
 
 typedef void (^requestUpdateTokenSuccess)(NSInteger code, NSDictionary *responseDictionary);
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 typedef void (^updateTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
+typedef void (^preRequestAction)(void);
 
 typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
     WorldpayValidationTypeBasic,
     WorldpayValidationTypeAdvanced,
-    validation_types
+    
+    WorldpayValidationTypeCount
 };
 
 
@@ -37,28 +31,28 @@ typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
 /*!
  *  Property that sets the Client Key which is used for API calls made directly from your customer's browser
  */
-@property (nonatomic, strong) NSString *clientKey;
+@property (nonatomic, copy) NSString *clientKey;
 
 /*!
  *  Property that sets the Service Key which is used for some API calls like order API
  */
-@property (nonatomic, strong) NSString *serviceKey;
+@property (nonatomic, copy) NSString *serviceKey;
 
 /*!
  *  Worldpay allows you to store card details so you can charge a card multiple times. You can use this to offer your customers card-on-file payment or a recurring payment
  */
-@property (nonatomic) BOOL reusable;
+@property (nonatomic, assign) BOOL reusable;
 
 /*!
  *  Authorisations can be used if you want to ring-fence the funds on a customer's bank account days or weeks before making the actual payment. A typical use case for this is hotel reservations or car rentals.
  */
-@property (nonatomic) BOOL authorizeOnly;
+@property (nonatomic, assign) BOOL authorizeOnly;
 
 
 /*!
  *  Property that sets the Token Type (card / apm) used for apm orders
  */
-@property (nonatomic, strong) NSString *tokenType;
+@property (nonatomic, copy) NSString *tokenType;
 
 /*!
  *  It defines a static variable (but only global to this translation unit) which is then initialized once and only once in sharedInstance. The way we ensure that it’s only created once is by using the dispatch_once method from Grand Central Dispatch (GCD). Singleton Pattern is being used here.
@@ -153,7 +147,7 @@ typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
 - (void)showCVCModalWithParentView:(UIView *)parentView
                              token:(NSString *)token
                            success:(requestUpdateTokenSuccess)success
-                     beforeRequest:(void (^)(void))beforeRequest
+                     beforeRequest:(preRequestAction)beforeRequest
                              error:(updateTokenFailure)failure;
 
 /*!

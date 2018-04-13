@@ -381,7 +381,7 @@
                      [UIView animateWithDuration:0.5 delay:2.5 options:UIViewAnimationOptionCurveLinear
                                       animations:^{
                                           errorMessage.alpha = 0;
-                                      } completion:^(BOOL finished){
+                                      } completion:^(BOOL finished) {
                                           self->_isDisplayingError = NO;
                                       }];
                  }
@@ -546,15 +546,15 @@
 }
 
 - (void)shakeTextField:(CardDetailsTextField)textField{
-    if(textField == CardDetailsTextFieldFirstName){
+    if (textField == CardDetailsTextFieldFirstName) {
         [self shake:_firstName shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldLastName){
+    }else if (textField == CardDetailsTextFieldLastName) {
         [self shake:_lastName shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldCardNumber){
+    }else if (textField == CardDetailsTextFieldCardNumber) {
         [self shake:_cardNumber shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldExpiry){
+    }else if (textField == CardDetailsTextFieldExpiry) {
         [self shake:_expiry shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldCVC){
+    }else if (textField == CardDetailsTextFieldCVC) {
         [self shake:_CVC shakes:0 direction:1];
     }
 }
@@ -580,7 +580,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if ([textField.layer.name isEqualToString:@"expiry"]){
+    if ([textField.layer.name isEqualToString:@"expiry"]) {
         [textField selectAll:self];
     }
 }
@@ -617,38 +617,38 @@
     
 }
 
--(IBAction)firstNameSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)firstNameSetBlackTextOnEditingChanged:(id)sender{
     _firstName.textColor = [UIColor blackColor];
 }
 
--(IBAction)lastNameSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)lastNameSetBlackTextOnEditingChanged:(id)sender{
     _lastName.textColor = [UIColor blackColor];
 }
 
--(IBAction)cardNumberSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)cardNumberSetBlackTextOnEditingChanged:(id)sender{
     _cardNumber.textColor = [UIColor blackColor];
 }
 
--(IBAction)expirySetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)expirySetBlackTextOnEditingChanged:(id)sender{
     _expiry.textColor = [UIColor blackColor];
 }
 
--(IBAction)CVCSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)CVCSetBlackTextOnEditingChanged:(id)sender{
     _CVC.textColor = [UIColor blackColor];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if ([textField.layer.name isEqualToString:@"firstName"]){
+    if ([textField.layer.name isEqualToString:@"firstName"]) {
         [_lastName becomeFirstResponder];
     }
-    else if([textField.layer.name isEqualToString:@"lastName"]){
+    else if ([textField.layer.name isEqualToString:@"lastName"]) {
         [_cardNumber becomeFirstResponder];
     }
-    else if([textField.layer.name isEqualToString:@"cardNumber"]){
+    else if ([textField.layer.name isEqualToString:@"cardNumber"]) {
         [_expiry becomeFirstResponder];
     }
-    else if([textField.layer.name isEqualToString:@"expiry"]){
+    else if ([textField.layer.name isEqualToString:@"expiry"]) {
         [_CVC becomeFirstResponder];
     }
     else{
@@ -680,10 +680,10 @@
         _cardNumber.text = [NSString stringWithFormat:@"%@ ", _cardNumber.text];
     }
     
-    if (textField.text.length >= 7 && range.length == 0 && [textField.layer.name isEqualToString:@"expiry"]){
+    if (textField.text.length >= 7 && range.length == 0 && [textField.layer.name isEqualToString:@"expiry"]) {
         return NO;
     }
-    else if(textField.text.length >= 4 && range.length == 0 && [textField.layer.name isEqualToString:@"CVC"]){
+    else if (textField.text.length >= 4 && range.length == 0 && [textField.layer.name isEqualToString:@"CVC"]) {
         return NO;
     }
     

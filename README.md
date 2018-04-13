@@ -99,7 +99,7 @@ How To Use the Library
                                            expirationMonth:@"MM"
                                             expirationYear:@"YYYY"
                                                        CVC:@"CARD_CVC"
-                                                   success:^(int code, NSDictionary *responseDictionary){
+                                                   success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                           // save the token in the way you want.
                                                           // The responseDictionary will look like:
                                                           // {
@@ -133,7 +133,7 @@ How To Use the Library
       /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] reuseToken:@"YOUR_REUSABLE_TOKEN"
                                     withCVC:@"CARD_CVC"
-                                    success:^(int code, NSDictionary *responseDictionary){
+                                    success:^(NSInteger code, NSDictionary *responseDictionary) {
                                           //updated successfully
                                     }
                                     failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -154,10 +154,10 @@ How To Use the Library
       /** OBJECTIVE-C **/
       [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
                                                       token:@"YOUR_REUSABLE_TOKEN"
-                                                    success:^(int code, NSDictionary *responseDictionary){
+                                                    success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                           //updated successfully
                                                     }
-                                                    beforeRequest:^(void){
+                                                    beforeRequest:^(void) {
                                                           //your code before the request is triggered
                                                     }
                                                     error:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -430,7 +430,7 @@ Follow these steps to use **APMController**:
       }
 
       [[Worldpay sharedInstance] createAPMTokenWithAPMName:_apmName countryCode:@"GB" apmFields:apmFields shopperLanguageCode:_shopperLangCode
-              success:^(int code, NSDictionary *responseDictionary) {
+              success:^(NSInteger code, NSDictionary *responseDictionary) {
               //Once the token is created we can use the apmController with the token in responseDictionary.token
               //Now we set the fields to create the APM order
 
@@ -567,7 +567,7 @@ The **ThreeDSController** is another UIWebViewDelegate controller that lets you 
                                            expirationMonth:@"MM"
                                             expirationYear:@"YYYY"
                                                        CVC:@"CARD_CVC"
-                                   success:^(int code, NSDictionary *responseDictionary){
+                                   success:^(NSInteger code, NSDictionary *responseDictionary) {
                                    //Create token is successful, so we can proceed creating the 3DS order with the token we just created. If we already had a token stored,
                                    //we wouldn't need the createTokenWithNameOnCard call.
                                           ThreeDSController *threeDSController = [[ThreeDSController alloc] init];
@@ -630,7 +630,7 @@ the ThreeDSController, otherwise create order will fail:
       if (reusable) {
           [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
                                   token:token
-                                success:^(int code, NSDictionary *responseDictionary) {
+                                success:^(NSInteger code, NSDictionary *responseDictionary) {
                                     [self.navigationController pushViewController:threeDSController animated:YES];
                                 }
                                 beforeRequest:^{
@@ -703,7 +703,7 @@ The iOS Worldpay library comes with support for Apple Pay. These are the steps t
                               didAuthorizePayment:(PKPayment *)payment
                                        completion:(void (^)(PKPaymentAuthorizationStatus))completion {
 
-              [[Worldpay sharedInstance] createTokenWithPaymentData:payment.token.paymentData success:^(int code, NSDictionary *responseDictionary) {
+              [[Worldpay sharedInstance] createTokenWithPaymentData:payment.token.paymentData success:^(NSInteger code, NSDictionary *responseDictionary) {
                   //Handle the Worldpay token here. At this point you should connect to your own server and complete the purchase from there.
                   completion(PKPaymentAuthorizationStatusSuccess);
               } failure:^(NSDictionary *responseDictionary, NSArray *errors) {

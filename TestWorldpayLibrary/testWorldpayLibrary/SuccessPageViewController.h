@@ -12,18 +12,18 @@
 /**
  *  Function that creates the custom Navigation Bar.
  */
--(void)createNavigationBar;
+- (void)createNavigationBar;
 
 /**
  *  Function that creates and initiliazes the graphics user interface.
  */
--(void)initGUI;
+- (void)initGUI;
 
 /**
  *  Function that returns to MainPageViewController.
  *
  *  @param sender
  */
--(IBAction)home:(id)sender;
+- (IBAction)home:(id)sender;
 
 @end

@@ -13,18 +13,24 @@
 #include <mach/machine.h>
 
 @interface Worldpay() <UITextFieldDelegate>
+
 @property (nonatomic, copy) requestUpdateTokenSuccess CVCModalSuccess;
 @property (nonatomic, copy) requestTokenFailure CVCModalFailure;
-@property (nonatomic, copy) void (^CVCModalBeforeRequest)(void);
-@property (nonatomic, strong) NSString *CVCModalToken;
-@property (nonatomic, strong) UIView *CVCModalBackgroundView;
-@property (nonatomic, strong) NSString *CVCModalTfCVC;
-@property (nonatomic, strong) UIActivityIndicatorView *CVCModalActivityIndicatorView;
-@property (nonatomic, strong) UIButton *CVCModalBtnConfirm;
+@property (nonatomic, copy) preRequestAction CVCModalBeforeRequest;
+
+@property (nonatomic, copy) NSString *CVCModalToken;
+@property (nonatomic, copy) NSString *CVCModalTfCVC;
 
 @property (nonatomic, strong) AFURLSessionManager *networkManager;
 
 @end
+
+static NSUInteger const kWorldpayTimeout = 65;
+
+#define api_version @"v1"
+
+#define api_url @"https://api.worldpay.com/v1/"
+
 
 @implementation Worldpay
 
@@ -43,7 +49,6 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-        WorldpayTimeout = 65;
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         
@@ -97,25 +102,24 @@
         return;
     }
     
-    NSMutableDictionary *cardDetailsDictionary = [[NSMutableDictionary alloc] init];
-    
-    [cardDetailsDictionary setValue:@(self.reusable) forKey:@"reusable"];
-    [cardDetailsDictionary setValue:_clientKey forKey:@"clientKey"];
-    
     NSMutableDictionary *paymentMethodDictionary = [[NSMutableDictionary alloc]init];
     
     NSInteger intExpirationYear = expirationYear.integerValue;
-    
-    [paymentMethodDictionary setValue:@"Card" forKey:@"type"];
-    [paymentMethodDictionary setValue:holderName forKey:@"name"];
-    [paymentMethodDictionary setValue:expirationMonth forKey:@"expiryMonth"];
-    [paymentMethodDictionary setValue:@(intExpirationYear+2000) forKey:@"expiryYear"];
-    [paymentMethodDictionary setValue:cardNumber forKey:@"cardNumber"];
-    if (CVC.length){
-        [paymentMethodDictionary setValue:CVC forKey:@"cvc"];
+    paymentMethodDictionary[@"type"] = @"Card";
+    paymentMethodDictionary[@"name"] = holderName;
+    paymentMethodDictionary[@"expiryMonth"] = expirationMonth;
+    paymentMethodDictionary[@"expiryYear"] = @(2000 + intExpirationYear);
+    paymentMethodDictionary[@"cardNumber"] = cardNumber;
+    paymentMethodDictionary[@"type"] = @"Card";
+    if (CVC.length) {
+        paymentMethodDictionary[@"cvc"] = CVC;
     }
     
-    [cardDetailsDictionary setValue:paymentMethodDictionary forKey:@"paymentMethod"];
+    NSMutableDictionary *cardDetailsDictionary = [[NSMutableDictionary alloc] init];
+    
+    cardDetailsDictionary[@"reusable"] = @(self.reusable);
+    cardDetailsDictionary[@"clientKey"] = self.clientKey;
+    cardDetailsDictionary[@"paymentMethod"] = paymentMethodDictionary;
     
     [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens", [self APIStringURL]]
            requestDictionary:cardDetailsDictionary
@@ -140,20 +144,17 @@
         return;
     }
     
-    NSMutableDictionary *apmDetailsDictionary = [[NSMutableDictionary alloc] init];
-    
-    [apmDetailsDictionary setValue:@(self.reusable) forKey:@"reusable"];
-    [apmDetailsDictionary setValue:_clientKey forKey:@"clientKey"];
-    [apmDetailsDictionary setValue:shopperLanguageCode forKey:@"shopperLanguageCode"];
-    
     NSMutableDictionary *paymentMethodDictionary = [[NSMutableDictionary alloc]init];
+    paymentMethodDictionary[@"type"] = @"APM";
+    paymentMethodDictionary[@"apmName"] = apmName;
+    paymentMethodDictionary[@"shopperCountryCode"] = countryCode;
+    paymentMethodDictionary[@"apmFields"] = apmFields;
     
-    [paymentMethodDictionary setValue:@"APM" forKey:@"type"];
-    [paymentMethodDictionary setValue:apmName forKey:@"apmName"];
-    [paymentMethodDictionary setValue:countryCode forKey:@"shopperCountryCode"];
-    [paymentMethodDictionary setValue:apmFields forKey:@"apmFields"];
-    
-    [apmDetailsDictionary setValue:paymentMethodDictionary forKey:@"paymentMethod"];
+    NSMutableDictionary *apmDetailsDictionary = [[NSMutableDictionary alloc] init];
+    apmDetailsDictionary[@"reusable"] = @(self.reusable);
+    apmDetailsDictionary[@"clientKey"] = self.clientKey;
+    apmDetailsDictionary[@"shopperLanguageCode"] = shopperLanguageCode;
+    apmDetailsDictionary[@"paymentMethod"] = paymentMethodDictionary;
     
     [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens", [self APIStringURL]]
            requestDictionary:apmDetailsDictionary
@@ -178,9 +179,8 @@
     }
     
     NSMutableDictionary *cardDetailsDictionary = [[NSMutableDictionary alloc] init];
-    
-    [cardDetailsDictionary setValue:CVC forKey:@"cvc"];
-    [cardDetailsDictionary setValue:_clientKey forKey:@"clientKey"];
+    cardDetailsDictionary[@"cvc"] = CVC;
+    cardDetailsDictionary[@"clientKey"] = self.clientKey;
     
     [self makeRequestWithURL:[NSString stringWithFormat:@"%@tokens/%@", [self APIStringURL], token]
            requestDictionary:cardDetailsDictionary
@@ -207,7 +207,7 @@
 - (void)showCVCModalWithParentView:(UIView *)parentView
                              token:(NSString *)token
                            success:(requestUpdateTokenSuccess)success
-                     beforeRequest:(void (^)(void))beforeRequest
+                     beforeRequest:(preRequestAction)beforeRequest
                              error:(updateTokenFailure)failure {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"CVC"
@@ -219,13 +219,18 @@
     }];
     
     __weak typeof(alertController) weakAlertController = alertController;
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.CVCModalTfCVC = [[alertController textFields][0] text];
-        [self confirmCVCAction:weakAlertController];
-    }];
+    __weak typeof(self) weak = self;
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              weak.CVCModalTfCVC = [[alertController textFields][0] text];
+                                                              [weak confirmCVCAction:weakAlertController];
+                                                          }];
     [alertController addAction:confirmAction];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
     [alertController addAction:cancelAction];
     
     self.CVCModalSuccess = success;
@@ -237,9 +242,6 @@
 }
 
 - (IBAction)confirmCVCAction:(id)sender {
-    self.CVCModalBtnConfirm.enabled = NO;
-    [self.CVCModalActivityIndicatorView startAnimating];
-    
     __weak typeof(self) weak = self;
     if (self.CVCModalBeforeRequest) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -251,30 +253,25 @@
              withCVC:self.CVCModalTfCVC
              success:^(NSInteger code, NSDictionary *responseDictionary) {
                  
-                 self.CVCModalToken = nil;
-                 self.CVCModalBtnConfirm.enabled = YES;
-                 [self.CVCModalActivityIndicatorView stopAnimating];
+                 weak.CVCModalToken = nil;
                  dispatch_async(dispatch_get_main_queue(), ^{
                      weak.CVCModalSuccess(code, responseDictionary);
                  });
              } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                 weak.CVCModalBtnConfirm.enabled = YES;
                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
-                                                                                          message:[errors[0] localizedDescription]
+                                                                                          message:[errors.firstObject localizedDescription]
                                                                                    preferredStyle:UIAlertControllerStyleAlert];
                  
                  UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
                                                                          style:UIAlertActionStyleDefault
                                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                                                               self.CVCModalFailure(responseDictionary, errors);
+                                                                               weak.CVCModalFailure(responseDictionary, errors);
                                                                            });
-                 }];
+                                                                       }];
                  [alertController addAction:confirmAction];
                  
                  [weak.topViewController presentViewController:alertController animated:YES completion:nil];
-                 
-                 [weak.CVCModalActivityIndicatorView stopAnimating];
              }];
 }
 
@@ -291,7 +288,7 @@
 #pragma mark - Validation Methods
 
 - (NSArray *)validateAPMDetailsWithAPMName:(NSString *)apmName
-                              countryCode:(NSString *)countryCode {
+                               countryCode:(NSString *)countryCode {
     
     NSMutableArray *errors = [[NSMutableArray alloc] init];
     
@@ -319,8 +316,8 @@
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Card Expiry is not valid", nil) code:1]];
     }
     
-    if ( (_validationType == WorldpayValidationTypeBasic && ![self validateCardNumberBasicWithCardNumber:cardNumber]) ||
-        (_validationType == WorldpayValidationTypeAdvanced && ![self validateCardNumberAdvancedWithCardNumber:cardNumber]) ) {
+    if ((self.validationType == WorldpayValidationTypeBasic && ![self validateCardNumberBasicWithCardNumber:cardNumber]) ||
+        (self.validationType == WorldpayValidationTypeAdvanced && ![self validateCardNumberAdvancedWithCardNumber:cardNumber])) {
         
         [errors addObject:[self errorWithTitle:NSLocalizedString(@"Card Number is not valid", nil) code:2]];
     }
@@ -391,7 +388,7 @@
         e = !e;
     }
     
-    if (c % 10 == 0){
+    if (c % 10 == 0) {
         return YES;
     }
     else {
@@ -416,19 +413,19 @@
     NSInteger month_current = components.month;
     NSInteger year_current = components.year % 100;
     
-    if (intYear < 0 || intYear > 99 || intMonth < 1 || intMonth > 12){
+    if (intYear < 0 || intYear > 99 || intMonth < 1 || intMonth > 12) {
         return NO;
     }
     else {
-        if (intYear == year_current){
-            if (intMonth >= month_current){
+        if (intYear == year_current) {
+            if (intMonth >= month_current) {
                 return YES;
             }
             else {
                 return NO;
             }
         }
-        else if (intYear > year_current){
+        else if (intYear > year_current) {
             return YES;
         }
         else{
@@ -437,7 +434,7 @@
     }
 }
 
-- (BOOL)validateCardCVCWithNumber:(NSString *)cvc{
+- (BOOL)validateCardCVCWithNumber:(NSString *)cvc {
     if (!cvc.length) {
         return YES;
     }
@@ -479,7 +476,7 @@
                                                        URLString:url
                                                       parameters:requestDictionary
                                                            error:nil];
-    request.timeoutInterval = WorldpayTimeout;
+    request.timeoutInterval = kWorldpayTimeout;
     [request setValue:[self customHeader] forHTTPHeaderField:@"X-wp-client-user-agent"];
     for (NSString *key in additionalHeaders.allKeys) {
         [request setValue:additionalHeaders[key] forHTTPHeaderField:key];
@@ -498,7 +495,7 @@
 }
 
 - (BOOL)validationTypeIsValid:(WorldpayValidationType)validationType {
-    return validationType < validation_types;
+    return validationType < WorldpayValidationTypeCount;
 }
 
 - (BOOL)validateAPMNameWithName:(NSString *)apmName {

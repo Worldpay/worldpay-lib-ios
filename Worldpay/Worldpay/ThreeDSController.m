@@ -93,7 +93,7 @@
     [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"User cancelled 3DS authorization", nil) code:0]];
     _authorizeFailureBlock(@{}, errors);
     
-    if (self.navigationController){
+    if (self.navigationController) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     else {
