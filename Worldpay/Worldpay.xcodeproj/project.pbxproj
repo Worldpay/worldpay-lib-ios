@@ -14,6 +14,8 @@
 				7EF710B31976BB1400F7DC51 /* ShellScript */,
 			);
 			dependencies = (
+				A5D2346E2088CBD40079B644 /* PBXTargetDependency */,
+				A5D234702088CBD40079B644 /* PBXTargetDependency */,
 			);
 			name = UniversalLib;
 			productName = UniversalLib;
@@ -69,6 +71,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7EF710741976B8B800F7DC51;
 			remoteInfo = Worldpay;
+		};
+		A5D2346D2088CBD40079B644 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EF7106D1976B8B800F7DC51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EF710741976B8B800F7DC51;
+			remoteInfo = Worldpay;
+		};
+		A5D2346F2088CBD40079B644 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EF7106D1976B8B800F7DC51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 597077AA1993999A002651A7;
+			remoteInfo = WorldpayResources;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -556,6 +572,16 @@
 			isa = PBXTargetDependency;
 			target = 7EF710741976B8B800F7DC51 /* Worldpay */;
 			targetProxy = 7EF7108B1976B8B800F7DC51 /* PBXContainerItemProxy */;
+		};
+		A5D2346E2088CBD40079B644 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EF710741976B8B800F7DC51 /* Worldpay */;
+			targetProxy = A5D2346D2088CBD40079B644 /* PBXContainerItemProxy */;
+		};
+		A5D234702088CBD40079B644 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 597077AA1993999A002651A7 /* WorldpayResources */;
+			targetProxy = A5D2346F2088CBD40079B644 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
