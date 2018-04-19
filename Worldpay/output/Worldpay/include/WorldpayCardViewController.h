@@ -8,17 +8,12 @@
 #import <UIKit/UIKit.h>
 #import "Worldpay.h"
 
-@interface WorldpayCardViewController : UIViewController <UITextFieldDelegate>
+@interface WorldpayCardViewController : UIViewController
 
-/*!
- *  Used for requestToken success and returns a JSON dictionary
- *
- *  @return self
- */
 typedef void (^requestTokenSuccess)(NSDictionary *responseDictionary);
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
-typedef NS_ENUM(unsigned int, CardDetailsTheme) {
+typedef NS_ENUM(NSUInteger, CardDetailsTheme) {
     CardDetailsThemeBlue,
     CardDetailsThemeRed,
     CardDetailsThemeYellow
@@ -26,14 +21,14 @@ typedef NS_ENUM(unsigned int, CardDetailsTheme) {
 
 @property (nonatomic) CardDetailsTheme theme;
 
-typedef NS_ENUM(unsigned int, CardDetailsLoadingTheme) {
+typedef NS_ENUM(NSUInteger, CardDetailsLoadingTheme) {
     CardDetailsLoadingThemeWhite,
     CardDetailsLoadingThemeBlack
 };
 
 @property (nonatomic) CardDetailsLoadingTheme loadingTheme;
 
-typedef NS_ENUM(unsigned int, CardDetailsTextField) {
+typedef NS_ENUM(NSUInteger, CardDetailsTextField) {
     CardDetailsTextFieldFirstName,
     CardDetailsTextFieldLastName,
     CardDetailsTextFieldCardNumber,
@@ -86,8 +81,8 @@ typedef NS_ENUM(unsigned int, CardDetailsTextField) {
 /*!
  *  Function that sets the Send Request Tap Block
  *
- *  @param success
- *  @param failure
+ *  @param success Success block
+ *  @param failure Failure block
  */
 - (void)setSaveButtonTapBlockWithSuccess:(requestTokenSuccess)success
                                  failure:(requestTokenFailure)failure;

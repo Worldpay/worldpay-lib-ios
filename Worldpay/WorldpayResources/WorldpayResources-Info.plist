@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
@@ -40,13 +38,11 @@
 	</dict>
 	<key>CFPlugInUnloadFunction</key>
 	<string></string>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2015 Worldpay. All rights reserved.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>worldpay.io</key>
+			<key>worldpay.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -55,7 +51,7 @@
 				<key>NSTemporaryExceptionMinimumTLSVersion</key>
 				<string>TLSv1.1</string>
 			</dict>
-			<key>worldpay.com</key>
+			<key>worldpay.io</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
@@ -66,5 +62,7 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2015 Worldpay. All rights reserved.</string>
 </dict>
 </plist>

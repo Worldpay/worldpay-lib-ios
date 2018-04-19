@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "Worldpay.h"
 
-@interface WorldpayAPMViewController : UIViewController <UITextFieldDelegate>
+@interface WorldpayAPMViewController : UIViewController
 
 
 
@@ -43,7 +43,7 @@
 typedef void (^createAPMOrderSuccess)(NSDictionary *responseDictionary);
 typedef void (^createAPMOrderFailure)(NSDictionary *responseDictionary, NSArray *errors);
 
-typedef NS_ENUM(unsigned int, APMDetailsTheme) {
+typedef NS_ENUM(NSUInteger, APMDetailsTheme) {
     APMDetailsThemeBlue,
     APMDetailsThemeRed,
     APMDetailsThemeYellow
@@ -51,7 +51,7 @@ typedef NS_ENUM(unsigned int, APMDetailsTheme) {
 
 @property (nonatomic) APMDetailsTheme theme;
 
-typedef NS_ENUM(unsigned int, APMDetailsLoadingTheme) {
+typedef NS_ENUM(NSUInteger, APMDetailsLoadingTheme) {
     APMDetailsLoadingThemeWhite,
     APMDetailsLoadingThemeBlack
 };
@@ -100,8 +100,8 @@ typedef NS_ENUM(unsigned int, APMDetailsLoadingTheme) {
 /*!
  *  Function that sets the Send Request Tap Block
  *
- *  @param success
- *  @param failure
+ *  @param success Success block
+ *  @param failure Failure block
  */
 - (void)setCreateAPMOrderBlockWithSuccess:(createAPMOrderSuccess)success
                                   failure:(createAPMOrderFailure)failure;

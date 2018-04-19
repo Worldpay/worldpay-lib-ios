@@ -8,28 +8,18 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <mach/machine.h>
-
-#define api_version @"v1"
-
-#define api_url @"https://api.worldpay.com/v1/"
-
-@interface Worldpay : NSObject {
-    
-    NSString *WorldpayClientKey;
-    NSUInteger WorldpayTimeout;
-}
+@interface Worldpay : NSObject
 
 typedef void (^requestUpdateTokenSuccess)(NSInteger code, NSDictionary *responseDictionary);
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 typedef void (^updateTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
+typedef void (^preRequestAction)(void);
 
-typedef NS_ENUM(unsigned int, WorldpayValidationType) {
+typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
     WorldpayValidationTypeBasic,
     WorldpayValidationTypeAdvanced,
-    validation_types
+    
+    WorldpayValidationTypeCount
 };
 
 
@@ -41,28 +31,28 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
 /*!
  *  Property that sets the Client Key which is used for API calls made directly from your customer's browser
  */
-@property (nonatomic, retain) NSString *clientKey;
+@property (nonatomic, copy) NSString *clientKey;
 
 /*!
  *  Property that sets the Service Key which is used for some API calls like order API
  */
-@property (nonatomic, retain) NSString *serviceKey;
+@property (nonatomic, copy) NSString *serviceKey;
 
 /*!
  *  Worldpay allows you to store card details so you can charge a card multiple times. You can use this to offer your customers card-on-file payment or a recurring payment
  */
-@property (nonatomic) BOOL reusable;
+@property (nonatomic, assign) BOOL reusable;
 
 /*!
  *  Authorisations can be used if you want to ring-fence the funds on a customer's bank account days or weeks before making the actual payment. A typical use case for this is hotel reservations or car rentals.
  */
-@property (nonatomic) BOOL authorizeOnly;
+@property (nonatomic, assign) BOOL authorizeOnly;
 
 
 /*!
  *  Property that sets the Token Type (card / apm) used for apm orders
  */
-@property (nonatomic, retain) NSString *tokenType;
+@property (nonatomic, copy) NSString *tokenType;
 
 /*!
  *  It defines a static variable (but only global to this translation unit) which is then initialized once and only once in sharedInstance. The way we ensure that it’s only created once is by using the dispatch_once method from Grand Central Dispatch (GCD). Singleton Pattern is being used here.
@@ -90,7 +80,7 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
  *
  *  @param holderName      First and Last name of the card's owner : NSString  ( MANDATORY )
  *  @param cardNumber      Card number : NSString ( MANDATORY )
- *  @param expirationDate  The expiration of the card in the (MM/YY) format : NSString ( MANDATORY )
+ *  @param expirationMonth The expiration of the card in the (MM/YY) format : NSString ( MANDATORY )
  *  @param CVC             The 3 or 4 digits of the Card Veridication Code : NSString ( OPTIONAL )
  *  @param success         On success returning status : long , responseData
  *  @param failure         On failure returning status : NSDictionary and NSArray of errors
@@ -157,7 +147,7 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
 - (void)showCVCModalWithParentView:(UIView *)parentView
                              token:(NSString *)token
                            success:(requestUpdateTokenSuccess)success
-                     beforeRequest:(void (^)(void))beforeRequest
+                     beforeRequest:(preRequestAction)beforeRequest
                              error:(updateTokenFailure)failure;
 
 /*!
@@ -190,13 +180,13 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
 /*!
  *  Function to validate Card Expiration Date. Year can be in YY or YYYY format
  *
- *  @param month is the month the card expires : int
- *  @param year  is the year the card expires : int
+ *  @param month is the month the card expires : NSUInteger
+ *  @param year  is the year the card expires : NSUInteger
  *
  *  @return YES or NO
  */
-- (BOOL)validateCardExpiryWithMonth:(int)month
-                               year:(int)year;
+- (BOOL)validateCardExpiryWithMonth:(NSInteger)month
+                               year:(NSInteger)year;
 
 /*!
  *  Function to validate the CVC (Card Verification Code)
@@ -219,7 +209,7 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
 /*!
  *  Function that validates cvc and token. It is called before the updateToken function
  *
- *  @param cvc is the three-digit number : NSString
+ *  @param CVC is the three-digit number : NSString
  *  @param token is required to make payments
  *
  *  @return an array of errors: 1 -> Problem with Card Expiration Date, 2 -> Problem with Card Number, 3 -> Problem with Name on Card ( holder name ), 4 -> Problem with CVC ( Card Verification Code )
@@ -232,7 +222,7 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
  *
  *  @param holderName      First and Last name of the card's owner : NSString  ( MANDATORY )
  *  @param cardNumber      card number : NSString ( MANDATORY )
- *  @param expirationDate  The expiration of the card in the (MM/YY) format : NSString ( MANDATORY )
+ *  @param expirationMonth The expiration of the card in the (MM/YY) format : NSString ( MANDATORY )
  *  @param CVC             The 3 or 4 digits of the Card Veridication Code : NSString ( OPTIONAL )
  *
  *  @return an array of errors: 1 -> Problem with Card Expiration Date, 2 -> Problem with Card Number, 3 -> Problem with Name on Card ( holder name ), 4 -> Problem with CVC ( Card Verification Code )
@@ -295,7 +285,7 @@ typedef NS_ENUM(unsigned int, WorldpayValidationType) {
  *  @param requestDictionary Request parameters
  *  @param method Request method (GET, POST,...)
  *  @param success Success block
- *  @param success Sailure block
+ *  @param failure Failure block
  *  @param additionalHeaders additional headers as NSDictionary
  */
 

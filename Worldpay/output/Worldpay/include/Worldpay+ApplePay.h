@@ -31,11 +31,10 @@
 /*!
  *  Creates a new Worldpay token using an ApplePay token
  *
- *  @param paymentData the paymentData of PKPaymentToken object which contains an encrypted payment credential
- *  @param success success block returning (int code, NSDictionary *responseDictionary)
+ *  @param payment the paymentData of PKPaymentToken object which contains an encrypted payment credential
+ *  @param success success block returning (NSInteger code, NSDictionary *responseDictionary)
  *  @param failure failure block returning (NSDictionary *responseDictionary, NSArray *errors)
  *
- *  @return a new PKPaymentRequest
  */
 
 - (void)createTokenWithPayment:(PKPayment *)payment
@@ -46,10 +45,9 @@
  *  Creates a new Worldpay token using an ApplePay token data
  *
  *  @param paymentData the paymentData of PKPaymentToken object which contains an encrypted payment credential
- *  @param success success block returning (int code, NSDictionary *responseDictionary)
+ *  @param success success block returning (NSInteger code, NSDictionary *responseDictionary)
  *  @param failure failure block returning (NSDictionary *responseDictionary, NSArray *errors)
  *
- *  @return a new PKPaymentRequest
  */
 - (void)createTokenWithPaymentData:(NSData *)paymentData
                            success:(requestUpdateTokenSuccess)success
