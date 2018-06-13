@@ -109,7 +109,7 @@
     
     NSDictionary *params = @{
                              @"token": _token,
-                             @"orderType": @"ECOM",
+                             @"orderType": @"RECURRING",
                              @"orderDescription": @"Goods and Services",
                              @"amount": @((float)(ceil(_price * 100))),
                              @"currencyCode": @"GBP",
