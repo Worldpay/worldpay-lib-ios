@@ -398,6 +398,7 @@
 				ORGANIZATIONNAME = arx;
 				TargetAttributes = {
 					7EF711041976C3C000F7DC51 = {
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.OMC = {
 								enabled = 1;
@@ -509,7 +510,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/ALToastView/ALToastView.framework",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
@@ -524,7 +525,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -694,12 +695,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
 				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.worldpay.worldfoodapp;
 				PRODUCT_NAME = Worldfood;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -710,12 +714,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = testWorldpayLibrary/Worldfood.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "testWorldpayLibrary/testWorldpayLibrary-Prefix.pch";
 				INFOPLIST_FILE = "testWorldpayLibrary/testWorldpayLibrary-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.worldpay.worldfoodapp;
 				PRODUCT_NAME = Worldfood;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

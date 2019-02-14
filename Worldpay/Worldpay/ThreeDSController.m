@@ -15,11 +15,11 @@
 #define TempURL "https://online.worldpay.com/3dsr/"
 
 @interface ThreeDSController ()<UIWebViewDelegate>
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (nonatomic, strong) NSString *currentOrderCode;
-@property (nonatomic,copy) threeDSOrderSuccess authorizeSuccessBlock;
-@property (nonatomic,copy) threeDSOrderFailure authorizeFailureBlock;
-@property (nonatomic, strong) NSString *sessionID;
+@property (nonatomic, weak) UIWebView *webView;
+@property (nonatomic, copy) NSString *currentOrderCode;
+@property (nonatomic, copy) threeDSOrderSuccess authorizeSuccessBlock;
+@property (nonatomic, copy) threeDSOrderFailure authorizeFailureBlock;
+@property (nonatomic, copy) NSString *sessionID;
 
 @property (nonatomic, strong) AFURLSessionManager *networkManager;
 
@@ -27,10 +27,8 @@
 
 @implementation ThreeDSController
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
+- (instancetype)init {
+    if (self = [super init]) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         
         AFURLSessionManager *networkManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -41,6 +39,10 @@
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [self.networkManager invalidateSessionCancelingTasks:YES];
 }
 
 - (void)createNavigationBar {
@@ -60,7 +62,7 @@
     [closeBtn setTitleColor:self.view.tintColor forState:UIControlStateNormal];
     
     [closeBtn setTitle:@"Close" forState:UIControlStateNormal];
-    [closeBtn addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [closeBtn addTarget:self action:@selector(onTouchCloseButton:) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:closeBtn];
     
     _sessionID = [self uniqueSessionID];
@@ -71,10 +73,12 @@
     // Do any additional setup after loading the view from its nib.
     [self createNavigationBar];
     
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0,50.0,self.view.frame.size.width,self.view.frame.size.height-self.customToolbar.frame.size.height)];
-    _webView.delegate = self;
-    
-    [self.view addSubview:_webView];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0, 50.0,
+                                                                     self.view.frame.size.width,
+                                                                     self.view.frame.size.height - self.customToolbar.frame.size.height)];
+    webView.delegate = self;
+    [self.view addSubview:webView];
+    _webView = webView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,12 +87,7 @@
     [self initializeThreeDS];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)close:(id)sender {
+- (IBAction)onTouchCloseButton:(id)sender {
     NSMutableArray *errors = [[NSMutableArray alloc] init];
     [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"User cancelled 3DS authorization", nil) code:0]];
     _authorizeFailureBlock(@{}, errors);
@@ -137,10 +136,10 @@
                                                            error:nil];
     
     [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
-    
+    __weak typeof(self) weak = self;
     NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
-            self->_currentOrderCode = [responseObject objectForKey:@"orderCode"];
+            weak.currentOrderCode = [responseObject objectForKey:@"orderCode"];
             
             NSArray *params = @[
                                 @{
@@ -152,13 +151,13 @@
                                     @"value": @TempURL
                                     },
                                 ];
-            [self redirectToThreeDSPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]
+            [weak redirectToThreeDSPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]
                                                 params:params];
         }
         else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];
             [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the 3DS Order.", nil) code:1]];
-            self->_authorizeFailureBlock(responseObject, errors);
+            weak.authorizeFailureBlock(responseObject, errors);
         }
     }];
     
@@ -201,15 +200,15 @@
                                                            error:nil];
     
     [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
-    
+    __weak typeof(self) weak = self;
     NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         NSString *status = [responseObject objectForKey:@"paymentStatus"];
         if ([status isEqualToString:@"SUCCESS"] || [status isEqualToString:@"AUTHORIZED"]) {
-            self->_authorizeSuccessBlock(responseObject);
+            weak.authorizeSuccessBlock(responseObject);
         } else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];
             [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"Error authorizing 3DS Order", nil) code:1]];
-            self->_authorizeFailureBlock(responseObject, errors);
+            weak.authorizeFailureBlock(responseObject, errors);
         }
     }];
     
@@ -291,11 +290,12 @@
     }
     // Free memory
     freeifaddrs(interfaces);
+    
     return address;
 }
 
 - (NSString *)userAgent {
-    UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     return [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
 }
 
@@ -314,10 +314,9 @@
 }
 
 - (NSString *)uniqueSessionID {
-    NSDateFormatter *formatter;
     NSString        *dateString;
     
-    formatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd-MM-yyyy HH:mm";
     
     dateString = [formatter stringFromDate:[NSDate date]];

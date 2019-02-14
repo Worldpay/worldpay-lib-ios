@@ -26,22 +26,11 @@
 		59243DEF1A26144E005F900B /* WorldpayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59243DEE1A26144E005F900B /* WorldpayUtils.m */; };
 		5929C51E1A717A1B00BAB6D8 /* Worldpay+ApplePay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 59FE0F741A71601D00691C1F /* Worldpay+ApplePay.h */; };
 		5929C5221A717D8A00BAB6D8 /* WorldpayApplePayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5929C5211A717D8A00BAB6D8 /* WorldpayApplePayTests.m */; };
-		593F149A19B0B8F800A009FB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149619B0B8F800A009FB /* amex.png */; };
-		593F149B19B0B8F800A009FB /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149719B0B8F800A009FB /* maestro.png */; };
-		593F149C19B0B8F800A009FB /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149819B0B8F800A009FB /* mastercard.png */; };
-		593F149D19B0B8F800A009FB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149919B0B8F800A009FB /* visa.png */; };
-		594A336819A5FA7A004085F9 /* back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 594A336719A5FA7A004085F9 /* back_arrow@2x.png */; };
 		5957D19D1A71839500D7A99F /* Worldpay+ApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE0F751A71601D00691C1F /* Worldpay+ApplePay.m */; };
 		59670F361A24ED4C001DA3F3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59670F351A24ED4C001DA3F3 /* CoreText.framework */; };
 		597077AD1993999A002651A7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 597077AC1993999A002651A7 /* CoreFoundation.framework */; };
 		597077B31993999A002651A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 597077B11993999A002651A7 /* InfoPlist.strings */; };
-		597077B8199399AD002651A7 /* lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE98198B86F200C34D6A /* lockB@2x.png */; };
-		597077B9199399AD002651A7 /* lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE99198B86F200C34D6A /* lockW@2x.png */; };
-		597077BD199399AD002651A7 /* x_b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE72198B77E400C34D6A /* x_b@2x.png */; };
-		597077BE199399AD002651A7 /* x_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE73198B77E400C34D6A /* x_w@2x.png */; };
 		597077BF19939A79002651A7 /* WorldpayResources.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 597077AB1993999A002651A7 /* WorldpayResources.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5A6788ED1A680E120084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EC1A680E120084394C /* default_card@2x.png */; };
-		5A6788EE1A680E120084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EC1A680E120084394C /* default_card@2x.png */; };
 		5A8BC2BB1BD8DBDF00FFBED0 /* WorldpayAPMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */; };
 		5A8BC2BC1BD8EB4400FFBED0 /* WorldpayAPMViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */; };
 		5A8BC2BE1BDA2A3200FFBED0 /* APMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */; };
@@ -49,10 +38,6 @@
 		5A8BC2CB1BDA9F7700FFBED0 /* ThreeDSController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */; };
 		5AC8C68A1BDE5E8C006F1F78 /* APMController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */; };
 		7E00CE58198B758C00C34D6A /* WorldpayCardViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */; };
-		7E00CE79198B77E400C34D6A /* x_b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE72198B77E400C34D6A /* x_b@2x.png */; };
-		7E00CE7A198B77E400C34D6A /* x_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE73198B77E400C34D6A /* x_w@2x.png */; };
-		7E00CE9A198B86F200C34D6A /* lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE98198B86F200C34D6A /* lockB@2x.png */; };
-		7E00CE9B198B86F200C34D6A /* lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE99198B86F200C34D6A /* lockW@2x.png */; };
 		7EEBCC24197E59BB00DBEA7C /* WorldpayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */; };
 		7EF710791976B8B800F7DC51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF710781976B8B800F7DC51 /* Foundation.framework */; };
 		7EF7107E1976B8B800F7DC51 /* Worldpay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7EF7107D1976B8B800F7DC51 /* Worldpay.h */; };
@@ -61,6 +46,45 @@
 		7EF7108D1976B8B800F7DC51 /* libWorldpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF710751976B8B800F7DC51 /* libWorldpay.a */; };
 		7EF710931976B8B800F7DC51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EF710911976B8B800F7DC51 /* InfoPlist.strings */; };
 		7EF710951976B8B800F7DC51 /* WorldpayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF710941976B8B800F7DC51 /* WorldpayTests.m */; };
+		A59C28B52215B36700610B6C /* wp_ic_visa_checkout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */; };
+		A59C28B62215B36700610B6C /* poweredByWorldPay.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28892215B36300610B6C /* poweredByWorldPay.png */; };
+		A59C28B72215B36700610B6C /* wp_ic_laser.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288A2215B36300610B6C /* wp_ic_laser.png */; };
+		A59C28B82215B36700610B6C /* wp_ic_amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288B2215B36300610B6C /* wp_ic_amex@2x.png */; };
+		A59C28B92215B36700610B6C /* wp_ic_lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288C2215B36300610B6C /* wp_ic_lockB@2x.png */; };
+		A59C28BA2215B36700610B6C /* wp_ic_lockW@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288D2215B36300610B6C /* wp_ic_lockW@3x.png */; };
+		A59C28BB2215B36700610B6C /* wp_ic_back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288E2215B36300610B6C /* wp_ic_back_arrow@2x.png */; };
+		A59C28BC2215B36700610B6C /* wp_ic_mastercard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288F2215B36300610B6C /* wp_ic_mastercard@3x.png */; };
+		A59C28BD2215B36700610B6C /* wp_ic_masterpass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28902215B36300610B6C /* wp_ic_masterpass@3x.png */; };
+		A59C28BE2215B36700610B6C /* wp_ic_diners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28912215B36300610B6C /* wp_ic_diners@2x.png */; };
+		A59C28BF2215B36700610B6C /* wp_ic_lockB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28922215B36300610B6C /* wp_ic_lockB@3x.png */; };
+		A59C28C02215B36700610B6C /* wp_ic_visa_checkout.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28932215B36300610B6C /* wp_ic_visa_checkout.png */; };
+		A59C28C12215B36700610B6C /* wp_ic_laser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28942215B36300610B6C /* wp_ic_laser@2x.png */; };
+		A59C28C22215B36700610B6C /* wp_ic_jcb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */; };
+		A59C28C42215B36700610B6C /* wp_ic_amex.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28972215B36300610B6C /* wp_ic_amex.png */; };
+		A59C28C52215B36700610B6C /* wp_ic_maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28982215B36400610B6C /* wp_ic_maestro.png */; };
+		A59C28C62215B36700610B6C /* wp_ic_maestro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28992215B36400610B6C /* wp_ic_maestro@2x.png */; };
+		A59C28C72215B36700610B6C /* wp_ic_masterpass.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289A2215B36400610B6C /* wp_ic_masterpass.png */; };
+		A59C28C82215B36700610B6C /* wp_ic_back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289B2215B36400610B6C /* wp_ic_back_arrow.png */; };
+		A59C28C92215B36700610B6C /* wp_ic_default_card.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289C2215B36400610B6C /* wp_ic_default_card.png */; };
+		A59C28CA2215B36700610B6C /* wp_ic_default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289D2215B36400610B6C /* wp_ic_default_card@2x.png */; };
+		A59C28CB2215B36700610B6C /* wp_ic_visa.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289E2215B36400610B6C /* wp_ic_visa.png */; };
+		A59C28CC2215B36700610B6C /* wp_ic_mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289F2215B36400610B6C /* wp_ic_mastercard.png */; };
+		A59C28CD2215B36700610B6C /* wp_ic_lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A02215B36400610B6C /* wp_ic_lockW@2x.png */; };
+		A59C28CE2215B36700610B6C /* wp_ic_lockB.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A12215B36400610B6C /* wp_ic_lockB.png */; };
+		A59C28CF2215B36700610B6C /* wp_ic_visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A22215B36400610B6C /* wp_ic_visa@2x.png */; };
+		A59C28D12215B36700610B6C /* wp_ic_diners@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */; };
+		A59C28D22215B36700610B6C /* wp_ic_masterpass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A52215B36500610B6C /* wp_ic_masterpass@2x.png */; };
+		A59C28D32215B36700610B6C /* wp_ic_lockW.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A62215B36500610B6C /* wp_ic_lockW.png */; };
+		A59C28D42215B36700610B6C /* wp_ic_diners.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A72215B36500610B6C /* wp_ic_diners.png */; };
+		A59C28D52215B36700610B6C /* wp_ic_maestro@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A82215B36500610B6C /* wp_ic_maestro@3x.png */; };
+		A59C28D62215B36700610B6C /* wp_ic_visa_checkout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A92215B36500610B6C /* wp_ic_visa_checkout@3x.png */; };
+		A59C28D72215B36700610B6C /* wp_ic_jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AA2215B36500610B6C /* wp_ic_jcb.png */; };
+		A59C28D82215B36700610B6C /* wp_ic_visa@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AB2215B36500610B6C /* wp_ic_visa@3x.png */; };
+		A59C28D92215B36700610B6C /* wp_ic_jcb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */; };
+		A59C28DA2215B36700610B6C /* wp_ic_back_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AD2215B36600610B6C /* wp_ic_back_arrow@3x.png */; };
+		A59C28DB2215B36700610B6C /* wp_ic_mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */; };
+		A59C28DE2215B36700610B6C /* wp_ic_laser@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */; };
+		A59C28E02215B36700610B6C /* wp_ic_amex@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */; };
 		B2B16E8DB17B41DEE9958DB8 /* Pods_Worldpay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,11 +135,6 @@
 		59243DED1A26144E005F900B /* WorldpayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayUtils.h; sourceTree = "<group>"; };
 		59243DEE1A26144E005F900B /* WorldpayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayUtils.m; sourceTree = "<group>"; };
 		5929C5211A717D8A00BAB6D8 /* WorldpayApplePayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayApplePayTests.m; sourceTree = "<group>"; };
-		593F149619B0B8F800A009FB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amex.png; path = Resources/amex.png; sourceTree = "<group>"; };
-		593F149719B0B8F800A009FB /* maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maestro.png; path = Resources/maestro.png; sourceTree = "<group>"; };
-		593F149819B0B8F800A009FB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = Resources/mastercard.png; sourceTree = "<group>"; };
-		593F149919B0B8F800A009FB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = Resources/visa.png; sourceTree = "<group>"; };
-		594A336719A5FA7A004085F9 /* back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_arrow@2x.png"; path = "Resources/back_arrow@2x.png"; sourceTree = "<group>"; };
 		59670F351A24ED4C001DA3F3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		597077AB1993999A002651A7 /* WorldpayResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldpayResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		597077AC1993999A002651A7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -125,7 +144,6 @@
 		59E902A51A2C7F2D00BBE8B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		59FE0F741A71601D00691C1F /* Worldpay+ApplePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Worldpay+ApplePay.h"; sourceTree = "<group>"; };
 		59FE0F751A71601D00691C1F /* Worldpay+ApplePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Worldpay+ApplePay.m"; sourceTree = "<group>"; };
-		5A6788EC1A680E120084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
 		5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayAPMViewController.h; sourceTree = "<group>"; };
 		5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayAPMViewController.m; sourceTree = "<group>"; };
 		5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMController.m; sourceTree = "<group>"; };
@@ -133,10 +151,6 @@
 		5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeDSController.h; sourceTree = "<group>"; };
 		5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeDSController.m; sourceTree = "<group>"; };
 		6D1C2B8E83D580151CB88A7E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		7E00CE72198B77E400C34D6A /* x_b@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x_b@2x.png"; path = "Resources/x_b@2x.png"; sourceTree = "<group>"; };
-		7E00CE73198B77E400C34D6A /* x_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x_w@2x.png"; path = "Resources/x_w@2x.png"; sourceTree = "<group>"; };
-		7E00CE98198B86F200C34D6A /* lockB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lockB@2x.png"; path = "Resources/lockB@2x.png"; sourceTree = "<group>"; };
-		7E00CE99198B86F200C34D6A /* lockW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lockW@2x.png"; path = "Resources/lockW@2x.png"; sourceTree = "<group>"; };
 		7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayCardViewController.h; sourceTree = "<group>"; };
 		7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayCardViewController.m; sourceTree = "<group>"; };
 		7EF710751976B8B800F7DC51 /* libWorldpay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWorldpay.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +162,45 @@
 		7EF710901976B8B800F7DC51 /* WorldpayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WorldpayTests-Info.plist"; sourceTree = "<group>"; };
 		7EF710921976B8B800F7DC51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EF710941976B8B800F7DC51 /* WorldpayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldpayTests.m; sourceTree = "<group>"; };
+		A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa_checkout@2x.png"; path = "Resources/wp_ic_visa_checkout@2x.png"; sourceTree = "<group>"; };
+		A59C28892215B36300610B6C /* poweredByWorldPay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = poweredByWorldPay.png; path = Resources/poweredByWorldPay.png; sourceTree = "<group>"; };
+		A59C288A2215B36300610B6C /* wp_ic_laser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_laser.png; path = Resources/wp_ic_laser.png; sourceTree = "<group>"; };
+		A59C288B2215B36300610B6C /* wp_ic_amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_amex@2x.png"; path = "Resources/wp_ic_amex@2x.png"; sourceTree = "<group>"; };
+		A59C288C2215B36300610B6C /* wp_ic_lockB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockB@2x.png"; path = "Resources/wp_ic_lockB@2x.png"; sourceTree = "<group>"; };
+		A59C288D2215B36300610B6C /* wp_ic_lockW@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockW@3x.png"; path = "Resources/wp_ic_lockW@3x.png"; sourceTree = "<group>"; };
+		A59C288E2215B36300610B6C /* wp_ic_back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_back_arrow@2x.png"; path = "Resources/wp_ic_back_arrow@2x.png"; sourceTree = "<group>"; };
+		A59C288F2215B36300610B6C /* wp_ic_mastercard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_mastercard@3x.png"; path = "Resources/wp_ic_mastercard@3x.png"; sourceTree = "<group>"; };
+		A59C28902215B36300610B6C /* wp_ic_masterpass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_masterpass@3x.png"; path = "Resources/wp_ic_masterpass@3x.png"; sourceTree = "<group>"; };
+		A59C28912215B36300610B6C /* wp_ic_diners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_diners@2x.png"; path = "Resources/wp_ic_diners@2x.png"; sourceTree = "<group>"; };
+		A59C28922215B36300610B6C /* wp_ic_lockB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockB@3x.png"; path = "Resources/wp_ic_lockB@3x.png"; sourceTree = "<group>"; };
+		A59C28932215B36300610B6C /* wp_ic_visa_checkout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_visa_checkout.png; path = Resources/wp_ic_visa_checkout.png; sourceTree = "<group>"; };
+		A59C28942215B36300610B6C /* wp_ic_laser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_laser@2x.png"; path = "Resources/wp_ic_laser@2x.png"; sourceTree = "<group>"; };
+		A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_jcb@3x.png"; path = "Resources/wp_ic_jcb@3x.png"; sourceTree = "<group>"; };
+		A59C28972215B36300610B6C /* wp_ic_amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_amex.png; path = Resources/wp_ic_amex.png; sourceTree = "<group>"; };
+		A59C28982215B36400610B6C /* wp_ic_maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_maestro.png; path = Resources/wp_ic_maestro.png; sourceTree = "<group>"; };
+		A59C28992215B36400610B6C /* wp_ic_maestro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_maestro@2x.png"; path = "Resources/wp_ic_maestro@2x.png"; sourceTree = "<group>"; };
+		A59C289A2215B36400610B6C /* wp_ic_masterpass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_masterpass.png; path = Resources/wp_ic_masterpass.png; sourceTree = "<group>"; };
+		A59C289B2215B36400610B6C /* wp_ic_back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_back_arrow.png; path = Resources/wp_ic_back_arrow.png; sourceTree = "<group>"; };
+		A59C289C2215B36400610B6C /* wp_ic_default_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_default_card.png; path = Resources/wp_ic_default_card.png; sourceTree = "<group>"; };
+		A59C289D2215B36400610B6C /* wp_ic_default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_default_card@2x.png"; path = "Resources/wp_ic_default_card@2x.png"; sourceTree = "<group>"; };
+		A59C289E2215B36400610B6C /* wp_ic_visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_visa.png; path = Resources/wp_ic_visa.png; sourceTree = "<group>"; };
+		A59C289F2215B36400610B6C /* wp_ic_mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_mastercard.png; path = Resources/wp_ic_mastercard.png; sourceTree = "<group>"; };
+		A59C28A02215B36400610B6C /* wp_ic_lockW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockW@2x.png"; path = "Resources/wp_ic_lockW@2x.png"; sourceTree = "<group>"; };
+		A59C28A12215B36400610B6C /* wp_ic_lockB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_lockB.png; path = Resources/wp_ic_lockB.png; sourceTree = "<group>"; };
+		A59C28A22215B36400610B6C /* wp_ic_visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa@2x.png"; path = "Resources/wp_ic_visa@2x.png"; sourceTree = "<group>"; };
+		A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_diners@3x.png"; path = "Resources/wp_ic_diners@3x.png"; sourceTree = "<group>"; };
+		A59C28A52215B36500610B6C /* wp_ic_masterpass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_masterpass@2x.png"; path = "Resources/wp_ic_masterpass@2x.png"; sourceTree = "<group>"; };
+		A59C28A62215B36500610B6C /* wp_ic_lockW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_lockW.png; path = Resources/wp_ic_lockW.png; sourceTree = "<group>"; };
+		A59C28A72215B36500610B6C /* wp_ic_diners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_diners.png; path = Resources/wp_ic_diners.png; sourceTree = "<group>"; };
+		A59C28A82215B36500610B6C /* wp_ic_maestro@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_maestro@3x.png"; path = "Resources/wp_ic_maestro@3x.png"; sourceTree = "<group>"; };
+		A59C28A92215B36500610B6C /* wp_ic_visa_checkout@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa_checkout@3x.png"; path = "Resources/wp_ic_visa_checkout@3x.png"; sourceTree = "<group>"; };
+		A59C28AA2215B36500610B6C /* wp_ic_jcb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_jcb.png; path = Resources/wp_ic_jcb.png; sourceTree = "<group>"; };
+		A59C28AB2215B36500610B6C /* wp_ic_visa@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa@3x.png"; path = "Resources/wp_ic_visa@3x.png"; sourceTree = "<group>"; };
+		A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_jcb@2x.png"; path = "Resources/wp_ic_jcb@2x.png"; sourceTree = "<group>"; };
+		A59C28AD2215B36600610B6C /* wp_ic_back_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_back_arrow@3x.png"; path = "Resources/wp_ic_back_arrow@3x.png"; sourceTree = "<group>"; };
+		A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_mastercard@2x.png"; path = "Resources/wp_ic_mastercard@2x.png"; sourceTree = "<group>"; };
+		A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_laser@3x.png"; path = "Resources/wp_ic_laser@3x.png"; sourceTree = "<group>"; };
+		A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_amex@3x.png"; path = "Resources/wp_ic_amex@3x.png"; sourceTree = "<group>"; };
 		A934A0890DB3A3D26BF0DBE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Worldpay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F7362E68B3854D12F9ADC1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,16 +314,45 @@
 		7E3F08761977C889008DC3E0 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				5A6788EC1A680E120084394C /* default_card@2x.png */,
-				7E00CE98198B86F200C34D6A /* lockB@2x.png */,
-				7E00CE99198B86F200C34D6A /* lockW@2x.png */,
-				7E00CE72198B77E400C34D6A /* x_b@2x.png */,
-				7E00CE73198B77E400C34D6A /* x_w@2x.png */,
-				594A336719A5FA7A004085F9 /* back_arrow@2x.png */,
-				593F149619B0B8F800A009FB /* amex.png */,
-				593F149719B0B8F800A009FB /* maestro.png */,
-				593F149819B0B8F800A009FB /* mastercard.png */,
-				593F149919B0B8F800A009FB /* visa.png */,
+				A59C28892215B36300610B6C /* poweredByWorldPay.png */,
+				A59C28972215B36300610B6C /* wp_ic_amex.png */,
+				A59C288B2215B36300610B6C /* wp_ic_amex@2x.png */,
+				A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */,
+				A59C289B2215B36400610B6C /* wp_ic_back_arrow.png */,
+				A59C288E2215B36300610B6C /* wp_ic_back_arrow@2x.png */,
+				A59C28AD2215B36600610B6C /* wp_ic_back_arrow@3x.png */,
+				A59C289C2215B36400610B6C /* wp_ic_default_card.png */,
+				A59C289D2215B36400610B6C /* wp_ic_default_card@2x.png */,
+				A59C28A72215B36500610B6C /* wp_ic_diners.png */,
+				A59C28912215B36300610B6C /* wp_ic_diners@2x.png */,
+				A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */,
+				A59C28AA2215B36500610B6C /* wp_ic_jcb.png */,
+				A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */,
+				A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */,
+				A59C288A2215B36300610B6C /* wp_ic_laser.png */,
+				A59C28942215B36300610B6C /* wp_ic_laser@2x.png */,
+				A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */,
+				A59C28A12215B36400610B6C /* wp_ic_lockB.png */,
+				A59C288C2215B36300610B6C /* wp_ic_lockB@2x.png */,
+				A59C28922215B36300610B6C /* wp_ic_lockB@3x.png */,
+				A59C28A62215B36500610B6C /* wp_ic_lockW.png */,
+				A59C28A02215B36400610B6C /* wp_ic_lockW@2x.png */,
+				A59C288D2215B36300610B6C /* wp_ic_lockW@3x.png */,
+				A59C28982215B36400610B6C /* wp_ic_maestro.png */,
+				A59C28992215B36400610B6C /* wp_ic_maestro@2x.png */,
+				A59C28A82215B36500610B6C /* wp_ic_maestro@3x.png */,
+				A59C289F2215B36400610B6C /* wp_ic_mastercard.png */,
+				A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */,
+				A59C288F2215B36300610B6C /* wp_ic_mastercard@3x.png */,
+				A59C289A2215B36400610B6C /* wp_ic_masterpass.png */,
+				A59C28A52215B36500610B6C /* wp_ic_masterpass@2x.png */,
+				A59C28902215B36300610B6C /* wp_ic_masterpass@3x.png */,
+				A59C28932215B36300610B6C /* wp_ic_visa_checkout.png */,
+				A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */,
+				A59C28A92215B36500610B6C /* wp_ic_visa_checkout@3x.png */,
+				A59C289E2215B36400610B6C /* wp_ic_visa.png */,
+				A59C28A22215B36400610B6C /* wp_ic_visa@2x.png */,
+				A59C28AB2215B36500610B6C /* wp_ic_visa@3x.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -456,17 +538,46 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				597077B8199399AD002651A7 /* lockB@2x.png in Resources */,
-				597077B9199399AD002651A7 /* lockW@2x.png in Resources */,
-				593F149D19B0B8F800A009FB /* visa.png in Resources */,
-				593F149C19B0B8F800A009FB /* mastercard.png in Resources */,
-				597077BD199399AD002651A7 /* x_b@2x.png in Resources */,
-				593F149A19B0B8F800A009FB /* amex.png in Resources */,
-				597077BE199399AD002651A7 /* x_w@2x.png in Resources */,
+				A59C28BB2215B36700610B6C /* wp_ic_back_arrow@2x.png in Resources */,
+				A59C28CC2215B36700610B6C /* wp_ic_mastercard.png in Resources */,
+				A59C28B52215B36700610B6C /* wp_ic_visa_checkout@2x.png in Resources */,
+				A59C28BC2215B36700610B6C /* wp_ic_mastercard@3x.png in Resources */,
+				A59C28B62215B36700610B6C /* poweredByWorldPay.png in Resources */,
+				A59C28BF2215B36700610B6C /* wp_ic_lockB@3x.png in Resources */,
+				A59C28D42215B36700610B6C /* wp_ic_diners.png in Resources */,
+				A59C28CB2215B36700610B6C /* wp_ic_visa.png in Resources */,
+				A59C28E02215B36700610B6C /* wp_ic_amex@3x.png in Resources */,
+				A59C28D12215B36700610B6C /* wp_ic_diners@3x.png in Resources */,
+				A59C28C62215B36700610B6C /* wp_ic_maestro@2x.png in Resources */,
+				A59C28B72215B36700610B6C /* wp_ic_laser.png in Resources */,
+				A59C28CA2215B36700610B6C /* wp_ic_default_card@2x.png in Resources */,
+				A59C28BD2215B36700610B6C /* wp_ic_masterpass@3x.png in Resources */,
+				A59C28C82215B36700610B6C /* wp_ic_back_arrow.png in Resources */,
+				A59C28CD2215B36700610B6C /* wp_ic_lockW@2x.png in Resources */,
+				A59C28CE2215B36700610B6C /* wp_ic_lockB.png in Resources */,
+				A59C28D62215B36700610B6C /* wp_ic_visa_checkout@3x.png in Resources */,
+				A59C28B92215B36700610B6C /* wp_ic_lockB@2x.png in Resources */,
+				A59C28C42215B36700610B6C /* wp_ic_amex.png in Resources */,
+				A59C28C02215B36700610B6C /* wp_ic_visa_checkout.png in Resources */,
+				A59C28D82215B36700610B6C /* wp_ic_visa@3x.png in Resources */,
+				A59C28D32215B36700610B6C /* wp_ic_lockW.png in Resources */,
+				A59C28C22215B36700610B6C /* wp_ic_jcb@3x.png in Resources */,
+				A59C28DA2215B36700610B6C /* wp_ic_back_arrow@3x.png in Resources */,
+				A59C28D52215B36700610B6C /* wp_ic_maestro@3x.png in Resources */,
+				A59C28D72215B36700610B6C /* wp_ic_jcb.png in Resources */,
+				A59C28B82215B36700610B6C /* wp_ic_amex@2x.png in Resources */,
 				597077B31993999A002651A7 /* InfoPlist.strings in Resources */,
-				594A336819A5FA7A004085F9 /* back_arrow@2x.png in Resources */,
-				5A6788EE1A680E120084394C /* default_card@2x.png in Resources */,
-				593F149B19B0B8F800A009FB /* maestro.png in Resources */,
+				A59C28BA2215B36700610B6C /* wp_ic_lockW@3x.png in Resources */,
+				A59C28D92215B36700610B6C /* wp_ic_jcb@2x.png in Resources */,
+				A59C28C52215B36700610B6C /* wp_ic_maestro.png in Resources */,
+				A59C28DE2215B36700610B6C /* wp_ic_laser@3x.png in Resources */,
+				A59C28CF2215B36700610B6C /* wp_ic_visa@2x.png in Resources */,
+				A59C28BE2215B36700610B6C /* wp_ic_diners@2x.png in Resources */,
+				A59C28C92215B36700610B6C /* wp_ic_default_card.png in Resources */,
+				A59C28DB2215B36700610B6C /* wp_ic_mastercard@2x.png in Resources */,
+				A59C28C12215B36700610B6C /* wp_ic_laser@2x.png in Resources */,
+				A59C28D22215B36700610B6C /* wp_ic_masterpass@2x.png in Resources */,
+				A59C28C72215B36700610B6C /* wp_ic_masterpass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,12 +585,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E00CE7A198B77E400C34D6A /* x_w@2x.png in Resources */,
-				7E00CE79198B77E400C34D6A /* x_b@2x.png in Resources */,
-				7E00CE9B198B86F200C34D6A /* lockW@2x.png in Resources */,
-				5A6788ED1A680E120084394C /* default_card@2x.png in Resources */,
 				7EF710931976B8B800F7DC51 /* InfoPlist.strings in Resources */,
-				7E00CE9A198B86F200C34D6A /* lockB@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

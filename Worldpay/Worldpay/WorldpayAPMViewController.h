@@ -17,28 +17,29 @@
  *  The developer can preset these parameters so they will be displayed as a read only parameters on the form (and not as inputs)
  */
 
-@property (nonatomic) UIToolbar *customToolbar;
-@property (nonatomic) UIButton *confirmPurchaseButton;
+@property (nonatomic, strong) UIToolbar *customToolbar;
+@property (nonatomic, strong) UIButton *confirmPurchaseButton;
 
-@property (nonatomic) NSString *apmName;
-@property (nonatomic) NSString *address;
-@property (nonatomic) NSString *city;
-@property (nonatomic) NSString *postcode;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *countryCode;
-@property (nonatomic) NSString *currency;
-@property (nonatomic) NSString *settlementCurrency;
-@property (nonatomic) NSString *successUrl;
-@property (nonatomic) NSString *cancelUrl;
-@property (nonatomic) NSString *failureUrl;
-@property (nonatomic) NSString *pendingUrl;
-@property (nonatomic) NSString *shopperLanguageCode;
-@property (nonatomic) NSString *swiftCode;
-@property (nonatomic) NSString *customerOrderCode;
-@property (nonatomic) NSString *orderDescription;
-@property (nonatomic) NSDictionary *customerIdentifiers;
+@property (nonatomic, copy) NSString *apmName;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *city;
+@property (nonatomic, copy) NSString *postcode;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *countryCode;
+@property (nonatomic, copy) NSString *currency;
+@property (nonatomic, copy) NSString *settlementCurrency;
+@property (nonatomic, copy) NSString *successUrl;
+@property (nonatomic, copy) NSString *cancelUrl;
+@property (nonatomic, copy) NSString *failureUrl;
+@property (nonatomic, copy) NSString *pendingUrl;
+@property (nonatomic, copy) NSString *shopperLanguageCode;
+@property (nonatomic, copy) NSString *swiftCode;
+@property (nonatomic, copy) NSString *customerOrderCode;
+@property (nonatomic, copy) NSString *orderDescription;
 
-@property (nonatomic) float price;
+@property (nonatomic, strong) NSDictionary *customerIdentifiers;
+
+@property (nonatomic, assign) CGFloat price;
 
 typedef void (^createAPMOrderSuccess)(NSDictionary *responseDictionary);
 typedef void (^createAPMOrderFailure)(NSDictionary *responseDictionary, NSArray *errors);
@@ -49,14 +50,14 @@ typedef NS_ENUM(NSUInteger, APMDetailsTheme) {
     APMDetailsThemeYellow
 };
 
-@property (nonatomic) APMDetailsTheme theme;
+@property (nonatomic, assign) APMDetailsTheme theme;
 
 typedef NS_ENUM(NSUInteger, APMDetailsLoadingTheme) {
     APMDetailsLoadingThemeWhite,
     APMDetailsLoadingThemeBlack
 };
 
-@property (nonatomic) APMDetailsLoadingTheme loadingTheme;
+@property (nonatomic, assign) APMDetailsLoadingTheme loadingTheme;
 
 /*!
  *  Function to initialize APM Details with the default theme

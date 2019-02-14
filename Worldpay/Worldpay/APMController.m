@@ -12,11 +12,11 @@
 
 @interface APMController () <UIWebViewDelegate>
 
-@property (nonatomic,copy) authorizeAPMOrderSuccess authorizeSuccessBlock;
-@property (nonatomic,copy) authorizeAPMOrderFailure authorizeFailureBlock;
+@property (nonatomic, copy) authorizeAPMOrderSuccess authorizeSuccessBlock;
+@property (nonatomic, copy) authorizeAPMOrderFailure authorizeFailureBlock;
 
-@property (nonatomic, strong) NSString *currentOrderCode;
-@property (strong, nonatomic) UIWebView *webView;
+@property (nonatomic, copy) NSString *currentOrderCode;
+@property (nonatomic, copy) UIWebView *webView;
 
 @property (nonatomic, strong) AFURLSessionManager *networkManager;
 
@@ -38,6 +38,10 @@
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [self.networkManager invalidateSessionCancelingTasks:YES];
 }
 
 - (void)createNavigationBar {
@@ -126,25 +130,26 @@
                                                            error:nil];
     
     [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
+    __weak typeof(self) weak = self;
     
     NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
-            self->_currentOrderCode = [responseObject objectForKey:@"orderCode"];
+            weak.currentOrderCode = [responseObject objectForKey:@"orderCode"];
             
             //Refresh URLS in case the user doesn't input any urls on create order
-            self->_successUrl = [responseObject objectForKey:@"successUrl"];
-            self->_failureUrl = [responseObject objectForKey:@"failureUrl"];
-            self->_cancelUrl = [responseObject objectForKey:@"cancelUrl"];
-            self->_pendingUrl = [responseObject objectForKey:@"pendingUrl"];
+            weak.successUrl = [responseObject objectForKey:@"successUrl"];
+            weak.failureUrl = [responseObject objectForKey:@"failureUrl"];
+            weak.cancelUrl = [responseObject objectForKey:@"cancelUrl"];
+            weak.pendingUrl = [responseObject objectForKey:@"pendingUrl"];
             
-            [self redirectToAPMPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]];
+            [weak redirectToAPMPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]];
             
         } else {
             NSMutableArray *errors = [[NSMutableArray alloc] init];
             [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the APM Order.", nil) code:1]];
             
             
-            self->_authorizeFailureBlock(responseObject, errors);
+            weak.authorizeFailureBlock(responseObject, errors);
         }
     }];
     

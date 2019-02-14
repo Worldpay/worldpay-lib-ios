@@ -11,35 +11,35 @@
 
 @interface WorldpayAPMViewController () <UITextFieldDelegate>
 
-@property (nonatomic,copy) createAPMOrderSuccess saveSuccessBlock;
-@property (nonatomic,copy) createAPMOrderFailure saveFailureBlock;
+@property (nonatomic, copy) createAPMOrderSuccess saveSuccessBlock;
+@property (nonatomic, copy) createAPMOrderFailure saveFailureBlock;
 
-@property (nonatomic) BOOL isModal, shouldDeleteCharacter;
-@property (nonatomic, strong) UIColor *colorTheme;
-@property (nonatomic) BOOL isDisplayingError;
+@property (nonatomic, assign) BOOL isModal, shouldDeleteCharacter;
+@property (nonatomic, copy  ) UIColor *colorTheme;
+@property (nonatomic, assign) BOOL isDisplayingError;
 
 /*!
  *  The textfields required to fill in the APM details.
  */
 
 // UI FIELDS
-@property (nonatomic) UITextField *apmNameInput;
-@property (nonatomic) UITextField *priceInput;
-@property (nonatomic) UITextField *addressInput;
-@property (nonatomic) UITextField *cityInput;
-@property (nonatomic) UITextField *postcodeInput;
-@property (nonatomic) UITextField *nameInput;
-@property (nonatomic) UITextField *countryCodeInput;
-@property (nonatomic) UITextField *settlementCurrencyInput;
-@property (nonatomic) UITextField *currencyInput;
-@property (nonatomic) UITextField *successUrlInput;
-@property (nonatomic) UITextField *cancelUrlInput;
-@property (nonatomic) UITextField *failureUrlInput;
-@property (nonatomic) UITextField *pendingUrlInput;
-@property (nonatomic) UITextField *shopperLanguageCodeInput;
-@property (nonatomic) UITextField *swiftCodeInput;
-@property (nonatomic) UITextField *customerOrderCodeInput;
-@property (nonatomic) UITextField *descriptionInput;
+@property (nonatomic, weak) UITextField *apmNameInput;
+@property (nonatomic, weak) UITextField *priceInput;
+@property (nonatomic, weak) UITextField *addressInput;
+@property (nonatomic, weak) UITextField *cityInput;
+@property (nonatomic, weak) UITextField *postcodeInput;
+@property (nonatomic, weak) UITextField *nameInput;
+@property (nonatomic, weak) UITextField *countryCodeInput;
+@property (nonatomic, weak) UITextField *settlementCurrencyInput;
+@property (nonatomic, weak) UITextField *currencyInput;
+@property (nonatomic, weak) UITextField *successUrlInput;
+@property (nonatomic, weak) UITextField *cancelUrlInput;
+@property (nonatomic, weak) UITextField *failureUrlInput;
+@property (nonatomic, weak) UITextField *pendingUrlInput;
+@property (nonatomic, weak) UITextField *shopperLanguageCodeInput;
+@property (nonatomic, weak) UITextField *swiftCodeInput;
+@property (nonatomic, weak) UITextField *customerOrderCodeInput;
+@property (nonatomic, weak) UITextField *descriptionInput;
 
 @end
 
@@ -51,31 +51,17 @@
     CGRect screenRect;
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
 - (instancetype)init {
-    if (self = [super init]) {
-        _loadingTheme = APMDetailsLoadingThemeWhite;
-        _colorTheme = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
-        _isDisplayingError = NO;
-        
+    if (self = [self initWithAPMName:nil]) {
     }
+    
     return self;
 }
 
 - (instancetype)initWithAPMName:(NSString *)apmName {
-    if (self = [super init]) {
-        _apmName = apmName;
-        _loadingTheme = APMDetailsLoadingThemeWhite;
-        _colorTheme = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
+    if (self = [self initWithColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0]
+                      loadingTheme:APMDetailsLoadingThemeWhite
+                           apmName:apmName]) {
     }
     
     return self;
@@ -86,6 +72,7 @@
         _apmName = apmName;
         _colorTheme = color;
         _loadingTheme = loadingTheme;
+        _isDisplayingError = NO;
     }
     
     return self;
@@ -104,7 +91,7 @@
     [self createNavigationBar];
     [self initGUI];
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];    
+    self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -143,8 +130,8 @@
     backButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-    UIImage *arrowImage = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/back_arrow.png"] withColor:toolbar.tintColor];
-    UIImage *arrowHover = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/back_arrow.png"] withColor:[UIColor lightGrayColor]];
+    UIImage *arrowImage = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_back_arrow.png"] withColor:toolbar.tintColor];
+    UIImage *arrowHover = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_back_arrow.png"] withColor:[UIColor lightGrayColor]];
     
     [backButton setImage:arrowImage forState:UIControlStateNormal];
     [backButton setImage:arrowHover forState:UIControlStateHighlighted];
@@ -271,52 +258,53 @@
         }
         
         //We create an APM token here
+        __weak typeof(self) weak = self;
         [[Worldpay sharedInstance] createAPMTokenWithAPMName:_apmName countryCode:countryCode apmFields:apmFields shopperLanguageCode:_shopperLangCode
                                                      success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                          
                                                          APMController *apmController = [[APMController alloc] init];
                                                          
-                                                         apmController.address = (self->_address) ? self->_address : self->_addressInput.text;
-                                                         apmController.countryCode = (self->_countryCode) ? self->_countryCode : self->_countryCodeInput.text;
-                                                         apmController.city = (self->_city) ? self->_city : self->_cityInput.text;
-                                                         apmController.currencyCode = (self->_currency) ? self->_currency : self->_currencyInput.text;
-                                                         apmController.settlementCurrency = (self->_settlementCurrency) ? self->_settlementCurrency : self->_settlementCurrencyInput.text;
-                                                         apmController.postalCode = (self->_postcode) ? self->_postcode : self->_postcodeInput.text;
+                                                         apmController.address = (weak.address) ? weak.address : weak.addressInput.text;
+                                                         apmController.countryCode = (weak.countryCode) ? weak.countryCode : weak.countryCodeInput.text;
+                                                         apmController.city = (weak.city) ? weak.city : weak.cityInput.text;
+                                                         apmController.currencyCode = (weak.currency) ? weak.currency : weak.currencyInput.text;
+                                                         apmController.settlementCurrency = (weak.settlementCurrency) ? weak.settlementCurrency : weak.settlementCurrencyInput.text;
+                                                         apmController.postalCode = (weak.postcode) ? weak.postcode : weak.postcodeInput.text;
                                                          apmController.token = responseDictionary[@"token"];
-                                                         apmController.name = (self->_name) ? self->_name : self->_nameInput.text;
-                                                         apmController.price = (self->_price) ? self->_price : (self->_priceInput.text).floatValue;
-                                                         apmController.successUrl = (self->_successUrl) ? self->_successUrl : self->_successUrlInput.text;
-                                                         apmController.failureUrl = (self->_failureUrl) ? self->_failureUrl : self->_failureUrlInput.text;
-                                                         apmController.cancelUrl = (self->_cancelUrl) ? self->_cancelUrl : self->_cancelUrlInput.text;
-                                                         apmController.pendingUrl = (self->_pendingUrl) ? self->_pendingUrl : self->_pendingUrlInput.text;
+                                                         apmController.name = (weak.name) ? weak.name : weak.nameInput.text;
+                                                         apmController.price = (weak.price) ? weak.price : (weak.priceInput.text).floatValue;
+                                                         apmController.successUrl = (weak.successUrl) ? weak.successUrl : weak.successUrlInput.text;
+                                                         apmController.failureUrl = (weak.failureUrl) ? weak.failureUrl : weak.failureUrlInput.text;
+                                                         apmController.cancelUrl = (weak.cancelUrl) ? weak.cancelUrl : weak.cancelUrlInput.text;
+                                                         apmController.pendingUrl = (weak.pendingUrl) ? weak.pendingUrl : weak.pendingUrlInput.text;
                                                          
-                                                         apmController.customerOrderCode = (self->_customerOrderCode) ?  self->_customerOrderCode : self->_customerOrderCodeInput.text;
+                                                         apmController.customerOrderCode = (weak.customerOrderCode) ?  weak.customerOrderCode : weak.customerOrderCodeInput.text;
                                                          
-                                                         apmController.customerIdentifiers = (self->_customerIdentifiers && self->_customerIdentifiers.count > 0) ? self->_customerIdentifiers : @{};
+                                                         apmController.customerIdentifiers = (weak.customerIdentifiers && weak.customerIdentifiers.count > 0) ? weak.customerIdentifiers : @{};
                                                          //
-                                                         apmController.orderDescription = (self->_orderDescription) ? self->_orderDescription : self->_descriptionInput.text;
+                                                         apmController.orderDescription = (weak.orderDescription) ? weak.orderDescription : weak.descriptionInput.text;
                                                          
                                                          ///Once the authorize order is completed, we call these code blocks
                                                          [apmController setAuthorizeAPMOrderBlockWithSuccess:^(NSDictionary *responseDictionary) {
-                                                             [self removeLoadingBackground];
-                                                             self->_saveSuccessBlock(responseDictionary);
+                                                             [weak removeLoadingBackground];
+                                                             weak.saveSuccessBlock(responseDictionary);
                                                              
                                                          } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                             [self removeLoadingBackground];
-                                                             self->_saveFailureBlock(responseDictionary, errors);
+                                                             [weak removeLoadingBackground];
+                                                             weak.saveFailureBlock(responseDictionary, errors);
                                                          }];
                                                          
-                                                         if (self.navigationController) {
-                                                             [self.navigationController pushViewController:apmController animated:YES];
+                                                         if (weak.navigationController) {
+                                                             [weak.navigationController pushViewController:apmController animated:YES];
                                                          }
                                                          else {
-                                                             [self presentViewController:apmController animated:YES completion:nil];
+                                                             [weak presentViewController:apmController animated:YES completion:nil];
                                                          }
                                                          
                                                      }
                                                      failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                         [self removeLoadingBackground];
-                                                         [self displayAlertMessage:@"There was an error creating the token!"];
+                                                         [weak removeLoadingBackground];
+                                                         [weak displayAlertMessage:@"There was an error creating the token!"];
                                                          
                                                          NSError *err = errors[0];
                                                          NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
@@ -333,7 +321,7 @@
     errorMessage.backgroundColor = _colorTheme;
     errorMessage.textAlignment = NSTextAlignmentCenter;
     errorMessage.text = message;
-    errorMessage.alpha = 0;
+    errorMessage.alpha = 0.0;
     
     [self.view addSubview:errorMessage];
     [UIView animateWithDuration:0.5
@@ -344,14 +332,14 @@
                      }
                      completion:^(BOOL finished)
      {
-         self->_isDisplayingError = YES;
+         self.isDisplayingError = YES;
          if (finished) {
              [UIView animateWithDuration:0.5 delay:2.5 options:UIViewAnimationOptionCurveLinear
                               animations:^{
                                   errorMessage.alpha = 0;
                               }
                               completion:^(BOOL finished) {
-                                  self->_isDisplayingError = NO;
+                                  self.isDisplayingError = NO;
                               }];
          }
      }];
@@ -375,187 +363,194 @@
     bg.backgroundColor = (_loadingTheme == APMDetailsLoadingThemeBlack) ? [UIColor blackColor] : [UIColor whiteColor];
     [scrollView addSubview:bg];
     
-    _apmNameInput = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, screenRect.size.width - 10, 40)];
-    _apmNameInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"APM Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    _apmNameInput.text = [NSLocalizedString(@"APM Name: ",nil) stringByAppendingString:_apmName];
-    _apmNameInput.enabled = NO;
-    [scrollView addSubview:_apmNameInput];
+    UITextField *apmNameInput = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, screenRect.size.width - 10, 40)];
+    apmNameInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"APM Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    apmNameInput.text = [NSLocalizedString(@"APM Name: ", nil) stringByAppendingString:_apmName];
+    apmNameInput.enabled = NO;
+    [scrollView addSubview:apmNameInput];
+    _apmNameInput = apmNameInput;
     
     [self addHorizontalLineOnView:scrollView afterElement:_apmNameInput];
     
-    _priceInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _apmNameInput.frame.size.height+_apmNameInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _priceInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Total Price", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    UITextField *priceInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _apmNameInput.frame.size.height+_apmNameInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    priceInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Total Price", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     
-    if (_price) {
-        _priceInput.enabled = NO;
-        _priceInput.text = [NSLocalizedString(@"Total Price: ",nil) stringByAppendingString:[NSString stringWithFormat:@"%.2f", _price]];
+    if (_price > 0.0) {
+        priceInput.enabled = NO;
+        priceInput.text = [NSLocalizedString(@"Total Price: ", nil) stringByAppendingString:[NSString stringWithFormat:@"%.2f", _price]];
     }
-    [scrollView addSubview:_priceInput];
-    
+    [scrollView addSubview:priceInput];
+    _priceInput = priceInput;
     [self addHorizontalLineOnView:scrollView afterElement:_priceInput];
     
-    _addressInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _priceInput.frame.size.height+_priceInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _addressInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Address", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    UITextField *addressInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _priceInput.frame.size.height+_priceInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    addressInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Address", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     
-    if (_address) {
-        _addressInput.text = [NSLocalizedString(@"Address: ",nil) stringByAppendingString:_address];
-        _addressInput.enabled = NO;
+    if (_address.length) {
+        addressInput.text = [NSLocalizedString(@"Address: ",nil) stringByAppendingString:_address];
+        addressInput.enabled = NO;
     }
-    [scrollView addSubview:_addressInput];
-    
+    [scrollView addSubview:addressInput];
+    _addressInput = addressInput;
     [self addHorizontalLineOnView:scrollView afterElement:_addressInput];
     
-    _cityInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _addressInput.frame.size.height+_addressInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _cityInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"City", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    UITextField *cityInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _addressInput.frame.size.height+_addressInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    cityInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"City", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     
-    if (_city) {
-        _cityInput.text = [NSLocalizedString(@"City: ",nil) stringByAppendingString:_city];
-        _cityInput.enabled = NO;
+    if (_city.length) {
+        cityInput.text = [NSLocalizedString(@"City: ",nil) stringByAppendingString:_city];
+        cityInput.enabled = NO;
     }
-    [scrollView addSubview:_cityInput];
-    
+    [scrollView addSubview:cityInput];
+    _cityInput = cityInput;
     [self addHorizontalLineOnView:scrollView afterElement:_cityInput];
     
-    _postcodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _cityInput.frame.size.height+_cityInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _postcodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Postcode", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    UITextField *postcodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _cityInput.frame.size.height+_cityInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    postcodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Postcode", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
     
-    if (_postcode) {
-        _postcodeInput.text = [NSLocalizedString(@"Postcode: ",nil) stringByAppendingString:_postcode];
-        _postcodeInput.enabled = NO;
+    if (_postcode.length) {
+        postcodeInput.text = [NSLocalizedString(@"Postcode: ",nil) stringByAppendingString:_postcode];
+        postcodeInput.enabled = NO;
     }
-    [scrollView addSubview:_postcodeInput];
-    
+    [scrollView addSubview:postcodeInput];
+    _postcodeInput = postcodeInput;
     [self addHorizontalLineOnView:scrollView afterElement:_postcodeInput];
     
-    _descriptionInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _postcodeInput.frame.size.height+_postcodeInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _descriptionInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Order Description", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_orderDescription) {
-        _descriptionInput.enabled = NO;
-        _descriptionInput.text = [NSLocalizedString(@"Description: ",nil) stringByAppendingString:_orderDescription];
+    UITextField *descriptionInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _postcodeInput.frame.size.height+_postcodeInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    descriptionInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Order Description", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_orderDescription.length) {
+        descriptionInput.enabled = NO;
+        descriptionInput.text = [NSLocalizedString(@"Description: ",nil) stringByAppendingString:_orderDescription];
     }
-    [scrollView addSubview:_descriptionInput];
-    
+    [scrollView addSubview:descriptionInput];
+    _descriptionInput = descriptionInput;
     [self addHorizontalLineOnView:scrollView afterElement:_descriptionInput];
     
-    _countryCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _descriptionInput.frame.size.height+_descriptionInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _countryCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Country Code (Eg. 'GB')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_countryCode) {
-        _countryCodeInput.enabled = NO;
-        _countryCodeInput.text = [NSLocalizedString(@"Country Code: ",nil) stringByAppendingString:_countryCode];
+    UITextField *countryCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _descriptionInput.frame.size.height+_descriptionInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    countryCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Country Code (Eg. 'GB')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_countryCode.length) {
+        countryCodeInput.enabled = NO;
+        countryCodeInput.text = [NSLocalizedString(@"Country Code: ",nil) stringByAppendingString:_countryCode];
     }
-    [scrollView addSubview:_countryCodeInput];
-    
+    [scrollView addSubview:countryCodeInput];
+    _countryCodeInput = countryCodeInput;
     [self addHorizontalLineOnView:scrollView afterElement:_countryCodeInput];
     
     if ([_apmName.lowercaseString isEqualToString:@"paypal"]) {
-        _shopperLanguageCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _countryCodeInput.frame.size.height+_countryCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-        _shopperLanguageCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Language Code (Eg. 'EN')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-        if (_shopperLanguageCode) {
-            _shopperLanguageCodeInput.enabled = NO;
-            _shopperLanguageCodeInput.text = [NSLocalizedString(@"Language Code: ",nil) stringByAppendingString:_shopperLanguageCode];
+        UITextField *shopperLanguageCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _countryCodeInput.frame.size.height+_countryCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+        shopperLanguageCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Language Code (Eg. 'EN')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+        if (_shopperLanguageCode.length) {
+            shopperLanguageCodeInput.enabled = NO;
+            shopperLanguageCodeInput.text = [NSLocalizedString(@"Language Code: ",nil) stringByAppendingString:_shopperLanguageCode];
         }
-        [scrollView addSubview:_shopperLanguageCodeInput];
+        [scrollView addSubview:shopperLanguageCodeInput];
+        _shopperLanguageCodeInput = shopperLanguageCodeInput;
         [self addHorizontalLineOnView:scrollView afterElement:_shopperLanguageCodeInput];
         
-        _currencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _shopperLanguageCodeInput.frame.size.height+_shopperLanguageCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-        _currencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Currency (Eg. 'GBP')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-        if (_currency) {
-            _currencyInput.enabled = NO;
-            _currencyInput.text = [NSLocalizedString(@"Currency: ",nil) stringByAppendingString:_currency];
+        UITextField *currencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _shopperLanguageCodeInput.frame.size.height+_shopperLanguageCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+        currencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Currency (Eg. 'GBP')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+        if (_currency.length) {
+            currencyInput.enabled = NO;
+            currencyInput.text = [NSLocalizedString(@"Currency: ",nil) stringByAppendingString:_currency];
         }
-        [scrollView addSubview:_currencyInput];
+        [scrollView addSubview:currencyInput];
+        _currencyInput = currencyInput;
     }
     
     if ([_apmName.lowercaseString isEqualToString:@"giropay"]) {
         
-        _swiftCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _countryCodeInput.frame.size.height+_countryCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+        UITextField *swiftCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _countryCodeInput.frame.size.height+_countryCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
         _swiftCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Swift Code", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
         if (_swiftCode) {
-            _swiftCodeInput.enabled = NO;
-            _swiftCodeInput.text = [NSLocalizedString(@"Swift Code: ",nil) stringByAppendingString:_swiftCode];
+            swiftCodeInput.enabled = NO;
+            swiftCodeInput.text = [NSLocalizedString(@"Swift Code: ",nil) stringByAppendingString:_swiftCode];
         }
-        [scrollView addSubview:_swiftCodeInput];
+        [scrollView addSubview:swiftCodeInput];
+        _swiftCodeInput = swiftCodeInput;
         [self addHorizontalLineOnView:scrollView afterElement:_swiftCodeInput];
         
-        _currencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _swiftCodeInput.frame.size.height+_swiftCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-        _currencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Currency (Eg. 'GBP')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+        UITextField *currencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _swiftCodeInput.frame.size.height+_swiftCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+        currencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Currency (Eg. 'GBP')", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
         
-        if (_currency) {
-            _currencyInput.enabled = NO;
-            _currencyInput.text = [NSLocalizedString(@"Currency: ",nil) stringByAppendingString:_currency];
+        if (_currency.length) {
+            currencyInput.enabled = NO;
+            currencyInput.text = [NSLocalizedString(@"Currency: ",nil) stringByAppendingString:_currency];
         }
-        [scrollView addSubview:_currencyInput];
+        [scrollView addSubview:currencyInput];
+        _currencyInput = currencyInput;
     }
     
     [self addHorizontalLineOnView:scrollView afterElement:_currencyInput];
     
-    _settlementCurrencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _currencyInput.frame.size.height+_currencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _settlementCurrencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Settlement Currency", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_settlementCurrency) {
-        _settlementCurrencyInput.enabled = NO;
-        _settlementCurrencyInput.text = [NSLocalizedString(@"Settlement Currency: ",nil) stringByAppendingString:_settlementCurrency];
+    UITextField *settlementCurrencyInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _currencyInput.frame.size.height+_currencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    settlementCurrencyInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Settlement Currency", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_settlementCurrency.length) {
+        settlementCurrencyInput.enabled = NO;
+        settlementCurrencyInput.text = [NSLocalizedString(@"Settlement Currency: ",nil) stringByAppendingString:_settlementCurrency];
     }
     
-    [scrollView addSubview:_settlementCurrencyInput];
+    [scrollView addSubview:settlementCurrencyInput];
+    _settlementCurrencyInput = settlementCurrencyInput;
     [self addHorizontalLineOnView:scrollView afterElement:_settlementCurrencyInput];
     
-    _nameInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _settlementCurrencyInput.frame.size.height+_settlementCurrencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _nameInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_name) {
-        _nameInput.enabled = NO;
-        _nameInput.text = [NSLocalizedString(@"Name: ",nil) stringByAppendingString:_name];
+    UITextField *nameInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _settlementCurrencyInput.frame.size.height+_settlementCurrencyInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    nameInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_name.length) {
+        nameInput.enabled = NO;
+        nameInput.text = [NSLocalizedString(@"Name: ",nil) stringByAppendingString:_name];
     }
-    [scrollView addSubview:_nameInput];
+    [scrollView addSubview:nameInput];
+    _nameInput = nameInput;
     [self addHorizontalLineOnView:scrollView afterElement:_nameInput];
     
-    _customerOrderCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _nameInput.frame.size.height+_nameInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
-    _customerOrderCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Customer Order Code", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_customerOrderCode) {
-        _customerOrderCodeInput.enabled = NO;
-        _customerOrderCodeInput.text = [NSLocalizedString(@"Order Code: ",nil) stringByAppendingString:_customerOrderCode];
+    UITextField *customerOrderCodeInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _nameInput.frame.size.height+_nameInput.frame.origin.y, screenRect.size.width - 10, fieldHeight)];
+    customerOrderCodeInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Customer Order Code", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_customerOrderCode.length) {
+        customerOrderCodeInput.enabled = NO;
+        customerOrderCodeInput.text = [NSLocalizedString(@"Order Code: ",nil) stringByAppendingString:_customerOrderCode];
     }
-    [scrollView addSubview:_customerOrderCodeInput];
-    
+    [scrollView addSubview:customerOrderCodeInput];
+    _customerOrderCodeInput = customerOrderCodeInput;
     [self addHorizontalLineOnView:scrollView afterElement:_customerOrderCodeInput];
     
-    _successUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _customerOrderCodeInput.frame.size.height+_customerOrderCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-    _successUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Success URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_successUrl) {
-        _successUrlInput.enabled = NO;
-        _successUrlInput.text = [NSLocalizedString(@"Success URL: ",nil) stringByAppendingString:_successUrl];
+    UITextField *successUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _customerOrderCodeInput.frame.size.height+_customerOrderCodeInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+    successUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Success URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_successUrl.length) {
+        successUrlInput.enabled = NO;
+        successUrlInput.text = [NSLocalizedString(@"Success URL: ",nil) stringByAppendingString:_successUrl];
     }
-    [scrollView addSubview:_successUrlInput];
-    
+    [scrollView addSubview:successUrlInput];
+    _successUrlInput = successUrlInput;
     [self addHorizontalLineOnView:scrollView afterElement:_successUrlInput];
     
-    _cancelUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _successUrlInput.frame.size.height+_successUrlInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-    _cancelUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Cancel URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_cancelUrl) {
-        _cancelUrlInput.enabled = NO;
-        _cancelUrlInput.text = [NSLocalizedString(@"Cancel URL: ",nil) stringByAppendingString:_cancelUrl];
+    UITextField *cancelUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _successUrlInput.frame.size.height+_successUrlInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+    cancelUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Cancel URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_cancelUrl.length) {
+        cancelUrlInput.enabled = NO;
+        cancelUrlInput.text = [NSLocalizedString(@"Cancel URL: ",nil) stringByAppendingString:_cancelUrl];
     }
-    [scrollView addSubview:_cancelUrlInput];
-    
+    [scrollView addSubview:cancelUrlInput];
+    _cancelUrlInput = cancelUrlInput;
     [self addHorizontalLineOnView:scrollView afterElement:_cancelUrlInput];
     
-    _failureUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _cancelUrlInput.frame.size.height+_cancelUrlInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-    _failureUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Failure URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_failureUrl) {
-        _failureUrlInput.enabled = NO;
-        _failureUrlInput.text = [NSLocalizedString(@"Failure URL: ",nil) stringByAppendingString:_failureUrl];
+    UITextField *failureUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _cancelUrlInput.frame.size.height+_cancelUrlInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+    failureUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Failure URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_failureUrl.length) {
+        failureUrlInput.enabled = NO;
+        failureUrlInput.text = [NSLocalizedString(@"Failure URL: ",nil) stringByAppendingString:_failureUrl];
     }
-    [scrollView addSubview:_failureUrlInput];
-    
+    [scrollView addSubview:failureUrlInput];
+    _failureUrlInput = failureUrlInput;
     [self addHorizontalLineOnView:scrollView afterElement:_failureUrlInput];
     
-    _pendingUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _failureUrlInput.frame.size.height+_failureUrlInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
-    _pendingUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pending URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    if (_pendingUrl) {
-        _pendingUrlInput.enabled = NO;
-        _pendingUrlInput.text = [NSLocalizedString(@"Pending URL: ",nil) stringByAppendingString:_pendingUrl];
+    UITextField *pendingUrlInput = [[UITextField alloc]initWithFrame:CGRectMake(10, _failureUrlInput.frame.size.height+_failureUrlInput.frame.origin.y+1, screenRect.size.width - 10, fieldHeight)];
+    pendingUrlInput.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pending URL", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    if (_pendingUrl.length) {
+        pendingUrlInput.enabled = NO;
+        pendingUrlInput.text = [NSLocalizedString(@"Pending URL: ",nil) stringByAppendingString:_pendingUrl];
     }
-    [scrollView addSubview:_pendingUrlInput];
-    
+    [scrollView addSubview:pendingUrlInput];
+    _pendingUrlInput = pendingUrlInput;
     
     UIButton *confirmPurchase = [[UIButton alloc]initWithFrame:CGRectMake(screenRect.size.width/2-85, scrollView.frame.size.height-320, 160, 35)];
     
@@ -578,60 +573,60 @@
     
     [UITextField appearance].tintColor = _colorTheme;
     
-    _apmNameInput.layer.name = @"apmName";
-    _priceInput.layer.name = @"price";
-    _addressInput.layer.name = @"address";
-    _cityInput.layer.name = @"city";
-    _postcodeInput.layer.name = @"postcode";
-    _countryCodeInput.layer.name = @"countryCode";
-    _nameInput.layer.name = @"name";
-    _successUrlInput.layer.name = @"successUrl";
-    _failureUrlInput.layer.name = @"failureUrl";
-    _cancelUrlInput.layer.name = @"cancelUrl";
-    _pendingUrlInput.layer.name = @"pendingUrl";
-    _currencyInput.layer.name = @"currency";
-    _shopperLanguageCodeInput.layer.name = @"shopperLanguageCode";
-    _swiftCodeInput.layer.name = @"swiftCode";
-    _descriptionInput.layer.name = @"description";
-    _settlementCurrencyInput.layer.name = @"settlementCurrency";
-    _customerOrderCodeInput.layer.name = @"customerOrderCode";
+    _apmNameInput.layer.name                = @"apmName";
+    _priceInput.layer.name                  = @"price";
+    _addressInput.layer.name                = @"address";
+    _cityInput.layer.name                   = @"city";
+    _postcodeInput.layer.name               = @"postcode";
+    _countryCodeInput.layer.name            = @"countryCode";
+    _nameInput.layer.name                   = @"name";
+    _successUrlInput.layer.name             = @"successUrl";
+    _failureUrlInput.layer.name             = @"failureUrl";
+    _cancelUrlInput.layer.name              = @"cancelUrl";
+    _pendingUrlInput.layer.name             = @"pendingUrl";
+    _currencyInput.layer.name               = @"currency";
+    _shopperLanguageCodeInput.layer.name    = @"shopperLanguageCode";
+    _swiftCodeInput.layer.name              = @"swiftCode";
+    _descriptionInput.layer.name            = @"description";
+    _settlementCurrencyInput.layer.name     = @"settlementCurrency";
+    _customerOrderCodeInput.layer.name      = @"customerOrderCode";
     
-    _apmNameInput.delegate = self;
-    _priceInput.delegate = self;
-    _addressInput.delegate = self;
-    _cityInput.delegate = self;
-    _postcodeInput.delegate = self;
-    _countryCodeInput.delegate = self;
-    _nameInput.delegate = self;
-    _successUrlInput.delegate = self;
-    _failureUrlInput.delegate = self;
-    _cancelUrlInput.delegate = self;
-    _pendingUrlInput.delegate = self;
-    _currencyInput.delegate = self;
-    _shopperLanguageCodeInput.delegate = self;
-    _swiftCodeInput.delegate = self;
-    _descriptionInput.delegate = self;
-    _settlementCurrencyInput.delegate = self;
-    _customerOrderCodeInput.delegate = self;
+    _apmNameInput.delegate              = self;
+    _priceInput.delegate                = self;
+    _addressInput.delegate              = self;
+    _cityInput.delegate                 = self;
+    _postcodeInput.delegate             = self;
+    _countryCodeInput.delegate          = self;
+    _nameInput.delegate                 = self;
+    _successUrlInput.delegate           = self;
+    _failureUrlInput.delegate           = self;
+    _cancelUrlInput.delegate            = self;
+    _pendingUrlInput.delegate           = self;
+    _currencyInput.delegate             = self;
+    _shopperLanguageCodeInput.delegate  = self;
+    _swiftCodeInput.delegate            = self;
+    _descriptionInput.delegate          = self;
+    _settlementCurrencyInput.delegate   = self;
+    _customerOrderCodeInput.delegate    = self;
     
     if (_loadingTheme == APMDetailsLoadingThemeBlack) {
-        _apmNameInput.textColor = [UIColor whiteColor];
-        _priceInput.textColor = [UIColor whiteColor];
-        _addressInput.textColor = [UIColor whiteColor];
-        _cityInput.textColor = [UIColor whiteColor];
-        _postcodeInput.textColor = [UIColor whiteColor];
-        _countryCodeInput.textColor = [UIColor whiteColor];
-        _nameInput.textColor = [UIColor whiteColor];
-        _successUrlInput.textColor = [UIColor whiteColor];
-        _failureUrlInput.textColor = [UIColor whiteColor];
-        _cancelUrlInput.textColor = [UIColor whiteColor];
-        _pendingUrlInput.textColor = [UIColor whiteColor];
-        _currencyInput.textColor = [UIColor whiteColor];
+        _apmNameInput.textColor             = [UIColor whiteColor];
+        _priceInput.textColor               = [UIColor whiteColor];
+        _addressInput.textColor             = [UIColor whiteColor];
+        _cityInput.textColor                = [UIColor whiteColor];
+        _postcodeInput.textColor            = [UIColor whiteColor];
+        _countryCodeInput.textColor         = [UIColor whiteColor];
+        _nameInput.textColor                = [UIColor whiteColor];
+        _successUrlInput.textColor          = [UIColor whiteColor];
+        _failureUrlInput.textColor          = [UIColor whiteColor];
+        _cancelUrlInput.textColor           = [UIColor whiteColor];
+        _pendingUrlInput.textColor          = [UIColor whiteColor];
+        _currencyInput.textColor            = [UIColor whiteColor];
         _shopperLanguageCodeInput.textColor = [UIColor whiteColor];
-        _swiftCodeInput.textColor = [UIColor whiteColor];
-        _descriptionInput.textColor = [UIColor whiteColor];
-        _settlementCurrencyInput.textColor = [UIColor whiteColor];
-        _customerOrderCodeInput.textColor = [UIColor whiteColor];
+        _swiftCodeInput.textColor           = [UIColor whiteColor];
+        _descriptionInput.textColor         = [UIColor whiteColor];
+        _settlementCurrencyInput.textColor  = [UIColor whiteColor];
+        _customerOrderCodeInput.textColor   = [UIColor whiteColor];
     }
 }
 

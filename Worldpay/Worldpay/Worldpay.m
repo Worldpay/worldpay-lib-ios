@@ -62,6 +62,10 @@ static NSUInteger const kWorldpayTimeout = 65;
     return self;
 }
 
+- (void)dealloc {
+    [self.networkManager invalidateSessionCancelingTasks:YES];
+}
+
 - (NSString *)APIStringURL {
     return api_url;
 }
@@ -584,6 +588,10 @@ static NSUInteger const kWorldpayTimeout = 65;
                           @{
                               @"type": @"jcb",
                               @"pattern": @"^(?:2131|1800|35\\d{3})\\d{11}$"
+                              },
+                          @{
+                              @"type": @"laser",
+                              @"pattern": @"^(6304|6706|6709|6771)[0-9]{12,15}$"
                               }
                           ];
     

@@ -19,14 +19,14 @@ typedef NS_ENUM(NSUInteger, CardDetailsTheme) {
     CardDetailsThemeYellow
 };
 
-@property (nonatomic) CardDetailsTheme theme;
+@property (nonatomic, assign) CardDetailsTheme theme;
 
 typedef NS_ENUM(NSUInteger, CardDetailsLoadingTheme) {
     CardDetailsLoadingThemeWhite,
     CardDetailsLoadingThemeBlack
 };
 
-@property (nonatomic) CardDetailsLoadingTheme loadingTheme;
+@property (nonatomic, assign) CardDetailsLoadingTheme loadingTheme;
 
 typedef NS_ENUM(NSUInteger, CardDetailsTextField) {
     CardDetailsTextFieldFirstName,
@@ -35,8 +35,6 @@ typedef NS_ENUM(NSUInteger, CardDetailsTextField) {
     CardDetailsTextFieldExpiry,
     CardDetailsTextFieldCVC
 };
-
-@property (nonatomic) CardDetailsTextField textField;
 
 /*!
  *  Function to initialize Card Details with the default theme
