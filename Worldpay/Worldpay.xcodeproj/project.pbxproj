@@ -46,6 +46,9 @@
 		7EF7108D1976B8B800F7DC51 /* libWorldpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF710751976B8B800F7DC51 /* libWorldpay.a */; };
 		7EF710931976B8B800F7DC51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EF710911976B8B800F7DC51 /* InfoPlist.strings */; };
 		7EF710951976B8B800F7DC51 /* WorldpayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF710941976B8B800F7DC51 /* WorldpayTests.m */; };
+		A52A7CBA2216FF150051843F /* wp_ic_discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52A7CB72216FF150051843F /* wp_ic_discover@2x.png */; };
+		A52A7CBB2216FF150051843F /* wp_ic_discover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52A7CB82216FF150051843F /* wp_ic_discover@3x.png */; };
+		A52A7CBC2216FF150051843F /* wp_ic_discover.png in Resources */ = {isa = PBXBuildFile; fileRef = A52A7CB92216FF150051843F /* wp_ic_discover.png */; };
 		A59C28B52215B36700610B6C /* wp_ic_visa_checkout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */; };
 		A59C28B62215B36700610B6C /* poweredByWorldPay.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28892215B36300610B6C /* poweredByWorldPay.png */; };
 		A59C28B72215B36700610B6C /* wp_ic_laser.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288A2215B36300610B6C /* wp_ic_laser.png */; };
@@ -163,6 +166,9 @@
 		7EF710901976B8B800F7DC51 /* WorldpayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WorldpayTests-Info.plist"; sourceTree = "<group>"; };
 		7EF710921976B8B800F7DC51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EF710941976B8B800F7DC51 /* WorldpayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldpayTests.m; sourceTree = "<group>"; };
+		A52A7CB72216FF150051843F /* wp_ic_discover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_discover@2x.png"; path = "Resources/wp_ic_discover@2x.png"; sourceTree = "<group>"; };
+		A52A7CB82216FF150051843F /* wp_ic_discover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_discover@3x.png"; path = "Resources/wp_ic_discover@3x.png"; sourceTree = "<group>"; };
+		A52A7CB92216FF150051843F /* wp_ic_discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_discover.png; path = Resources/wp_ic_discover.png; sourceTree = "<group>"; };
 		A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa_checkout@2x.png"; path = "Resources/wp_ic_visa_checkout@2x.png"; sourceTree = "<group>"; };
 		A59C28892215B36300610B6C /* poweredByWorldPay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = poweredByWorldPay.png; path = Resources/poweredByWorldPay.png; sourceTree = "<group>"; };
 		A59C288A2215B36300610B6C /* wp_ic_laser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_laser.png; path = Resources/wp_ic_laser.png; sourceTree = "<group>"; };
@@ -330,6 +336,9 @@
 				A59C28A72215B36500610B6C /* wp_ic_diners.png */,
 				A59C28912215B36300610B6C /* wp_ic_diners@2x.png */,
 				A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */,
+				A52A7CB92216FF150051843F /* wp_ic_discover.png */,
+				A52A7CB72216FF150051843F /* wp_ic_discover@2x.png */,
+				A52A7CB82216FF150051843F /* wp_ic_discover@3x.png */,
 				A59C28AA2215B36500610B6C /* wp_ic_jcb.png */,
 				A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */,
 				A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */,
@@ -557,6 +566,7 @@
 				A59C28CC2215B36700610B6C /* wp_ic_mastercard.png in Resources */,
 				A59C28B52215B36700610B6C /* wp_ic_visa_checkout@2x.png in Resources */,
 				A59C28BC2215B36700610B6C /* wp_ic_mastercard@3x.png in Resources */,
+				A52A7CBA2216FF150051843F /* wp_ic_discover@2x.png in Resources */,
 				A59C28B62215B36700610B6C /* poweredByWorldPay.png in Resources */,
 				A59C28BF2215B36700610B6C /* wp_ic_lockB@3x.png in Resources */,
 				A59C28D42215B36700610B6C /* wp_ic_diners.png in Resources */,
@@ -589,6 +599,8 @@
 				A59C28CF2215B36700610B6C /* wp_ic_visa@2x.png in Resources */,
 				A59C28BE2215B36700610B6C /* wp_ic_diners@2x.png in Resources */,
 				A59C28C92215B36700610B6C /* wp_ic_default_card.png in Resources */,
+				A52A7CBB2216FF150051843F /* wp_ic_discover@3x.png in Resources */,
+				A52A7CBC2216FF150051843F /* wp_ic_discover.png in Resources */,
 				A59C28DB2215B36700610B6C /* wp_ic_mastercard@2x.png in Resources */,
 				A59C28C12215B36700610B6C /* wp_ic_laser@2x.png in Resources */,
 				A59C28D22215B36700610B6C /* wp_ic_masterpass@2x.png in Resources */,
