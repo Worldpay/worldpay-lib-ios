@@ -6,7 +6,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "Worldpay.h"
+#import <Worldpay/Worldpay.h>
 
 @interface WorldpayTests : XCTestCase
 

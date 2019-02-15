@@ -8,20 +8,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "WorldpayConstants.h"
+
 @interface Worldpay : NSObject
 
 typedef void (^requestUpdateTokenSuccess)(NSInteger code, NSDictionary *responseDictionary);
 typedef void (^requestTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 typedef void (^updateTokenFailure)(NSDictionary *responseDictionary, NSArray *errors);
 typedef void (^preRequestAction)(void);
-
-typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
-    WorldpayValidationTypeBasic,
-    WorldpayValidationTypeAdvanced,
-    
-    WorldpayValidationTypeCount
-};
-
 
 /*!
  *  Property to set the validation type (WorldpayValidationTypeBasic or WorldpayValidationTypeAdvanced)
@@ -270,7 +264,7 @@ typedef NS_ENUM(NSUInteger, WorldpayValidationType) {
  *
  *  @return The type of the card
  */
-- (NSString *)cardType:(NSString *)cardNumber;
++ (WorldpayCardType)cardType:(NSString *)cardNumber;
 
 /*!
  * Returns a Worldpay format error message with title and code

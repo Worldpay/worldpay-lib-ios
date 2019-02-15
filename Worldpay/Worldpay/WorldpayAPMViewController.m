@@ -5,9 +5,11 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
+#import <AFNetworking/AFNetworking.h>
+
 #import "WorldpayAPMViewController.h"
 #import "APMController.h"
-#import <AFNetworking/AFNetworking.h>
+#import "UIImage+Worldpay.h"
 
 @interface WorldpayAPMViewController () <UITextFieldDelegate>
 
@@ -130,8 +132,10 @@
     backButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-    UIImage *arrowImage = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_back_arrow.png"] withColor:toolbar.tintColor];
-    UIImage *arrowHover = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_back_arrow.png"] withColor:[UIColor lightGrayColor]];
+    UIImage *arrowImage = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+                                               withColor:toolbar.tintColor];
+    UIImage *arrowHover = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+                                               withColor:[UIColor lightGrayColor]];
     
     [backButton setImage:arrowImage forState:UIControlStateNormal];
     [backButton setImage:arrowHover forState:UIControlStateHighlighted];
@@ -630,7 +634,6 @@
     }
 }
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [_apmNameInput resignFirstResponder];
     [_priceInput resignFirstResponder];
@@ -648,37 +651,6 @@
     [_swiftCodeInput resignFirstResponder];
     
     return YES;
-}
-
-- (UIImage *)filledImageFrom:(UIImage *)source withColor:(UIColor *)color {
-    
-    // begin a new image context, to draw our colored image onto with the right scale
-    UIGraphicsBeginImageContextWithOptions(source.size, NO, [UIScreen mainScreen].scale);
-    
-    // get a reference to that context we created
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // set the fill color
-    [color setFill];
-    
-    // translate/flip the graphics context (for transforming from CG* coords to UI* coords
-    CGContextTranslateCTM(context, 0, source.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    CGContextSetBlendMode(context, kCGBlendModeColorBurn);
-    CGRect rect = CGRectMake(0, 0, source.size.width, source.size.height);
-    CGContextDrawImage(context, rect, source.CGImage);
-    
-    CGContextSetBlendMode(context, kCGBlendModeSourceIn);
-    CGContextAddRect(context, rect);
-    CGContextDrawPath(context,kCGPathFill);
-    
-    // generate a new UIImage from the graphics context we drew onto
-    UIImage *coloredImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    //return the color-burned image
-    return coloredImg;
 }
 
 - (void)closeController {

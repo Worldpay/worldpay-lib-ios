@@ -7,6 +7,7 @@
 
 #import "WorldpayCardViewController.h"
 #import "WorldpayUtils.h"
+#import "UIImage+Worldpay.h"
 
 @interface WorldpayCardViewController () <UITextFieldDelegate>
 
@@ -39,18 +40,8 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
-    }
-    
-    return self;
-}
-
-- (instancetype)initWithTheme:(CardDetailsTheme)theme loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
-    if (self = [super init]) {
-        _theme = theme;
-        _loadingTheme = loadingTheme;
     }
     
     return self;
@@ -69,6 +60,15 @@
 - (instancetype)initWithColor:(UIColor *)color loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
     if (self = [super init]) {
         _colorTheme = color;
+        _loadingTheme = loadingTheme;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithTheme:(CardDetailsTheme)theme loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
+    if (self = [super init]) {
+        _theme = theme;
         _loadingTheme = loadingTheme;
     }
     
@@ -103,8 +103,6 @@
 }
 
 - (void)createNavigationBar {
-    
-    
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 44)];
     toolbar.translucent = NO;
     [self.view addSubview:toolbar];
@@ -123,8 +121,10 @@
     backButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-    UIImage *arrowImage = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_back_arrow.png"] withColor:toolbar.tintColor];
-    UIImage *arrowHover = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_back_arrow.png"] withColor:[UIColor lightGrayColor]];
+    UIImage *arrowImage = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+                                               withColor:toolbar.tintColor];
+    UIImage *arrowHover = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+                                               withColor:[UIColor lightGrayColor]];
     
     [backButton setImage:arrowImage forState:UIControlStateNormal];
     [backButton setImage:arrowHover forState:UIControlStateHighlighted];
@@ -202,14 +202,14 @@
         [btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btnConfirm.titleLabel.textColor = [UIColor whiteColor];
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0xFFFFFF, 1.0);
-        padlockImage.image = [UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_lockB.png"];
+        padlockImage.image = [UIImage wp_imageNamed:@"wp_ic_lockB"];
     }
     else {
         btnConfirm.backgroundColor = [UIColor whiteColor];
         [btnConfirm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0x000000, 1.0);
-        padlockImage.image = [UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_lockW.png"];
+        padlockImage.image = [UIImage wp_imageNamed:@"wp_ic_lockW"];
     }
     [backgroundView addSubview:containerView];
     [containerView addSubview:btnConfirm];
@@ -451,7 +451,7 @@
     _cardNumber = cardNumber;
     
     UIImageView *cardTypeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, _cardNumber.frame.origin.y + 5, 40, 40)];
-    cardTypeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"WorldpayResources.bundle/default_card.png"]];;
+    cardTypeImageView.image = [UIImage wp_cardImage:WorldpayCardType_unknown];
     cardTypeImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:cardTypeImageView];
     _cardTypeImageView = cardTypeImageView;
@@ -494,10 +494,10 @@
     
     UIImageView *padlock = [[UIImageView alloc]initWithFrame:CGRectMake(secureAndSafe.frame.size.width+secureAndSafe.frame.origin.x, horizontalLine2.frame.origin.y+15, 20, 20)];
     
-    UIImage *padLockImage = [UIImage imageNamed:@"WorldpayResources.bundle/wp_ic_lockB.png"];
+    UIImage *padLockImage = [UIImage wp_imageNamed:@"wp_ic_lockB"];
     
     [UITextField appearance].tintColor = _colorTheme;
-    padlock.image = [self filledImageFrom:padLockImage withColor:_colorTheme];
+    padlock.image = [UIImage wp_filledImageFrom:padLockImage withColor:_colorTheme];
     padlock.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:padlock];
@@ -592,19 +592,17 @@
     _expiry.text = [_expiry.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     _CVC.text = [_CVC.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     
-    NSString *cardType = [[Worldpay sharedInstance] cardType:[_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    WorldpayCardType cardType = [Worldpay cardType:[_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
     
     BOOL isValidCard = ([Worldpay sharedInstance].validationType == WorldpayValidationTypeBasic &&
                         [[Worldpay sharedInstance] validateCardNumberBasicWithCardNumber:_cardNumber.text]) ||
     ([Worldpay sharedInstance].validationType == WorldpayValidationTypeAdvanced &&
      [[Worldpay sharedInstance] validateCardNumberAdvancedWithCardNumber:_cardNumber.text]);
     
-    if (![cardType isEqualToString:@"unknown"] && isValidCard) {
-        _cardTypeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"WorldpayResources.bundle/wp_ic_%@.png", cardType]];
+    if (!isValidCard) {
+        cardType = WorldpayCardType_unknown;
     }
-    else {
-        _cardTypeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"WorldpayResources.bundle/wp_ic_default_card.png"]];;
-    }
+    _cardTypeImageView.image = [UIImage wp_cardImage:cardType];
     
     if (sender == _expiry && _expiry.text.length == 2 && _expiry.text.length == 2 && [_expiry.text characterAtIndex:1] != '/' && !_shouldDeleteCharacter) {
         _expiry.text = [NSString stringWithFormat:@"%@/", _expiry.text];
@@ -690,43 +688,6 @@
     }
     
     return YES;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (UIImage *)filledImageFrom:(UIImage *)source withColor:(UIColor *)color {
-    
-    // begin a new image context, to draw our colored image onto with the right scale
-    UIGraphicsBeginImageContextWithOptions(source.size, NO, [UIScreen mainScreen].scale);
-    
-    // get a reference to that context we created
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // set the fill color
-    [color setFill];
-    
-    // translate/flip the graphics context (for transforming from CG* coords to UI* coords
-    CGContextTranslateCTM(context, 0, source.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    CGContextSetBlendMode(context, kCGBlendModeColorBurn);
-    CGRect rect = CGRectMake(0, 0, source.size.width, source.size.height);
-    CGContextDrawImage(context, rect, source.CGImage);
-    
-    CGContextSetBlendMode(context, kCGBlendModeSourceIn);
-    CGContextAddRect(context, rect);
-    CGContextDrawPath(context,kCGPathFill);
-    
-    // generate a new UIImage from the graphics context we drew onto
-    UIImage *coloredImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    //return the color-burned image
-    return coloredImg;
 }
 
 - (void)closeController {

@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5927CEA719B5CB95004BA44F /* app_icon@2x.png */; };
-		593F14AA19B0BA7F00A009FB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A619B0BA7F00A009FB /* amex.png */; };
-		593F14AB19B0BA7F00A009FB /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A719B0BA7F00A009FB /* maestro.png */; };
-		593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A819B0BA7F00A009FB /* mastercard.png */; };
-		593F14AD19B0BA7F00A009FB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F14A919B0BA7F00A009FB /* visa.png */; };
 		59581CAA1B7B544E00D616C0 /* Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59581CA91B7B544E00D616C0 /* Close@2x.png */; };
 		59616AF71A9F4EB4009A820E /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59616AF61A9F4EB4009A820E /* AddressBook.framework */; };
 		59B389A51AC1A99C00CA5269 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B389A31AC1A99C00CA5269 /* SettingsTableViewController.m */; };
@@ -22,7 +18,6 @@
 		59CEF27C1B72015500FB0A7D /* BasketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 59CEF27B1B72015500FB0A7D /* BasketManager.m */; };
 		59D4B5441A7153BC00E92557 /* apple_pay_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */; };
 		59D4B5461A71594300E92557 /* apple_pay_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */; };
-		5A6788F01A680E590084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EF1A680E590084394C /* default_card@2x.png */; };
 		5AC8C6911BDEAC57006F1F78 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AC8C68E1BDEAC57006F1F78 /* Default-568h@2x.png */; };
 		5AC8C6921BDEAC57006F1F78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AC8C68F1BDEAC57006F1F78 /* Default.png */; };
 		5AC8C6931BDEAC57006F1F78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AC8C6901BDEAC57006F1F78 /* Default@2x.png */; };
@@ -85,10 +80,6 @@
 		396CB97E046112B2665DFFC6 /* Pods_testWorldpayLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testWorldpayLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B8FB47399606D0168C472D /* Pods-testWorldpayLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testWorldpayLibrary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testWorldpayLibrary/Pods-testWorldpayLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 		5927CEA719B5CB95004BA44F /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "Resources/app_icon@2x.png"; sourceTree = "<group>"; };
-		593F14A619B0BA7F00A009FB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amex.png; path = Resources/amex.png; sourceTree = "<group>"; };
-		593F14A719B0BA7F00A009FB /* maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maestro.png; path = Resources/maestro.png; sourceTree = "<group>"; };
-		593F14A819B0BA7F00A009FB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = Resources/mastercard.png; sourceTree = "<group>"; };
-		593F14A919B0BA7F00A009FB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = Resources/visa.png; sourceTree = "<group>"; };
 		59581CA91B7B544E00D616C0 /* Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Close@2x.png"; path = "Resources/Close@2x.png"; sourceTree = "<group>"; };
 		59616AF61A9F4EB4009A820E /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		59A6308E1A8BC0C2002A1CCC /* Worldfood.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Worldfood.entitlements; sourceTree = "<group>"; };
@@ -103,7 +94,6 @@
 		59CEF27B1B72015500FB0A7D /* BasketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasketManager.m; sourceTree = "<group>"; };
 		59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apple_pay_btn@2x.png"; path = "Resources/apple_pay_btn@2x.png"; sourceTree = "<group>"; };
 		59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apple_pay_btn@3x.png"; path = "Resources/apple_pay_btn@3x.png"; sourceTree = "<group>"; };
-		5A6788EF1A680E590084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
 		5AC8C68E1BDEAC57006F1F78 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5AC8C68F1BDEAC57006F1F78 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5AC8C6901BDEAC57006F1F78 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -224,7 +214,6 @@
 				59C0053F1B78D89400862E1A /* Basket@2x.png */,
 				59D4B5431A7153BC00E92557 /* apple_pay_btn@2x.png */,
 				59D4B5451A71594300E92557 /* apple_pay_btn@3x.png */,
-				5A6788EF1A680E590084394C /* default_card@2x.png */,
 				5927CEA719B5CB95004BA44F /* app_icon@2x.png */,
 				7EB746C6198BCED400D33001 /* moussaka@2x.jpg */,
 				7EB746C7198BCED400D33001 /* paella@2x.jpg */,
@@ -239,10 +228,6 @@
 				7E00CE87198B7B5500C34D6A /* uk@2x.png */,
 				7E00CE81198B7B5500C34D6A /* greece@2x.png */,
 				7E00CE85198B7B5500C34D6A /* loxodrome@2x.png */,
-				593F14A619B0BA7F00A009FB /* amex.png */,
-				593F14A719B0BA7F00A009FB /* maestro.png */,
-				593F14A819B0BA7F00A009FB /* mastercard.png */,
-				593F14A919B0BA7F00A009FB /* visa.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -436,7 +421,6 @@
 			files = (
 				7E00CE8B198B7B5500C34D6A /* delete@2x.png in Resources */,
 				7E00CE91198B7B5500C34D6A /* loxodrome@2x.png in Resources */,
-				593F14AD19B0BA7F00A009FB /* visa.png in Resources */,
 				59581CAA1B7B544E00D616C0 /* Close@2x.png in Resources */,
 				59D4B5441A7153BC00E92557 /* apple_pay_btn@2x.png in Resources */,
 				7EF7114C1976C74100F7DC51 /* NavigationViewController.xib in Resources */,
@@ -446,12 +430,10 @@
 				7EF711131976C3C100F7DC51 /* InfoPlist.strings in Resources */,
 				7EB746C9198BCED400D33001 /* moussaka@2x.jpg in Resources */,
 				7EF711451976C72600F7DC51 /* SampleViewController.xib in Resources */,
-				5A6788F01A680E590084394C /* default_card@2x.png in Resources */,
 				59C005401B78D89400862E1A /* Basket@2x.png in Resources */,
 				7E5166B3197FE63700CCB1EC /* SplashScreenViewController.xib in Resources */,
 				7EB746CB198BCED400D33001 /* roastbeef@2x.jpg in Resources */,
 				59B389A61AC1A99C00CA5269 /* SettingsTableViewController.xib in Resources */,
-				593F14AA19B0BA7F00A009FB /* amex.png in Resources */,
 				7E00CE8A198B7B5500C34D6A /* clock@2x.png in Resources */,
 				5AC8C6931BDEAC57006F1F78 /* Default@2x.png in Resources */,
 				5AC8C6921BDEAC57006F1F78 /* Default.png in Resources */,
@@ -461,9 +443,7 @@
 				7E00CE93198B7B5500C34D6A /* uk@2x.png in Resources */,
 				7EB746CA198BCED400D33001 /* paella@2x.jpg in Resources */,
 				59D4B5461A71594300E92557 /* apple_pay_btn@3x.png in Resources */,
-				593F14AC19B0BA7F00A009FB /* mastercard.png in Resources */,
 				5927CEA819B5CB95004BA44F /* app_icon@2x.png in Resources */,
-				593F14AB19B0BA7F00A009FB /* maestro.png in Resources */,
 				7E00CE89198B7B5500C34D6A /* choose@2x.png in Resources */,
 				7EF7111B1976C3C100F7DC51 /* Images.xcassets in Resources */,
 				7E00CE8D198B7B5500C34D6A /* greece@2x.png in Resources */,

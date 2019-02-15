@@ -503,38 +503,30 @@ static NSUInteger const kWorldpayTimeout = 65;
 }
 
 - (BOOL)validateAPMNameWithName:(NSString *)apmName {
-    if (!apmName.length) {
-        return NO;
-    }
-    
-    return YES;
+    return apmName.length > 0;
 }
 
 - (BOOL)validateCountryCodeWithCode:(NSString *)countryCode {
-    if (!countryCode.length) {
-        return NO;
-    }
-    
-    return YES;
+    return countryCode.length > 0;
 }
 
 - (NSString *)convertYearIfNeededWithYear:(NSString *)year {
+    NSString *result = nil;
     if (year.length == 4) {
-        return [year substringWithRange:NSMakeRange(2, 2)];
+        result = [year substringWithRange:NSMakeRange(2, 2)];
     }
     else if (year.length == 2) {
-        return year;
+        result = year;
     }
     
-    return nil;
+    return result;
 }
 
 - (NSError *)errorWithTitle:(NSString *)title
                        code:(NSInteger)code {
-    NSError *error = [NSError errorWithDomain:@"com.worldpay.error"
+    return [NSError errorWithDomain:@"com.worldpay.error"
                                          code:code
                                      userInfo:@{NSLocalizedDescriptionKey:title}];
-    return error;
 }
 
 - (BOOL)stringIsNumeric:(NSString *)string {
@@ -542,55 +534,55 @@ static NSUInteger const kWorldpayTimeout = 65;
     return [string rangeOfCharacterFromSet:notDigits].location == NSNotFound;
 }
 
-- (NSString *)cardType:(NSString *)cardNumber {
-    
++ (WorldpayCardType)cardType:(NSString *)cardNumber {
+
     NSArray *patterns = @[
                           @{
-                              @"type": @"electron",
+                              @"type": @(WorldpayCardType_electron),
                               @"pattern": @"^(4026|417500|4405|4508|4844|4913|4917)\\d+$"
                               },
                           @{
-                              @"type": @"maestro",
+                              @"type": @(WorldpayCardType_maestro),
                               @"pattern": @"^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390|6799)\\d+$"
                               },
                           @{
-                              @"type": @"dankort",
+                              @"type": @(WorldpayCardType_dankort),
                               @"pattern": @"^(5019)\\d+$"
                               },
                           @{
-                              @"type": @"interpayment",
+                              @"type": @(WorldpayCardType_interpayment),
                               @"pattern": @"^(636)\\d+$"
                               },
                           @{
-                              @"type": @"unionpay",
+                              @"type": @(WorldpayCardType_unionpay),
                               @"pattern": @"^(62|88)\\d+$"
                               },
                           @{
-                              @"type": @"visa",
+                              @"type": @(WorldpayCardType_visa),
                               @"pattern": @"^4[0-9]{12}(?:[0-9]{3})?$"
                               },
                           @{
-                              @"type": @"mastercard",
+                              @"type": @(WorldpayCardType_mastercard),
                               @"pattern": @"^5[1-5][0-9]{14}$"
                               },
                           @{
-                              @"type": @"amex",
+                              @"type": @(WorldpayCardType_amex),
                               @"pattern": @"^3[47][0-9]{13}$"
                               },
                           @{
-                              @"type": @"diners",
+                              @"type": @(WorldpayCardType_diners),
                               @"pattern": @"^3(?:0[0-5]|[68][0-9])[0-9]{11}$"
                               },
                           @{
-                              @"type": @"discover",
+                              @"type": @(WorldpayCardType_discover),
                               @"pattern": @"^6(?:011|5[0-9]{2})[0-9]{12}$"
                               },
                           @{
-                              @"type": @"jcb",
+                              @"type": @(WorldpayCardType_jcb),
                               @"pattern": @"^(?:2131|1800|35\\d{3})\\d{11}$"
                               },
                           @{
-                              @"type": @"laser",
+                              @"type": @(WorldpayCardType_laser),
                               @"pattern": @"^(6304|6706|6709|6771)[0-9]{12,15}$"
                               }
                           ];
@@ -599,11 +591,11 @@ static NSUInteger const kWorldpayTimeout = 65;
         NSRange range = [cardNumber rangeOfString:pattern[@"pattern"] options:NSRegularExpressionSearch];
         
         if (range.location != NSNotFound) {
-            return pattern[@"type"];
+            return [pattern[@"type"] unsignedIntegerValue];
         }
     }
     
-    return @"unknown";
+    return WorldpayCardType_unknown;
 }
 
 - (NSString *)customHeader {
