@@ -12,13 +12,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIImage (Worldpay)
+@interface WorldpayResourcesManager : NSObject
 
 + (UIImage *)wp_filledImageFrom:(UIImage *)source withColor:(UIColor *)color;
 
 + (UIImage *)wp_imageNamed:(NSString *)name;
 
 + (UIImage *)wp_cardImage:(WorldpayCardType)cardType;
+
++ (UIImage *)wp_WorldpayPoweredImage;
 
 @end
 

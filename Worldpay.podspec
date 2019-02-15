@@ -18,9 +18,16 @@ Pod::Spec.new do |s|
                                 :tag => s.version
                             }
 
-  s.public_header_files     = 'Worldpay/Worldpay/APMController*.h', 'Worldpay/Worldpay/ThreeDSController.h', 'Worldpay/Worldpay/Worldpay.h', 'Worldpay/Worldpay/Worldpay+ApplePay.h', 'Worldpay/Worldpay/WorldpayAPMViewController.h', 'Worldpay/Worldpay/WorldpayCardViewController.h', 'Worldpay/Worldpay/UIImage+Worldpay.h', 'Worldpay/Worldpay/WorldpayConstants.h'
+  s.public_header_files     =   'Worldpay/Worldpay/APMController*.h',
+                                'Worldpay/Worldpay/ThreeDSController.h',
+                                'Worldpay/Worldpay/Worldpay.h',
+                                'Worldpay/Worldpay/Worldpay+ApplePay.h',
+                                'Worldpay/Worldpay/WorldpayAPMViewController.h',
+                                'Worldpay/Worldpay/WorldpayCardViewController.h',
+                                'Worldpay/Worldpay/WorldpayResourcesManager.h',
+                                'Worldpay/Worldpay/WorldpayConstants.h'
   s.source_files            = 'Worldpay/Worldpay/*.{h,m}'
-  s.resources               = 'Worldpay/output/Worldpay/Include/WorldpayResources.bundle'
+  s.resources               = 'Worldpay/WorldpayResources.bundle'
   s.requires_arc            = true
   s.weak_frameworks         = 'UIKit', 'Foundation', 'CoreGraphics'
 

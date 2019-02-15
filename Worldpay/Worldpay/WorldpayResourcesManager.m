@@ -1,14 +1,14 @@
 //
-//  UIImage+Worldpay.m
+//  WorldpayResourcesManager.m
 //  Worldpay
 //
 //  Created by Vitalii Parovishnyk on 2/15/19.
 //  Copyright © 2019 Worldpay. All rights reserved.
 //
 
-#import "UIImage+Worldpay.h"
+#import "WorldpayResourcesManager.h"
 
-@implementation UIImage (Worldpay)
+@implementation WorldpayResourcesManager
 
 + (UIImage *)wp_filledImageFrom:(UIImage *)source withColor:(UIColor *)color {
     
@@ -40,9 +40,16 @@
     //return the color-burned image
     return coloredImg;
 }
-
 + (UIImage *)wp_imageNamed:(NSString *)name {
-    return [UIImage imageNamed:[@"WorldpayResources.bundle/" stringByAppendingString:name]];
+    return [self wp_imageNamed:name ofType:@"tiff"];
+}
+
++ (UIImage *)wp_imageNamed:(NSString *)name ofType:(NSString *)type {
+    NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"Worldpay")];
+    NSString *imgPath = [bundle pathForResource:name
+                                         ofType:type
+                                    inDirectory:@"WorldpayResources.bundle"];
+    return [UIImage imageWithContentsOfFile:imgPath];
 }
 
 + (UIImage *)wp_cardImage:(WorldpayCardType)cardType {
@@ -65,6 +72,10 @@
                             };
     
     return [self wp_imageNamed:cards[@(cardType)]];
+}
+
++ (UIImage *)wp_WorldpayPoweredImage {
+    return [self wp_imageNamed:@"poweredByWorldPay" ofType:@"png"];
 }
 
 @end

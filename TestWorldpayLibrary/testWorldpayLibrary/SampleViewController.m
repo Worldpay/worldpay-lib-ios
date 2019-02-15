@@ -5,11 +5,9 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
+@import Worldpay;
+
 #import "SampleViewController.h"
-#import "Worldpay.h"
-#import "Worldpay+ApplePay.h"
-#import "WorldpayCardViewController.h"
-#import "WorldpayAPMViewController.h"
 #import "DBhandler.h"
 #import "FMDatabase.h"
 #import "CustomGestureRecognizer.h"
@@ -745,25 +743,25 @@
         [storedCardBackgroundView addSubview:verticalLine1];
         
         UIImageView *empty = [[UIImageView alloc]initWithFrame:CGRectMake(10, 8, 25, 25)];
-        [empty setImage:[UIImage imageNamed:@"empty.png"]];
+        [empty setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_unknown]];
         [storedCardBackgroundView addSubview:empty];
         
         UIImageView *cardlogo = [[UIImageView alloc]initWithFrame:CGRectMake(50, 2, 40, 35)];
         cardlogo.contentMode = UIViewContentModeScaleAspectFit;
         if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"VISA"]) {
-            [cardlogo setImage:[UIImage imageNamed:@"visa.png"]];
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_visa]];
         }
         else if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"MAESTRO"]) {
-            [cardlogo setImage:[UIImage imageNamed:@"maestro.png"]];
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_maestro]];
         }
         else if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"MASTERCARD"]) {
-            [cardlogo setImage:[UIImage imageNamed:@"mastercard.png"]];
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_mastercard]];
         }
         else if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"AMEX"]) {
-            [cardlogo setImage:[UIImage imageNamed:@"amex.png"]];
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_amex]];
         }
         else {
-            [cardlogo setImage:[UIImage imageNamed:@"default_card.png"]];
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_unknown]];
             cardlogo.frame = CGRectMake(cardlogo.frame.origin.x-1, cardlogo.frame.origin.y+3, 43, 30);
         }
         

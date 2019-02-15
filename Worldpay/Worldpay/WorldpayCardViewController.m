@@ -7,7 +7,7 @@
 
 #import "WorldpayCardViewController.h"
 #import "WorldpayUtils.h"
-#import "UIImage+Worldpay.h"
+#import "WorldpayResourcesManager.h"
 
 @interface WorldpayCardViewController () <UITextFieldDelegate>
 
@@ -121,9 +121,9 @@
     backButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-    UIImage *arrowImage = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+    UIImage *arrowImage = [WorldpayResourcesManager wp_filledImageFrom:[WorldpayResourcesManager wp_imageNamed:@"wp_ic_back_arrow"]
                                                withColor:toolbar.tintColor];
-    UIImage *arrowHover = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+    UIImage *arrowHover = [WorldpayResourcesManager wp_filledImageFrom:[WorldpayResourcesManager wp_imageNamed:@"wp_ic_back_arrow"]
                                                withColor:[UIColor lightGrayColor]];
     
     [backButton setImage:arrowImage forState:UIControlStateNormal];
@@ -202,14 +202,14 @@
         [btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btnConfirm.titleLabel.textColor = [UIColor whiteColor];
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0xFFFFFF, 1.0);
-        padlockImage.image = [UIImage wp_imageNamed:@"wp_ic_lockB"];
+        padlockImage.image = [WorldpayResourcesManager wp_imageNamed:@"wp_ic_lockB"];
     }
     else {
         btnConfirm.backgroundColor = [UIColor whiteColor];
         [btnConfirm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0x000000, 1.0);
-        padlockImage.image = [UIImage wp_imageNamed:@"wp_ic_lockW"];
+        padlockImage.image = [WorldpayResourcesManager wp_imageNamed:@"wp_ic_lockW"];
     }
     [backgroundView addSubview:containerView];
     [containerView addSubview:btnConfirm];
@@ -451,7 +451,7 @@
     _cardNumber = cardNumber;
     
     UIImageView *cardTypeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, _cardNumber.frame.origin.y + 5, 40, 40)];
-    cardTypeImageView.image = [UIImage wp_cardImage:WorldpayCardType_unknown];
+    cardTypeImageView.image = [WorldpayResourcesManager wp_cardImage:WorldpayCardType_unknown];
     cardTypeImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:cardTypeImageView];
     _cardTypeImageView = cardTypeImageView;
@@ -494,10 +494,10 @@
     
     UIImageView *padlock = [[UIImageView alloc]initWithFrame:CGRectMake(secureAndSafe.frame.size.width+secureAndSafe.frame.origin.x, horizontalLine2.frame.origin.y+15, 20, 20)];
     
-    UIImage *padLockImage = [UIImage wp_imageNamed:@"wp_ic_lockB"];
+    UIImage *padLockImage = [WorldpayResourcesManager wp_imageNamed:@"wp_ic_lockB"];
     
     [UITextField appearance].tintColor = _colorTheme;
-    padlock.image = [UIImage wp_filledImageFrom:padLockImage withColor:_colorTheme];
+    padlock.image = [WorldpayResourcesManager wp_filledImageFrom:padLockImage withColor:_colorTheme];
     padlock.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:padlock];
@@ -587,7 +587,7 @@
     }
 }
 
-- (IBAction)textFieldDidChange:(id)sender{
+- (void)textFieldDidChange:(UITextField *)textField {
     _cardNumber.text = [_cardNumber.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     _expiry.text = [_expiry.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     _CVC.text = [_CVC.text stringByReplacingOccurrencesOfString:@"." withString:@""];
@@ -602,15 +602,15 @@
     if (!isValidCard) {
         cardType = WorldpayCardType_unknown;
     }
-    _cardTypeImageView.image = [UIImage wp_cardImage:cardType];
+    _cardTypeImageView.image = [WorldpayResourcesManager wp_cardImage:cardType];
     
-    if (sender == _expiry && _expiry.text.length == 2 && _expiry.text.length == 2 && [_expiry.text characterAtIndex:1] != '/' && !_shouldDeleteCharacter) {
+    if (textField == _expiry && _expiry.text.length == 2 && _expiry.text.length == 2 && [_expiry.text characterAtIndex:1] != '/' && !_shouldDeleteCharacter) {
         _expiry.text = [NSString stringWithFormat:@"%@/", _expiry.text];
     }
     
     NSInteger cardLength = [_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""].length;
     
-    if (sender == _cardNumber && cardLength != 16 && cardLength % 4 == 0 && [_cardNumber.text characterAtIndex:cardLength-1] != ' ' && !_shouldDeleteCharacter) {
+    if (textField == _cardNumber && cardLength != 16 && cardLength % 4 == 0 && [_cardNumber.text characterAtIndex:cardLength-1] != ' ' && !_shouldDeleteCharacter) {
         _cardNumber.text = [NSString stringWithFormat:@"%@ ", _cardNumber.text];
     }
     _shouldDeleteCharacter = NO;

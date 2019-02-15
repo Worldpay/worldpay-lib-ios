@@ -9,7 +9,7 @@
 
 #import "WorldpayAPMViewController.h"
 #import "APMController.h"
-#import "UIImage+Worldpay.h"
+#import "WorldpayResourcesManager.h"
 
 @interface WorldpayAPMViewController () <UITextFieldDelegate>
 
@@ -132,9 +132,9 @@
     backButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-    UIImage *arrowImage = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+    UIImage *arrowImage = [WorldpayResourcesManager wp_filledImageFrom:[WorldpayResourcesManager wp_imageNamed:@"wp_ic_back_arrow"]
                                                withColor:toolbar.tintColor];
-    UIImage *arrowHover = [UIImage wp_filledImageFrom:[UIImage wp_imageNamed:@"wp_ic_back_arrow"]
+    UIImage *arrowHover = [WorldpayResourcesManager wp_filledImageFrom:[WorldpayResourcesManager wp_imageNamed:@"wp_ic_back_arrow"]
                                                withColor:[UIColor lightGrayColor]];
     
     [backButton setImage:arrowImage forState:UIControlStateNormal];

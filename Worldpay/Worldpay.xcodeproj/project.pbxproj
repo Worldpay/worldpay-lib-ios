@@ -85,7 +85,7 @@
 		A59C28DB2215B36700610B6C /* wp_ic_mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */; };
 		A59C28DE2215B36700610B6C /* wp_ic_laser@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */; };
 		A59C28E02215B36700610B6C /* wp_ic_amex@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */; };
-		A59C28E92216D56F00610B6C /* UIImage+Worldpay.m in Sources */ = {isa = PBXBuildFile; fileRef = A59C28E82216D56F00610B6C /* UIImage+Worldpay.m */; };
+		A59C28E92216D56F00610B6C /* WorldpayResourcesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A59C28E82216D56F00610B6C /* WorldpayResourcesManager.m */; };
 		B2B16E8DB17B41DEE9958DB8 /* Pods_Worldpay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */; };
 /* End PBXBuildFile section */
 
@@ -202,8 +202,8 @@
 		A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_mastercard@2x.png"; path = "Resources/wp_ic_mastercard@2x.png"; sourceTree = "<group>"; };
 		A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_laser@3x.png"; path = "Resources/wp_ic_laser@3x.png"; sourceTree = "<group>"; };
 		A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_amex@3x.png"; path = "Resources/wp_ic_amex@3x.png"; sourceTree = "<group>"; };
-		A59C28E72216D56F00610B6C /* UIImage+Worldpay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Worldpay.h"; sourceTree = "<group>"; };
-		A59C28E82216D56F00610B6C /* UIImage+Worldpay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Worldpay.m"; sourceTree = "<group>"; };
+		A59C28E72216D56F00610B6C /* WorldpayResourcesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldpayResourcesManager.h; sourceTree = "<group>"; };
+		A59C28E82216D56F00610B6C /* WorldpayResourcesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldpayResourcesManager.m; sourceTree = "<group>"; };
 		A59C28ED2216DC6200610B6C /* WorldpayConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldpayConstants.h; sourceTree = "<group>"; };
 		A934A0890DB3A3D26BF0DBE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Worldpay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -399,7 +399,7 @@
 		7EF7107A1976B8B800F7DC51 /* Worldpay */ = {
 			isa = PBXGroup;
 			children = (
-				A59C28E62216D55900610B6C /* Categories */,
+				A59C28E62216D55900610B6C /* Managers */,
 				5AC8C6871BDE2BF2006F1F78 /* ApplePay */,
 				5AC8C6861BDE2BE0006F1F78 /* Card */,
 				5AC8C6851BDE283D006F1F78 /* 3DS */,
@@ -442,13 +442,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A59C28E62216D55900610B6C /* Categories */ = {
+		A59C28E62216D55900610B6C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				A59C28E72216D56F00610B6C /* UIImage+Worldpay.h */,
-				A59C28E82216D56F00610B6C /* UIImage+Worldpay.m */,
+				A59C28E72216D56F00610B6C /* WorldpayResourcesManager.h */,
+				A59C28E82216D56F00610B6C /* WorldpayResourcesManager.m */,
 			);
-			name = Categories;
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		EC13089FEE45848175714BB1 /* Pods */ = {
@@ -670,7 +670,7 @@
 				5A8BC2BB1BD8DBDF00FFBED0 /* WorldpayAPMViewController.m in Sources */,
 				5957D19D1A71839500D7A99F /* Worldpay+ApplePay.m in Sources */,
 				7EEBCC24197E59BB00DBEA7C /* WorldpayCardViewController.m in Sources */,
-				A59C28E92216D56F00610B6C /* UIImage+Worldpay.m in Sources */,
+				A59C28E92216D56F00610B6C /* WorldpayResourcesManager.m in Sources */,
 				7EF710801976B8B800F7DC51 /* Worldpay.m in Sources */,
 				5A8BC2CA1BDA9DD600FFBED0 /* ThreeDSController.m in Sources */,
 				5A8BC2BE1BDA2A3200FFBED0 /* APMController.m in Sources */,
