@@ -4,19 +4,19 @@
 //
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
-
-#import <AFNetworking/AFNetworking.h>
+@import WebKit;
+@import AFNetworking;
 
 #import "APMController.h"
 #import "Worldpay.h"
 
-@interface APMController () <UIWebViewDelegate>
+@interface APMController () <WKNavigationDelegate>
 
 @property (nonatomic, copy) authorizeAPMOrderSuccess authorizeSuccessBlock;
 @property (nonatomic, copy) authorizeAPMOrderFailure authorizeFailureBlock;
 
 @property (nonatomic, copy) NSString *currentOrderCode;
-@property (nonatomic, copy) UIWebView *webView;
+@property (nonatomic, copy) WKWebView *webView;
 
 @property (nonatomic, strong) AFURLSessionManager *networkManager;
 
@@ -68,8 +68,10 @@
     [super viewDidLoad];
     [self createNavigationBar];
     
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0,50,self.view.frame.size.width,self.view.frame.size.height-_customToolbar.frame.size.height)];
-    _webView.delegate = self;
+    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+    _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0.0,50,self.view.frame.size.width,self.view.frame.size.height-_customToolbar.frame.size.height)
+                                            configuration:config];
+    _webView.navigationDelegate = self;
     
     [self.view addSubview:_webView];
 }
@@ -170,9 +172,12 @@
     _authorizeFailureBlock = failure;
 }
 
-#pragma mark - UIWebView delegate methods
+#pragma mark - WKWebView delegate methods
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    NSURL *url = navigationAction.request.URL;
     
     NSDictionary *responseDictionary = @{
                                          @"token": _token,
@@ -181,23 +186,23 @@
     NSMutableArray *errors = [[NSMutableArray alloc] init];
     
     //we need to tell the parent controller that the purchase was success
-    if ([request.URL.absoluteString containsString:_successUrl]) {
+    if ([url.absoluteString containsString:_successUrl]) {
         _authorizeSuccessBlock(responseDictionary);
     }
-    else if ([request.URL.absoluteString containsString:_failureUrl]) {
+    else if ([url.absoluteString containsString:_failureUrl]) {
         [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error authorizing the APM Order. Order failed.", nil) code:1]];
         _authorizeFailureBlock(responseDictionary, errors);
     }
-    else if ([request.URL.absoluteString containsString:_cancelUrl]) {
+    else if ([url.absoluteString containsString:_cancelUrl]) {
         [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error authorizing the APM Order. Order cancelled.", nil) code:2]];
         _authorizeFailureBlock(responseDictionary, errors);
     }
-    else if ([request.URL.absoluteString containsString:_pendingUrl]) {
+    else if ([url.absoluteString containsString:_pendingUrl]) {
         [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error authorizing the APM Order. Order pending.", nil) code:3]];
         _authorizeFailureBlock(responseDictionary, errors);
     }
     
-    return YES;
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 @end

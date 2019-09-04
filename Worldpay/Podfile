@@ -4,7 +4,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 def shared_pods
-  pod 'AFNetworking'
+  pod 'AFNetworking', '3.2.1', :subspecs => ['Reachability', 'Serialization', 'Security', 'NSURLSession']
 end
  
 target 'Worldpay' do

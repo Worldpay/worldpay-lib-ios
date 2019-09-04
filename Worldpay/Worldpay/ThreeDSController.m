@@ -5,17 +5,19 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
+@import WebKit;
+@import AFNetworking;
+
 #import "ThreeDSController.h"
 #import "Worldpay.h"
-#import "AFNetworking.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 #import <CommonCrypto/CommonDigest.h>
 
 #define TempURL "https://online.worldpay.com/3dsr/"
 
-@interface ThreeDSController ()<UIWebViewDelegate>
-@property (nonatomic, weak) UIWebView *webView;
+@interface ThreeDSController ()<WKNavigationDelegate>
+@property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, copy) NSString *currentOrderCode;
 @property (nonatomic, copy) threeDSOrderSuccess authorizeSuccessBlock;
 @property (nonatomic, copy) threeDSOrderFailure authorizeFailureBlock;
@@ -73,10 +75,12 @@
     // Do any additional setup after loading the view from its nib.
     [self createNavigationBar];
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0, 50.0,
+    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0.0, 50.0,
                                                                      self.view.frame.size.width,
-                                                                     self.view.frame.size.height - self.customToolbar.frame.size.height)];
-    webView.delegate = self;
+                                                                     self.view.frame.size.height - self.customToolbar.frame.size.height)
+                                            configuration:config];
+    webView.navigationDelegate = self;
     [self.view addSubview:webView];
     _webView = webView;
 }
@@ -106,62 +110,66 @@
 - (void)initializeThreeDS {
     NSString *stringURL = [[[Worldpay sharedInstance] APIStringURL] stringByAppendingPathComponent:@"orders"];
     
-    NSDictionary *params = @{
-                             @"token": _token,
-                             @"orderType": @"RECURRING",
-                             @"orderDescription": @"Goods and Services",
-                             @"amount": @((float)(ceil(_price * 100))),
-                             @"currencyCode": @"GBP",
-                             @"settlementCurrency": @"GBP",
-                             @"name": @"3D",
-                             @"billingAddress": @{
-                                     @"address1": _address,
-                                     @"postalCode": _postalCode,
-                                     @"city": _city,
-                                     @"countryCode": @"GB"
-                                     },
-                             @"authorizeOnly" : @([Worldpay sharedInstance].authorizeOnly),
-                             @"customerIdentifiers": (_customerIdentifiers && _customerIdentifiers.count > 0) ? _customerIdentifiers : @{},
-                             @"is3DSOrder": @(YES),
-                             @"shopperAcceptHeader": @"application/json",
-                             @"shopperUserAgent": [self userAgent],
-                             @"shopperSessionId": _sessionID,
-                             @"shopperIpAddress": [self getIPAddress]
-                             };
-    
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
-                                                       URLString:stringURL
-                                                      parameters:params
-                                                           error:nil];
-    
-    [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
     __weak typeof(self) weak = self;
-    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
-            weak.currentOrderCode = [responseObject objectForKey:@"orderCode"];
-            
-            NSArray *params = @[
-                                @{
-                                    @"key": @"PaReq",
-                                    @"value": [responseObject objectForKey:@"oneTime3DsToken"]
-                                    },
-                                @{
-                                    @"key": @"TermUrl",
-                                    @"value": @TempURL
-                                    },
-                                ];
-            [weak redirectToThreeDSPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]
-                                                params:params];
-        }
-        else {
-            NSMutableArray *errors = [[NSMutableArray alloc] init];
-            [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the 3DS Order.", nil) code:1]];
-            weak.authorizeFailureBlock(responseObject, errors);
-        }
+    [self userAgentWithHandler:^(NSString* userAgent) {
+        
+        NSDictionary *params = @{
+                                 @"token": weak.token,
+                                 @"orderType": @"RECURRING",
+                                 @"orderDescription": @"Goods and Services",
+                                 @"amount": @((float)(ceil(weak.price * 100))),
+                                 @"currencyCode": @"GBP",
+                                 @"settlementCurrency": @"GBP",
+                                 @"name": @"3D",
+                                 @"billingAddress": @{
+                                         @"address1": weak.address,
+                                         @"postalCode": weak.postalCode,
+                                         @"city": weak.city,
+                                         @"countryCode": @"GB"
+                                         },
+                                 @"authorizeOnly" : @([Worldpay sharedInstance].authorizeOnly),
+                                 @"customerIdentifiers": (weak.customerIdentifiers && weak.customerIdentifiers.count > 0) ? weak.customerIdentifiers : @{},
+                                 @"is3DSOrder": @(YES),
+                                 @"shopperAcceptHeader": @"application/json",
+                                 @"shopperUserAgent": userAgent,
+                                 @"shopperSessionId": weak.sessionID,
+                                 @"shopperIpAddress": [self getIPAddress]
+                                 };
+        
+        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+        NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
+                                                           URLString:stringURL
+                                                          parameters:params
+                                                               error:nil];
+        
+        [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
+        
+        NSURLSessionDataTask *dataTask = [weak.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
+                weak.currentOrderCode = [responseObject objectForKey:@"orderCode"];
+                
+                NSArray *params = @[
+                                    @{
+                                        @"key": @"PaReq",
+                                        @"value": [responseObject objectForKey:@"oneTime3DsToken"]
+                                        },
+                                    @{
+                                        @"key": @"TermUrl",
+                                        @"value": @TempURL
+                                        },
+                                    ];
+                [weak redirectToThreeDSPageWithRedirectURL:[responseObject objectForKey:@"redirectURL"]
+                                                    params:params];
+            }
+            else {
+                NSMutableArray *errors = [[NSMutableArray alloc] init];
+                [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"There was an error creating the 3DS Order.", nil) code:1]];
+                weak.authorizeFailureBlock(responseObject, errors);
+            }
+        }];
+        
+        [dataTask resume];
     }];
-    
-    [dataTask resume];
 }
 
 - (void)redirectToThreeDSPageWithRedirectURL:(NSString *)redirectURL
@@ -183,47 +191,53 @@
 - (void)authorize3DSOrder:(NSString *)orderCode
                     paRes:(NSString *)paRes {
     
-    NSString *stringURL = [[[[Worldpay sharedInstance] APIStringURL] stringByAppendingPathComponent:@"orders"] stringByAppendingPathComponent:orderCode];
-    
-    NSDictionary *params = @{
-                             @"threeDSResponseCode": paRes,
-                             @"shopperAcceptHeader": @"application/json",
-                             @"shopperUserAgent": [self userAgent],
-                             @"shopperSessionId": _sessionID,
-                             @"shopperIpAddress": [self getIPAddress]
-                             };
-    
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    NSMutableURLRequest *request = [serializer requestWithMethod:@"PUT"
-                                                       URLString:stringURL
-                                                      parameters:params
-                                                           error:nil];
-    
-    [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
     __weak typeof(self) weak = self;
-    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        NSString *status = [responseObject objectForKey:@"paymentStatus"];
-        if ([status isEqualToString:@"SUCCESS"] || [status isEqualToString:@"AUTHORIZED"]) {
-            weak.authorizeSuccessBlock(responseObject);
-        } else {
-            NSMutableArray *errors = [[NSMutableArray alloc] init];
-            [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"Error authorizing 3DS Order", nil) code:1]];
-            weak.authorizeFailureBlock(responseObject, errors);
-        }
+    [self userAgentWithHandler:^(NSString* userAgent) {
+        
+        NSString *stringURL = [[[[Worldpay sharedInstance] APIStringURL] stringByAppendingPathComponent:@"orders"] stringByAppendingPathComponent:orderCode];
+        
+        NSDictionary *params = @{
+                                 @"threeDSResponseCode": paRes,
+                                 @"shopperAcceptHeader": @"application/json",
+                                 @"shopperUserAgent": userAgent,
+                                 @"shopperSessionId": weak.sessionID,
+                                 @"shopperIpAddress": [weak getIPAddress]
+                                 };
+        
+        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+        NSMutableURLRequest *request = [serializer requestWithMethod:@"PUT"
+                                                           URLString:stringURL
+                                                          parameters:params
+                                                               error:nil];
+        
+        [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
+        
+        NSURLSessionDataTask *dataTask = [weak.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            NSString *status = [responseObject objectForKey:@"paymentStatus"];
+            if ([status isEqualToString:@"SUCCESS"] || [status isEqualToString:@"AUTHORIZED"]) {
+                weak.authorizeSuccessBlock(responseObject);
+            } else {
+                NSMutableArray *errors = [[NSMutableArray alloc] init];
+                [errors addObject:[[Worldpay sharedInstance] errorWithTitle:NSLocalizedString(@"Error authorizing 3DS Order", nil) code:1]];
+                weak.authorizeFailureBlock(responseObject, errors);
+            }
+        }];
+        
+        [dataTask resume];
     }];
-    
-    [dataTask resume];
 }
 
-#pragma mark - UIWebView delegate methods
+#pragma mark - WKNavigationDelegate delegate methods
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([request.URL.absoluteString containsString:@"worldpay-scheme://"]) {
-        NSString *paRes = [self paramFromURL:request.URL.absoluteString key:@"PaRes"];
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction
+decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    NSURL *url = navigationAction.request.URL;
+    if ([url.absoluteString containsString:@"worldpay-scheme://"]) {
+        NSString *paRes = [self paramFromURL:url.absoluteString key:@"PaRes"];
         [self authorize3DSOrder:_currentOrderCode paRes:paRes];
     }
-    
-    return YES;
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 
@@ -294,9 +308,20 @@
     return address;
 }
 
-- (NSString *)userAgent {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    return [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+- (void)userAgentWithHandler:(void (^ __nullable)(NSString* userAgent))completionHandler {
+    WKWebViewConfiguration *config = [WKWebViewConfiguration new];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero
+                                            configuration:config];
+    
+    [webView evaluateJavaScript:@"navigator.userAgent"
+              completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                  if (!error) {
+                      NSString *userAgent = [result stringValue];
+                      completionHandler(userAgent);
+                  } else {
+                      completionHandler(nil);
+                  }
+              }];
 }
 
 - (NSString *)MD5String:(NSString *)text {
