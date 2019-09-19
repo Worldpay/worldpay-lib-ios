@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'Worldpay'
-  s.version      = '1.6.0'
+  s.version      = '1.6.1'
   s.summary      = 'Worldpay iOS Library'
 
   s.description  = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.homepage            = 'https://online.worldpay.com'
   s.author              = 'Worldpay'
 
-  s.platform                = :ios, '9.0'
+  s.platform                = :ios, '9.3'
   s.source                  = { :git => 'https://github.com/driivz/worldpay-lib-ios.git',
                                 :tag => s.version
                             }

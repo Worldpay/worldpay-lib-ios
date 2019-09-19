@@ -6,13 +6,15 @@
 //
 
 @import WebKit;
+@import CommonCrypto;
+
 @import AFNetworking;
+
+#import <ifaddrs.h>
+#import <arpa/inet.h>
 
 #import "ThreeDSController.h"
 #import "Worldpay.h"
-#import <ifaddrs.h>
-#import <arpa/inet.h>
-#import <CommonCrypto/CommonDigest.h>
 
 #define TempURL "https://online.worldpay.com/3dsr/"
 

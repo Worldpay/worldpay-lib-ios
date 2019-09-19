@@ -5,8 +5,9 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
+@import AddressBook;
+
 #import "Worldpay+ApplePay.h"
-#import <AddressBook/AddressBook.h>
 
 #define WorldpaySupportedNetworks @[PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]
 

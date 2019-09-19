@@ -5,10 +5,11 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
+@import CoreText;
+
+@import AFNetworking;
 
 #import "WorldpayUtils.h"
-#import <CoreText/CoreText.h>
 
 @implementation WorldpayUtils
 

@@ -5,12 +5,12 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
-
-#import "Worldpay.h"
+@import AFNetworking;
 
 #include <sys/sysctl.h>
 #include <mach/machine.h>
+
+#import "Worldpay.h"
 
 @interface Worldpay() <UITextFieldDelegate>
 

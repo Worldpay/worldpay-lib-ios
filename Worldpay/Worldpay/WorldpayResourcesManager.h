@@ -6,7 +6,7 @@
 //  Copyright © 2019 Worldpay. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "WorldpayConstants.h"
 

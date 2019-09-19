@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
+@import AFNetworking;
 
 #import "WorldpayAPMViewController.h"
 #import "APMController.h"

@@ -5,8 +5,8 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 #import "WorldpayConstants.h"
 

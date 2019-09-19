@@ -258,7 +258,7 @@ APM Orders: The WorldpayAPMViewController & APMController
 In addition to **Worldpay.h**, the library provides another 2 controllers:
 
 - **WorldpayAPMViewController.h**: This is a UIViewController that displays a form that creates APM tokens, and makes use of APMController. This controller can be used as a guide for the developer to know how the process works.
-- **APMController.h**: This is a controller that can be used to create an APM order, display the APM Authorisation Page on a UIWebView and handle the response.
+- **APMController.h**: This is a controller that can be used to create an APM order, display the APM Authorisation Page on a WKWebView and handle the response.
 
 ### WorldpayAPMViewController ###
 The **WorldpayAPMViewController** can be used to display a very simple form with the APM fields required to create an APM token & order. This controller will create an APM Token and will make use of the **APMController** to create the order, using the token created by itself.
@@ -376,7 +376,7 @@ The **WorldpayAPMViewController** generates the token, but it uses internally **
 
 ### APMController ###
 The purpose of **WorldpayAPMViewController** is more documentation than using it on an actual application. If we want to create an APM order, we can use the **APMController**. This controller is a
-UIWebViewDelegate controller that creates the APM Order and redirects to the APM Authorisation Page. It also lets the user handle the callback of the APM Authorisation Page. **WorldpayAPMViewController** also makes use
+WKNavigationDelegate controller that creates the APM Order and redirects to the APM Authorisation Page. It also lets the user handle the callback of the APM Authorisation Page. **WorldpayAPMViewController** also makes use
 of this controller.
 
 Follow these steps to use **APMController**:
@@ -518,7 +518,7 @@ Follow these steps to use **APMController**:
 5. Once the token is generated successfully the callback for createAPMTokenWithAPMName will be triggered with a valid token: this is a good moment to setup your APMController to create a APM Order and display the APM Authorisation Page. It will also handle the create order result, as shown on the example above.
 
 ### ThreeDSController ###
-The **ThreeDSController** is another UIWebViewDelegate controller that lets you create 3DS Orders and redirects to the 3DS Authorisation Page. It also lets the user handle the callback of the 3DS Authorisation Page.
+The **ThreeDSController** is another WKNavigationDelegate controller that lets you create 3DS Orders and redirects to the 3DS Authorisation Page. It also lets the user handle the callback of the 3DS Authorisation Page.
 
 1. Import **Worldpay.h** and **ThreeDSController.h**
 

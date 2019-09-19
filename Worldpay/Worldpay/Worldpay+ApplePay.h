@@ -5,8 +5,9 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <PassKit/PassKit.h>
+@import Foundation;
+@import PassKit;
+
 #import "Worldpay.h"
 
 @interface Worldpay (ApplePay)
