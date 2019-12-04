@@ -5,11 +5,9 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
+@import Worldpay;
+
 #import "SampleViewController.h"
-#import "Worldpay.h"
-#import "Worldpay+ApplePay.h"
-#import "WorldpayCardViewController.h"
-#import "WorldpayAPMViewController.h"
 #import "DBhandler.h"
 #import "FMDatabase.h"
 #import "CustomGestureRecognizer.h"
@@ -24,7 +22,6 @@
 
 @interface SampleViewController ()<PKPaymentAuthorizationViewControllerDelegate>
 @property (nonatomic, retain) NSString *selectedToken;
-@property (nonatomic, retain) UIAlertView *deleteCardAlertView, *confirmAlertView, *quantityAlertView, *endPointAlertView, *deleteItemAlertView;
 @property (nonatomic) NSInteger selectedRowToDelete;
 @property (nonatomic, retain) AppDelegate *delegate;
 @property (nonatomic, retain) NSDictionary *selectedItem;
@@ -76,15 +73,17 @@
     _delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     screenRect = [[UIScreen mainScreen]bounds];
-
+    
     [self createNavigationBar];
     [self initGUI];
     [self createStoredCardView];
-
+    
     [[Worldpay sharedInstance] setValidationType:WorldpayValidationTypeAdvanced];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     token = @"";
@@ -93,11 +92,10 @@
     [scrollView removeFromSuperview];
     [self initGUI];
     [self createStoredCardView];
-  
 }
 
--(void)createNavigationBar{
-  
+- (void)createNavigationBar {
+    
     UIView *navigationBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, screenRect.size.width, 40)];
     navigationBarView.backgroundColor = [UIColor colorWithRed:0.941 green:0.118 blue:0.078 alpha:1];
     [self.view addSubview:navigationBarView];
@@ -113,19 +111,19 @@
     checkoutLabel.textAlignment = NSTextAlignmentCenter;
     checkoutLabel.text = @"CHECKOUT";
     [navigationBarView addSubview:checkoutLabel];
-  
+    
     UIButton *settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(navigationBarView.frame.size.width-75, 10, 75, 20)];
     [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
     [settingsButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     MainPageViewController *previousViewController = (MainPageViewController *)[self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-  
+    
     [settingsButton addTarget:previousViewController action:@selector(settingsAction:) forControlEvents:UIControlEventTouchUpInside ];
     [settingsButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [settingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [navigationBarView addSubview:settingsButton];
 }
 
--(void)initGUI{
+- (void)initGUI{
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 60, screenRect.size.width, screenRect.size.height)];
     scrollView.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -197,8 +195,6 @@
     price.textColor = [UIColor colorWithRed:0.902 green:0 blue:0 alpha:0.8];
     [scrollView addSubview:price];
     
-    y += 40;
-    
     UIView *grayView2 = [[UIView alloc]initWithFrame:CGRectMake(0, price.frame.size.height+price.frame.origin.y+20, screenRect.size.width, 30)];
     grayView2.backgroundColor = [UIColor colorWithRed:0.569 green:0.569 blue:0.569 alpha:1];
     [scrollView addSubview:grayView2];
@@ -268,11 +264,12 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSString *address = [prefs stringForKey:@"address"];
     
-    if(address==nil){
+    if (address == nil) {
         [prefs setObject:addressTextField.text forKey:@"address"];
         [prefs setObject:cityTextField.text forKey:@"city"];
         [prefs setObject:postcodeTextField.text forKey:@"postcode"];
-    }else{
+    }
+    else{
         addressTextField.text = [prefs stringForKey:@"address"];
         cityTextField.text = [prefs stringForKey:@"city"];
         postcodeTextField.text = [prefs stringForKey:@"postcode"];
@@ -285,12 +282,12 @@
     confirmPurchase.layer.cornerRadius = 5.0f;
     [confirmPurchase addTarget:self action:@selector(confirmPurchaseAction:) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:confirmPurchase];
-
+    
     applePayButton = [[UIButton alloc]initWithFrame:CGRectMake(_addCardButton.frame.size.width + _addCardButton.frame.origin.x + 13, _addCardButton.frame.origin.y, 140, 32)];
     [applePayButton setImage:[UIImage imageNamed:@"apple_pay_btn.png"] forState:UIControlStateNormal];
     [applePayButton addTarget:self action:@selector(applePayTap) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:applePayButton];
-
+    
     
     addressTextField.returnKeyType = UIReturnKeyNext;
     postcodeTextField.returnKeyType = UIReturnKeyDone;
@@ -308,7 +305,7 @@
     _paypalButton.layer.cornerRadius = 5.0f;
     [_paypalButton addTarget:self action:@selector(editPaypalSettingsAction:) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:_paypalButton];
-
+    
     //Giropay Button
     _giropayButton = [[UIButton alloc]initWithFrame:CGRectMake(_addCardButton.frame.size.width + _addCardButton.frame.origin.x + 13, grayView3.frame.size.height+grayView3.frame.origin.y+51, 140, 32)];
     [_giropayButton setTitle:@"Buy with Giropay" forState:UIControlStateNormal];
@@ -322,41 +319,41 @@
 }
 
 
--(IBAction)cancelCheckout:(id)sender{
+- (IBAction)cancelCheckout:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
--(IBAction)editPaypalSettingsAction:(id)sender {
+- (IBAction)editPaypalSettingsAction:(id)sender {
     [self editAPMSettingsAction:@"Paypal"];
 }
--(IBAction)editGiropaySettingsAction:(id)sender {
+
+- (IBAction)editGiropaySettingsAction:(id)sender {
     [self editAPMSettingsAction:@"Giropay"];
 }
 
--(IBAction)editAPMSettingsAction:(NSString *)apmName {
+- (IBAction)editAPMSettingsAction:(NSString *)apmName {
     
     [self saveDeliveryAddressDefaults];
     
     NSString *billingAddressErrorMessage = @"";
-    if([addressTextField.text isEqualToString:@""]){
+    if ([addressTextField.text isEqualToString:@""]) {
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in address\n"];
     }
-    if([cityTextField.text isEqualToString:@""]){
+    if ([cityTextField.text isEqualToString:@""]) {
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in city\n"];
     }
-    if([postcodeTextField.text isEqualToString:@""]){
+    if ([postcodeTextField.text isEqualToString:@""]) {
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in postal code\n"];
     }
     
-    if(![billingAddressErrorMessage isEqualToString:@""]){
+    if (![billingAddressErrorMessage isEqualToString:@""]) {
         [ALToastView toastInView:self.view withText:billingAddressErrorMessage];
         [confirmPurchase setUserInteractionEnabled:YES];
         return;
     }
     
     worldpayapmviewcontroller = [[WorldpayAPMViewController alloc] initWithColor:[UIColor redColor] loadingTheme:APMDetailsLoadingThemeWhite apmName:apmName];
-
+    
     worldpayapmviewcontroller.address = addressTextField.text;
     worldpayapmviewcontroller.city = cityTextField.text;
     worldpayapmviewcontroller.postcode = postcodeTextField.text;
@@ -365,9 +362,9 @@
     worldpayapmviewcontroller.orderDescription = @"Worldfood purchase";
     worldpayapmviewcontroller.countryCode = @"GB";
     worldpayapmviewcontroller.settlementCurrency = @"GBP";
-
+    
     BOOL _reusable = [[Worldpay sharedInstance] reusable];
-
+    
     if ([apmName isEqualToString:@"Giropay"]) {
         worldpayapmviewcontroller.currency = @"EUR";
         worldpayapmviewcontroller.swiftCode = @"ABC123";
@@ -381,19 +378,19 @@
     
     __weak SampleViewController *weakSelf = self;
     __weak AppDelegate *weakDelegate  = _delegate;
-
+    
     //this code blocks will be executed if the APM order is created an authorised successfully / or there is an error
     [worldpayapmviewcontroller setCreateAPMOrderBlockWithSuccess:^(NSDictionary *responseDictionary) {
         //APM Order is successful, here you can handle what to do after it (eg. clearing the basket, displaying another controller etc)
         [[BasketManager sharedInstance] clearBasket];
-
+        
         //once the order has been completed, revert _reusable to whatever it was (remember we forced reusable=NO for Giropay)
         if ([apmName isEqualToString:@"Giropay"]) {
             [[Worldpay sharedInstance] setReusable:_reusable];
         }
         
     } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-
+        
         NSError *error = [errors objectAtIndex:0];
         
         //user manually cancelled APM order by pressing back button on the controller
@@ -406,21 +403,20 @@
             [weakSelf.navigationController popToViewController:[[weakSelf.navigationController viewControllers] objectAtIndex:1] animated:YES];
             [ALToastView toastInView:weakDelegate.window withText:[error localizedDescription]];
         }
-        
     }];
     
     [self.navigationController pushViewController:worldpayapmviewcontroller animated:YES];
     
 }
 
--(void)saveDeliveryAddressDefaults {
+- (void)saveDeliveryAddressDefaults {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     [prefs setObject:addressTextField.text forKey:@"address"];
     [prefs setObject:cityTextField.text forKey:@"city"];
     [prefs setObject:postcodeTextField.text forKey:@"postcode"];
 }
 
--(IBAction)addCardAction:(id)sender{
+- (IBAction)addCardAction:(id)sender{
     
     [self saveDeliveryAddressDefaults];
     
@@ -432,7 +428,7 @@
     
     [self.navigationController pushViewController:worldpaycardviewcontroller animated:YES];
     
-    __weak SampleViewController *weakSelf = self;
+    __weak SampleViewController *weak = self;
     
     [worldpaycardviewcontroller setSaveButtonTapBlockWithSuccess:^(NSDictionary *responseDictionary) {
         FMDatabase *database = [DBhandler openDB];
@@ -444,56 +440,73 @@
         
         [DBhandler closeDatabase:database];
         
-        weakSelf.selectedToken = [responseDictionary objectForKey:@"token"];
+        weak.selectedToken = [responseDictionary objectForKey:@"token"];
         
-        [weakSelf createStoredCardView];
+        [weak createStoredCardView];
     } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
         NSLog(@"%@", errors);
         NSLog(@"%@", [[Worldpay sharedInstance] serviceKey]);
         NSLog(@"%@", [[Worldpay sharedInstance] clientKey]);
         
         if (errors.count > 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to add card! Please check your client key!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alertView show];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                     message:@"Unable to add card! Please check your client key!"
+                                                                              preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:nil];
+            [alertController addAction:confirmAction];
+            
+            [weak presentViewController:alertController animated:YES completion:nil];
         }
     }];
 }
 
--(IBAction)confirmPurchaseAction:(id)sender{
+- (IBAction)confirmPurchaseAction:(id)sender{
     
-    if(!isSelectedCard){
+    if (!isSelectedCard) {
         [ALToastView toastInView:self.view withText:@"Please select a card to charge"];
         [confirmPurchase setUserInteractionEnabled:YES];
         return;
     }
     
     NSString *billingAddressErrorMessage = @"";
-    if([addressTextField.text isEqualToString:@""]){
+    if ([addressTextField.text isEqualToString:@""]) {
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in address\n"];
     }
-    if([cityTextField.text isEqualToString:@""]){
+    if ([cityTextField.text isEqualToString:@""]) {
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in city\n"];
     }
-    if([postcodeTextField.text isEqualToString:@""]){
+    if ([postcodeTextField.text isEqualToString:@""]) {
         billingAddressErrorMessage = [billingAddressErrorMessage stringByAppendingString:@"Please fill in postal code\n"];
     }
     
-    if(![billingAddressErrorMessage isEqualToString:@""]){
+    if (![billingAddressErrorMessage isEqualToString:@""]) {
         [ALToastView toastInView:self.view withText:billingAddressErrorMessage];
         [confirmPurchase setUserInteractionEnabled:YES];
+        
         return;
     }
-
+    
     [self saveDeliveryAddressDefaults];
     [self makePayment];
 }
 
 - (void)applePayTap {
-    
     if (![[Worldpay sharedInstance] canMakePayments]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not available" message:@"Apple Pay is not available on this device." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Not available"
+                                                                                 message:@"Apple Pay is not available on this device."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:nil];
+        [alertController addAction:confirmAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else {
         //Create a new request using your merchant identifier
         PKPaymentRequest *request = [[Worldpay sharedInstance] createPaymentRequestWithMerchantIdentifier:@"merchant.worldpay.test"];
         
@@ -503,7 +516,7 @@
             //Set the description of item
             PKPaymentSummaryItem *paymentItem = [PKPaymentSummaryItem summaryItemWithLabel:[item objectForKey:@"name"]
                                                                                     amount:[NSDecimalNumber decimalNumberWithString:[item objectForKey:@"price"]]];
-
+            
             
             //Set the items to request
             [paymentItems addObject:paymentItem];
@@ -522,7 +535,7 @@
         PKPaymentAuthorizationViewController *viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
         
         viewController.delegate = self;
-
+        
         
         [self presentViewController:viewController
                            animated:YES
@@ -532,7 +545,7 @@
 }
 
 - (void)makePayment {
-
+    
     if (_delegate.threeDSEnabled) {
         ThreeDSController *threeDSController = [[ThreeDSController alloc] init];
         threeDSController.address = addressTextField.text;
@@ -541,9 +554,9 @@
         threeDSController.token = token;
         threeDSController.name = ([[[Worldpay sharedInstance] clientKey] hasPrefix:@"T_"]) ? @"3D" : name;
         threeDSController.price = [[BasketManager sharedInstance] totalPrice];
-
+        
         __weak AppDelegate *weakDelegate  = _delegate;
-
+        
         
         //this code blocks will be executed if the 3DS order is created and authorised successfully / or there is an error
         [threeDSController setAuthorizeThreeDSOrderBlockWithSuccess:^(NSDictionary *responseDictionary) {
@@ -553,7 +566,7 @@
             
             //if the token is not reusable, we remove it
             if (![[Worldpay sharedInstance] reusable]) {
-                [self deleteStoredToken:_selectedToken];
+                [self deleteStoredToken:self->_selectedToken];
             }
             
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -571,77 +584,76 @@
         if (reusable) {
             [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
                                                             token:token
-                                                          success:^(int code, NSDictionary *responseDictionary) {
+                                                          success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                               [self.navigationController pushViewController:threeDSController animated:YES];
                                                           }
-                                                          beforeRequest:^{
-                                                          }
-                                                          error:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                              NSLog(@"%@", errors);
-                                                          }];
+                                                    beforeRequest:^{
+                                                    }
+                                                            error:^(NSDictionary *responseDictionary, NSArray *errors) {
+                                                                NSLog(@"%@", errors);
+                                                            }];
         }
         else {
             [self.navigationController pushViewController:threeDSController animated:YES];
         }
-    } else {
-        
+    }
+    else {
+        __weak typeof(self) weak = self;
         [[Worldpay sharedInstance] showCVCModalWithParentView:self.view
                                                         token:token
-                                                      success:^(int code, NSDictionary *responseDictionary) {
+                                                      success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                           
                                                           
                                                           NSDictionary *requestBillingAddress = @{
-                                                                                                  @"address1": addressTextField.text,
-                                                                                                  @"postalCode": postcodeTextField.text,
-                                                                                                  @"city": cityTextField.text,
-                                                                                                  @"state": cityTextField.text
+                                                                                                  @"address1": self->addressTextField.text,
+                                                                                                  @"postalCode": self->postcodeTextField.text,
+                                                                                                  @"city": self->cityTextField.text,
+                                                                                                  @"state": self->cityTextField.text
                                                                                                   };
                                                           
-                                                          [self makePaymentWithToken:token
-                                                                                         orderDescription:@"New Order"
-                                                                                              orderAmount:@(round([[BasketManager sharedInstance] totalPrice] * 100))
-                                                                                        orderCurrencyCode:@"GBP"
-                                                                                      orderBillingAddress:requestBillingAddress
-                                                                                                  success:^(int code, NSDictionary *responseDictionary) {
-                                                                                                      /**
-                                                                                                       *  At this point you should connect to your own server and complete the purchase from there.
-                                                                                                       */
-                                                                                                      
-                                                                                                      //IMPORTANT - Always check paymentStatus, even if response comes as 200
-                                                                                                      bool success = false;
-                                                                                                      if ([[Worldpay sharedInstance] authorizeOnly]) {
-                                                                                                          if ([[responseDictionary objectForKey:@"paymentStatus"] isEqualToString:@"AUTHORIZED"]){
-                                                                                                              success = true;
-                                                                                                          }
-                                                                                                      }
-                                                                                                      else if ([[responseDictionary objectForKey:@"paymentStatus"] isEqualToString:@"SUCCESS"]){
-                                                                                                          success = true;
-                                                                                                      }
-                                                                                                      
-                                                                                                      
-                                                                                                      if (success) {
-                                                                                                          SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
-                                                                                                          [self.navigationController pushViewController:vc animated:YES];
-                                                                                                          [[BasketManager sharedInstance] clearBasket];
-
-                                                                                                          //if the token is not reusable, we remove it
-                                                                                                          if (![[Worldpay sharedInstance] reusable]) {
-                                                                                                              [self deleteStoredToken:_selectedToken];
-                                                                                                          }
-                                                                                                      }
-                                                                                                      else {
-                                                                                                          [ALToastView toastInView:self.view withText:@"Error! Check console"];
-
-                                                                                                      }
-                                                                                                    
-                                                                                                  } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-                                                                                                      [ALToastView toastInView:self.view withText:@"Error! Check console"];
-                                                                                                  }];
-                                                      
-                                                          
+                                                          [weak makePaymentWithToken:self->token
+                                                                    orderDescription:@"New Order"
+                                                                         orderAmount:@(round([[BasketManager sharedInstance] totalPrice] * 100))
+                                                                   orderCurrencyCode:@"GBP"
+                                                                 orderBillingAddress:requestBillingAddress
+                                                                             success:^(NSInteger code, NSDictionary *responseDictionary) {
+                                                                                 /**
+                                                                                  *  At this point you should connect to your own server and complete the purchase from there.
+                                                                                  */
+                                                                                 
+                                                                                 //IMPORTANT - Always check paymentStatus, even if response comes as 200
+                                                                                 bool success = false;
+                                                                                 if ([[Worldpay sharedInstance] authorizeOnly]) {
+                                                                                     if ([[responseDictionary objectForKey:@"paymentStatus"] isEqualToString:@"AUTHORIZED"]) {
+                                                                                         success = true;
+                                                                                     }
+                                                                                 }
+                                                                                 else if ([[responseDictionary objectForKey:@"paymentStatus"] isEqualToString:@"SUCCESS"]) {
+                                                                                     success = true;
+                                                                                 }
+                                                                                 
+                                                                                 
+                                                                                 if (success) {
+                                                                                     SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
+                                                                                     [weak.navigationController pushViewController:vc animated:YES];
+                                                                                     [[BasketManager sharedInstance] clearBasket];
+                                                                                     
+                                                                                     //if the token is not reusable, we remove it
+                                                                                     if (![[Worldpay sharedInstance] reusable]) {
+                                                                                         [weak deleteStoredToken:weak.selectedToken];
+                                                                                     }
+                                                                                 }
+                                                                                 else {
+                                                                                     [ALToastView toastInView:self.view withText:@"Error! Check console"];
+                                                                                     
+                                                                                 }
+                                                                                 
+                                                                             } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
+                                                                                 [ALToastView toastInView:self.view withText:@"Error! Check console"];
+                                                                             }];
                                                       }
                                                 beforeRequest:^{
-                                                    [ALToastView toastInView:_delegate.window withText:@"Making payment, Please wait..."];
+                                                    [ALToastView toastInView:weak.delegate.window withText:@"Making payment, Please wait..."];
                                                 }
                                                         error:^(NSDictionary *responseDictionary, NSArray *errors) {
                                                             NSLog(@"%@", errors);
@@ -649,35 +661,57 @@
     }
 }
 
--(IBAction)deleteItem:(id)sender {
+- (IBAction)deleteItem:(id)sender {
     NSDictionary *item = [[sender layer] valueForKey:@"item"];
     
-    _deleteItemAlertView = [[UIAlertView alloc] initWithTitle:@"Delete Item"
-                                                        message:[NSString stringWithFormat:@"Are you sure you want to delete '%@?'", [item objectForKey:@"name"]]
-                                                       delegate:self
-                                              cancelButtonTitle:@"No"
-                                              otherButtonTitles:@"Yes", nil];
-    [_deleteItemAlertView.layer setValue:item forKey:@"item"];
-    [_deleteItemAlertView show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete Item"
+                                                                             message:[NSString stringWithFormat:@"Are you sure you want to delete '%@?'", [item objectForKey:@"name"]]
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    __weak typeof(self) weak = self;
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              [[BasketManager sharedInstance] removeItem:item];
+                                                              
+                                                              if ([[[BasketManager sharedInstance] basket] count] == 0) {
+                                                                  [weak.navigationController popViewControllerAnimated:YES];
+                                                                  [ALToastView toastInView:weak.delegate.window withText:@"Basket is empty!"];
+                                                              }
+                                                              
+                                                              [self->scrollView removeFromSuperview];
+                                                              [weak initGUI];
+                                                              [weak createStoredCardView];
+                                                          }];
+    [alertController addAction:confirmAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
     isSelectedCard = NO;
 }
 
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [addressTextField resignFirstResponder];
     [cityTextField resignFirstResponder];
     [postcodeTextField resignFirstResponder];
     
-    if([textField.layer.name isEqualToString:@"address"]){
+    if ([textField.layer.name isEqualToString:@"address"]) {
         [cityTextField becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"city"]){
+    }
+    else if ([textField.layer.name isEqualToString:@"city"]) {
         [postcodeTextField becomeFirstResponder];
     }
     
     return NO;
 }
 
--(void)createStoredCardView {
+- (void)createStoredCardView {
     
     int yPos = cardsViewStartYpos;
     
@@ -695,7 +729,7 @@
     cardsView.backgroundColor = [UIColor clearColor];
     [scrollView addSubview:cardsView];
     
-    for(int i = 0;i<cards.count;i++){
+    for (int i = 0; i < cards.count; ++i) {
         UIView *storedCardBackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, i*40, screenRect.size.width, 40)];
         storedCardBackgroundView.backgroundColor = [UIColor whiteColor];
         [cardsView addSubview:storedCardBackgroundView];
@@ -709,21 +743,25 @@
         [storedCardBackgroundView addSubview:verticalLine1];
         
         UIImageView *empty = [[UIImageView alloc]initWithFrame:CGRectMake(10, 8, 25, 25)];
-        [empty setImage:[UIImage imageNamed:@"empty.png"]];
+        [empty setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_unknown]];
         [storedCardBackgroundView addSubview:empty];
         
         UIImageView *cardlogo = [[UIImageView alloc]initWithFrame:CGRectMake(50, 2, 40, 35)];
         cardlogo.contentMode = UIViewContentModeScaleAspectFit;
-        if([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"VISA"]){
-            [cardlogo setImage:[UIImage imageNamed:@"visa.png"]];
-        }else if([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"MAESTRO"]){
-            [cardlogo setImage:[UIImage imageNamed:@"maestro.png"]];
-        }else if([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"MASTERCARD"]){
-            [cardlogo setImage:[UIImage imageNamed:@"mastercard.png"]];
-        }else if([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"AMEX"]){
-            [cardlogo setImage:[UIImage imageNamed:@"amex.png"]];
-        } else {
-            [cardlogo setImage:[UIImage imageNamed:@"default_card.png"]];
+        if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"VISA"]) {
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_visa]];
+        }
+        else if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"MAESTRO"]) {
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_maestro]];
+        }
+        else if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"MASTERCARD"]) {
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_mastercard]];
+        }
+        else if ([[[cards objectAtIndex:i]objectForKey:@"cardType"] containsString:@"AMEX"]) {
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_amex]];
+        }
+        else {
+            [cardlogo setImage:[WorldpayResourcesManager wp_cardImage:WorldpayCardType_unknown]];
             cardlogo.frame = CGRectMake(cardlogo.frame.origin.x-1, cardlogo.frame.origin.y+3, 43, 30);
         }
         
@@ -733,7 +771,7 @@
         maskedCard.text = [[cards objectAtIndex:i] objectForKey:@"maskedCardNumber"];
         maskedCard.textColor = [UIColor grayColor];
         [storedCardBackgroundView addSubview:maskedCard];
-    
+        
         UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, 39, screenRect.size.width, 1)];
         line2.backgroundColor = [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.0];
         [storedCardBackgroundView addSubview:line2];
@@ -772,13 +810,13 @@
     
     cardsViewEndYpos = yPos;
     
-    if(cardsViewEndYpos > (screenRect.size.height-60-50)){
+    if (cardsViewEndYpos > (screenRect.size.height-60-50)) {
         [scrollView setContentSize:CGSizeMake(screenRect.size.width, cardsViewEndYpos+110)];
         confirmPurchase.frame = CGRectMake(screenRect.size.width/2-80, cardsViewEndYpos+10, 160, 30);
     }
 }
 
--(IBAction)selectStoredCard:(id)sender{
+- (IBAction)selectStoredCard:(id)sender{
     isSelectedCard = YES;
     
     CustomGestureRecognizer *temp = sender;
@@ -793,7 +831,7 @@
     [temp.containerView addSubview:selectedCard];
 }
 
--(void)deleteStoredToken:(NSString *)_token {
+- (void)deleteStoredToken:(NSString *)_token {
     if (!_token) {
         return;
     }
@@ -804,16 +842,33 @@
     [DBhandler closeDatabase:database];
 }
 
--(IBAction)deleteStoredCard:(id)sender{
+- (IBAction)deleteStoredCard:(id)sender{
     UIButton *temp = sender;
     _selectedRowToDelete = [temp.layer.name intValue];
     _selectedToken = @"";
     isSelectedCard = NO;
-    _deleteCardAlertView = [[UIAlertView alloc] initWithTitle:@"Delete Card" message:@"Are you sure?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-    [_deleteCardAlertView show];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete Card"
+                                                                             message:NSLocalizedString(@"Are you sure?", nil)
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    __weak typeof(self) weak = self;
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              [weak deleteCardAtRow:weak.selectedRowToDelete];
+                                                          }];
+    [alertController addAction:confirmAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void)deleteCardAtRow:(NSInteger)row {
+- (void)deleteCardAtRow:(NSInteger)row {
     
     if ([_selectedToken isEqualToString:[[cards objectAtIndex:row] objectForKey:@"token"]]) {
         isSelectedCard = NO;
@@ -825,52 +880,7 @@
     [self createStoredCardView];
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView == _deleteCardAlertView) {
-        if (buttonIndex == 1) {
-            [self deleteCardAtRow:_selectedRowToDelete];
-        }
-    }
-    else if (alertView == _confirmAlertView) {
-        SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
-      
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (alertView == _quantityAlertView) {
-        if (buttonIndex == 1) {
-            NSString *text = [alertView textFieldAtIndex:0].text;
-            long quantity = [text integerValue];
-            if (quantity > 0) {
-                [_selectedItem setValue:[NSNumber numberWithInteger:quantity] forKey:@"quantity"];
-            }
-            [[BasketManager sharedInstance] saveBasket];
-          
-            token = @"";
-            isSelectedCard = NO;
-            [scrollView removeFromSuperview];
-            [self initGUI];
-            [self createStoredCardView];
-        }
-    }
-    else if (alertView == _deleteItemAlertView) {
-        if (buttonIndex == 1) {
-            NSDictionary *item = [[alertView layer] valueForKey:@"item"];
-            [[BasketManager sharedInstance] removeItem:item];
-            
-            if ([[[BasketManager sharedInstance] basket] count] == 0) {
-                [self.navigationController popViewControllerAnimated:YES];
-                [ALToastView toastInView:_delegate.window withText:@"Basket is empty!"];
-            }
-            
-            [scrollView removeFromSuperview];
-            [self initGUI];
-            [self createStoredCardView];
-        }
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -879,24 +889,50 @@
 
 - (IBAction)changeQuantityAction:(id)sender {
     _selectedItem = [[[sender view] layer] valueForKey:@"item"];
-    _quantityAlertView = [[UIAlertView alloc] initWithTitle:@"Quantity" message:@"Enter new quantity" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
     
-    _quantityAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-
-    [[_quantityAlertView textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Quantity"
+                                                                             message:NSLocalizedString(@"Enter new quantity", nil)
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.secureTextEntry = YES;
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+    }];
     
-    [_quantityAlertView show];
+    __weak typeof(alertController) weakAlertController = alertController;
+    __weak typeof(self) weak = self;
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              NSString *text = [[weakAlertController textFields][0] text];
+                                                              NSInteger quantity = [text integerValue];
+                                                              if (quantity > 0) {
+                                                                  [weak.selectedItem setValue:[NSNumber numberWithInteger:quantity] forKey:@"quantity"];
+                                                              }
+                                                              [[BasketManager sharedInstance] saveBasket];
+                                                              
+                                                              self->token = @"";
+                                                              self->isSelectedCard = NO;
+                                                              [self->scrollView removeFromSuperview];
+                                                              [weak initGUI];
+                                                              [weak createStoredCardView];
+                                                          }];
+    [alertController addAction:confirmAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark -
 #pragma mark Apple Pay delegate methods
 
--(void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
-                      didAuthorizePayment:(PKPayment *)payment
-                               completion:(void (^)(PKPaymentAuthorizationStatus))completion {
-    
-    
-    #if TARGET_OS_SIMULATOR
+- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+                       didAuthorizePayment:(PKPayment *)payment
+                                completion:(void (^)(PKPaymentAuthorizationStatus))completion {
+#if TARGET_OS_SIMULATOR
     NSDictionary *testPaymentData = @{ @"data" : @"4444333322221111",
                                        @"signature" : @"test",
                                        @"header" : @{
@@ -909,40 +945,31 @@
     NSError *error;
     NSData *paymentData = [NSJSONSerialization dataWithJSONObject:testPaymentData options:NSJSONWritingPrettyPrinted error: &error];
     
-    #else
+#else
     NSData *paymentData = payment.token.paymentData;
-    #endif
+#endif
     
-    
-    ABMultiValueRef addressMultiValue = ABRecordCopyValue(payment.billingAddress, kABPersonAddressProperty);
-    NSDictionary *addressDictionary = (__bridge_transfer NSDictionary *) ABMultiValueCopyValueAtIndex(addressMultiValue, 0);
-    
-    
-    NSDictionary *requestBillingAddress = @{
-                                            (NSString *)kABPersonAddressStreetKey: [addressDictionary objectForKey:@"Street"],
-                                            (NSString *)kABPersonAddressCountryKey: [addressDictionary objectForKey:@"Country"],
-                                            (NSString *)kABPersonAddressZIPKey: [addressDictionary objectForKey:@"ZIP"],
-                                            (NSString *)kABPersonAddressCityKey: [addressDictionary objectForKey:@"City"]
-                                            };
+    CNPostalAddress *requestBillingAddress = payment.billingContact.postalAddress;
     
     BOOL _reusable = [[Worldpay sharedInstance] reusable];
     [[Worldpay sharedInstance] setReusable:NO];
     
     [self makePaymentWithPaymentData:paymentData
                       billingAddress:requestBillingAddress
-                             success:^(int code, NSDictionary *responseDictionary) {
+                             success:^(NSInteger code, NSDictionary *responseDictionary) {
                                  [[BasketManager sharedInstance] clearBasket];
                                  completion(PKPaymentAuthorizationStatusSuccess);
                                  SuccessPageViewController *vc = [[SuccessPageViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                                  [[Worldpay sharedInstance] setReusable:_reusable];
-                             } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
+                             }
+                             failure:^(NSDictionary *responseDictionary, NSArray *errors) {
                                  completion(PKPaymentAuthorizationStatusFailure);
                                  [[Worldpay sharedInstance] setReusable:_reusable];
-    }];
+                             }];
 }
 
--(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller {
+- (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller {
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -955,61 +982,60 @@
          orderBillingAddress:(NSDictionary *)billingAddress
                      success:(requestUpdateTokenSuccess)success
                      failure:(requestTokenFailure)failure {
-  
-  NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
-  
-  [requestParams setValue:name forKey:@"name"];
-  [requestParams setValue:paymentToken forKey:@"token"];
-  [requestParams setValue:orderDescription forKey:@"orderDescription"];
-  [requestParams setValue:amount forKey:@"amount"];
-  [requestParams setValue:currencyCode forKey:@"currencyCode"];
-  [requestParams setValue:currencyCode forKey:@"settlementCurrency"];
-  [requestParams setValue:billingAddress forKey:@"billingAddress"];
-  
-  if ([[Worldpay sharedInstance] authorizeOnly]) {
-    [requestParams setValue:[NSNumber numberWithBool:YES] forKey:@"authorizeOnly"];
-  }
-  
-  NSDictionary *additionalHeaders = @{@"Authorization": [[Worldpay sharedInstance] serviceKey]};
-  
-  [[Worldpay sharedInstance] makeRequestWithURL:[NSString stringWithFormat:@"%@orders", [[Worldpay sharedInstance] APIStringURL]]
-         requestDictionary:requestParams
-                    method:@"POST"
-                   success:success
-                   failure:failure
-         additionalHeaders:additionalHeaders];
+    
+    NSMutableDictionary *requestParams = [[NSMutableDictionary alloc] init];
+    
+    [requestParams setValue:name forKey:@"name"];
+    [requestParams setValue:paymentToken forKey:@"token"];
+    [requestParams setValue:orderDescription forKey:@"orderDescription"];
+    [requestParams setValue:amount forKey:@"amount"];
+    [requestParams setValue:currencyCode forKey:@"currencyCode"];
+    [requestParams setValue:currencyCode forKey:@"settlementCurrency"];
+    [requestParams setValue:billingAddress forKey:@"billingAddress"];
+    
+    if ([[Worldpay sharedInstance] authorizeOnly]) {
+        [requestParams setValue:[NSNumber numberWithBool:YES] forKey:@"authorizeOnly"];
+    }
+    
+    NSDictionary *additionalHeaders = @{@"Authorization": [[Worldpay sharedInstance] serviceKey]};
+    
+    [[Worldpay sharedInstance] makeRequestWithURL:[NSString stringWithFormat:@"%@orders", [[Worldpay sharedInstance] APIStringURL]]
+                                requestDictionary:requestParams
+                                           method:@"POST"
+                                          success:success
+                                          failure:failure
+                                additionalHeaders:additionalHeaders];
 }
 
 - (void)makePaymentWithPayment:(PKPayment *)payment
                        success:(requestUpdateTokenSuccess)success
                        failure:(requestTokenFailure)failure {
-  ABMultiValueRef addressMultiValue = ABRecordCopyValue(payment.billingAddress, kABPersonAddressProperty);
-  NSDictionary *billingAddress = (__bridge_transfer NSDictionary *)ABMultiValueCopyValueAtIndex(addressMultiValue, 0);
-  
-  [self makePaymentWithPaymentData:payment.token.paymentData
-                    billingAddress:billingAddress
-                           success:success
-                           failure:failure];
+    CNPostalAddress *billingAddress = payment.billingContact.postalAddress;
+    
+    [self makePaymentWithPaymentData:payment.token.paymentData
+                      billingAddress:billingAddress
+                             success:success
+                             failure:failure];
 }
 
 - (void)makePaymentWithPaymentData:(NSData *)paymentData
-                    billingAddress:(NSDictionary *)billingAddress
+                    billingAddress:(CNPostalAddress *)billingAddress
                            success:(requestUpdateTokenSuccess)success
                            failure:(requestTokenFailure)failure {
     
     [[Worldpay sharedInstance] createTokenWithPaymentData:paymentData
-                                                  success:^(int code, NSDictionary *responseDictionary) {
+                                                  success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                       
                                                       NSString *paymentToken = [responseDictionary objectForKey:@"token"];
                                                       
                                                       NSDictionary *requestBillingAddress = @{
-                                                                                              @"address1": [billingAddress objectForKey:(NSString *)kABPersonAddressStreetKey],
-                                                                                              @"postalCode": [billingAddress objectForKey:(NSString *)kABPersonAddressZIPKey],
-                                                                                              @"city": [billingAddress objectForKey:(NSString *)kABPersonAddressCityKey],
-                                                                                              @"state": [billingAddress objectForKey:(NSString *)kABPersonAddressCityKey],
+                                                                                              @"address1": billingAddress.street,
+                                                                                              @"postalCode": billingAddress.postalCode,
+                                                                                              @"city": billingAddress.city,
+                                                                                              @"state": billingAddress.state,
                                                                                               };
                                                       
-                
+                                                      
                                                       [self makePaymentWithToken:paymentToken
                                                                 orderDescription:@"ApplePay payment"
                                                                      orderAmount:@(round([[BasketManager sharedInstance] totalPrice] * 100))

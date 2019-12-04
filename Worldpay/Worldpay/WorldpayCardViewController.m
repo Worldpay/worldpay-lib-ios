@@ -7,29 +7,30 @@
 
 #import "WorldpayCardViewController.h"
 #import "WorldpayUtils.h"
+#import "WorldpayResourcesManager.h"
 
-@interface WorldpayCardViewController ()
+@interface WorldpayCardViewController () <UITextFieldDelegate>
 
-@property (nonatomic,copy) requestTokenSuccess saveSuccessBlock;
-@property (nonatomic,copy) requestTokenFailure saveFailureBlock;
-@property (nonatomic) BOOL isModal, shouldDeleteCharacter;
-@property (nonatomic, retain) UIImageView *cardTypeImageView;
-@property (nonatomic, retain) UIColor *colorTheme;
-@property (nonatomic) BOOL isDisplayingError;
+@property (nonatomic, copy) requestTokenSuccess saveSuccessBlock;
+@property (nonatomic, copy) requestTokenFailure saveFailureBlock;
+@property (nonatomic, assign) BOOL isModal, shouldDeleteCharacter;
+@property (nonatomic, weak  ) UIImageView *cardTypeImageView;
+@property (nonatomic, copy  ) UIColor *colorTheme;
+@property (nonatomic, assign) BOOL isDisplayingError;
 
 /*!
  *  The 5 textfields required to fill in the card details.
  */
 
-@property (nonatomic) UITextField *firstName;
-@property (nonatomic) UITextField *lastName;
-@property (nonatomic) UITextField *cardNumber;
-@property (nonatomic) UITextField *expiry;
-@property (nonatomic) UITextField *CVC;
+@property (nonatomic, weak) UITextField *firstName;
+@property (nonatomic, weak) UITextField *lastName;
+@property (nonatomic, weak) UITextField *cardNumber;
+@property (nonatomic, weak) UITextField *expiry;
+@property (nonatomic, weak) UITextField *CVC;
 
 @end
 
-@implementation WorldpayCardViewController{
+@implementation WorldpayCardViewController {
     UIView *backgroundView, *containerView;
     UIView *backgroundLoadingView;
     UIActivityIndicatorView *actIndView;
@@ -37,46 +38,50 @@
     CGRect screenRect;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
     }
-    return self;
-}
-
--(id)initWithTheme:(CardDetailsTheme)theme loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
-    _theme = theme;
-    _loadingTheme = loadingTheme;
     
     return self;
 }
 
--(id)init {
+- (instancetype)init {
     if (self = [super init]) {
         _loadingTheme = CardDetailsLoadingThemeWhite;
         _colorTheme = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
         _isDisplayingError = NO;
     }
-    return self;
-}
-
--(id)initWithColor:(UIColor *)color loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
-     _colorTheme = color;
-    _loadingTheme = loadingTheme;
     
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (instancetype)initWithColor:(UIColor *)color loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
+    if (self = [super init]) {
+        _colorTheme = color;
+        _loadingTheme = loadingTheme;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithTheme:(CardDetailsTheme)theme loadingTheme:(CardDetailsLoadingTheme)loadingTheme {
+    if (self = [super init]) {
+        _theme = theme;
+        _loadingTheme = loadingTheme;
+    }
+    
+    return self;
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    screenRect = [[UIScreen mainScreen]bounds];
+    screenRect = [UIScreen mainScreen].bounds;
     
-    [[self navigationController] setNavigationBarHidden:NO animated:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.965 green:0.965 blue:0.965 alpha:1];
     
     [self createNavigationBar];
@@ -84,29 +89,27 @@
     [self initGUI];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
-    
-    [WorldpayUtils loadFont:@"ArialMT"];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     if (self.isBeingPresented) {
         _isModal = YES;
-    } else {
+    }
+    else {
         [self.navigationController setNavigationBarHidden:YES];
     }
 }
 
--(void)createNavigationBar{
-    
-
+- (void)createNavigationBar {
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 44)];
     toolbar.translucent = NO;
     [self.view addSubview:toolbar];
     
     toolbar.tintColor = _colorTheme;
     toolbar.barTintColor = [UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:243/255.0];
-
+    
     UIView *statusBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 20)];
     statusBackgroundView.backgroundColor = [UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:243/255.0];
     [self.view addSubview:statusBackgroundView];
@@ -118,8 +121,10 @@
     backButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -18, 0, 0);
-    UIImage *arrowImage = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/back_arrow.png"] withColor:toolbar.tintColor];
-    UIImage *arrowHover = [self filledImageFrom:[UIImage imageNamed:@"WorldpayResources.bundle/back_arrow.png"] withColor:[UIColor lightGrayColor]];
+    UIImage *arrowImage = [WorldpayResourcesManager wp_filledImageFrom:[WorldpayResourcesManager wp_imageNamed:@"wp_ic_back_arrow"]
+                                               withColor:toolbar.tintColor];
+    UIImage *arrowHover = [WorldpayResourcesManager wp_filledImageFrom:[WorldpayResourcesManager wp_imageNamed:@"wp_ic_back_arrow"]
+                                               withColor:[UIColor lightGrayColor]];
     
     [backButton setImage:arrowImage forState:UIControlStateNormal];
     [backButton setImage:arrowHover forState:UIControlStateHighlighted];
@@ -133,7 +138,7 @@
     
     UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     [items addObject:spacer1];
-
+    
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 120, 20)];
     title.text = @"Card Details";
     title.font = [UIFont boldSystemFontOfSize:16];
@@ -154,10 +159,10 @@
     [items addObject:toolbarSaveButton];
     [saveButton sizeToFit];
     
-    [toolbar setItems:items];
+    toolbar.items = items;
 }
 
--(void)showWarningView {
+- (void)showWarningView {
     
     [_firstName resignFirstResponder];
     [_lastName resignFirstResponder];
@@ -176,7 +181,7 @@
     backgroundView.backgroundColor = UIColorFromRGBWithAlpha(0x000000, 0.7);
     backgroundView.alpha = 0;
     backgroundView.userInteractionEnabled = YES;
-
+    
     [self.view addSubview:backgroundView];
     
     containerView = [[UIView alloc]initWithFrame:CGRectMake((screenRect.size.width/2)-140, (backgroundView.frame.size.height-208)/2, 280, 208)];
@@ -192,23 +197,23 @@
     [btnConfirm addTarget:self action:@selector(closeWarningView:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    if(_loadingTheme == CardDetailsLoadingThemeWhite){
-        [btnConfirm setBackgroundColor:[UIColor grayColor]];
+    if (_loadingTheme == CardDetailsLoadingThemeWhite) {
+        btnConfirm.backgroundColor = [UIColor grayColor];
         [btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btnConfirm.titleLabel.textColor = [UIColor whiteColor];
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0xFFFFFF, 1.0);
-        [padlockImage setImage:[UIImage imageNamed:@"WorldpayResources.bundle/lockB.png"]];
-    }else{
-        [btnConfirm setBackgroundColor:[UIColor whiteColor]];
+        padlockImage.image = [WorldpayResourcesManager wp_imageNamed:@"wp_ic_lockB"];
+    }
+    else {
+        btnConfirm.backgroundColor = [UIColor whiteColor];
         [btnConfirm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
         containerView.backgroundColor = UIColorFromRGBWithAlpha(0x000000, 1.0);
-        [padlockImage setImage:[UIImage imageNamed:@"WorldpayResources.bundle/lockW.png"]];
+        padlockImage.image = [WorldpayResourcesManager wp_imageNamed:@"wp_ic_lockW"];
     }
     [backgroundView addSubview:containerView];
     [containerView addSubview:btnConfirm];
-
+    
     containerView.layer.cornerRadius = 10;
     [containerView addSubview:padlockImage];
     
@@ -230,7 +235,7 @@
     secureAndSafeDescription2.font = [UIFont fontWithName:@"ArialMT" size:16];
     secureAndSafeDescription2.numberOfLines = 0;
     
-    if(_loadingTheme == CardDetailsLoadingThemeBlack){
+    if (_loadingTheme == CardDetailsLoadingThemeBlack) {
         secureAndSafeLabel.textColor = [UIColor whiteColor];
         secureAndSafeDescription1.textColor = [UIColor whiteColor];
         secureAndSafeDescription2.textColor = [UIColor whiteColor];
@@ -244,16 +249,16 @@
     float xPos = containerView.frame.origin.x;
     containerView.frame = CGRectMake(xPos, containerView.frame.origin.y, containerView.frame.size.width, containerView.frame.size.height);
     [UIView animateWithDuration:0.2 animations:^{
-        backgroundView.alpha = 1;
+        self->backgroundView.alpha = 1;
     }];
 }
 
 - (IBAction)closeWarningView:(id)sender {
     
     [UIView animateWithDuration:0.2 animations:^{
-        backgroundView.alpha = 0;
+        self->backgroundView.alpha = 0;
     } completion:^(BOOL finished) {
-        [backgroundView removeFromSuperview];
+        [self->backgroundView removeFromSuperview];
     }];
 }
 
@@ -264,7 +269,7 @@
     [_CVC resignFirstResponder];
     [_cardNumber resignFirstResponder];
     
-    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleDefault];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     
     backgroundLoadingView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
     backgroundLoadingView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.8];
@@ -284,7 +289,7 @@
 }
 
 - (void)setSaveButtonTapBlockWithSuccess:(requestTokenSuccess)success
-                                failure:(requestTokenFailure)failure {
+                                 failure:(requestTokenFailure)failure {
     _saveSuccessBlock = success;
     _saveFailureBlock = failure;
 }
@@ -300,8 +305,8 @@
     NSString *expirationYear = nil;
     
     if (expirationDateParts.count == 2) {
-        expirationMonth = [expirationDateParts objectAtIndex:0];
-        expirationYear = [expirationDateParts objectAtIndex:1];
+        expirationMonth = expirationDateParts[0];
+        expirationYear = expirationDateParts[1];
     }
     
     NSArray *errors = [[Worldpay sharedInstance] validateCardDetailsWithHolderName:[NSString stringWithFormat:@"%@%@",_firstName.text,_lastName.text]
@@ -321,27 +326,27 @@
         BOOL cvcValid = YES;
         NSString *expiryDateErrorMsg, *cardNumberErrorMsg, *cardHolderNameErrorMsg, *cvcErrorMsg;
         
-        for(NSError *error in errors) {
+        for (NSError *error in errors) {
             switch (error.code) {
                 case 1:
                     [self shakeTextField:CardDetailsTextFieldExpiry];
                     expiryDateValid = NO;
-                    expiryDateErrorMsg = [error localizedDescription];
+                    expiryDateErrorMsg = error.localizedDescription;
                     break;
                 case 2:
                     [self shakeTextField:CardDetailsTextFieldCardNumber];
                     cardNumberValid = NO;
-                    cardNumberErrorMsg = [error localizedDescription];
+                    cardNumberErrorMsg = error.localizedDescription;
                     break;
                 case 3:
                     [self shakeTextField:CardDetailsTextFieldFirstName];
                     [self shakeTextField:CardDetailsTextFieldLastName];
-                    cardHolderNameErrorMsg = [error localizedDescription];
+                    cardHolderNameErrorMsg = error.localizedDescription;
                     cardHolderNameValid = NO;
                     break;
                 case 4:
                     [self shakeTextField:CardDetailsTextFieldCVC];
-                    cvcErrorMsg = [error localizedDescription];
+                    cvcErrorMsg = error.localizedDescription;
                     cvcValid = NO;
                     break;
                 default:
@@ -362,7 +367,7 @@
             
             errorMessage.alpha = 0;
             [self.view addSubview:errorMessage];
-
+            
             [UIView animateWithDuration:0.5
                                   delay:0
                                 options:UIViewAnimationOptionCurveLinear
@@ -370,47 +375,44 @@
                                  errorMessage.alpha = 1;
                              }
                              completion:^(BOOL finished)
-                             {
-                                 _isDisplayingError = YES;
-                                 if (finished) {
-                                     [UIView animateWithDuration:0.5 delay:2.5 options:UIViewAnimationOptionCurveLinear
-                                                      animations:^{
-                                                          errorMessage.alpha = 0;
-                                                      }completion:^(BOOL finished){
-                                                          _isDisplayingError = NO;
-                                                      }];
-                             }
-            }];
+             {
+                 self.isDisplayingError = YES;
+                 if (finished) {
+                     [UIView animateWithDuration:0.5 delay:2.5 options:UIViewAnimationOptionCurveLinear
+                                      animations:^{
+                                          errorMessage.alpha = 0;
+                                      } completion:^(BOOL finished) {
+                                          self.isDisplayingError = NO;
+                                      }];
+                 }
+             }];
         }
         
-    } else {
+    }
+    else {
         [self addLoadingBackground];
         
-        __weak WorldpayCardViewController *weakSelf = self;
+        __weak typeof(self) weak = self;
         
         NSArray *dateParts = [_expiry.text componentsSeparatedByString:@"/"];
         
         [[Worldpay sharedInstance] createTokenWithNameOnCard:[NSString stringWithFormat:@"%@ %@",_firstName.text, _lastName.text]
-                                                      cardNumber:_cardNumber.text
-                                                 expirationMonth:[dateParts objectAtIndex:0]
-                                                  expirationYear:[dateParts objectAtIndex:1]
-                                                             CVC:_CVC.text
-                                                         success:^(int code, NSDictionary *responseDictionary) {
-                                                             [weakSelf closeController];
-                                                             _saveSuccessBlock(responseDictionary);
-                                                         }
-                                                         failure:^(id responseData, NSArray *errors) {
-                                                             [weakSelf closeController];
-                                                             _saveFailureBlock(responseData, errors);
-                                                         }];
-
-        
+                                                  cardNumber:_cardNumber.text
+                                             expirationMonth:dateParts[0]
+                                              expirationYear:dateParts[1]
+                                                         CVC:_CVC.text
+                                                     success:^(NSInteger code, NSDictionary *responseDictionary) {
+                                                         [weak closeController];
+                                                         weak.saveSuccessBlock(responseDictionary);
+                                                     }
+                                                     failure:^(id responseData, NSArray *errors) {
+                                                         [weak closeController];
+                                                         weak.saveFailureBlock(responseData, errors);
+                                                     }];
     }
 }
 
-- (void)initGUI{
-
-    
+- (void)initGUI {
     UIView *bg1 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, screenRect.size.width, 101)];
     bg1.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bg1];
@@ -419,56 +421,60 @@
     bg2.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bg2];
     
-    _firstName = [[UITextField alloc]initWithFrame:CGRectMake(10, 64, (screenRect.size.width/2) - 20, 50)];
-    _firstName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"First Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    [self.view addSubview:_firstName];
+    UITextField *firstName = [[UITextField alloc]initWithFrame:CGRectMake(10, 64, (screenRect.size.width/2) - 20, 50)];
+    firstName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"First Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    [self.view addSubview:firstName];
+    _firstName = firstName;
     
     UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(screenRect.size.width/2, 64, 1, 50)];
     line1.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:line1];
     
-    _lastName = [[UITextField alloc]initWithFrame:CGRectMake((screenRect.size.width/2)+10, 64, (screenRect.size.width/2) - 20, 50)];
-    _lastName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Last Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    [self.view addSubview:_lastName];
+    UITextField *lastName = [[UITextField alloc]initWithFrame:CGRectMake((screenRect.size.width/2)+10, 64, (screenRect.size.width/2) - 20, 50)];
+    lastName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Last Name", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    [self.view addSubview:lastName];
+    _lastName = lastName;
     
     UIView *horizontalLine0 = [[UIView alloc]initWithFrame:CGRectMake(0, 64, screenRect.size.width, 1)];
     horizontalLine0.backgroundColor = [UIColor colorWithRed:0.84 green:0.84 blue:0.84 alpha:1.0];
     [self.view addSubview:horizontalLine0];
-
+    
     
     UIView *horizontalLine1 = [[UIView alloc]initWithFrame:CGRectMake(10, _lastName.frame.size.height+_lastName.frame.origin.y, screenRect.size.width - 10, 1)];
     horizontalLine1.backgroundColor = [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.0];
     [self.view addSubview:horizontalLine1];
     
-    _cardNumber = [[UITextField alloc]initWithFrame:CGRectMake(60, horizontalLine1.frame.origin.y+1, screenRect.size.width - 10, 50)];
-    _cardNumber.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Card Number", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    [_cardNumber setKeyboardType:UIKeyboardTypeNumberPad];
+    UITextField *cardNumber = [[UITextField alloc]initWithFrame:CGRectMake(60, horizontalLine1.frame.origin.y+1, screenRect.size.width - 10, 50)];
+    cardNumber.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Card Number", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    cardNumber.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:cardNumber];
+    _cardNumber = cardNumber;
     
-    [self.view addSubview:_cardNumber];
-    
-    _cardTypeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, _cardNumber.frame.origin.y + 5, 40, 40)];
-    _cardTypeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"WorldpayResources.bundle/default_card.png"]];;
-    _cardTypeImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.view addSubview:_cardTypeImageView];
+    UIImageView *cardTypeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, _cardNumber.frame.origin.y + 5, 40, 40)];
+    cardTypeImageView.image = [WorldpayResourcesManager wp_cardImage:WorldpayCardType_unknown];
+    cardTypeImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:cardTypeImageView];
+    _cardTypeImageView = cardTypeImageView;
     
     UIView *horizontalLine2 = [[UIView alloc]initWithFrame:CGRectMake(10, _cardNumber.frame.size.height+_cardNumber.frame.origin.y, screenRect.size.width - 10, 1)];
     horizontalLine2.backgroundColor = [UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.0];
     [self.view addSubview:horizontalLine2];
     
-    _expiry = [[UITextField alloc]initWithFrame:CGRectMake(10, horizontalLine2.frame.origin.y+1, screenRect.size.width/3.5, 50)];
-    _expiry.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"MM/YYYY", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    [_expiry setKeyboardType:UIKeyboardTypeNumberPad];
-    [self.view addSubview:_expiry];
+    UITextField *expiry = [[UITextField alloc]initWithFrame:CGRectMake(10, horizontalLine2.frame.origin.y+1, screenRect.size.width/3.5, 50)];
+    expiry.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"MM/YYYY", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    expiry.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:expiry];
+    _expiry = expiry;
     
     UIView *line4 = [[UIView alloc]initWithFrame:CGRectMake((screenRect.size.width/3.5) + 10, horizontalLine2.frame.origin.y+1, 1, 50)];
     line4.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:line4];
     
-    _CVC = [[UITextField alloc]initWithFrame:CGRectMake((screenRect.size.width/3.5) + 20, horizontalLine2.frame.origin.y+1, screenRect.size.width/4, 50)];
-    _CVC.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"CVC", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
-    [_CVC setKeyboardType:UIKeyboardTypeNumberPad];
-
-    [self.view addSubview:_CVC];
+    UITextField *CVC = [[UITextField alloc]initWithFrame:CGRectMake((screenRect.size.width/3.5) + 20, horizontalLine2.frame.origin.y+1, screenRect.size.width/4, 50)];
+    CVC.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"CVC", nil) attributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]}];
+    CVC.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:CVC];
+    _CVC = CVC;
     
     UIView *line5 = [[UIView alloc]initWithFrame:CGRectMake(screenRect.size.width/2, horizontalLine2.frame.origin.y+1, 1, 50)];
     line5.backgroundColor = [UIColor lightGrayColor];
@@ -488,10 +494,10 @@
     
     UIImageView *padlock = [[UIImageView alloc]initWithFrame:CGRectMake(secureAndSafe.frame.size.width+secureAndSafe.frame.origin.x, horizontalLine2.frame.origin.y+15, 20, 20)];
     
-    UIImage *padLockImage = [UIImage imageNamed:@"WorldpayResources.bundle/lockB.png"];
+    UIImage *padLockImage = [WorldpayResourcesManager wp_imageNamed:@"wp_ic_lockB"];
     
-    [[UITextField appearance] setTintColor:_colorTheme];
-    [padlock setImage:[self filledImageFrom:padLockImage withColor:_colorTheme]];
+    [UITextField appearance].tintColor = _colorTheme;
+    padlock.image = [WorldpayResourcesManager wp_filledImageFrom:padLockImage withColor:_colorTheme];
     padlock.contentMode = UIViewContentModeScaleAspectFit;
     
     [self.view addSubview:padlock];
@@ -542,118 +548,117 @@
 }
 
 - (void)shakeTextField:(CardDetailsTextField)textField{
-    if(textField == CardDetailsTextFieldFirstName){
+    if (textField == CardDetailsTextFieldFirstName) {
         [self shake:_firstName shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldLastName){
+    }else if (textField == CardDetailsTextFieldLastName) {
         [self shake:_lastName shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldCardNumber){
+    }else if (textField == CardDetailsTextFieldCardNumber) {
         [self shake:_cardNumber shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldExpiry){
+    }else if (textField == CardDetailsTextFieldExpiry) {
         [self shake:_expiry shakes:0 direction:1];
-    }else if(textField == CardDetailsTextFieldCVC){
+    }else if (textField == CardDetailsTextFieldCVC) {
         [self shake:_CVC shakes:0 direction:1];
     }
 }
 
-- (void)shake:(UITextField *)theOneYouWannaShake shakes:(int)shakes direction:(int)direction {
-    __block int shakesNumber = shakes;
-    __block int directionNumber = shakes;
+- (void)shake:(UITextField *)theOneYouWannaShake shakes:(NSInteger)shakes direction:(NSInteger)direction {
+    __block NSInteger shakesNumber = shakes;
+    __block NSInteger directionNumber = shakes;
     
-    [UIView animateWithDuration:0.05 animations:^
-     {
-         theOneYouWannaShake.transform = CGAffineTransformMakeTranslation(5*direction, 0);
-     }
-                     completion:^(BOOL finished)
-     {
-         if(shakes >= 10)
-         {
-             theOneYouWannaShake.textColor = [UIColor redColor];
-             theOneYouWannaShake.transform = CGAffineTransformIdentity;
-             return;
-         }
-         shakesNumber++;
-         directionNumber = direction * -1;
-         [self shake:theOneYouWannaShake shakes:shakesNumber direction:directionNumber];
-     }];
+    [UIView animateWithDuration:0.05 animations:^{
+        theOneYouWannaShake.transform = CGAffineTransformMakeTranslation(5*direction, 0);
+    }
+                     completion:^(BOOL finished) {
+                         if (shakes >= 10) {
+                             theOneYouWannaShake.textColor = [UIColor redColor];
+                             theOneYouWannaShake.transform = CGAffineTransformIdentity;
+                             
+                             return;
+                         }
+                         shakesNumber++;
+                         directionNumber = direction * -1;
+                         [self shake:theOneYouWannaShake shakes:shakesNumber direction:directionNumber];
+                     }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if([textField.layer.name isEqualToString:@"expiry"]){
+    if ([textField.layer.name isEqualToString:@"expiry"]) {
         [textField selectAll:self];
     }
 }
 
-- (IBAction)textFieldDidChange:(id)sender{
+- (void)textFieldDidChange:(UITextField *)textField {
     _cardNumber.text = [_cardNumber.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     _expiry.text = [_expiry.text stringByReplacingOccurrencesOfString:@"." withString:@""];
     _CVC.text = [_CVC.text stringByReplacingOccurrencesOfString:@"." withString:@""];
-
-    NSString *cardType = [[Worldpay sharedInstance] cardType:[_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
     
-    BOOL isValidCard = ([[Worldpay sharedInstance] validationType] == WorldpayValidationTypeBasic &&
+    WorldpayCardType cardType = [Worldpay cardType:[_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+    
+    BOOL isValidCard = ([Worldpay sharedInstance].validationType == WorldpayValidationTypeBasic &&
                         [[Worldpay sharedInstance] validateCardNumberBasicWithCardNumber:_cardNumber.text]) ||
-                       ([[Worldpay sharedInstance] validationType] == WorldpayValidationTypeAdvanced &&
-                        [[Worldpay sharedInstance] validateCardNumberAdvancedWithCardNumber:_cardNumber.text]);
+    ([Worldpay sharedInstance].validationType == WorldpayValidationTypeAdvanced &&
+     [[Worldpay sharedInstance] validateCardNumberAdvancedWithCardNumber:_cardNumber.text]);
     
-    if (![cardType isEqualToString:@"unknown"] && isValidCard) {
-        _cardTypeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"WorldpayResources.bundle/%@.png", cardType]];
+    if (!isValidCard) {
+        cardType = WorldpayCardType_unknown;
     }
-    else {
-        _cardTypeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"WorldpayResources.bundle/default_card.png"]];;
-    }
+    _cardTypeImageView.image = [WorldpayResourcesManager wp_cardImage:cardType];
     
-    if (sender == _expiry && _expiry.text.length == 2 && _expiry.text.length == 2 && [_expiry.text characterAtIndex:1] != '/' && !_shouldDeleteCharacter) {
+    if (textField == _expiry && _expiry.text.length == 2 && _expiry.text.length == 2 && [_expiry.text characterAtIndex:1] != '/' && !_shouldDeleteCharacter) {
         _expiry.text = [NSString stringWithFormat:@"%@/", _expiry.text];
     }
     
-    NSInteger cardLength = [[_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""] length];
+    NSInteger cardLength = [_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""].length;
     
-    if (sender == _cardNumber && cardLength != 16 && cardLength % 4 == 0 && [_cardNumber.text characterAtIndex:cardLength-1] != ' ' && !_shouldDeleteCharacter) {
+    if (textField == _cardNumber && cardLength != 16 && cardLength % 4 == 0 && [_cardNumber.text characterAtIndex:cardLength-1] != ' ' && !_shouldDeleteCharacter) {
         _cardNumber.text = [NSString stringWithFormat:@"%@ ", _cardNumber.text];
     }
     _shouldDeleteCharacter = NO;
     
 }
 
--(IBAction)firstNameSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)firstNameSetBlackTextOnEditingChanged:(id)sender{
     _firstName.textColor = [UIColor blackColor];
 }
 
--(IBAction)lastNameSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)lastNameSetBlackTextOnEditingChanged:(id)sender{
     _lastName.textColor = [UIColor blackColor];
 }
 
--(IBAction)cardNumberSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)cardNumberSetBlackTextOnEditingChanged:(id)sender{
     _cardNumber.textColor = [UIColor blackColor];
 }
 
--(IBAction)expirySetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)expirySetBlackTextOnEditingChanged:(id)sender{
     _expiry.textColor = [UIColor blackColor];
 }
 
--(IBAction)CVCSetBlackTextOnEditingChanged:(id)sender{
+- (IBAction)CVCSetBlackTextOnEditingChanged:(id)sender{
     _CVC.textColor = [UIColor blackColor];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if([textField.layer.name isEqualToString:@"firstName"]){
+    if ([textField.layer.name isEqualToString:@"firstName"]) {
         [_lastName becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"lastName"]){
+    }
+    else if ([textField.layer.name isEqualToString:@"lastName"]) {
         [_cardNumber becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"cardNumber"]){
+    }
+    else if ([textField.layer.name isEqualToString:@"cardNumber"]) {
         [_expiry becomeFirstResponder];
-    }else if([textField.layer.name isEqualToString:@"expiry"]){
+    }
+    else if ([textField.layer.name isEqualToString:@"expiry"]) {
         [_CVC becomeFirstResponder];
-    }else{
+    }
+    else{
         [_CVC resignFirstResponder];
     }
     
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if ([string isEqualToString:@""]) {
         _shouldDeleteCharacter = YES;
@@ -667,64 +672,29 @@
         return NO;
     }
     
-    if(textField == _expiry && string.length != 0 && ![string isEqualToString:@"/"] && [_expiry.text length] == 2 && [_expiry.text rangeOfString:@"/"].location == NSNotFound) {
+    if (textField == _expiry && string.length != 0 && ![string isEqualToString:@"/"] && (_expiry.text).length == 2 && [_expiry.text rangeOfString:@"/"].location == NSNotFound) {
         _expiry.text = [NSString stringWithFormat:@"%@/", _expiry.text];
     }
     
-    if (textField == _cardNumber && string.length != 0 && _cardNumber.text.length != 0 && ![[_cardNumber.text substringFromIndex:_cardNumber.text.length-1] isEqualToString:@" "] && [[_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""] length] % 4 == 0) {
+    if (textField == _cardNumber && string.length != 0 && _cardNumber.text.length != 0 && ![[_cardNumber.text substringFromIndex:_cardNumber.text.length-1] isEqualToString:@" "] && [_cardNumber.text stringByReplacingOccurrencesOfString:@" " withString:@""].length % 4 == 0) {
         _cardNumber.text = [NSString stringWithFormat:@"%@ ", _cardNumber.text];
     }
     
-    if (textField.text.length >= 7 && range.length == 0 && [textField.layer.name isEqualToString:@"expiry"]){
+    if (textField.text.length >= 7 && range.length == 0 && [textField.layer.name isEqualToString:@"expiry"]) {
         return NO;
-    } else if(textField.text.length >= 4 && range.length == 0 && [textField.layer.name isEqualToString:@"CVC"]){
+    }
+    else if (textField.text.length >= 4 && range.length == 0 && [textField.layer.name isEqualToString:@"CVC"]) {
         return NO;
     }
     
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (UIImage *)filledImageFrom:(UIImage *)source withColor:(UIColor *)color {
-    
-    // begin a new image context, to draw our colored image onto with the right scale
-    UIGraphicsBeginImageContextWithOptions(source.size, NO, [UIScreen mainScreen].scale);
-    
-    // get a reference to that context we created
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // set the fill color
-    [color setFill];
-    
-    // translate/flip the graphics context (for transforming from CG* coords to UI* coords
-    CGContextTranslateCTM(context, 0, source.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    CGContextSetBlendMode(context, kCGBlendModeColorBurn);
-    CGRect rect = CGRectMake(0, 0, source.size.width, source.size.height);
-    CGContextDrawImage(context, rect, source.CGImage);
-    
-    CGContextSetBlendMode(context, kCGBlendModeSourceIn);
-    CGContextAddRect(context, rect);
-    CGContextDrawPath(context,kCGPathFill);
-    
-    // generate a new UIImage from the graphics context we drew onto
-    UIImage *coloredImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    //return the color-burned image
-    return coloredImg;
-}
-
 - (void)closeController {
     if (_isModal) {
         [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
+    }
+    else {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

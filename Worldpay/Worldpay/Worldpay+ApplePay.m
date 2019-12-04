@@ -5,17 +5,17 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import "Worldpay+ApplePay.h"
-#import <AddressBook/AddressBook.h>
-#import "WorldpayUtils.h"
+@import AddressBook;
 
+#import "Worldpay+ApplePay.h"
 
 #define WorldpaySupportedNetworks @[PKPaymentNetworkVisa, PKPaymentNetworkMasterCard, PKPaymentNetworkAmex]
 
 @implementation Worldpay (ApplePay)
 
 - (BOOL)canMakePayments {
-    return [PKPaymentAuthorizationViewController canMakePayments] && [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:WorldpaySupportedNetworks];
+    return [PKPaymentAuthorizationViewController canMakePayments]
+        && [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:WorldpaySupportedNetworks];
 }
 
 - (PKPaymentRequest *)createPaymentRequestWithMerchantIdentifier:(NSString *)marchantIdentifier {
@@ -30,8 +30,8 @@
 }
 
 - (void)createTokenWithPayment:(PKPayment *)payment
-                           success:(requestUpdateTokenSuccess)success
-                           failure:(requestTokenFailure)failure {
+                       success:(requestUpdateTokenSuccess)success
+                       failure:(requestTokenFailure)failure {
     
     [self createTokenWithPaymentData:payment.token.paymentData
                              success:success
@@ -42,18 +42,18 @@
                            success:(requestUpdateTokenSuccess)success
                            failure:(requestTokenFailure)failure {
     
-   
+    
     NSString *tokenString = [[NSString alloc] initWithData:paymentData
                                                   encoding:NSUTF8StringEncoding];
     
     
     NSDictionary *params = @{
                              @"paymentMethod": @{
-                                        @"type": @"ApplePay",
-                                        @"applePayToken": tokenString,
+                                     @"type": @"ApplePay",
+                                     @"applePayToken": tokenString,
                                      },
                              @"clientKey": self.clientKey,
-                             @"reusable": [NSNumber numberWithBool:self.reusable]
+                             @"reusable": @(self.reusable)
                              };
     
     [self makeRequestWithURL:[NSString stringWithFormat:@"%@/tokens", [[Worldpay sharedInstance] APIStringURL]]
@@ -63,9 +63,5 @@
                      failure:failure
            additionalHeaders:nil];
 }
-
-
-
-
 
 @end

@@ -36,7 +36,7 @@
     [self initGUI];
 }
 
--(void)createNavigationBar{
+- (void)createNavigationBar{
     
     UIView *navigationBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, screenRect.size.width, 40)];
     navigationBarView.backgroundColor = [UIColor colorWithRed:0.941 green:0.118 blue:0.078 alpha:1];
@@ -48,7 +48,7 @@
 
 }
 
--(void)initGUI{
+- (void)initGUI{
     self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
     
     UILabel *thankYou = [[UILabel alloc]initWithFrame:CGRectMake(10, 100, screenRect.size.width-20, 50)];
@@ -85,11 +85,12 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
--(IBAction)home:(id)sender{
+- (IBAction)home:(id)sender{
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSArray *settingsItems, *keys, *versions;
 @property (nonatomic, retain) NSArray *sections;
 @property (nonatomic, retain) AppDelegate *delegate;
-@property (nonatomic, retain) UIAlertView *keyAlertView;
 @property (nonatomic, retain) NSString *clientKey, *serviceKey;
 @end
 
@@ -65,7 +64,7 @@
     return 3;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return [_sections objectAtIndex:section];
 }
 
@@ -88,7 +87,6 @@
     
     UITableViewCell *cell = nil;
     
-    
     if (indexPath.section == 0) {
         SettingsCell *settingsCell = [tableView dequeueReusableCellWithIdentifier:@"settingsCell"
                                                                      forIndexPath:indexPath];
@@ -105,7 +103,7 @@
         
         cell = settingsCell;
     }
-    else if (indexPath.section <= 1) {
+    else if (indexPath.section == 1) {
         UITableViewCell *keyCell = [tableView dequeueReusableCellWithIdentifier:@"keyCell"];
         
         if (keyCell == nil) {
@@ -121,7 +119,7 @@
         
         cell = keyCell;
     }
-    else if (indexPath.section == 2) {
+    else {
         UITableViewCell *versionCell = [tableView dequeueReusableCellWithIdentifier:@"versionCell"];
         
         if (versionCell == nil) {
@@ -140,32 +138,55 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1 ) {
-        
         NSString *title = @"Client Key";
-        NSString *key = nil;
+        NSString *value = self.clientKey;
+        NSString *key = @"clientKey";
         
-        _keyAlertView = [[UIAlertView alloc] initWithTitle:title message:@"Enter your Key" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        
-        if (indexPath.row == 0) {
-            key = _clientKey;
-            [_keyAlertView.layer setValue:@"clientKey" forKey:@"key"];
-
-        } else {
+        if (indexPath.row != 0) {
             title = @"Service Key";
-            key = _serviceKey;
-            [_keyAlertView.layer setValue:@"serviceKey" forKey:@"key"];
-
+            value = _serviceKey;
+            key = @"serviceKey";
         }
-    
-        _keyAlertView.title = title;
-        _keyAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-
-        [[_keyAlertView textFieldAtIndex:0] setText:key];
-        [_keyAlertView show];
-
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                                 message:@"Enter your Key"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.text = value;
+            textField.keyboardType = UIKeyboardTypeDefault;
+        }];
+        
+        __weak typeof(alertController) weakAlertController = alertController;
+        __weak typeof(self) weak = self;
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                                                                  
+                                                                  NSString *val = [[weakAlertController textFields][0] text];
+                                                                  
+                                                                  [userDefaults setValue:val forKey:key];
+                                                                  [userDefaults synchronize];
+                                                                  
+                                                                  FMDatabase *database = [DBhandler openDB];
+                                                                  [DBhandler deleteAllCards:database];
+                                                                  [DBhandler closeDatabase:database];
+                                                                  
+                                                                  [weak.delegate setKeys];
+                                                                  [weak setKeys];
+                                                                  [weak.tableView reloadData];
+                                                              }];
+        [alertController addAction:confirmAction];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:nil];
+        [alertController addAction:cancelAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
@@ -197,7 +218,6 @@
     _clientKey = [userDefaults valueForKey:@"clientKey"];
     _serviceKey = [userDefaults valueForKey:@"serviceKey"];
 
-    
     _keys = @[
                          @{
                              @"label": @"Client Key",
@@ -226,28 +246,5 @@
                       }
                   ];
 }
-
-#pragma mark - UIAlertView delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-      NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-      UITextField *textField = [alertView textFieldAtIndex:0];
-        
-      [userDefaults setValue:textField.text forKey:[alertView.layer valueForKey:@"key"]];
-      [userDefaults synchronize];
-    
-      FMDatabase *database = [DBhandler openDB];
-      [DBhandler deleteAllCards:database];
-      [DBhandler closeDatabase:database];
-
-      [_delegate setKeys];
-      [self setKeys];
-      [self.tableView reloadData];
-    }
-}
-
-
 
 @end

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -14,6 +14,8 @@
 				7EF710B31976BB1400F7DC51 /* ShellScript */,
 			);
 			dependencies = (
+				A5D2346E2088CBD40079B644 /* PBXTargetDependency */,
+				A5D234702088CBD40079B644 /* PBXTargetDependency */,
 			);
 			name = UniversalLib;
 			productName = UniversalLib;
@@ -24,37 +26,19 @@
 		59243DEF1A26144E005F900B /* WorldpayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 59243DEE1A26144E005F900B /* WorldpayUtils.m */; };
 		5929C51E1A717A1B00BAB6D8 /* Worldpay+ApplePay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 59FE0F741A71601D00691C1F /* Worldpay+ApplePay.h */; };
 		5929C5221A717D8A00BAB6D8 /* WorldpayApplePayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5929C5211A717D8A00BAB6D8 /* WorldpayApplePayTests.m */; };
-		593F149A19B0B8F800A009FB /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149619B0B8F800A009FB /* amex.png */; };
-		593F149B19B0B8F800A009FB /* maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149719B0B8F800A009FB /* maestro.png */; };
-		593F149C19B0B8F800A009FB /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149819B0B8F800A009FB /* mastercard.png */; };
-		593F149D19B0B8F800A009FB /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 593F149919B0B8F800A009FB /* visa.png */; };
-		594A336819A5FA7A004085F9 /* back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 594A336719A5FA7A004085F9 /* back_arrow@2x.png */; };
 		5957D19D1A71839500D7A99F /* Worldpay+ApplePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FE0F751A71601D00691C1F /* Worldpay+ApplePay.m */; };
 		59670F361A24ED4C001DA3F3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59670F351A24ED4C001DA3F3 /* CoreText.framework */; };
 		597077AD1993999A002651A7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 597077AC1993999A002651A7 /* CoreFoundation.framework */; };
 		597077B31993999A002651A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 597077B11993999A002651A7 /* InfoPlist.strings */; };
-		597077B8199399AD002651A7 /* lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE98198B86F200C34D6A /* lockB@2x.png */; };
-		597077B9199399AD002651A7 /* lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE99198B86F200C34D6A /* lockW@2x.png */; };
-		597077BD199399AD002651A7 /* x_b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE72198B77E400C34D6A /* x_b@2x.png */; };
-		597077BE199399AD002651A7 /* x_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE73198B77E400C34D6A /* x_w@2x.png */; };
 		597077BF19939A79002651A7 /* WorldpayResources.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 597077AB1993999A002651A7 /* WorldpayResources.bundle */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5A6788ED1A680E120084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EC1A680E120084394C /* default_card@2x.png */; };
-		5A6788EE1A680E120084394C /* default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A6788EC1A680E120084394C /* default_card@2x.png */; };
 		5A8BC2BB1BD8DBDF00FFBED0 /* WorldpayAPMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */; };
 		5A8BC2BC1BD8EB4400FFBED0 /* WorldpayAPMViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */; };
 		5A8BC2BE1BDA2A3200FFBED0 /* APMController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */; };
-		5A8BC2C11BDA46B900FFBED0 /* WorldpayAPMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8BC2BA1BD8DBDF00FFBED0 /* WorldpayAPMViewController.xib */; };
-		5A8BC2C61BDA4F8100FFBED0 /* APMController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A8BC2C51BDA4F8100FFBED0 /* APMController.xib */; };
 		5A8BC2CA1BDA9DD600FFBED0 /* ThreeDSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */; };
 		5A8BC2CB1BDA9F7700FFBED0 /* ThreeDSController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */; };
 		5AC8C68A1BDE5E8C006F1F78 /* APMController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */; };
 		7E00CE58198B758C00C34D6A /* WorldpayCardViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */; };
-		7E00CE79198B77E400C34D6A /* x_b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE72198B77E400C34D6A /* x_b@2x.png */; };
-		7E00CE7A198B77E400C34D6A /* x_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE73198B77E400C34D6A /* x_w@2x.png */; };
-		7E00CE9A198B86F200C34D6A /* lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE98198B86F200C34D6A /* lockB@2x.png */; };
-		7E00CE9B198B86F200C34D6A /* lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E00CE99198B86F200C34D6A /* lockW@2x.png */; };
 		7EEBCC24197E59BB00DBEA7C /* WorldpayCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */; };
-		7EEBCC26197E59BB00DBEA7C /* WorldpayCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EEBCC23197E59BB00DBEA7C /* WorldpayCardViewController.xib */; };
 		7EF710791976B8B800F7DC51 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF710781976B8B800F7DC51 /* Foundation.framework */; };
 		7EF7107E1976B8B800F7DC51 /* Worldpay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7EF7107D1976B8B800F7DC51 /* Worldpay.h */; };
 		7EF710801976B8B800F7DC51 /* Worldpay.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF7107F1976B8B800F7DC51 /* Worldpay.m */; };
@@ -62,6 +46,50 @@
 		7EF7108D1976B8B800F7DC51 /* libWorldpay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF710751976B8B800F7DC51 /* libWorldpay.a */; };
 		7EF710931976B8B800F7DC51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EF710911976B8B800F7DC51 /* InfoPlist.strings */; };
 		7EF710951976B8B800F7DC51 /* WorldpayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF710941976B8B800F7DC51 /* WorldpayTests.m */; };
+		A52A7CBA2216FF150051843F /* wp_ic_discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52A7CB72216FF150051843F /* wp_ic_discover@2x.png */; };
+		A52A7CBB2216FF150051843F /* wp_ic_discover@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A52A7CB82216FF150051843F /* wp_ic_discover@3x.png */; };
+		A52A7CBC2216FF150051843F /* wp_ic_discover.png in Resources */ = {isa = PBXBuildFile; fileRef = A52A7CB92216FF150051843F /* wp_ic_discover.png */; };
+		A59C28B52215B36700610B6C /* wp_ic_visa_checkout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */; };
+		A59C28B62215B36700610B6C /* poweredByWorldPay.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28892215B36300610B6C /* poweredByWorldPay.png */; };
+		A59C28B72215B36700610B6C /* wp_ic_laser.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288A2215B36300610B6C /* wp_ic_laser.png */; };
+		A59C28B82215B36700610B6C /* wp_ic_amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288B2215B36300610B6C /* wp_ic_amex@2x.png */; };
+		A59C28B92215B36700610B6C /* wp_ic_lockB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288C2215B36300610B6C /* wp_ic_lockB@2x.png */; };
+		A59C28BA2215B36700610B6C /* wp_ic_lockW@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288D2215B36300610B6C /* wp_ic_lockW@3x.png */; };
+		A59C28BB2215B36700610B6C /* wp_ic_back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288E2215B36300610B6C /* wp_ic_back_arrow@2x.png */; };
+		A59C28BC2215B36700610B6C /* wp_ic_mastercard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C288F2215B36300610B6C /* wp_ic_mastercard@3x.png */; };
+		A59C28BD2215B36700610B6C /* wp_ic_masterpass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28902215B36300610B6C /* wp_ic_masterpass@3x.png */; };
+		A59C28BE2215B36700610B6C /* wp_ic_diners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28912215B36300610B6C /* wp_ic_diners@2x.png */; };
+		A59C28BF2215B36700610B6C /* wp_ic_lockB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28922215B36300610B6C /* wp_ic_lockB@3x.png */; };
+		A59C28C02215B36700610B6C /* wp_ic_visa_checkout.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28932215B36300610B6C /* wp_ic_visa_checkout.png */; };
+		A59C28C12215B36700610B6C /* wp_ic_laser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28942215B36300610B6C /* wp_ic_laser@2x.png */; };
+		A59C28C22215B36700610B6C /* wp_ic_jcb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */; };
+		A59C28C42215B36700610B6C /* wp_ic_amex.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28972215B36300610B6C /* wp_ic_amex.png */; };
+		A59C28C52215B36700610B6C /* wp_ic_maestro.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28982215B36400610B6C /* wp_ic_maestro.png */; };
+		A59C28C62215B36700610B6C /* wp_ic_maestro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28992215B36400610B6C /* wp_ic_maestro@2x.png */; };
+		A59C28C72215B36700610B6C /* wp_ic_masterpass.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289A2215B36400610B6C /* wp_ic_masterpass.png */; };
+		A59C28C82215B36700610B6C /* wp_ic_back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289B2215B36400610B6C /* wp_ic_back_arrow.png */; };
+		A59C28C92215B36700610B6C /* wp_ic_default_card.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289C2215B36400610B6C /* wp_ic_default_card.png */; };
+		A59C28CA2215B36700610B6C /* wp_ic_default_card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289D2215B36400610B6C /* wp_ic_default_card@2x.png */; };
+		A59C28CB2215B36700610B6C /* wp_ic_visa.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289E2215B36400610B6C /* wp_ic_visa.png */; };
+		A59C28CC2215B36700610B6C /* wp_ic_mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C289F2215B36400610B6C /* wp_ic_mastercard.png */; };
+		A59C28CD2215B36700610B6C /* wp_ic_lockW@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A02215B36400610B6C /* wp_ic_lockW@2x.png */; };
+		A59C28CE2215B36700610B6C /* wp_ic_lockB.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A12215B36400610B6C /* wp_ic_lockB.png */; };
+		A59C28CF2215B36700610B6C /* wp_ic_visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A22215B36400610B6C /* wp_ic_visa@2x.png */; };
+		A59C28D12215B36700610B6C /* wp_ic_diners@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */; };
+		A59C28D22215B36700610B6C /* wp_ic_masterpass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A52215B36500610B6C /* wp_ic_masterpass@2x.png */; };
+		A59C28D32215B36700610B6C /* wp_ic_lockW.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A62215B36500610B6C /* wp_ic_lockW.png */; };
+		A59C28D42215B36700610B6C /* wp_ic_diners.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A72215B36500610B6C /* wp_ic_diners.png */; };
+		A59C28D52215B36700610B6C /* wp_ic_maestro@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A82215B36500610B6C /* wp_ic_maestro@3x.png */; };
+		A59C28D62215B36700610B6C /* wp_ic_visa_checkout@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28A92215B36500610B6C /* wp_ic_visa_checkout@3x.png */; };
+		A59C28D72215B36700610B6C /* wp_ic_jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AA2215B36500610B6C /* wp_ic_jcb.png */; };
+		A59C28D82215B36700610B6C /* wp_ic_visa@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AB2215B36500610B6C /* wp_ic_visa@3x.png */; };
+		A59C28D92215B36700610B6C /* wp_ic_jcb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */; };
+		A59C28DA2215B36700610B6C /* wp_ic_back_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AD2215B36600610B6C /* wp_ic_back_arrow@3x.png */; };
+		A59C28DB2215B36700610B6C /* wp_ic_mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */; };
+		A59C28DE2215B36700610B6C /* wp_ic_laser@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */; };
+		A59C28E02215B36700610B6C /* wp_ic_amex@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */; };
+		A59C28E92216D56F00610B6C /* WorldpayResourcesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A59C28E82216D56F00610B6C /* WorldpayResourcesManager.m */; };
+		B2B16E8DB17B41DEE9958DB8 /* Pods_Worldpay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +99,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7EF710741976B8B800F7DC51;
 			remoteInfo = Worldpay;
+		};
+		A5D2346D2088CBD40079B644 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EF7106D1976B8B800F7DC51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EF710741976B8B800F7DC51;
+			remoteInfo = Worldpay;
+		};
+		A5D2346F2088CBD40079B644 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EF7106D1976B8B800F7DC51 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 597077AA1993999A002651A7;
+			remoteInfo = WorldpayResources;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -97,11 +139,6 @@
 		59243DED1A26144E005F900B /* WorldpayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayUtils.h; sourceTree = "<group>"; };
 		59243DEE1A26144E005F900B /* WorldpayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayUtils.m; sourceTree = "<group>"; };
 		5929C5211A717D8A00BAB6D8 /* WorldpayApplePayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayApplePayTests.m; sourceTree = "<group>"; };
-		593F149619B0B8F800A009FB /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amex.png; path = Resources/amex.png; sourceTree = "<group>"; };
-		593F149719B0B8F800A009FB /* maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maestro.png; path = Resources/maestro.png; sourceTree = "<group>"; };
-		593F149819B0B8F800A009FB /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = Resources/mastercard.png; sourceTree = "<group>"; };
-		593F149919B0B8F800A009FB /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = Resources/visa.png; sourceTree = "<group>"; };
-		594A336719A5FA7A004085F9 /* back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_arrow@2x.png"; path = "Resources/back_arrow@2x.png"; sourceTree = "<group>"; };
 		59670F351A24ED4C001DA3F3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		597077AB1993999A002651A7 /* WorldpayResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldpayResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		597077AC1993999A002651A7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -111,24 +148,15 @@
 		59E902A51A2C7F2D00BBE8B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		59FE0F741A71601D00691C1F /* Worldpay+ApplePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Worldpay+ApplePay.h"; sourceTree = "<group>"; };
 		59FE0F751A71601D00691C1F /* Worldpay+ApplePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Worldpay+ApplePay.m"; sourceTree = "<group>"; };
-		5A6788EC1A680E120084394C /* default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default_card@2x.png"; path = "Resources/default_card@2x.png"; sourceTree = "<group>"; };
 		5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayAPMViewController.h; sourceTree = "<group>"; };
 		5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayAPMViewController.m; sourceTree = "<group>"; };
-		5A8BC2BA1BD8DBDF00FFBED0 /* WorldpayAPMViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorldpayAPMViewController.xib; sourceTree = "<group>"; };
 		5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APMController.m; sourceTree = "<group>"; };
 		5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APMController.h; sourceTree = "<group>"; };
-		5A8BC2C51BDA4F8100FFBED0 /* APMController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APMController.xib; sourceTree = "<group>"; };
 		5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeDSController.h; sourceTree = "<group>"; };
 		5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeDSController.m; sourceTree = "<group>"; };
-		5A8BC2C91BDA9DD600FFBED0 /* ThreeDSController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeDSController.xib; sourceTree = "<group>"; };
 		6D1C2B8E83D580151CB88A7E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		7E00CE72198B77E400C34D6A /* x_b@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x_b@2x.png"; path = "Resources/x_b@2x.png"; sourceTree = "<group>"; };
-		7E00CE73198B77E400C34D6A /* x_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x_w@2x.png"; path = "Resources/x_w@2x.png"; sourceTree = "<group>"; };
-		7E00CE98198B86F200C34D6A /* lockB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lockB@2x.png"; path = "Resources/lockB@2x.png"; sourceTree = "<group>"; };
-		7E00CE99198B86F200C34D6A /* lockW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lockW@2x.png"; path = "Resources/lockW@2x.png"; sourceTree = "<group>"; };
 		7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldpayCardViewController.h; sourceTree = "<group>"; };
 		7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldpayCardViewController.m; sourceTree = "<group>"; };
-		7EEBCC23197E59BB00DBEA7C /* WorldpayCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorldpayCardViewController.xib; sourceTree = "<group>"; };
 		7EF710751976B8B800F7DC51 /* libWorldpay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWorldpay.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EF710781976B8B800F7DC51 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EF7107C1976B8B800F7DC51 /* Worldpay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Worldpay-Prefix.pch"; sourceTree = "<group>"; };
@@ -138,8 +166,56 @@
 		7EF710901976B8B800F7DC51 /* WorldpayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WorldpayTests-Info.plist"; sourceTree = "<group>"; };
 		7EF710921976B8B800F7DC51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EF710941976B8B800F7DC51 /* WorldpayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldpayTests.m; sourceTree = "<group>"; };
+		A52A7CB72216FF150051843F /* wp_ic_discover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_discover@2x.png"; path = "Resources/wp_ic_discover@2x.png"; sourceTree = "<group>"; };
+		A52A7CB82216FF150051843F /* wp_ic_discover@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_discover@3x.png"; path = "Resources/wp_ic_discover@3x.png"; sourceTree = "<group>"; };
+		A52A7CB92216FF150051843F /* wp_ic_discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_discover.png; path = Resources/wp_ic_discover.png; sourceTree = "<group>"; };
+		A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa_checkout@2x.png"; path = "Resources/wp_ic_visa_checkout@2x.png"; sourceTree = "<group>"; };
+		A59C28892215B36300610B6C /* poweredByWorldPay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = poweredByWorldPay.png; path = Resources/poweredByWorldPay.png; sourceTree = "<group>"; };
+		A59C288A2215B36300610B6C /* wp_ic_laser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_laser.png; path = Resources/wp_ic_laser.png; sourceTree = "<group>"; };
+		A59C288B2215B36300610B6C /* wp_ic_amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_amex@2x.png"; path = "Resources/wp_ic_amex@2x.png"; sourceTree = "<group>"; };
+		A59C288C2215B36300610B6C /* wp_ic_lockB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockB@2x.png"; path = "Resources/wp_ic_lockB@2x.png"; sourceTree = "<group>"; };
+		A59C288D2215B36300610B6C /* wp_ic_lockW@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockW@3x.png"; path = "Resources/wp_ic_lockW@3x.png"; sourceTree = "<group>"; };
+		A59C288E2215B36300610B6C /* wp_ic_back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_back_arrow@2x.png"; path = "Resources/wp_ic_back_arrow@2x.png"; sourceTree = "<group>"; };
+		A59C288F2215B36300610B6C /* wp_ic_mastercard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_mastercard@3x.png"; path = "Resources/wp_ic_mastercard@3x.png"; sourceTree = "<group>"; };
+		A59C28902215B36300610B6C /* wp_ic_masterpass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_masterpass@3x.png"; path = "Resources/wp_ic_masterpass@3x.png"; sourceTree = "<group>"; };
+		A59C28912215B36300610B6C /* wp_ic_diners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_diners@2x.png"; path = "Resources/wp_ic_diners@2x.png"; sourceTree = "<group>"; };
+		A59C28922215B36300610B6C /* wp_ic_lockB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockB@3x.png"; path = "Resources/wp_ic_lockB@3x.png"; sourceTree = "<group>"; };
+		A59C28932215B36300610B6C /* wp_ic_visa_checkout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_visa_checkout.png; path = Resources/wp_ic_visa_checkout.png; sourceTree = "<group>"; };
+		A59C28942215B36300610B6C /* wp_ic_laser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_laser@2x.png"; path = "Resources/wp_ic_laser@2x.png"; sourceTree = "<group>"; };
+		A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_jcb@3x.png"; path = "Resources/wp_ic_jcb@3x.png"; sourceTree = "<group>"; };
+		A59C28972215B36300610B6C /* wp_ic_amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_amex.png; path = Resources/wp_ic_amex.png; sourceTree = "<group>"; };
+		A59C28982215B36400610B6C /* wp_ic_maestro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_maestro.png; path = Resources/wp_ic_maestro.png; sourceTree = "<group>"; };
+		A59C28992215B36400610B6C /* wp_ic_maestro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_maestro@2x.png"; path = "Resources/wp_ic_maestro@2x.png"; sourceTree = "<group>"; };
+		A59C289A2215B36400610B6C /* wp_ic_masterpass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_masterpass.png; path = Resources/wp_ic_masterpass.png; sourceTree = "<group>"; };
+		A59C289B2215B36400610B6C /* wp_ic_back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_back_arrow.png; path = Resources/wp_ic_back_arrow.png; sourceTree = "<group>"; };
+		A59C289C2215B36400610B6C /* wp_ic_default_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_default_card.png; path = Resources/wp_ic_default_card.png; sourceTree = "<group>"; };
+		A59C289D2215B36400610B6C /* wp_ic_default_card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_default_card@2x.png"; path = "Resources/wp_ic_default_card@2x.png"; sourceTree = "<group>"; };
+		A59C289E2215B36400610B6C /* wp_ic_visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_visa.png; path = Resources/wp_ic_visa.png; sourceTree = "<group>"; };
+		A59C289F2215B36400610B6C /* wp_ic_mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_mastercard.png; path = Resources/wp_ic_mastercard.png; sourceTree = "<group>"; };
+		A59C28A02215B36400610B6C /* wp_ic_lockW@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_lockW@2x.png"; path = "Resources/wp_ic_lockW@2x.png"; sourceTree = "<group>"; };
+		A59C28A12215B36400610B6C /* wp_ic_lockB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_lockB.png; path = Resources/wp_ic_lockB.png; sourceTree = "<group>"; };
+		A59C28A22215B36400610B6C /* wp_ic_visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa@2x.png"; path = "Resources/wp_ic_visa@2x.png"; sourceTree = "<group>"; };
+		A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_diners@3x.png"; path = "Resources/wp_ic_diners@3x.png"; sourceTree = "<group>"; };
+		A59C28A52215B36500610B6C /* wp_ic_masterpass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_masterpass@2x.png"; path = "Resources/wp_ic_masterpass@2x.png"; sourceTree = "<group>"; };
+		A59C28A62215B36500610B6C /* wp_ic_lockW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_lockW.png; path = Resources/wp_ic_lockW.png; sourceTree = "<group>"; };
+		A59C28A72215B36500610B6C /* wp_ic_diners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_diners.png; path = Resources/wp_ic_diners.png; sourceTree = "<group>"; };
+		A59C28A82215B36500610B6C /* wp_ic_maestro@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_maestro@3x.png"; path = "Resources/wp_ic_maestro@3x.png"; sourceTree = "<group>"; };
+		A59C28A92215B36500610B6C /* wp_ic_visa_checkout@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa_checkout@3x.png"; path = "Resources/wp_ic_visa_checkout@3x.png"; sourceTree = "<group>"; };
+		A59C28AA2215B36500610B6C /* wp_ic_jcb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_ic_jcb.png; path = Resources/wp_ic_jcb.png; sourceTree = "<group>"; };
+		A59C28AB2215B36500610B6C /* wp_ic_visa@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_visa@3x.png"; path = "Resources/wp_ic_visa@3x.png"; sourceTree = "<group>"; };
+		A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_jcb@2x.png"; path = "Resources/wp_ic_jcb@2x.png"; sourceTree = "<group>"; };
+		A59C28AD2215B36600610B6C /* wp_ic_back_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_back_arrow@3x.png"; path = "Resources/wp_ic_back_arrow@3x.png"; sourceTree = "<group>"; };
+		A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_mastercard@2x.png"; path = "Resources/wp_ic_mastercard@2x.png"; sourceTree = "<group>"; };
+		A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_laser@3x.png"; path = "Resources/wp_ic_laser@3x.png"; sourceTree = "<group>"; };
+		A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_ic_amex@3x.png"; path = "Resources/wp_ic_amex@3x.png"; sourceTree = "<group>"; };
+		A59C28E72216D56F00610B6C /* WorldpayResourcesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldpayResourcesManager.h; sourceTree = "<group>"; };
+		A59C28E82216D56F00610B6C /* WorldpayResourcesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldpayResourcesManager.m; sourceTree = "<group>"; };
+		A59C28ED2216DC6200610B6C /* WorldpayConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldpayConstants.h; sourceTree = "<group>"; };
 		A934A0890DB3A3D26BF0DBE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Worldpay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F7362E68B3854D12F9ADC1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAADCDD3904E756756F7E27A /* Pods-Worldpay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Worldpay.release.xcconfig"; path = "Pods/Target Support Files/Pods-Worldpay/Pods-Worldpay.release.xcconfig"; sourceTree = "<group>"; };
+		F0C18CE34C230F04EDC4883D /* Pods-Worldpay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Worldpay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Worldpay/Pods-Worldpay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +233,7 @@
 			files = (
 				59670F361A24ED4C001DA3F3 /* CoreText.framework in Frameworks */,
 				7EF710791976B8B800F7DC51 /* Foundation.framework in Frameworks */,
+				B2B16E8DB17B41DEE9958DB8 /* Pods_Worldpay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,12 +278,10 @@
 		5AC8C6841BDE2827006F1F78 /* APM */ = {
 			isa = PBXGroup;
 			children = (
-				5A8BC2C51BDA4F8100FFBED0 /* APMController.xib */,
 				5A8BC2BF1BDA2A8500FFBED0 /* APMController.h */,
 				5A8BC2BD1BDA2A3200FFBED0 /* APMController.m */,
 				5A8BC2B81BD8DBDF00FFBED0 /* WorldpayAPMViewController.h */,
 				5A8BC2B91BD8DBDF00FFBED0 /* WorldpayAPMViewController.m */,
-				5A8BC2BA1BD8DBDF00FFBED0 /* WorldpayAPMViewController.xib */,
 			);
 			name = APM;
 			sourceTree = "<group>";
@@ -216,7 +291,6 @@
 			children = (
 				5A8BC2C71BDA9DD600FFBED0 /* ThreeDSController.h */,
 				5A8BC2C81BDA9DD600FFBED0 /* ThreeDSController.m */,
-				5A8BC2C91BDA9DD600FFBED0 /* ThreeDSController.xib */,
 			);
 			name = 3DS;
 			sourceTree = "<group>";
@@ -226,7 +300,6 @@
 			children = (
 				7EEBCC21197E59BB00DBEA7C /* WorldpayCardViewController.h */,
 				7EEBCC22197E59BB00DBEA7C /* WorldpayCardViewController.m */,
-				7EEBCC23197E59BB00DBEA7C /* WorldpayCardViewController.xib */,
 			);
 			name = Card;
 			sourceTree = "<group>";
@@ -251,16 +324,48 @@
 		7E3F08761977C889008DC3E0 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				5A6788EC1A680E120084394C /* default_card@2x.png */,
-				7E00CE98198B86F200C34D6A /* lockB@2x.png */,
-				7E00CE99198B86F200C34D6A /* lockW@2x.png */,
-				7E00CE72198B77E400C34D6A /* x_b@2x.png */,
-				7E00CE73198B77E400C34D6A /* x_w@2x.png */,
-				594A336719A5FA7A004085F9 /* back_arrow@2x.png */,
-				593F149619B0B8F800A009FB /* amex.png */,
-				593F149719B0B8F800A009FB /* maestro.png */,
-				593F149819B0B8F800A009FB /* mastercard.png */,
-				593F149919B0B8F800A009FB /* visa.png */,
+				A59C28892215B36300610B6C /* poweredByWorldPay.png */,
+				A59C28972215B36300610B6C /* wp_ic_amex.png */,
+				A59C288B2215B36300610B6C /* wp_ic_amex@2x.png */,
+				A59C28B32215B36600610B6C /* wp_ic_amex@3x.png */,
+				A59C289B2215B36400610B6C /* wp_ic_back_arrow.png */,
+				A59C288E2215B36300610B6C /* wp_ic_back_arrow@2x.png */,
+				A59C28AD2215B36600610B6C /* wp_ic_back_arrow@3x.png */,
+				A59C289C2215B36400610B6C /* wp_ic_default_card.png */,
+				A59C289D2215B36400610B6C /* wp_ic_default_card@2x.png */,
+				A59C28A72215B36500610B6C /* wp_ic_diners.png */,
+				A59C28912215B36300610B6C /* wp_ic_diners@2x.png */,
+				A59C28A42215B36500610B6C /* wp_ic_diners@3x.png */,
+				A52A7CB92216FF150051843F /* wp_ic_discover.png */,
+				A52A7CB72216FF150051843F /* wp_ic_discover@2x.png */,
+				A52A7CB82216FF150051843F /* wp_ic_discover@3x.png */,
+				A59C28AA2215B36500610B6C /* wp_ic_jcb.png */,
+				A59C28AC2215B36500610B6C /* wp_ic_jcb@2x.png */,
+				A59C28952215B36300610B6C /* wp_ic_jcb@3x.png */,
+				A59C288A2215B36300610B6C /* wp_ic_laser.png */,
+				A59C28942215B36300610B6C /* wp_ic_laser@2x.png */,
+				A59C28B12215B36600610B6C /* wp_ic_laser@3x.png */,
+				A59C28A12215B36400610B6C /* wp_ic_lockB.png */,
+				A59C288C2215B36300610B6C /* wp_ic_lockB@2x.png */,
+				A59C28922215B36300610B6C /* wp_ic_lockB@3x.png */,
+				A59C28A62215B36500610B6C /* wp_ic_lockW.png */,
+				A59C28A02215B36400610B6C /* wp_ic_lockW@2x.png */,
+				A59C288D2215B36300610B6C /* wp_ic_lockW@3x.png */,
+				A59C28982215B36400610B6C /* wp_ic_maestro.png */,
+				A59C28992215B36400610B6C /* wp_ic_maestro@2x.png */,
+				A59C28A82215B36500610B6C /* wp_ic_maestro@3x.png */,
+				A59C289F2215B36400610B6C /* wp_ic_mastercard.png */,
+				A59C28AE2215B36600610B6C /* wp_ic_mastercard@2x.png */,
+				A59C288F2215B36300610B6C /* wp_ic_mastercard@3x.png */,
+				A59C289A2215B36400610B6C /* wp_ic_masterpass.png */,
+				A59C28A52215B36500610B6C /* wp_ic_masterpass@2x.png */,
+				A59C28902215B36300610B6C /* wp_ic_masterpass@3x.png */,
+				A59C28932215B36300610B6C /* wp_ic_visa_checkout.png */,
+				A59C28882215B36300610B6C /* wp_ic_visa_checkout@2x.png */,
+				A59C28A92215B36500610B6C /* wp_ic_visa_checkout@3x.png */,
+				A59C289E2215B36400610B6C /* wp_ic_visa.png */,
+				A59C28A22215B36400610B6C /* wp_ic_visa@2x.png */,
+				A59C28AB2215B36500610B6C /* wp_ic_visa@3x.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -295,6 +400,7 @@
 				7EF710781976B8B800F7DC51 /* Foundation.framework */,
 				597077AC1993999A002651A7 /* CoreFoundation.framework */,
 				C2F7362E68B3854D12F9ADC1 /* libPods.a */,
+				AE8512D1CF00E59D921E7064 /* Pods_Worldpay.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -302,12 +408,14 @@
 		7EF7107A1976B8B800F7DC51 /* Worldpay */ = {
 			isa = PBXGroup;
 			children = (
+				A59C28E62216D55900610B6C /* Managers */,
 				5AC8C6871BDE2BF2006F1F78 /* ApplePay */,
 				5AC8C6861BDE2BE0006F1F78 /* Card */,
 				5AC8C6851BDE283D006F1F78 /* 3DS */,
 				5AC8C6841BDE2827006F1F78 /* APM */,
 				7EF7107D1976B8B800F7DC51 /* Worldpay.h */,
 				7EF7107F1976B8B800F7DC51 /* Worldpay.m */,
+				A59C28ED2216DC6200610B6C /* WorldpayConstants.h */,
 				59243DED1A26144E005F900B /* WorldpayUtils.h */,
 				59243DEE1A26144E005F900B /* WorldpayUtils.m */,
 				7EF7107B1976B8B800F7DC51 /* Supporting Files */,
@@ -343,11 +451,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A59C28E62216D55900610B6C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A59C28E72216D56F00610B6C /* WorldpayResourcesManager.h */,
+				A59C28E82216D56F00610B6C /* WorldpayResourcesManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		EC13089FEE45848175714BB1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				6D1C2B8E83D580151CB88A7E /* Pods.debug.xcconfig */,
 				A934A0890DB3A3D26BF0DBE5 /* Pods.release.xcconfig */,
+				F0C18CE34C230F04EDC4883D /* Pods-Worldpay.debug.xcconfig */,
+				CAADCDD3904E756756F7E27A /* Pods-Worldpay.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -376,11 +495,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EF710981976B8B800F7DC51 /* Build configuration list for PBXNativeTarget "Worldpay" */;
 			buildPhases = (
+				3945E0155EA94C1743AFFE4E /* [CP] Check Pods Manifest.lock */,
 				CB169F3934799FA669FBF989 /* Check Pods Manifest.lock */,
 				7EF710711976B8B800F7DC51 /* Sources */,
 				7EF710721976B8B800F7DC51 /* Frameworks */,
 				7EF710731976B8B800F7DC51 /* CopyFiles */,
-				E6C89D0615BAD3A8A227EB49 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,15 +534,16 @@
 		7EF7106D1976B8B800F7DC51 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = Worldpay;
 			};
 			buildConfigurationList = 7EF710701976B8B800F7DC51 /* Build configuration list for PBXProject "Worldpay" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7EF7106C1976B8B800F7DC51;
 			productRefGroup = 7EF710761976B8B800F7DC51 /* Products */;
@@ -443,17 +563,49 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				597077B8199399AD002651A7 /* lockB@2x.png in Resources */,
-				597077B9199399AD002651A7 /* lockW@2x.png in Resources */,
-				593F149D19B0B8F800A009FB /* visa.png in Resources */,
-				593F149C19B0B8F800A009FB /* mastercard.png in Resources */,
-				597077BD199399AD002651A7 /* x_b@2x.png in Resources */,
-				593F149A19B0B8F800A009FB /* amex.png in Resources */,
-				597077BE199399AD002651A7 /* x_w@2x.png in Resources */,
+				A59C28BB2215B36700610B6C /* wp_ic_back_arrow@2x.png in Resources */,
+				A59C28CC2215B36700610B6C /* wp_ic_mastercard.png in Resources */,
+				A59C28B52215B36700610B6C /* wp_ic_visa_checkout@2x.png in Resources */,
+				A59C28BC2215B36700610B6C /* wp_ic_mastercard@3x.png in Resources */,
+				A52A7CBA2216FF150051843F /* wp_ic_discover@2x.png in Resources */,
+				A59C28B62215B36700610B6C /* poweredByWorldPay.png in Resources */,
+				A59C28BF2215B36700610B6C /* wp_ic_lockB@3x.png in Resources */,
+				A59C28D42215B36700610B6C /* wp_ic_diners.png in Resources */,
+				A59C28CB2215B36700610B6C /* wp_ic_visa.png in Resources */,
+				A59C28E02215B36700610B6C /* wp_ic_amex@3x.png in Resources */,
+				A59C28D12215B36700610B6C /* wp_ic_diners@3x.png in Resources */,
+				A59C28C62215B36700610B6C /* wp_ic_maestro@2x.png in Resources */,
+				A59C28B72215B36700610B6C /* wp_ic_laser.png in Resources */,
+				A59C28CA2215B36700610B6C /* wp_ic_default_card@2x.png in Resources */,
+				A59C28BD2215B36700610B6C /* wp_ic_masterpass@3x.png in Resources */,
+				A59C28C82215B36700610B6C /* wp_ic_back_arrow.png in Resources */,
+				A59C28CD2215B36700610B6C /* wp_ic_lockW@2x.png in Resources */,
+				A59C28CE2215B36700610B6C /* wp_ic_lockB.png in Resources */,
+				A59C28D62215B36700610B6C /* wp_ic_visa_checkout@3x.png in Resources */,
+				A59C28B92215B36700610B6C /* wp_ic_lockB@2x.png in Resources */,
+				A59C28C42215B36700610B6C /* wp_ic_amex.png in Resources */,
+				A59C28C02215B36700610B6C /* wp_ic_visa_checkout.png in Resources */,
+				A59C28D82215B36700610B6C /* wp_ic_visa@3x.png in Resources */,
+				A59C28D32215B36700610B6C /* wp_ic_lockW.png in Resources */,
+				A59C28C22215B36700610B6C /* wp_ic_jcb@3x.png in Resources */,
+				A59C28DA2215B36700610B6C /* wp_ic_back_arrow@3x.png in Resources */,
+				A59C28D52215B36700610B6C /* wp_ic_maestro@3x.png in Resources */,
+				A59C28D72215B36700610B6C /* wp_ic_jcb.png in Resources */,
+				A59C28B82215B36700610B6C /* wp_ic_amex@2x.png in Resources */,
 				597077B31993999A002651A7 /* InfoPlist.strings in Resources */,
-				594A336819A5FA7A004085F9 /* back_arrow@2x.png in Resources */,
-				5A6788EE1A680E120084394C /* default_card@2x.png in Resources */,
-				593F149B19B0B8F800A009FB /* maestro.png in Resources */,
+				A59C28BA2215B36700610B6C /* wp_ic_lockW@3x.png in Resources */,
+				A59C28D92215B36700610B6C /* wp_ic_jcb@2x.png in Resources */,
+				A59C28C52215B36700610B6C /* wp_ic_maestro.png in Resources */,
+				A59C28DE2215B36700610B6C /* wp_ic_laser@3x.png in Resources */,
+				A59C28CF2215B36700610B6C /* wp_ic_visa@2x.png in Resources */,
+				A59C28BE2215B36700610B6C /* wp_ic_diners@2x.png in Resources */,
+				A59C28C92215B36700610B6C /* wp_ic_default_card.png in Resources */,
+				A52A7CBB2216FF150051843F /* wp_ic_discover@3x.png in Resources */,
+				A52A7CBC2216FF150051843F /* wp_ic_discover.png in Resources */,
+				A59C28DB2215B36700610B6C /* wp_ic_mastercard@2x.png in Resources */,
+				A59C28C12215B36700610B6C /* wp_ic_laser@2x.png in Resources */,
+				A59C28D22215B36700610B6C /* wp_ic_masterpass@2x.png in Resources */,
+				A59C28C72215B36700610B6C /* wp_ic_masterpass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,21 +613,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E00CE7A198B77E400C34D6A /* x_w@2x.png in Resources */,
-				7E00CE79198B77E400C34D6A /* x_b@2x.png in Resources */,
-				7E00CE9B198B86F200C34D6A /* lockW@2x.png in Resources */,
-				5A6788ED1A680E120084394C /* default_card@2x.png in Resources */,
-				7EEBCC26197E59BB00DBEA7C /* WorldpayCardViewController.xib in Resources */,
-				5A8BC2C11BDA46B900FFBED0 /* WorldpayAPMViewController.xib in Resources */,
 				7EF710931976B8B800F7DC51 /* InfoPlist.strings in Resources */,
-				5A8BC2C61BDA4F8100FFBED0 /* APMController.xib in Resources */,
-				7E00CE9A198B86F200C34D6A /* lockB@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3945E0155EA94C1743AFFE4E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Worldpay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7EF710B31976BB1400F7DC51 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,21 +666,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E6C89D0615BAD3A8A227EB49 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -536,6 +683,7 @@
 				5A8BC2BB1BD8DBDF00FFBED0 /* WorldpayAPMViewController.m in Sources */,
 				5957D19D1A71839500D7A99F /* Worldpay+ApplePay.m in Sources */,
 				7EEBCC24197E59BB00DBEA7C /* WorldpayCardViewController.m in Sources */,
+				A59C28E92216D56F00610B6C /* WorldpayResourcesManager.m in Sources */,
 				7EF710801976B8B800F7DC51 /* Worldpay.m in Sources */,
 				5A8BC2CA1BDA9DD600FFBED0 /* ThreeDSController.m in Sources */,
 				5A8BC2BE1BDA2A3200FFBED0 /* APMController.m in Sources */,
@@ -559,6 +707,16 @@
 			isa = PBXTargetDependency;
 			target = 7EF710741976B8B800F7DC51 /* Worldpay */;
 			targetProxy = 7EF7108B1976B8B800F7DC51 /* PBXContainerItemProxy */;
+		};
+		A5D2346E2088CBD40079B644 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EF710741976B8B800F7DC51 /* Worldpay */;
+			targetProxy = A5D2346D2088CBD40079B644 /* PBXContainerItemProxy */;
+		};
+		A5D234702088CBD40079B644 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 597077AA1993999A002651A7 /* WorldpayResources */;
+			targetProxy = A5D2346F2088CBD40079B644 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -605,12 +763,8 @@
 				INFOPLIST_FILE = "WorldpayResources/WorldpayResources-Info.plist";
 				INFOPLIST_PREPROCESS = NO;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -620,18 +774,14 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WorldpayResources/WorldpayResources-Prefix.pch";
 				INFOPLIST_FILE = "WorldpayResources/WorldpayResources-Info.plist";
 				INFOPLIST_PREPROCESS = NO;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -640,22 +790,37 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -668,15 +833,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lz",
 				);
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -684,90 +847,83 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lz",
 				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Release;
 		};
 		7EF710991976B8B800F7DC51 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D1C2B8E83D580151CB88A7E /* Pods.debug.xcconfig */;
+			baseConfigurationReference = F0C18CE34C230F04EDC4883D /* Pods-Worldpay.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/Worldpay.dst;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldpay/Worldpay-Prefix.pch";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_LIBTOOLFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Debug;
 		};
 		7EF7109A1976B8B800F7DC51 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A934A0890DB3A3D26BF0DBE5 /* Pods.release.xcconfig */;
+			baseConfigurationReference = CAADCDD3904E756756F7E27A /* Pods-Worldpay.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/Worldpay.dst;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldpay/Worldpay-Prefix.pch";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_LIBTOOLFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Release;
 		};
 		7EF7109C1976B8B800F7DC51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldpay/Worldpay-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -775,17 +931,6 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "WorldpayTests/WorldpayTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-all_load",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arxnet.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -795,24 +940,9 @@
 		7EF7109D1976B8B800F7DC51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldpay/Worldpay-Prefix.pch";
 				INFOPLIST_FILE = "WorldpayTests/WorldpayTests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-all_load",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arxnet.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -822,22 +952,14 @@
 		7EF710AF1976BA4600F7DC51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Debug;
 		};
 		7EF710B01976BA4600F7DC51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s arm64 x86_64";
 			};
 			name = Release;
 		};

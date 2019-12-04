@@ -1,0 +1,5 @@
+TestWorldpayLibrary/Pods
+Podfile.lock
+Worldpay/Pods
+*.xcworkspace
+*xcuserdata

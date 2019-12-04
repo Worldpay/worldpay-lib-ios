@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface APMController : UIViewController
 
@@ -15,25 +15,24 @@ typedef void (^authorizeAPMOrderFailure)(NSDictionary *responseDictionary, NSArr
 @property (nonatomic) UIView *customToolbar;
 @property (nonatomic) float price;
 
-@property (nonatomic, retain) NSString *apmName;
-@property (nonatomic, retain) NSString *customerOrderCode;
-@property (nonatomic, retain) NSString *orderDescription;
-@property (nonatomic, retain) NSDictionary *customerIdentifiers;
-@property (nonatomic, retain) NSString *successUrl;
-@property (nonatomic, retain) NSString *failureUrl;
-@property (nonatomic, retain) NSString *cancelUrl;
-@property (nonatomic, retain) NSString *pendingUrl;
-@property (nonatomic, retain) NSString *address;
-@property (nonatomic, retain) NSString *city;
-@property (nonatomic, retain) NSString *postalCode;
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *currencyCode;
-@property (nonatomic, retain) NSString *settlementCurrency;
-@property (nonatomic, retain) NSString *countryCode;
-
+@property (nonatomic, strong) NSString *apmName;
+@property (nonatomic, strong) NSString *customerOrderCode;
+@property (nonatomic, strong) NSString *orderDescription;
+@property (nonatomic, strong) NSDictionary *customerIdentifiers;
+@property (nonatomic, strong) NSString *successUrl;
+@property (nonatomic, strong) NSString *failureUrl;
+@property (nonatomic, strong) NSString *cancelUrl;
+@property (nonatomic, strong) NSString *pendingUrl;
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *postalCode;
+@property (nonatomic, strong) NSString *token;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *currencyCode;
+@property (nonatomic, strong) NSString *settlementCurrency;
+@property (nonatomic, strong) NSString *countryCode;
 
 - (void)setAuthorizeAPMOrderBlockWithSuccess:(authorizeAPMOrderSuccess)success
-                                  failure:(authorizeAPMOrderFailure)failure;
+                                     failure:(authorizeAPMOrderFailure)failure;
 
 @end

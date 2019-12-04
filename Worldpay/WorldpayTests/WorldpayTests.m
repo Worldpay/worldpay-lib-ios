@@ -6,7 +6,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "Worldpay.h"
+#import <Worldpay/Worldpay.h>
 
 @interface WorldpayTests : XCTestCase
 
@@ -18,8 +18,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     __block BOOL done = NO;
     block(&done);
     while (!done) {
-        [[NSRunLoop mainRunLoop] runUntilDate:
-         [NSDate dateWithTimeIntervalSinceNow:.1]];
+        [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     }
 }
 
@@ -54,7 +53,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Failure
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"^&*AghA GHAJdas" cardNumber:@"1cczz zvs safd  asd" expirationMonth:@"-1" expirationYear:@"21" CVC:@"---" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"^&*AghA GHAJdas" cardNumber:@"1cczz zvs safd  asd" expirationMonth:@"-1" expirationYear:@"21" CVC:@"---" success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             XCTFail(@"should not call success block");
             
@@ -74,7 +73,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Success
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"John Doe" cardNumber:@"6759649826438453" expirationMonth:@"05" expirationYear:@"21" CVC:@"067" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createTokenWithNameOnCard:@"John Doe" cardNumber:@"6759649826438453" expirationMonth:@"05" expirationYear:@"21" CVC:@"067" success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -92,7 +91,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     
 
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"" countryCode:@"" apmFields:nil shopperLanguageCode:nil success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"" countryCode:@"" apmFields:nil shopperLanguageCode:nil success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             XCTFail(@"should not call success block");
             *done = YES;
@@ -110,7 +109,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Success (paypal)
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"paypal" countryCode:@"GB" apmFields:nil shopperLanguageCode:nil success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"paypal" countryCode:@"GB" apmFields:nil shopperLanguageCode:nil success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
@@ -126,7 +125,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     hxRunInMainLoop(^(BOOL *done) {
         [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"giropay" countryCode:@"GB" apmFields:@{
                                                                                                       @"swiftCode": @"ABC12345"
-                                                                                                      } shopperLanguageCode:@"EN" success:^(int code, NSDictionary *responseDictionary) {
+                                                                                                      } shopperLanguageCode:@"EN" success:^(NSInteger code, NSDictionary *responseDictionary) {
                                                                                                           
                                                                                                           //        [[Worldpay sharedInstance] createAPMTokenWithAPMName:@"paypal" countryCode:@"GB" apmFields:nil shopperLanguageCode:nil success:^(int code, NSDictionary *responseDictionary) {
                                                                                                           
@@ -152,7 +151,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
                                              expirationMonth:@"05"
                                               expirationYear:@"21"
                                                          CVC:@"067"
-                                                     success:^(int code, NSDictionary *responseDictionary) {
+                                                     success:^(NSInteger code, NSDictionary *responseDictionary) {
             
             token = [responseDictionary objectForKey:@"token"];
             
@@ -168,11 +167,11 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Failure
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] reuseToken:token withCVC:@"-14" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] reuseToken:token withCVC:@"-14" success:^(NSInteger code, NSDictionary *responseDictionary) {
             XCTFail(@"should not call success block");
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
-            XCTAssertTrue(errors.count == 1 && [[errors objectAtIndex:0] code] == 4, @"error should have code 4");
+            XCTAssertTrue(errors.count == 2 && [[errors firstObject] code] == 4, @"error should have code 4");
             *done = YES;
         }];
     });
@@ -181,7 +180,7 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
      *  Success
      */
     hxRunInMainLoop(^(BOOL *done) {
-        [[Worldpay sharedInstance] reuseToken:token withCVC:@"067" success:^(int code, NSDictionary *responseDictionary) {
+        [[Worldpay sharedInstance] reuseToken:token withCVC:@"067" success:^(NSInteger code, NSDictionary *responseDictionary) {
             *done = YES;
         } failure:^(NSDictionary *responseDictionary, NSArray *errors) {
             XCTFail(@"should not call failure block");
@@ -318,8 +317,8 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     /**
      *  Valid Data
      */
-    XCTAssertTrue([[Worldpay sharedInstance] validateCardExpiryWithMonth:12 year:2016], @"return value should be YES");
-    XCTAssertTrue([[Worldpay sharedInstance] validateCardExpiryWithMonth:12 year:16], @"return value should be YES");
+    XCTAssertTrue([[Worldpay sharedInstance] validateCardExpiryWithMonth:12 year:2026], @"return value should be YES");
+    XCTAssertTrue([[Worldpay sharedInstance] validateCardExpiryWithMonth:12 year:26], @"return value should be YES");
 }
 
 - (void)testHolderName {
@@ -584,33 +583,33 @@ static inline void hxRunInMainLoop(void(^block)(BOOL *done)) {
     /**
      *  American Express
      */
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"378282246310005"] isEqualToString:@"amex"], @"Card type is amex");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"371449635398431"] isEqualToString:@"amex"], @"Card type is amex");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"378734493671000"] isEqualToString:@"amex"], @"Card type is amex");
+    XCTAssertTrue([Worldpay cardType:@"378282246310005"] == WorldpayCardType_amex, @"Card type is amex");
+    XCTAssertTrue([Worldpay cardType:@"371449635398431"] == WorldpayCardType_amex, @"Card type is amex");
+    XCTAssertTrue([Worldpay cardType:@"378734493671000"] == WorldpayCardType_amex, @"Card type is amex");
     
     /**
      *  MasterCard
      */
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"5555555555554444"] isEqualToString:@"mastercard"], @"Card type is MasterCard");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"5105105105105100"] isEqualToString:@"mastercard"], @"Card type is MasterCard");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"5454545454545454"] isEqualToString:@"mastercard"], @"Card type is MasterCard");
+    XCTAssertTrue([Worldpay cardType:@"5555555555554444"] == WorldpayCardType_mastercard, @"Card type is MasterCard");
+    XCTAssertTrue([Worldpay cardType:@"5105105105105100"] == WorldpayCardType_mastercard, @"Card type is MasterCard");
+    XCTAssertTrue([Worldpay cardType:@"5454545454545454"] == WorldpayCardType_mastercard, @"Card type is MasterCard");
     
     /**
      *  Visa
      */
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4111111111111111"] isEqualToString:@"visa"], @"Card type is Visa");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4012888888881881"] isEqualToString:@"visa"], @"Card type is Visa");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4222222222222"] isEqualToString:@"visa"], @"Card type is Visa");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4462030000000000"] isEqualToString:@"visa"], @"Card type is Visa");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4444333322221111"] isEqualToString:@"visa"], @"Card type is Visa");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4911830000000"] isEqualToString:@"visa"], @"Card type is Visa");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"4462030000000000"] isEqualToString:@"visa"], @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4111111111111111"] == WorldpayCardType_visa, @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4012888888881881"] == WorldpayCardType_visa, @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4222222222222"] == WorldpayCardType_visa, @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4462030000000000"] == WorldpayCardType_visa, @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4444333322221111"] == WorldpayCardType_visa, @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4911830000000"] == WorldpayCardType_visa, @"Card type is Visa");
+    XCTAssertTrue([Worldpay cardType:@"4462030000000000"] == WorldpayCardType_visa, @"Card type is Visa");
     
     /**
      *  Maestro
      */
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"6759649826438453"] isEqualToString:@"maestro"], @"Card type is Maestro");
-    XCTAssertTrue([[[Worldpay sharedInstance] cardType:@"6799990100000000019"] isEqualToString:@"maestro"], @"Card type is Maestro");
+    XCTAssertTrue([Worldpay cardType:@"6759649826438453"] == WorldpayCardType_maestro, @"Card type is Maestro");
+    XCTAssertTrue([Worldpay cardType:@"6799990100000000019"] == WorldpayCardType_maestro, @"Card type is Maestro");
     
 }
 

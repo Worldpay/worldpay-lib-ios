@@ -12,7 +12,7 @@
 /**
  *  Function that creates a custom navigation bar with red background and logo.
  */
--(void)createNavigationBar;
+- (void)createNavigationBar;
 
 /**
  *  Function that creates 4 NSArrays : foodArray , foodDescriptionArray , foodPriceArray and foodFlagsArray
@@ -22,17 +22,17 @@
     foodFlagsArray contains the name of the images flags of the foods.
     foodPicturesArray contains the pictures of the foods.
  */
--(void)setArrays;
+- (void)setArrays;
 
 /**
  *  Function that creates UIScrollView that displays pictures of the foods.
  */
--(void)createScrollView;
+- (void)createScrollView;
 
 /**
  *  Function that creates the UITableView that will contain each cell a specific food
  */
--(void)createTableView;
+- (void)createTableView;
 
 /**
  *  Function that creates the View for each food
@@ -40,7 +40,7 @@
  *  @param indexPathRow passing parameter indexPath.row to indetify specific row that is created.
  *  @param cv           passing parameter the cellView to addSubViews to it.
  */
--(void)createCellView:(long)indexPathRow cellView:(UIView *)cv;
+- (void)createCellView:(long)indexPathRow cellView:(UIView *)cv;
 
 - (IBAction)settingsAction:(id)sender;
 @end

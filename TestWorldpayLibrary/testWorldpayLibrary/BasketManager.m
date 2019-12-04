@@ -49,7 +49,8 @@
         
         [_basket replaceObjectAtIndex:itemIndex withObject:item];        
         
-    } else {
+    }
+    else {
         [_basket addObject:item];
     }
   

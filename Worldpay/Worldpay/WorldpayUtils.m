@@ -5,50 +5,30 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
+@import CoreText;
+@import UIKit;
+
 #import "WorldpayUtils.h"
-#import <CoreText/CoreText.h>
-#import "AFNetworking.h"
 
 @implementation WorldpayUtils
 
-+ (void)loadFont:(NSString *)fontName {
-    NSString *fontPath = [[WorldpayUtils frameworkBundle] pathForResource:fontName ofType:@"ttf"];
-    NSData *inData = [NSData dataWithContentsOfFile:fontPath];
-    CFErrorRef error;
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)inData);
-    CGFontRef font = CGFontCreateWithDataProvider(provider);
-    CTFontManagerRegisterGraphicsFont(font, &error);
-}
-
-+ (NSBundle *)frameworkBundle {
-    static NSBundle* frameworkBundle = nil;
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
-        NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"WorldpayResources.bundle"];
-        frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    });
-    return frameworkBundle;
-}
-
 #pragma mark -
-+ (void)sendDebug: (NSString *)string {
++ (void)sendDebug:(NSString *)string {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    formatter.dateFormat = @"dd-MM-yyyy HH:mm";
     
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     
-    NSString *logEntry = [NSString stringWithFormat:@"%@ [Library] (%@): %@\n", dateString, [[UIDevice currentDevice] name], string];
+    __unused NSString *logEntry = [NSString stringWithFormat:@"%@ [Library] (%@): %@\n", dateString, [UIDevice currentDevice].name, string];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"https://public.arx.net/~billp/ios_reports/report.asp" parameters:@{@"log": logEntry} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://public.arx.net/~billp/ios_reports/report.asp"]];
+    [request setHTTPMethod:@"POST"];
+    NSData *data = [[NSString stringWithFormat:@"@log=%@", logEntry] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = data;
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
     }];
+    [dataTask resume];
 }
-
-
-
 
 @end

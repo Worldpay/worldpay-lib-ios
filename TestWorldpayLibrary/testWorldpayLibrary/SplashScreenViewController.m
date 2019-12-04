@@ -34,7 +34,7 @@
     [self performSelector:@selector(pushHomePageScreen:) withObject:self afterDelay:2];
 }
 
--(void)initGUI{
+- (void)initGUI{
     self.view.backgroundColor = [UIColor colorWithRed:0.922 green:0.922 blue:0.922 alpha:1];
     
     
@@ -46,7 +46,7 @@
     
 }
 
--(IBAction)pushHomePageScreen:(id)sender{
+- (IBAction)pushHomePageScreen:(id)sender{
     
     NavigationViewController *navViewCon = [[NavigationViewController alloc]init];
     [self presentViewController:navViewCon animated:YES completion:nil];

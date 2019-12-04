@@ -19,13 +19,12 @@
     //[[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:filePath])
-    {
+    if ([fileManager fileExistsAtPath:filePath]) {
         //NSLog(@"exists");
-        
-    }else{
+    }
+    else{
         NSError *error;
-        if([[NSFileManager defaultManager] copyItemAtPath:filePathMainBundle toPath:filePath error:&error]){
+        if ([[NSFileManager defaultManager] copyItemAtPath:filePathMainBundle toPath:filePath error:&error]) {
             //NSLog(@"File successfully copied");
         } else {
             //NSLog(@"Error description-%@ \n", [error localizedDescription]);
@@ -53,6 +52,7 @@
     while ([results next]) {
         [rows addObject:[results resultDictionary]];
     }
+    
     return rows;
 }
 
@@ -65,10 +65,10 @@
     NSString *string = [NSString stringWithFormat:@"insert into storedcards (token,cardType,name,maskedCardNumber) values('%@','%@','%@','%@')",token,cardType,name,maskedCardNumber];
     
     BOOL y = [database executeUpdate:string];
-    if (!y)
-    {
+    if (!y) {
         NSLog(@"insert failed!!");
-    }else{
+    }
+    else {
         NSLog(@"insert succeeded!!");
     }
     
@@ -77,10 +77,10 @@
 + (void)deleteCard:(FMDatabase *)database token:(NSString *)token{
     NSString *string = [NSString stringWithFormat:@"delete from storedcards where token='%@'",token];
     BOOL y = [database executeUpdate:string];
-    if (!y)
-    {
+    if (!y) {
         NSLog(@"delete failed!!");
-    }else{
+    }
+    else {
         NSLog(@"delete succeeded!!");
     }
 }
@@ -88,10 +88,10 @@
 + (void)deleteAllCards:(FMDatabase *)database {
     NSString *string = @"delete from storedcards";
     BOOL y = [database executeUpdate:string];
-    if (!y)
-    {
+    if (!y) {
       NSLog(@"delete failed!!");
-    }else{
+    }
+    else {
       NSLog(@"delete succeeded!!");
     }
 }
