@@ -31,5 +31,4 @@ Pod::Spec.new do |s|
   s.requires_arc            = true
   s.weak_frameworks         = 'UIKit', 'Foundation', 'CoreGraphics'
 
-  s.ios.dependency 'AFNetworking'
 end

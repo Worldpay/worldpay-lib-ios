@@ -5,8 +5,6 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-@import AFNetworking;
-
 #import "WorldpayAPMViewController.h"
 #import "APMController.h"
 #import "WorldpayResourcesManager.h"
@@ -310,10 +308,9 @@
                                                          [weak removeLoadingBackground];
                                                          [weak displayAlertMessage:@"There was an error creating the token!"];
                                                          
-                                                         NSError *err = errors[0];
-                                                         NSString* ErrorResponse = [[NSString alloc] initWithData:(NSData *)err.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+                                                         NSError *err = errors.firstObject;
                                                          
-                                                         NSLog(@"%@",ErrorResponse);
+                                                         NSLog(@"%@", err.localizedDescription);
                                                      }];
     }
 }

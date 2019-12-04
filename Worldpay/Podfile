@@ -1,10 +1,9 @@
-platform :ios, '9.0'
+platform :ios, '9.3'
 
 use_frameworks!
 inhibit_all_warnings!
 
 def shared_pods
-  pod 'AFNetworking', '3.2.1'
 end
  
 target 'Worldpay' do

@@ -5,8 +5,6 @@
 //  Copyright (c) 2015 Worldpay. All rights reserved.
 //
 
-@import AFNetworking;
-
 #include <sys/sysctl.h>
 #include <mach/machine.h>
 
@@ -21,7 +19,7 @@
 @property (nonatomic, copy) NSString *CVCModalToken;
 @property (nonatomic, copy) NSString *CVCModalTfCVC;
 
-@property (nonatomic, strong) AFURLSessionManager *networkManager;
+@property (nonatomic, strong) NSURLSession *networkManager;
 
 @end
 
@@ -52,10 +50,7 @@ static NSUInteger const kWorldpayTimeout = 65;
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         
-        AFURLSessionManager *networkManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
-        responseSerializer.readingOptions = NSJSONReadingMutableContainers;
-        networkManager.responseSerializer = responseSerializer;
+        NSURLSession *networkManager = [NSURLSession sessionWithConfiguration:configuration];
         _networkManager = networkManager;
     }
     
@@ -63,7 +58,7 @@ static NSUInteger const kWorldpayTimeout = 65;
 }
 
 - (void)dealloc {
-    [self.networkManager invalidateSessionCancelingTasks:YES];
+    [self.networkManager invalidateAndCancel];
 }
 
 - (NSString *)APIStringURL {
@@ -475,18 +470,21 @@ static NSUInteger const kWorldpayTimeout = 65;
                    failure:(requestTokenFailure)failure
          additionalHeaders:(NSDictionary *)additionalHeaders {
     
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    NSMutableURLRequest *request = [serializer requestWithMethod:method
-                                                       URLString:url
-                                                      parameters:requestDictionary
-                                                           error:nil];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [request setHTTPMethod:method];
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:requestDictionary options:NSJSONWritingFragmentsAllowed error:nil];
+    request.HTTPBody = data;
     request.timeoutInterval = kWorldpayTimeout;
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:[self customHeader] forHTTPHeaderField:@"X-wp-client-user-agent"];
     for (NSString *key in additionalHeaders.allKeys) {
         [request setValue:additionalHeaders[key] forHTTPHeaderField:key];
     }
     
-    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        id responseObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         if (error == nil) {
             success(((NSHTTPURLResponse *)response).statusCode, responseObject);
         }

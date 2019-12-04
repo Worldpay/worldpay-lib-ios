@@ -8,8 +8,6 @@
 @import WebKit;
 @import CommonCrypto;
 
-@import AFNetworking;
-
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 
@@ -25,7 +23,7 @@
 @property (nonatomic, copy) threeDSOrderFailure authorizeFailureBlock;
 @property (nonatomic, copy) NSString *sessionID;
 
-@property (nonatomic, strong) AFURLSessionManager *networkManager;
+@property (nonatomic, strong) NSURLSession *networkManager;
 
 @end
 
@@ -35,10 +33,7 @@
     if (self = [super init]) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         
-        AFURLSessionManager *networkManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
-        responseSerializer.readingOptions = NSJSONReadingMutableContainers;
-        networkManager.responseSerializer = responseSerializer;
+        NSURLSession *networkManager = [NSURLSession sessionWithConfiguration:configuration];
         _networkManager = networkManager;
     }
     
@@ -46,7 +41,7 @@
 }
 
 - (void)dealloc {
-    [self.networkManager invalidateSessionCancelingTasks:YES];
+    [self.networkManager invalidateAndCancel];
 }
 
 - (void)createNavigationBar {
@@ -138,15 +133,18 @@
                                  @"shopperIpAddress": [self getIPAddress]
                                  };
         
-        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-        NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
-                                                           URLString:stringURL
-                                                          parameters:params
-                                                               error:nil];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:stringURL]];
+        [request setHTTPMethod:@"POST"];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingFragmentsAllowed error:nil];
+        request.HTTPBody = data;
         
+        [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
+        __weak typeof(self) weak = self;
         
-        NSURLSessionDataTask *dataTask = [weak.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            id responseObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             if ([[responseObject objectForKey:@"paymentStatus"] isEqualToString:@"PRE_AUTHORIZED"]) {
                 weak.currentOrderCode = [responseObject objectForKey:@"orderCode"];
                 
@@ -169,7 +167,6 @@
                 weak.authorizeFailureBlock(responseObject, errors);
             }
         }];
-        
         [dataTask resume];
     }];
 }
@@ -206,15 +203,18 @@
                                  @"shopperIpAddress": [weak getIPAddress]
                                  };
         
-        AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-        NSMutableURLRequest *request = [serializer requestWithMethod:@"PUT"
-                                                           URLString:stringURL
-                                                          parameters:params
-                                                               error:nil];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:stringURL]];
+        [request setHTTPMethod:@"PUT"];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingFragmentsAllowed error:nil];
+        request.HTTPBody = data;
         
+        [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request addValue:[Worldpay sharedInstance].serviceKey forHTTPHeaderField:@"Authorization"];
+        __weak typeof(self) weak = self;
         
-        NSURLSessionDataTask *dataTask = [weak.networkManager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NSURLSessionDataTask *dataTask = [self.networkManager dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            id responseObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSString *status = [responseObject objectForKey:@"paymentStatus"];
             if ([status isEqualToString:@"SUCCESS"] || [status isEqualToString:@"AUTHORIZED"]) {
                 weak.authorizeSuccessBlock(responseObject);
@@ -224,7 +224,6 @@
                 weak.authorizeFailureBlock(responseObject, errors);
             }
         }];
-        
         [dataTask resume];
     }];
 }

@@ -924,7 +924,6 @@
 		7EF7109C1976B8B800F7DC51 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/AFNetworking";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldpay/Worldpay-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -932,12 +931,6 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "WorldpayTests/WorldpayTests-Info.plist";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					AFNetworking,
-					"-all_load",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arxnet.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
@@ -947,16 +940,9 @@
 		7EF7109D1976B8B800F7DC51 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/AFNetworking";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldpay/Worldpay-Prefix.pch";
 				INFOPLIST_FILE = "WorldpayTests/WorldpayTests-Info.plist";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					AFNetworking,
-					"-all_load",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arxnet.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;

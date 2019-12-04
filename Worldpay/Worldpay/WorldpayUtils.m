@@ -6,8 +6,7 @@
 //
 
 @import CoreText;
-
-@import AFNetworking;
+@import UIKit;
 
 #import "WorldpayUtils.h"
 
@@ -22,16 +21,12 @@
     
     __unused NSString *logEntry = [NSString stringWithFormat:@"%@ [Library] (%@): %@\n", dateString, [UIDevice currentDevice].name, string];
     
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    NSMutableURLRequest *request = [serializer requestWithMethod:@"POST"
-                                                       URLString:@"https://public.arx.net/~billp/ios_reports/report.asp"
-                                                      parameters:@{@"log": logEntry}
-                                                           error:nil];
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://public.arx.net/~billp/ios_reports/report.asp"]];
+    [request setHTTPMethod:@"POST"];
+    NSData *data = [[NSString stringWithFormat:@"@log=%@", logEntry] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = data;
+        
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
     }];
     [dataTask resume];
 }
